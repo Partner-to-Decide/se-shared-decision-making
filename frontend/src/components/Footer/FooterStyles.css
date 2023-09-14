@@ -18,7 +18,7 @@ div.allFooter {
   background-color: #fff;
   height: 1.5vw;
   flex-grow: 0;
-  font-family: PublicSans;
+  font-family: Public Sans;
   font-size: 1.25vw;
   font-weight: 500;
   font-stretch: normal;
@@ -31,11 +31,11 @@ div.allFooter {
 
 h1.allFooter {
   width: 270px;
-  height: 0.5vw;
   flex-grow: 0;
-  font-family: ClashGrotesk;
+  font-family: ClashGrotesk-Medium;
   font-size: 25px;
   font-weight: 500;
+  margin-bottom: 1rem;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.08;
@@ -50,10 +50,9 @@ img.logo {
 }
 button.allFooter {
   width: 224px;
-  height: 0.01vw;
   flex-grow: 0;
-  margin: 42px 10px 9px 0px;
-  font-family: PublicSans;
+  margin: 10px 10px 9px 0px;
+  font-family: Public Sans;
   font-size: 1vw;
   font-weight: normal;
   font-stretch: normal;
@@ -65,14 +64,14 @@ button.allFooter {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
+  display: inline-block;
 }
 
 button.leftFooter {
   width: 224px;
-  height: 0.01vw;
   flex-grow: 0;
-  margin: 42px 10px 9px 115px;
-  font-family: PublicSans;
+  margin: 10px 10px 9px 115px;
+  font-family: Public Sans;
   font-size: 1vw;
   font-weight: normal;
   font-stretch: normal;
@@ -84,6 +83,7 @@ button.leftFooter {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
+  display: inline-block;
 }
 
 #col1F {
@@ -105,7 +105,6 @@ ol {
 
 li {
   line-height: 1.5vws;
-  height: 2vw;
 }
 
 hr {

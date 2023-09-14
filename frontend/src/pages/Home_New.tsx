@@ -184,7 +184,9 @@ export default function Home() {
                             </Typography>
                           </Box>
                           <Box sx={{display:'flex', justifyContent:'flex-start', alignItems:'flex-start', flexDirection:'column', width:'80%', fontSize:'16px', padding:'10px'}}>
-                            <h4 style={{marginBottom:'10px'}}>Quick Facts</h4>
+                            <Typography variant="h4" sx={{ fontSize: 20, fontWeight: 700}} color="text.primary" gutterBottom>
+                              Quick Facts
+                            </Typography>
                             <Box component={Container} sx={{maxWidth:'100%'}} disableGutters={true}>
                               {card.fact_point.map(fact => {
                                 return (
@@ -200,7 +202,7 @@ export default function Home() {
                           </Box>
                         </CardContent>
                         {card.card_link?
-                          <Typography sx={{fontSize:16, marginLeft:5}} component="a" href={card.card_link}>
+                          <Typography sx={{fontSize:16, marginLeft:5, fontFamily:'Public Sans'}} component="a" href={card.card_link}>
                             Learn More
                           </Typography>
                         :
@@ -235,7 +237,7 @@ export default function Home() {
                             </Typography>
                           </Box>
                           <Box sx={{display:'flex', justifyContent:'flex-start', alignItems:'flex-start', flexDirection:'column', width:'80%', fontSize:'16px', padding:'10px'}}>
-                            <h4 style={{marginBottom:'10px'}}>Quick Facts</h4>
+                            <h4 style={{marginBottom:'10px', fontFamily: 'Clash Grotesk Medium'}}>Quick Facts</h4>
                             <Box sx={{maxWidth:'100%'}}>
                               {card.fact_point.map(fact => {
                                 return (
@@ -270,13 +272,13 @@ export default function Home() {
                 <Box className="info_nav" component={Container} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '20px', fontSize: '25px'}}>
                   {infoSectionData.map(data => {
                     return (
-                      <Typography id={data.Information_Short_Title} onClick={() => changeSelection(data.Information_Short_Title)} className={`info_nav_text ${data.Information_Short_Title==selectedInfoSectionData?.Information_Short_Title? 'active':null}`} component={'h4'}>{data.Information_Short_Title}</Typography>
+                      <Typography variant="h4" sx={{ fontSize: 'inherit', fontWeight: 600 }} id={data.Information_Short_Title} onClick={() => changeSelection(data.Information_Short_Title)} className={`info_nav_text ${data.Information_Short_Title==selectedInfoSectionData?.Information_Short_Title? 'active':null}`}>{data.Information_Short_Title}</Typography>
                     )
                   })}
                 </Box>
                 <Container sx={{minHeight: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width:'70%'}} maxWidth={false}>
                   <Container sx={{width: '50%', minHeight: '40vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                    <Typography sx={{fontSize:'56px'}} className="info_content_title" component={'h2'}>{selectedInfoSectionData?.Information_Full_Title}</Typography>
+                    <Typography sx={{fontSize:'56px', fontWeight: 700, color: '#0C3A25' }} className="info_content_title" variant="h2">{selectedInfoSectionData?.Information_Full_Title}</Typography>
                     <Typography component={'small'}>{selectedInfoSectionData?.Information_Caution_Text}</Typography>
                     <Typography sx={{fontSize:'36px'}} className="info_content_answer" component={'h1'}>{selectedInfoSectionData?.Information_Answer}</Typography>
                     <Typography sx={{width: '90%'}} className="info_content_description" component={'p'}>{selectedInfoSectionData?.Information_Description}</Typography>

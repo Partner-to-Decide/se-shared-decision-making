@@ -117,6 +117,26 @@ export interface decision_aid_section {
   Button_Text: string
   Section_Image: image_data
 }
+
+export interface mystuff_page_title_subtitles {
+  data: {
+    id: number
+    attributes: {
+      Title: string
+      Description: string
+    }
+  }
+}
+
+export interface mystuff_page_questions_list {
+  data: {
+    id: number
+    attributes: {
+      question: string
+      Tooltip: string
+    }
+  }
+}
 //--------------------------------- MyChoices page
 export interface mychoices_page_title_subtitles {
   data: {
@@ -129,6 +149,7 @@ export interface mychoices_page_title_subtitles {
     }
   }
 }
+
 export interface mychoices_page_learn_about {
   data: {
     id: number

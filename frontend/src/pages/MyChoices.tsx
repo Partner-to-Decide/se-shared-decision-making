@@ -197,6 +197,7 @@ const MyChoices = () => {
             "/api/my-choices-risks-foralls?populate=content&locale=" +
             localStorage.getItem("language")
         );
+        console.log(result.data,'result.result')
         setForAll(result.data);
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
@@ -245,8 +246,11 @@ const MyChoices = () => {
         const result = await axios.get(
           REACT_APP_api_base_url +
             "/api/my-choices-sections?populate[title][populate]=*&populate[content1][populate]=*&populate[content2][populate]=*&populate[content3][populate]=*&locale=" +
-            localStorage.getItem("language")
+            localStorage.getItem("language") +"&_sort=createdAt:ASC" // Add the sorting parameter here
         );
+        const sortedData = result.data.data.sort((a: any, b: any) => {
+          return a.id - b.id;
+        });
         setSectionsData(result.data);
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
@@ -300,18 +304,6 @@ const MyChoices = () => {
     fetchNeedHelpData();
   }, [languageState]);
 
-  // for strapi purpose:
-  // interface Response {
-  //   data: [] | ApiHomePageeHomePagee[];
-  // }
-  // const defaultResponse = { data: [] };
-
-  // const data: Response = useFetch<Response>(
-  //   "http://localhost:1337/api/home-pagees?populate=*", defaultResponse
-  // );
-
-  // console.log("data" + data.data[0].attributes);
-  console.log(sectionsData);
   return (
     <StyledEngineProvider injectFirst>
       <Layout>
@@ -422,7 +414,7 @@ const MyChoices = () => {
             sm={8}
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
-          >
+          > 
             {sectionsData?.data[0].attributes.title != null ? (
               <Grid container>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -458,7 +450,7 @@ const MyChoices = () => {
               }}
             >
               {sectionsData?.data[0].attributes.content1[0].picture1.data
-                .attributes.url != null ? (
+                 != null ? (
                 <Grid item width="10rem" height="10rem">
                   <img
                     src={
@@ -469,23 +461,22 @@ const MyChoices = () => {
                   />
                 </Grid>
               ) : null}
-              {REACT_APP_api_base_url +
-                sectionsData?.data[0].attributes.content2[0].picture1.data
-                  .attributes.url !=
+              {sectionsData?.data[0].attributes.content2[0].picture1.data
+                  !=
               null ? (
                 <Grid item width="10rem" height="10rem">
+                {sectionsData?.data[0].attributes.content2[0].picture1.data &&
                   <img
                     src={
                       REACT_APP_api_base_url +
                       sectionsData?.data[0].attributes.content2[0].picture1.data
                         .attributes.url
                     }
-                  />
+                  />}
                 </Grid>
               ) : null}
-              {REACT_APP_api_base_url +
-                sectionsData?.data[0].attributes.content3[0].picture1.data
-                  .attributes.url !=
+              { sectionsData?.data[0].attributes.content3[0].picture1.data
+                 !=
                 null && !isMobile ? (
                 <Grid item width="10rem" height="10rem">
                   <img
@@ -547,25 +538,31 @@ const MyChoices = () => {
               {sectionsData?.data[1].attributes != null ? (
                 <Fragment>
                   <Grid item width="10rem" height="10rem">
+                  {sectionsData?.data[1].attributes.content1[0].picture1
+                          .data !=null &&
                     <img
                       src={
                         REACT_APP_api_base_url +
                         sectionsData?.data[1].attributes.content1[0].picture1
                           .data.attributes.url
                       }
-                    />
+                    />}
                   </Grid>
                   <Grid item width="10rem" height="10rem">
+                   {sectionsData?.data[1].attributes.content1[0].picture1
+                          .data !=null &&
                     <img
                       src={
                         REACT_APP_api_base_url +
                         sectionsData?.data[1].attributes.content2[0].picture1
                           .data.attributes.url
                       }
-                    />
+                    />}
                   </Grid>
                   {!isMobile ? (
                     <Grid item width="10rem" height="10rem">
+                      {sectionsData?.data[1].attributes.content3[0].picture1
+                            .data &&
                       <img
                         src={
                           REACT_APP_api_base_url +
@@ -573,6 +570,7 @@ const MyChoices = () => {
                             .data.attributes.url
                         }
                       />
+                    }
                     </Grid>
                   ) : null}
                 </Fragment>
@@ -625,9 +623,8 @@ const MyChoices = () => {
             >
               <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  {REACT_APP_api_base_url +
-                    sectionsData?.data[2].attributes.content1[0].picture1.data
-                      .attributes.url !=
+                  {sectionsData?.data[2].attributes.content1[0].picture1.data
+                       !=
                   null ? (
                     <img
                       src={
@@ -665,13 +662,15 @@ const MyChoices = () => {
                     .attributes.url !=
                 null ? ( */}
                   <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                  {sectionsData?.data[2].attributes.content2[0].picture1
+                          .data !=null &&
                     <img
                       src={
                         REACT_APP_api_base_url +
                         sectionsData?.data[2].attributes.content2[0].picture1
                           .data.attributes.url
                       }
-                    />
+                    /> } 
                   </Grid>
                   {/* ) : null} */}
                   <Grid
@@ -799,9 +798,8 @@ const MyChoices = () => {
               }}
             >
               <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                {REACT_APP_api_base_url +
-                  sectionsData?.data[3].attributes.content1[0].picture1.data
-                    .attributes.url !=
+                {sectionsData?.data[3].attributes.content1[0].picture1.data
+                     !=
                 null ? (
                   <Grid
                     item
@@ -834,9 +832,9 @@ const MyChoices = () => {
               </Grid>
 
               <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
-                {REACT_APP_api_base_url +
+                {
                   sectionsData?.data[3].attributes.content2[0].picture1.data
-                    .attributes.url !=
+                    !=
                 null ? (
                   <Grid
                     item
@@ -1079,7 +1077,7 @@ const MyChoices = () => {
                           <Fragment>
                             <Grid item>
                               {sectionsData?.data[5].attributes.content1[0]
-                                .picture1.data.attributes.url != null ? (
+                                .picture1.data != null ? (
                                 <img
                                   width="180.45px"
                                   height="243px"
@@ -1092,9 +1090,8 @@ const MyChoices = () => {
                               ) : null}
                             </Grid>
                             <Grid item>
-                              {REACT_APP_api_base_url +
-                                sectionsData?.data[5].attributes.content2[0]
-                                  .picture1.data.attributes.url !=
+                              {sectionsData?.data[5].attributes.content2[0]
+                                  .picture1.data !=
                               null ? (
                                 <img
                                   width="180.45px"
@@ -1108,9 +1105,8 @@ const MyChoices = () => {
                               ) : null}
                             </Grid>
                             <Grid item>
-                              {REACT_APP_api_base_url +
-                                sectionsData?.data[5].attributes.content3[0]
-                                  .picture1.data.attributes.url !=
+                              {sectionsData?.data[5].attributes.content3[0]
+                                  .picture1.data !=
                               null ? (
                                 <img
                                   width="180.45px"
@@ -1216,9 +1212,8 @@ const MyChoices = () => {
                                 sm={12}
                                 xs={12}
                               >
-                                {REACT_APP_api_base_url +
-                                  sectionsData?.data[6].attributes.content1[0]
-                                    .picture1.data.attributes.url !=
+                                {sectionsData?.data[6].attributes.content1[0]
+                                    .picture1.data !=
                                 null ? (
                                   <img
                                     width="180.45px"
@@ -1245,9 +1240,8 @@ const MyChoices = () => {
                                 sm={12}
                                 xs={12}
                               >
-                                {REACT_APP_api_base_url +
-                                  sectionsData?.data[6].attributes.content2[0]
-                                    .picture1.data.attributes.url !=
+                                {sectionsData?.data[6].attributes.content2[0]
+                                    .picture1.data !=
                                 null ? (
                                   <img
                                     width="446px"
@@ -1386,9 +1380,8 @@ const MyChoices = () => {
                                 sm={12}
                                 xs={12}
                               >
-                                {REACT_APP_api_base_url +
-                                  sectionsData?.data[7].attributes.content1[0]
-                                    .picture1.data.attributes.url !=
+                                {sectionsData?.data[7].attributes.content1[0]
+                                    .picture1.data !=
                                 null ? (
                                   <img
                                     width="180.45px"
@@ -1415,9 +1408,8 @@ const MyChoices = () => {
                                 sm={12}
                                 xs={12}
                               >
-                                {REACT_APP_api_base_url +
-                                  sectionsData?.data[7].attributes.content2[0]
-                                    .picture1.data.attributes.url !=
+                                { sectionsData?.data[7].attributes.content2[0]
+                                    .picture1.data !=
                                 null ? (
                                   <img
                                     width="449px"
@@ -1585,10 +1577,8 @@ const MyChoices = () => {
                               ) : null}
                             </Grid>
                             <Grid item>
-                              {REACT_APP_api_base_url +
-                                sectionsData?.data[8].attributes.content2[0]
-                                  .picture1.data.attributes.url !=
-                              null ? (
+                            
+                              {sectionsData?.data[8].attributes.content2[0].picture1.data != null && sectionsData?.data[8].attributes.content2[0].picture1.data.attributes.url != undefined ? (
                                 <img
                                   width="180.45px"
                                   height="243px"
@@ -1602,10 +1592,7 @@ const MyChoices = () => {
                             </Grid>
 
                             <Grid item>
-                              {REACT_APP_api_base_url +
-                                sectionsData?.data[8].attributes.content3[0]
-                                  .picture1.data.attributes.url !=
-                              null ? (
+                            {sectionsData?.data[8]?.attributes.content3[0].picture1.data != null ? (
                                 <img
                                   width="180.45px"
                                   height="235.66px"

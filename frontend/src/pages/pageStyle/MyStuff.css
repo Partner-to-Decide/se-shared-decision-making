@@ -1,0 +1,166 @@
+.question-outer{
+	position: relative;
+}
+.question-outer .MuiCheckbox-root {
+    position: absolute;
+    top: 20px;
+    left: 18px;
+    padding: 0;
+    z-index: 9;
+    border-radius: 100px;
+    height: 44px;
+    width: 44px;
+    border: 2px solid #DFF0D8;
+}
+.question-outer .MuiCheckbox-root.Mui-checked {
+    background-color: #DFF0D8;
+    border-color: #DFF0D8;
+    background-image: url(../../siteImages/icons/check-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.question-outer .MuiCheckbox-root svg.MuiSvgIcon-root{
+    display: none;
+}
+.question {
+    background: white;
+    padding: 33px 22px 23px 78px;
+    border-radius: 10px;
+    position: relative;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    min-height: 17px;
+    display: flex;
+    align-items: flex-start;
+}
+.question.pdf-ques{
+    padding: 14px 22px 14px 28px;
+}
+.question-outer .MuiCheckbox-root.Mui-checked + .question {
+    background: #F4FCF0;
+}
+.question-outer .MuiCheckbox-root.Mui-checked + .question button.edit-btn {
+    display: none;
+}
+.checklist-outer button.add-ques-btn {
+    background: #DFF0D8;
+    border: none;
+    padding: 24px 10px;
+    border-radius: 10px;
+    width: 100%;
+    color: #0C3A25;
+    cursor: pointer;
+}
+.checklist-outer button.add-ques-btn img {
+    vertical-align: middle;
+    margin-right: 16px;
+    position: relative;
+    top: -2px;
+}
+.question button.edit-btn {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    top: 26px;
+}
+.question:hover button.edit-btn{
+	opacity: 1;
+}
+.question input[type="text"] {
+    border: none;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: 0 0;
+    outline: none;
+    padding: 0;
+}
+.question button.edit-btn {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+.question input[type="text"] {
+    border: none;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: 0 0;
+    outline: none;
+    padding: 0;
+}
+.edit-case-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 22px;
+}
+.edit-case-btn-group button.delete-btn {
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    color: #00653E;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+.edit-case-btn-group button.cancel-btn {
+    border: 1px solid #0C3A25;
+    background: transparent;
+    border-radius: 22px;
+    display: block;
+    padding: 10px 21px;
+    color: #0C3A25;
+    cursor: pointer;
+}
+.edit-case-btn-group button.save-btn {
+    border: 1px solid #0C3A25;
+    background: #0C3A25;
+    border-radius: 22px;
+    display: block;
+    padding: 10px 21px;
+    color: #fff;
+    cursor: pointer;
+}
+.MuiButtonBase-root.save-ques-btn {
+    border-radius: 100px;
+    text-transform: capitalize;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 11px;
+}
+.MuiButtonBase-root.save-ques-btn img {
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 6px;
+    width: 23px;
+}
+.question .tooltip-icon {
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.MuiTooltip-tooltip p.MuiTypography-root {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 6px;
+    line-height: initial;
+    height: auto;
+}
+.MuiTooltip-tooltip a {
+    color: #00653E;
+    font-size: 14px;
+    font-weight: bold;
+}
+
