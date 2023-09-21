@@ -7,10 +7,10 @@ export const api_config = {
 export const language_config = {
     English:"en",
     Español:"es",
-    bah:"Bahamas Creole English",
+    bah:"Kreyòl ayisyen",
     en:"English",
     "es":"Español",
-    "bah":"Bahamas Creole English",
+    "bah":"Kreyòl ayisyen",
 }
 
 export const getLanguageKey = (language) => {

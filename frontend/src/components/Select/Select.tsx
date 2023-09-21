@@ -52,7 +52,7 @@ export default function BasicSelect() {
       >
         <MenuItem value={"en"}>English</MenuItem>
         <MenuItem value={"es"}>Español</MenuItem>
-        <MenuItem value={"bah"}>Bahamas Creole English</MenuItem>
+        <MenuItem value={"bah"}>Kreyòl ayisyen</MenuItem>
         {/* <MenuItem value={"Kreyòl Ayisyen"}>Kreyòl Ayisyen</MenuItem> */}
       </Select>
     </Box>

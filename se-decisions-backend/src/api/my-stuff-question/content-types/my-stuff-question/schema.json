@@ -1,11 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "my_stuff_page_titles",
+  "kind": "collectionType",
+  "collectionName": "my_stuff_questions",
   "info": {
-    "singularName": "my-stuff-page-title",
-    "pluralName": "my-stuff-page-titles",
-    "displayName": "MyStuff-PageTitle",
-    "description": ""
+    "singularName": "my-stuff-question",
+    "pluralName": "my-stuff-questions",
+    "displayName": "MyStuff-question"
   },
   "options": {
     "draftAndPublish": true
@@ -16,7 +15,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "question": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -24,7 +23,7 @@
       },
       "type": "string"
     },
-    "Description": {
+    "Tooltip": {
       "pluginOptions": {
         "i18n": {
           "localized": true
