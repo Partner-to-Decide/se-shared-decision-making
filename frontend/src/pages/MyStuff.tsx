@@ -7,7 +7,7 @@ import React, { useRef,useState, useEffect, Fragment } from "react";
 import Checklist from "../components/checklists/Checklist";
 import ChecklistQues from "../components/checklists/ChecklistQues";
 import "./pageStyle/MyStuff.css";
-// import html2pdf from 'html2pdf.js';
+import html2pdf from 'html2pdf.js';
 import {
   mystuff_page_title_subtitles,
   mystuff_page_questions_list,
@@ -28,7 +28,8 @@ export default function MyStuff() {
   const [modalShow, setModalShow] = useState(false);
   const [noteIndex, setIndex] = useState(0);
   const summaryGridRef = useRef<HTMLDivElement | null>(null);
-const [isPdfGeneration, setIsPdfGeneration] = useState(false);
+  const [isPdfGeneration, setIsPdfGeneration] = useState(false);
+  const [isloading, setLoading] = useState(false);
   const [languageState, setLanguageState] = useState("en");
   const addNote = function (value: string) {
     return setNote((notes) => [...notes, value]);
@@ -49,35 +50,35 @@ const [isPdfGeneration, setIsPdfGeneration] = useState(false);
     // todo: can not download
   const downloadSummary = () => {
     setIsPdfGeneration(true);
-    // setLoading(true);
-    //   const element = document.getElementById('pdf-page'); // Get the container element by its ID
-    // var orientation = 'portrait';
-    // var options = {
-    //   margin: [0, 0, 0, 0], // [top, right, bottom, left]
-    //   enableLinks: true,
-    //   filename: 'Quiz-result.pdf',
-    //   image: { type: 'jpeg', quality: 1.0 },
-    //   css: 'custom-styles',
-    //   html2canvas: {
-    //     scale: 2.0, 
-    //             scrollX: 0, 
-    //             scrollY:0, 
-    //     letterRendering: true
-    //   },
-    //   jsPDF: {
-    //     orientation: 'portrait', 
-    //     unit: 'pt', 
-    //     format: 'letter', 
-    //     compressPDF: true,
-    //     pagebreak: { mode: ['css', 'legacy'], before: '.before', after: '.after', avoid: '.avoid' }
-    //   }
-    // };
-    // window.setTimeout(() => {
-    //     html2pdf().set(options).from(element).save().then(() => {
-    //         setIsPdfGeneration(false);
-    //         // setLoading(false);
-    //     });
-    // }, 500);
+    setLoading(true);
+      const element = document.getElementById('pdf-page'); // Get the container element by its ID
+    var orientation = 'portrait';
+    var options = {
+      margin: [0, 0, 0, 0], // [top, right, bottom, left]
+      enableLinks: true,
+      filename: 'Quiz-result.pdf',
+      image: { type: 'jpeg', quality: 1.0 },
+      css: 'custom-styles',
+      html2canvas: {
+        scale: 2.0, 
+                scrollX: 0, 
+                scrollY:0, 
+        letterRendering: true
+      },
+      jsPDF: {
+        orientation: 'portrait', 
+        unit: 'pt', 
+        format: 'letter', 
+        compressPDF: true,
+        pagebreak: { mode: ['css', 'legacy'], before: '.before', after: '.after', avoid: '.avoid' }
+      }
+    };
+    window.setTimeout(() => {
+        html2pdf().set(options).from(element).save().then(() => {
+            setIsPdfGeneration(false);
+            // setLoading(false);
+        });
+    }, 500);
   };
   useEffect(() => {
   const fetchPageTitlesData = async () => {

@@ -12,7 +12,7 @@ const FooterBar = () => {
       <div className="allFooter">
         <div id="col1F">
           <ol>
-            <img src="https://se-shared-decision-making-production-9c59.up.railway.app/uploads/Linear_Mint_dc3b7a587c.png" alt="Logo" className="logo" />
+            <img src="https://se-shared-decision-making-production-9c59.up.railway.app/uploads/footer_logo_c45b8e39fd.png" alt="Logo" className="logo" />
             <li>
               <button className="leftFooter">Website</button>
             </li>
