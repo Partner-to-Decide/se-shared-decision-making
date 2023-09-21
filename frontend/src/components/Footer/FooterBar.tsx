@@ -1,6 +1,7 @@
 import React from 'react'
 import './FooterStyles.css'
 import LogoDark from './logo.png'
+import Link from '@mui/material/Link';
 const FooterBar = () => {
   // Footer is still in standard rendered format,
   //   requires proper buttons and routing to
@@ -12,12 +13,12 @@ const FooterBar = () => {
       <div className="allFooter">
         <div id="col1F">
           <ol>
-            <img src="https://se-shared-decision-making-production-9c59.up.railway.app/uploads/footer_logo_c45b8e39fd.png" alt="Logo" className="logo" />
+            <img src="https://se-shared-decision-making-production.up.railway.app/uploads/footer_logo_c45b8e39fd.png" alt="Logo" className="logo" />
             <li>
-              <button className="leftFooter">Website</button>
+              <button className="leftFooter"><Link href="/" style={{ color: '#fff' }}>Website</Link></button>
             </li>
             <li>
-              <button className="leftFooter">Contact Us</button>
+              <button className="leftFooter"><Link href="/" style={{ color: '#fff' }}>Contact Us</Link></button>
             </li>
             <li>
               <button id="srt">Support Us</button>
@@ -29,16 +30,16 @@ const FooterBar = () => {
           <ol>
             <h1 className="allFooter">Induction Decision Aid</h1>
             <li>
-              <button className="allFooter">Home</button>
+              <button className="allFooter"><Link href="/Home" style={{ color: '#fff' }}>Home</Link></button>
             </li>
             <li>
-              <button className="allFooter">My Choices</button>
+              <button className="allFooter"><Link href="/MyChoices" style={{ color: '#fff' }}>My Choices</Link></button>
             </li>
             <li>
-              <button className="allFooter">My Values</button>
+              <button className="allFooter"><Link href="/MyValues" style={{ color: '#fff' }}>My Values</Link></button>
             </li>
             <li>
-              <button className="allFooter">My Stuff</button>
+              <button className="allFooter"><Link href="/MyStuff" style={{ color: '#fff' }}>My Stuff</Link></button>
             </li>
             <hr></hr>
             <li>
@@ -57,13 +58,13 @@ const FooterBar = () => {
           <ol>
             <h1 className="allFooter">Download a PDF</h1>
             <li>
-              <button className="allFooter">English</button>
+              <button className="allFooter"><Link href="#" style={{ color: '#fff' }}>English</Link></button>
             </li>
             <li>
-              <button className="allFooter">Español</button>
+              <button className="allFooter"><Link href="#" style={{ color: '#fff' }}>Español</Link></button>
             </li>
             <li>
-              <button className="allFooter">Kreyòl Ayisyen</button>
+              <button className="allFooter"><Link href="#" style={{ color: '#fff' }}>Kreyòl Ayisyen</Link></button>
             </li>
           </ol>
         </div>
