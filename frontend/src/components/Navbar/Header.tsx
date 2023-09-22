@@ -1,81 +1,81 @@
 import { Grid, Container, Typography, IconButton } from "@mui/material";
 import Logo from "./logoNav.png";
+import axios from "axios";
 import MenuButton from "../Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Select from "../Select/Select";
 import './Header.css'
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import { header_section} from "../../utils/types";
+import { REACT_APP_api_base_url } from "../../utils/url_config";
+import Link from '@mui/material/Link';
 const Header = () => {
+  
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedLang = queryParams.get('lang') || 'en';
+  const [languageState, setLanguageState] = useState(selectedLang);
+
   const [headerState, setHeaderState] = useState(false);
+  const [HeaderMenusData, setHeaderMenusData] = useState<header_section>();
   const showHeader = () => {
     setHeaderState(!headerState)
   }
   const navigate = useNavigate();
-  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+
+  useEffect(() => {
+    axios.get(REACT_APP_api_base_url + '/api/headers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
+      setHeaderMenusData(result.data.data[0].attributes)
+      return result;
+    })
+
+  }, [languageState]);
+
+  useEffect(() => {
+    if(HeaderMenusData){
+      setHeaderState(true)
+    }
+  }, [HeaderMenusData]);
+
   return (
     <Fragment>
-    <Container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'space-between', boxShadow:'1', padding:'2', backgroundColor:"#fff", minHeight:'10vh'}} maxWidth={false} className="header">
-        <Grid container sx={{maxWidth:'5vw'}} className="hamburger" style={{display:'flex', justifyContent:'flex-start', alignItems:'flex-start'}}>
-          <IconButton 
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={showHeader}
-            sx={{ mr: 2, display: { xs: 'block', sm: 'none',}, }}>   
-            <MenuIcon />
-          </IconButton>
-        </Grid>
-        <Grid container sx={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', minHeight:'2vh', flexWrap:'nowrap', display: { xs: headerState?'flex':'none', sm: 'flex',}}} className="responsive">
-          <Grid container sx={{display:'flex', justifyContent:'center'}} className="nav-logo">
-            <img className="nav" src="https://se-shared-decision-making-production.up.railway.app/uploads/header_logo_981ee987d1.png" alt="Logo" />
-          </Grid>
-          <Grid container sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}} className="nav-list">
-            <MenuButton className="nav-button" routeName={"Home"} onClick={() => navigate("/Home")} data-testid="header-home">
-              Home
-            </MenuButton>
-            <MenuButton
-            className="nav-button"
-              routeName={"MyChoices"}
-              onClick={() => navigate("/MyChoices")}
-              data-testid="header-choices"
-            >
-              My Choices
-            </MenuButton>
-            <MenuButton
-            className="nav-button"
-              routeName={"MyValues"}
-              onClick={() => navigate("/MyValues")}
-              data-testid="header-values"
-            >
-              My Values
-            </MenuButton>
-            <MenuButton
-            className="nav-button"
-              routeName={"MyStuff"}
-              onClick={() => navigate("/MyStuff")}
-              data-testid="header-stuff"
-            >
-              My Stuff
-            </MenuButton>
-          </Grid>
-          <Grid container className="language-selector" sx={{display:'flex', justifyContent:'flex-end'}}>
-            <Select />
-          </Grid>
-        </Grid>
-    </Container>
+      <Grid container sx={{ py: 3, boxShadow:'1', background: '#ffffff' }} className="header">
+          <Container maxWidth="xl">
+              <Grid container spacing={2} sx={{ alignItems: 'center' }} className="responsive">
+                  <Grid item className="nav-logo">
+                      {HeaderMenusData?
+                       <Link href="/Home"> <img className="nav" src={(REACT_APP_api_base_url || "") + HeaderMenusData?.Header_Logo.data[0].attributes.url} alt="Logo" /></Link>
+                          :null
+                        }
+                  </Grid>
+                  <Grid item  className="nav-list" sx={{ mx: 'auto' }}>
+
+                   { headerState && HeaderMenusData ?(<>
+                      {HeaderMenusData?.Header_Link.map(card => {
+                          return( 
+                              <MenuButton 
+                              className="nav-button" 
+                              routeName={card.Menu_Link}
+                              onClick={() => navigate(`/${card.Menu_Link}`)}
+                              data-testid="header-${card.Menu_Link}"
+                              >
+                              {card.Link_Name}
+                            </MenuButton>
+                          )
+                        }
+                      )}
+                    </>
+                    ):(null)}
+                  </Grid>
+                  <Grid item className="language-selector">
+                    <Select />
+                  </Grid>
+              </Grid>
+          </Container>
+      </Grid>
     </Fragment>
   );
 };
 
 export default Header;
-
-// export default Header

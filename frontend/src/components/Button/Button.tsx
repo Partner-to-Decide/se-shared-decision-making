@@ -5,10 +5,8 @@ const MenuButton = ({ children, routeName, onClick }: any) => {
   const pathName = window.location.pathname.split("/")[pathlength - 1];
   const active = pathName === routeName;
 
-  console.log(pathlength);
-
   //Button styling for navigation bar, applies hover properties when hover
-
+  
   return (
     <MUIButton
       sx={{

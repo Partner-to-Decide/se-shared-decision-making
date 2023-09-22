@@ -10,10 +10,11 @@
   
 
 .hero_container {
-    background: url('../../siteImages/website_pattern.svg');
-    background-size: cover;
+    background-image: url('../../siteImages/website_pattern.svg');
+    background-size: 920px;
     background-repeat: no-repeat;
     background-attachment: scroll;
+    background-position: right bottom;
 }
 
 //     .inner_container{
@@ -44,11 +45,10 @@
 //             }
 //         }
 
-.hero_image{
-    width:629px;
-    height:414px;
-    border-radius:207px;
-    margin-left:500px;
+.hero_image {
+    width: calc(100% + 255px);
+    border-radius: 100rem;
+    margin-left: -255px;
 }
 //     }
 // }
@@ -67,12 +67,23 @@
         font-size: 25px;
 
         .info_nav_text {
-            padding: 20px;
+            padding: 14px 0;
             cursor: pointer;
+            margin: 0 0 0 40px;
+            color: #666666;
         }
 
         .active{
-            border-bottom: solid 1.5px;
+            border-bottom: solid 2.5px;
+            color: #0C3A25;
+            border-color: #0C3A25;
+        }
+    }
+
+    .info_canvas{
+        canvas {
+            width: 332px !important;
+            height: 331px !important;
         }
     }
 
@@ -127,6 +138,13 @@
         }
 
         
+    }
+}
+
+.about-section{
+    .hero_image_about{
+        width: 100%;
+        border-radius: 200px;
     }
 }
 

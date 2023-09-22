@@ -1,15 +1,14 @@
 {
-  "collectionName": "components_header_link_header_links",
+  "collectionName": "components_footer_link_footer_links",
   "info": {
-    "displayName": "Header_Link",
-    "description": ""
+    "displayName": "Footer_Link"
   },
   "options": {},
   "attributes": {
     "Link_Name": {
       "type": "string"
     },
-    "Menu_Link": {
+    "Link_url": {
       "type": "string"
     }
   }

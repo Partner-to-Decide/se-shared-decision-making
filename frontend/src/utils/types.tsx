@@ -16,6 +16,29 @@ export interface image_data {
   data: image_attribute
 }
 
+export interface header_section {
+  Header_Logo:image_data
+  Header_Link: header_menu_items[]
+}
+export interface header_menu_items{
+    Link_Name: string
+    Menu_Link: string
+}
+export interface footer_section {
+  Footer_data:footer_repeat_block[]
+}
+export interface footer_repeat_block {
+  Footer_Logo:image_data
+  MenuHeading:string
+  FooterLinks: footer_menu_items[]
+}
+  
+export interface footer_menu_items{
+    Link_Name: string
+    Link_url: string
+}
+
+
 export interface home_choice_section {
   Title: string
   Fact_Card_Content: home_choice_card[]
@@ -24,6 +47,19 @@ export interface home_choice_section {
 
   //   };
   // };
+}
+
+
+export interface home_about_section {
+  Creator_Name: string
+  About_Paras: about_paras_card[]
+  Creator_Image:image_data
+}
+export interface about_paras_card {
+  Para_Title: string
+  Para_Description: string
+  Para_Link: string
+  Para_Link_Filler: string
 }
 
 export interface home_choice_attributes {
