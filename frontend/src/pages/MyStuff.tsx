@@ -133,7 +133,7 @@ export default function MyStuff() {
   //returns index of where edit occurs
   return (
     <Layout>
-      <div >
+      <div>
         <Grid container columns={{ xl: 12, lg: 12, md: 12 }} item xl={12} lg={12} md={12}
           sx={{
             backgroundColor: "#FAF6ED", direction: "column",

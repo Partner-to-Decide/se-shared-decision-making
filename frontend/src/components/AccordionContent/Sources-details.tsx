@@ -16,7 +16,6 @@ export const Sources = ({ number, text1, text2 }: any) => {
       >
         <Typography
           variant="h6"
-          fontFamily="Clash Grotesk"
           fontWeight="500"
           fontSize="24px"
           lineHeight="26px"

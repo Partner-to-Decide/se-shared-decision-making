@@ -1,7 +1,8 @@
 {
   "collectionName": "components_footer_link_footer_links",
   "info": {
-    "displayName": "Footer_Link"
+    "displayName": "Footer_Link",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,6 +11,9 @@
     },
     "Link_url": {
       "type": "string"
+    },
+    "Divider": {
+      "type": "boolean"
     }
   }
 }

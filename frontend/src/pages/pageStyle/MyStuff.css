@@ -35,6 +35,7 @@
 }
 .question.pdf-ques{
     padding: 14px 22px 14px 28px;
+    display: block;
 }
 .question-outer .MuiCheckbox-root.Mui-checked + .question {
     background: #F4FCF0;

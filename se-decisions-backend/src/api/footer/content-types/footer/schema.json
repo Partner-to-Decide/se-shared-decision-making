@@ -16,24 +16,8 @@
     }
   },
   "attributes": {
-    "Footer_Logo": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "FooterLinks": {
-      "displayName": "Footer_Link",
+    "Footer_section_data1": {
+      "displayName": "Footer_section_data1",
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
@@ -41,15 +25,18 @@
           "localized": true
         }
       },
-      "component": "footer-link.footer-link"
+      "component": "footer-section.footer-section-data1"
     },
-    "MenuHeading": {
+    "Footer_Decision_Aid": {
+      "displayName": "Footer-Decision-Aid",
+      "type": "component",
+      "repeatable": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "string"
+      "component": "footer-decision-aid.footer-decision-aid"
     }
   }
 }

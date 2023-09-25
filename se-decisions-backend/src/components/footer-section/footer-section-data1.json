@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_footer_section_footer_section_data1s",
+  "info": {
+    "displayName": "Footer_section_data1",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Footer_link": {
+      "type": "component",
+      "repeatable": true,
+      "component": "footer-link.footer-link"
+    },
+    "Footer_Logo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "ButtonText": {
+      "type": "string"
+    },
+    "ButtonLink": {
+      "type": "string"
+    }
+  }
+}

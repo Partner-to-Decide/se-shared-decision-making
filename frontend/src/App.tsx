@@ -61,7 +61,7 @@ const majorTheme = createTheme({
 })
 
 majorTheme.typography.h2 = {
-  fontSize: '3.5rem',
+  fontSize: '1.5rem',
   fontWeight: 'normal',
   fontFamily: 'ClashGrotesk-Medium',
   lineHeight: 1,
@@ -80,7 +80,7 @@ majorTheme.typography.h2 = {
 };
 
 majorTheme.typography.h3 = {
-  fontSize: '2.5rem',
+  fontSize: '1.5rem',
   fontWeight: 'normal',
   fontFamily: 'ClashGrotesk-Medium',
   '@media (min-width:600px)': {
@@ -93,6 +93,28 @@ majorTheme.typography.h3 = {
     fontWeight: 'normal',
     fontFamily: 'ClashGrotesk-Medium',
   },
+};
+
+majorTheme.typography.h4 = {
+  fontSize: '1rem',
+  fontWeight: 'normal',
+  fontFamily: 'ClashGrotesk-Medium',
+  '@media (min-width:600px)': {
+    fontSize: '1rem',
+    fontFamily: 'ClashGrotesk-Medium',
+    fontWeight: 'normal',
+  },
+  [majorTheme.breakpoints.up('md')]: {
+    fontSize: '1.5rem',
+    fontWeight: 'normal',
+    fontFamily: 'ClashGrotesk-Medium',
+  },
+};
+
+majorTheme.typography.h5 = {
+  fontSize: '1rem',
+  fontWeight: 'normal',
+  fontFamily: 'ClashGrotesk-Medium',
 };
 
 majorTheme.typography.body1 = {

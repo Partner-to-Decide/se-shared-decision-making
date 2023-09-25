@@ -47,7 +47,6 @@ const FooterBar = () => {
 
   useEffect(() => {
     axios.get(REACT_APP_api_base_url + '/api/footers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
-      console.log(result.data,'result.data')
       setFooterData(result.data)
       return result;
     })
@@ -64,34 +63,46 @@ const FooterBar = () => {
       <div className="allFooter">
         <Container maxWidth="xl">
             <Grid container spacing={2}>
+            {footerState && FooterData?.data[0].attributes.Footer_section_data1[0]?
                 <Grid item xs={3}>
                     <Box
                       component="img"
                       alt="Logo"
                       sx={{ mb: 4 }}
                       className="logo" 
-                      src="https://se-shared-decision-making-production.up.railway.app/uploads/footer_logo_c45b8e39fd.png"
+                      src={
+                          REACT_APP_api_base_url +
+                          FooterData?.data[0].attributes.Footer_section_data1[0].Footer_Logo.data[0].attributes.url
+                        }
                     />
+                   {footerState && FooterData?.data[0].attributes.Footer_section_data1[0].Footer_link?
                     <MenuList className="footer-menu">
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/" style={{ color: '#fff' }}>Website</Link></MenuItem>
-                        <MenuItem sx={{ mb: 4, p: 0 }}><Link href="/" style={{ color: '#fff' }}>Contact Us</Link></MenuItem>
+                     {FooterData?.data[0].attributes.Footer_section_data1[0].Footer_link.map((item) => (
+                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href={'/'+item.Link_url} style={{ color: '#fff' }}>{item.Link_Name}</Link></MenuItem>
+                       ))}
                     </MenuList>
-                    <Button sx={{ background: 'white', fontSize: '18px', borderRadius: '30px', padding: '0.7rem 1.3rem', textTransform: 'inherit' }}>Support Us</Button>
+                    : null }
+                    <Button sx={{ background: 'white', fontSize: '18px', borderRadius: '30px', padding: '0.7rem 1.3rem', textTransform: 'inherit' }}>
+                      <Link href={FooterData?.data[0].attributes.Footer_section_data1[0].ButtonLink}>{FooterData?.data[0].attributes.Footer_section_data1[0].ButtonText}</Link>
+                  </Button>
                 </Grid>
+                 :
+                 null
+               }
                 <Grid item xs={1}></Grid>
+                {footerState && FooterData?.data[0].attributes.Footer_Decision_Aid[0]?
                 <Grid item xs={3}>
-                    <Typography className="footer-title" variant="h4" gutterBottom>Induction Decision Aid</Typography>
-                    <MenuList className="footer-menu">
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/Home" style={{ color: '#fff' }}>Home</Link></MenuItem>
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/MyChoices" style={{ color: '#fff' }}>My Choices</Link></MenuItem>
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/MyValues" style={{ color: '#fff' }}>My Values</Link></MenuItem>
-                        <MenuItem sx={{ mb: 3, p: 0 }}><Link href="/MyStuff" style={{ color: '#fff' }}>My Stuff</Link></MenuItem>
-                        <Divider sx={{ borderColor: '#DFF0D8'}} />
-                        <MenuItem sx={{ mt: 3, mb: 2.5, p: 0 }}><Link href="/" style={{ color: '#fff' }}>Wait for Labor</Link></MenuItem>
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/" style={{ color: '#fff' }}>41-42 Week Induction</Link></MenuItem>
-                        <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="/" style={{ color: '#fff' }}>39-41 Week Induction</Link></MenuItem>
+                  <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.data[0].attributes.Footer_Decision_Aid[0].MenuHeading}</Typography>
+                   <MenuList className="footer-menu">
+                       {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item) => (<>
+                            <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href={'/'+item.Link_url} style={{ color: '#fff' }}>{item.Link_Name}</Link></MenuItem>
+                              {item.Divider ==true ? <Divider sx={{ borderColor: '#DFF0D8'}} /> :null}
+                        </> ))}
                     </MenuList>
                 </Grid>
+                  :
+                 null
+               }
                 <Grid item xs={2}></Grid>
                 <Grid item xs={3}>
                     <Typography className="footer-title" variant="h4" gutterBottom>Download a PDF</Typography>

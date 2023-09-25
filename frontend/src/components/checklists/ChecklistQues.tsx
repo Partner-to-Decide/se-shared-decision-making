@@ -158,7 +158,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
               <>
                 <Checkbox {...label} />
                 <div className="question">
-                  <input type="text" value={question.text} onChange={(e) => handleQuestionTextChange(index, e.target.value)} />
+                  <input type="text" value={question.text} onChange={(e) => handleQuestionTextChange(index, e.target.value)} autoFocus />
                   <div className="edit-case-btn-group">
                     <button className="delete-btn" onClick={() => handleDeleteQuestion(index)}>Delete</button>
                     <button className="cancel-btn" onClick={() => handleCancelEdit(index)}>Cancel</button>
@@ -171,6 +171,10 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
                 {props.isPdfGeneration == true ? (
                   <div className="question pdf-ques">
                     {question.text}
+                    <div style={{ marginTop: '10px', display: 'block', width: '100%' }}>
+                      <h4>Learn more about</h4>
+                      {question.tooltip}
+                    </div>
                   </div>
                 ) : (<>
                   <Checkbox {...label} />

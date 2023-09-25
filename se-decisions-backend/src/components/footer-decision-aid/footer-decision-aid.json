@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_footer_decision_aid_footer_decision_aids",
+  "info": {
+    "displayName": "Footer-Decision-Aid"
+  },
+  "options": {},
+  "attributes": {
+    "Footer_link": {
+      "type": "component",
+      "repeatable": true,
+      "component": "footer-link.footer-link"
+    },
+    "MenuHeading": {
+      "type": "string"
+    }
+  }
+}

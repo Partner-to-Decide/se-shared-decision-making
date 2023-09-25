@@ -1,3 +1,5 @@
+$terracotta:#A86133;
+
 .root {
   background-image: url('../../siteImages/detail-bg.jpg');
   background-position: top right;
@@ -13,23 +15,15 @@
 }
 
 .foot-big-nunmber{
-font-family: Clash Grotesk;
-font-size: 16px;
-font-weight: 500;
-line-height: 16px;
-letter-spacing: 1.5px;
-text-align: left;
-color: #000000;
+  font-family: Clash Grotesk;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 1.5px;
+  text-align: left;
+  color: #000000;
 }
 
-.view-risks-acc-title{
-  color: white;
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-}
 
 .potential-risks-content{
   /* Body/Medium */
@@ -87,12 +81,10 @@ font-weight: bold;
 }
 
 .bodyText {
-  font-family: 'Public Sans Regular';
   margin-left: 30px;
   margin-top: 20px;
   color: #4D4D4D;
   margin-bottom: 50px;
-  font-size: 16px;
   line-height: 24px;
 }
 
@@ -105,17 +97,15 @@ font-weight: bold;
 }
 
 .linkText {
-  font-family: 'Public Sans Regular';
   margin-left: 30px;
   color: #4D4D4D;
   margin-bottom: 50px;
-  font-size: 16px;
   line-height: 24px;
 }
 
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   font-size: 3rem;
   margin: auto;
   flex-direction: column;
@@ -132,20 +122,8 @@ font-weight: bold;
 
 
 .rightTitle {
-  font-family: 'Clash Grotesk Medium';
   font-size: 32px;
-  line-height: 90px;
-  letter-spacing: 0;
   color: #0C3A25;
-}
-
-.bottomTitle {
-  font-family: 'Clash Grotesk Medium';
-  font-size: 20px;
-  line-height: 60px;
-  letter-spacing: 0;
-  color: #0C3A25;
-  font-weight: bold;
 }
 
 #first-image {
@@ -162,8 +140,8 @@ font-weight: bold;
 }
 
 .post {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
   margin-top: 1rem;
   background-color: #DFF0D8;
   border-radius: 10px;
@@ -201,12 +179,17 @@ font-weight: bold;
 }
 
 .secondTitle {
-  font-family: 'Clash Grotesk Medium';
-  font-size: 32px;
-  line-height: 36px;
+  font-family: 'ClashGrotesk-Medium';
+  font-size: 36px;
+  line-height: initial;
   letter-spacing: 0px;
   color: #0C3A25;
   font-weight: bold;
+  display: flex;
+}
+
+.secondTitle.title2 {
+  color: #A86133;
 }
 
 .subTitle {
@@ -220,4 +203,19 @@ font-weight: bold;
 
 button.container {
   height: '25px',
+}
+
+.accordion-details:before {
+  display:none;
+}
+
+
+.accordion-details #panel1a-header {
+    border-bottom: 1px solid #B3B3B3;
+    min-height: auto !important;
+    margin-bottom: 1rem;
+}
+
+.accordion-details #panel1a-header .MuiAccordionSummary-content {
+    margin: 0;
 }

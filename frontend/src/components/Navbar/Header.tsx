@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <Fragment>
-      <Grid container sx={{ py: 3, boxShadow:'1', background: '#ffffff' }} className="header">
+      <Grid container sx={{ py: 3, boxShadow:'1', background: '#ffffff' }} position="relative" zIndex="1" className="header">
           <Container maxWidth="xl">
               <Grid container spacing={2} sx={{ alignItems: 'center' }} className="responsive">
                   <Grid item className="nav-logo">

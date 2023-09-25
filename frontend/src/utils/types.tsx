@@ -25,17 +25,29 @@ export interface header_menu_items{
     Menu_Link: string
 }
 export interface footer_section {
-  Footer_data:footer_repeat_block[]
+   data: {
+    id: number
+    attributes: {
+      Footer_section_data1: {
+        id: number
+        Footer_Logo:image_data
+         ButtonText:string
+         ButtonLink:string
+         Footer_link:footer_menu_items[]
+      },
+      Footer_Decision_Aid:{
+        id: number
+        MenuHeading:string
+        Footer_link:footer_menu_items[]
+      }
+    }
+  }
 }
-export interface footer_repeat_block {
-  Footer_Logo:image_data
-  MenuHeading:string
-  FooterLinks: footer_menu_items[]
-}
-  
+
 export interface footer_menu_items{
     Link_Name: string
     Link_url: string
+    Divider:boolean
 }
 
 

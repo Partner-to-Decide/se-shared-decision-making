@@ -23,6 +23,7 @@ import {
   BookmarkSimple,
   Clock,
   Heart,
+  CaretRight,
 } from '@phosphor-icons/react'
 import { Sources } from '../components/AccordionContent/Sources-details'
 import './pageStyle/Details.css'
@@ -417,25 +418,26 @@ function Details() {
       <Layout>
         <div className="root">
           <Container maxWidth="lg">
-            <Grid container spacing={2}>
+            <Grid container spacing={2} pt="2rem" pb="3rem">
               <Grid item xs={12} md={7}>
                 <Paper elevation={0} className="mainText">
-                  <h4
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      color: '#666666',
-                    }}
-                  >
-                    {detailsWaitingData?.data.attributes.title1}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Clock size={20} style={{ marginRight: '5px' }} />
-                    {detailsWaitingData?.data.attributes.title2}
-                  </h4>
-                  <Typography variant="h4" className="title">
+                <Grid container spacing={2} mb="2rem">
+                    <Grid item>
+                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                            <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> {detailsWaitingData?.data.attributes.title1}
+                        </Typography>
+                    </Grid>
+                    <Grid item ml='auto'>
+                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                            <Clock size={20} style={{ marginRight: '5px' }} />
+                            {detailsWaitingData?.data.attributes.title2}
+                        </Typography>
+                    </Grid>
+                </Grid>
+                 <Typography variant="h2" mb="0.7rem" color="primary.main">
                     {detailsWaitingData?.data.attributes.title3}
                   </Typography>
-                  <Typography variant="subtitle1" className="subTitle">
+                  <Typography variant="h4" color="primary.main">
                     {detailsWaitingData?.data.attributes.title4}
                   </Typography>
                   <img
@@ -490,7 +492,7 @@ function Details() {
                         .Description
                     }
                   </Typography>
-                  <p className="linkText">
+                  <Typography variant="body1" className="linkText">
                     Learn more about{' '}
                     <Link
                       href="https://example.com"
@@ -498,14 +500,14 @@ function Details() {
                     >
                       starting labor
                     </Link>
-                  </p>
+                  </Typography>
                   <Avatar
                     alt="Profile Picture"
                     src={SecondImg}
                     sx={{
                       width: '40rem',
                       height: '25rem',
-                      borderRadius: '5%',
+                      borderRadius: '6px',
                       marginBottom: '2rem',
                       marginTop: '3rem',
                     }}
@@ -533,16 +535,7 @@ function Details() {
                         .Description
                     }
                   </Typography>
-                  <p
-                    style={{
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      marginLeft: '20px',
-                      marginTop: '20px',
-                      marginBottom: '20px',
-                      color: '#4D4D4D',
-                    }}
-                  >
+                  <Typography variant="body1" className="bodyText" mb="2rem">
                     Compare the differences using{' '}
                     <Link
                       href="https://example.com"
@@ -550,14 +543,15 @@ function Details() {
                     >
                       my choices
                     </Link>
-                  </p>
+                  </Typography>
                 </Paper>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
-                        variant="h6"
-                        component="h3"
+                        variant="h4" 
+                        mb="0.7rem" 
+                        color="primary.dark"
                         className="bottomTitle"
                       >
                         {
@@ -565,7 +559,7 @@ function Details() {
                             .Title
                         }
                       </Typography>
-                      <Typography variant="body1" className="space">
+                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids1[0]
                             .Description
@@ -573,10 +567,6 @@ function Details() {
                       </Typography>
                       <Avatar
                         className="avatar"
-                        sx={{
-                          width: '150px',
-                          height: '150px',
-                        }}
                         style={{
                           backgroundColor: '#DFF0D8',
                         }}
@@ -586,7 +576,7 @@ function Details() {
                           style={{
                             color: '#0C3A25',
                             fontWeight: 'bold',
-                            fontSize: '24px',
+                            fontSize: '2rem',
                           }}
                         >
                           {
@@ -595,9 +585,12 @@ function Details() {
                           }
                         </Typography>
                         <Typography
-                          variant="body1"
+                          variant="h4"
+                          color="#0C3A25"
                           style={{
                             fontSize: '16px',
+                            letterSpacing: '0.25px',
+                            textTransform: 'capitalize'
                           }}
                         >
                           {
@@ -611,8 +604,9 @@ function Details() {
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
-                        variant="h6"
-                        component="h3"
+                        variant="h4" 
+                        mb="0.7rem" 
+                        color="primary.dark"
                         className="bottomTitle"
                       >
                         {
@@ -620,7 +614,7 @@ function Details() {
                             .Title
                         }
                       </Typography>
-                      <Typography variant="body1" className="space">
+                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids2[0]
                             .Description
@@ -628,14 +622,8 @@ function Details() {
                       </Typography>
                       <Avatar
                         className="avatar"
-                        sx={{
-                          width: '150px',
-                          height: '150px',
-                        }}
                         style={{
                           backgroundColor: '#0C3A25',
-                          marginBottom: '2rem',
-                          marginTop: '53px',
                         }}
                       >
                         <Typography
@@ -643,7 +631,7 @@ function Details() {
                           style={{
                             color: '#DFF0D8',
                             fontWeight: 'bold',
-                            fontSize: '24px',
+                            fontSize: '2rem',
                           }}
                         >
                           {
@@ -652,10 +640,12 @@ function Details() {
                           }
                         </Typography>
                         <Typography
-                          variant="body1"
+                          variant="h4"
+                          color="#DFF0D8"
                           style={{
-                            color: '#DFF0D8',
                             fontSize: '16px',
+                            letterSpacing: '0.25px',
+                            textTransform: 'capitalize'
                           }}
                         >
                           {
@@ -669,8 +659,9 @@ function Details() {
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
-                        variant="h6"
-                        component="h3"
+                        variant="h4" 
+                        mb="0.7rem" 
+                        color="primary.dark"
                         className="bottomTitle"
                       >
                         {
@@ -678,7 +669,7 @@ function Details() {
                             .Title
                         }
                       </Typography>
-                      <Typography variant="body1" className="space">
+                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids3[0]
                             .Description
@@ -686,12 +677,7 @@ function Details() {
                       </Typography>
                       <Avatar
                         className="avatar"
-                        sx={{
-                          width: '150px',
-                          height: '150px',
-                        }}
                         style={{
-                          // backgroundColor: '#0C3A25',
                           background:
                             'linear-gradient(45deg, #0C3A25 30%, #DFF0D8 90%)',
                           marginBottom: '2rem',
@@ -711,10 +697,12 @@ function Details() {
                           }
                         </Typography>
                         <Typography
-                          variant="body1"
+                          variant="h4"
+                          color="#DFF0D8"
                           style={{
-                            color: '#DFF0D8',
                             fontSize: '16px',
+                            letterSpacing: '0.25px',
+                            textTransform: 'capitalize'
                           }}
                         >
                           {
@@ -727,13 +715,18 @@ function Details() {
                   </Grid>
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
-                      <Typography variant="h6" className="bottomTitle">
+                      <Typography 
+                        variant="h4" 
+                        mb="0.7rem" 
+                        color="primary.dark"
+                        className="bottomTitle"
+                        >
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids4[0]
                             .Title
                         }
                       </Typography>
-                      <Typography variant="body1" className="space">
+                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids4[0]
                             .Description
@@ -743,25 +736,28 @@ function Details() {
                         size={90}
                         color="#0C3A25"
                         weight="fill"
-                        style={{ marginLeft: '70px' }}
+                        style={{ margin: '0 auto 1rem', display: 'block' }}
                       />
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          fontWeight: 'bold',
-                          marginLeft: '45px',
-                        }}
-                      >
+                      <Typography
+                          variant="h4"
+                          color="primary.dark"
+                          textAlign="center"
+                          style={{
+                            fontSize: '16px',
+                            letterSpacing: '0.25px',
+                            textTransform: 'capitalize'
+                          }}
+                        >
                         {
                           detailsGridsData?.data[0].attributes.Details_Grids4[0]
                             .unit
                         }
-                      </p>
+                      </Typography>
                     </Paper>
                   </Grid>
                 </Grid>
                 <Paper className="post1" elevation={0}>
-                  <Typography variant="body1" className="bodyText1">
+                  <Typography variant="body1" textAlign="center" lineHeight="24px">
                     {detailsSubtitleData?.data[0].attributes.subtitle1} <br />
                     <Link
                       href="https://example.com"
@@ -776,28 +772,25 @@ function Details() {
                   <Typography
                     variant="h4"
                     component="h2"
-                    className="secondTitle"
-                    style={{ color: '#A86133', marginTop: '50px' }}
+                    mt="3rem"
+                    mb="0.7rem"
+                    className="secondTitle title2"
                   >
                     {
                       detailsSectionData?.data[0].attributes
                         .Details_Section_Data1[0].Title
                     }
                   </Typography>
-                  <p
-                    style={{
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      marginTop: '20px',
-                      marginBottom: '20px',
-                      color: '#4D4D4D',
-                    }}
+                  <Typography
+                    variant="body1"
+                    color="primary.dark"
+                    mb="2rem"
                   >
                     {
                       detailsSectionData?.data[0].attributes
                         .Details_Section_Data1[0].Content
                     }
-                  </p>
+                  </Typography>
                   <Accordion elevation={0}>
                     <AccordionSummary
                       expandIcon={
@@ -812,8 +805,11 @@ function Details() {
                       }}
                     >
                       <Typography
-                        className="view-risks-acc-title"
-                        sx={{ flexGrow: 1, textAlign: 'center' }}
+                        color="secondary.main"
+                        sx={{ 
+                            flexGrow: 1, 
+                            textAlign: 'center' 
+                        }}
                       >
                         {
                           detailsSectionData?.data[0].attributes
@@ -821,27 +817,17 @@ function Details() {
                         }
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails style={{ backgroundColor: '#FAF6ED' }}>
-                      <Grid container spacing={2}>
+                    <AccordionDetails style={{ backgroundColor: '#FAF6ED', padding: '3rem' }}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
-                          <Typography
-                            display="inline"
-                            className="ThreeTagsStyle"
-                          >
+                          <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
                             {' '}
                             {
                               detailsPotentialRiskData?.data[0].attributes
-                                .risk1[0].title
+                                .risk1[0].title 
                             }
                           </Typography>
-                          <Typography
-                            sx={{ ml: '4px' }}
-                            display="inline"
-                            className="foot-big-nunmber"
-                          >
-                            6
-                          </Typography>
-                          <Typography className="potential-risks-content">
+                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
                             {
                               detailsPotentialRiskData?.data[0].attributes
                                 .risk1[0].content
@@ -849,24 +835,14 @@ function Details() {
                           </Typography>
                         </Grid>
                         <Grid item xs={6}>
-                          <Typography
-                            display="inline"
-                            className="ThreeTagsStyle"
-                          >
+                          <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
                             {' '}
                             {
                               detailsPotentialRiskData?.data[0].attributes
                                 .risk2[0].title
-                            }
+                            } 6,8
                           </Typography>
-                          <Typography
-                            sx={{ ml: '4px' }}
-                            display="inline"
-                            className="foot-big-nunmber"
-                          >
-                            6,8
-                          </Typography>
-                          <Typography className="potential-risks-content">
+                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
                             {
                               detailsPotentialRiskData?.data[0].attributes
                                 .risk2[0].content
@@ -893,8 +869,10 @@ function Details() {
                         </Grid>
                         <Grid item xs={6}>
                           <Typography
-                            display="inline"
-                            className="ThreeTagsStyle"
+                            variant="h4"
+                            display="inline-block"
+                            fontSize="1.25rem"
+                            mb="0.7rem"
                             bgcolor="#dff0d8"
                             onClick={handleClickBirth}
                           >
@@ -912,14 +890,7 @@ function Details() {
                             text="(or Cesarean section or C-section) is the delivery of
                             a baby through surgical cuts(incisions) made in the pregnant persons abdomen and uterus."
                           />
-                          <Typography
-                            sx={{ ml: '4px' }}
-                            display="inline"
-                            className="foot-big-nunmber"
-                          >
-                            6
-                          </Typography>
-                          <Typography className="potential-risks-content">
+                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
                             {
                               detailsPotentialRiskData?.data[0].attributes
                                 .risk3[0].content
@@ -1075,10 +1046,9 @@ function Details() {
                   <Typography
                     variant="h4"
                     component="h2"
+                    mt="3rem"
+                    mb="0.7rem"
                     className="secondTitle"
-                    style={{
-                      marginTop: '50px',
-                    }}
                   >
                     {
                       detailsSectionData?.data[0].attributes
@@ -1088,22 +1058,20 @@ function Details() {
                   <Divider
                     style={{
                       height: '3px',
+                      marginBottom: '1rem'
                     }}
                   />
-                  <p
-                    style={{
-                      fontSize: '16px',
-                      lineHeight: '20px',
-                      marginTop: '20px',
-                      color: '#4D4D4D',
-                    }}
+                  <Typography
+                    variant="body1"
+                    lineHeight='24px'
                   >
                     {
                       detailsSectionData?.data[0].attributes
                         .Details_Section_Data3[0].Content
                     }
-                  </p>
+                  </Typography>
                   <Link
+                    variant="body1"
                     href="https://example.com"
                     style={{
                       color: '#00653E',
@@ -1294,13 +1262,20 @@ function Details() {
                       style={{ marginTop: 10, marginBottom: 10 }}
                     />
                   </Grid>
-                  <Accordion style={{ marginTop: '50px' }}>
+                  <Accordion className="accordion-details" style={{ marginTop: '50px', boxShadow: '0 0' }}>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography className="sources">Sources</Typography>
+                      <Typography
+                        variant="h4"
+                        component="h2"
+                        mb="0.7rem"
+                        className="secondTitle"
+                    >
+                        Sources
+                    </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Grid>
@@ -1353,24 +1328,24 @@ function Details() {
                     }}
                   />
                   <Grid container spacing={2} style={{ marginBottom: '20px' }}>
-                    <Grid item xs={12} md={4}>
-                      <Button>
+                    <Grid item>
+                      <Button sx={{ fontSize: '18px' }}>
                         {
                           detailsButtonSetData?.data[0].attributes.buttonset2[0]
                             .button1
                         }
                       </Button>
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Button>
+                    <Grid item>
+                      <Button fontSize="18px">
                         {
                           detailsButtonSetData?.data[0].attributes.buttonset2[0]
                             .button2
                         }
                       </Button>
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Button>
+                    <Grid item>
+                      <Button fontSize="18px">
                         {
                           detailsButtonSetData?.data[0].attributes.buttonset2[0]
                             .button3
@@ -1386,22 +1361,23 @@ function Details() {
                   <Typography
                     variant="h6"
                     component="h3"
+                    mb="1rem"
                     className="rightTitle"
                   >
                     {detailsTopicData?.data.attributes.title}
                   </Typography>
-                  <Typography variant="body1" className="space">
-                    {detailsTopicData?.data.attributes.text1}
+                  <Typography variant="body1" mb="1.3rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text1}
                   </Typography>
-                  <Typography variant="body1" className="space">
-                    {detailsTopicData?.data.attributes.text2}
+                  <Typography variant="body1" mb="1.3rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text2}
                   </Typography>
-                  <Typography variant="body1" className="space">
-                    {detailsTopicData?.data.attributes.text3}
+                  <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text3}
                   </Typography>
                 </Paper>
                 <Grid container spacing={2} style={{ marginBottom: '20px' }}>
-                  <Grid item xs={12} md={4}>
+                  <Grid item>
                     <Button>
                       <LinkSimpleHorizontal
                         size={24}
@@ -1413,7 +1389,7 @@ function Details() {
                       }
                     </Button>
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid item>
                     <Button>
                       <EnvelopeSimple
                         size={24}
@@ -1425,7 +1401,7 @@ function Details() {
                       }
                     </Button>
                   </Grid>
-                  <Grid item xs={12} md={4}>
+                  <Grid item>
                     <Button>
                       <BookmarkSimple
                         size={24}
@@ -1438,24 +1414,39 @@ function Details() {
                     </Button>
                   </Grid>
                 </Grid>
-                <Paper elevation={0} className="whitePost">
+                <Paper elevation={0}>
                   <Typography
-                    variant="h6"
+                    variant="h4"
                     component="h3"
-                    className="bottomTitle"
+                    color="primary.main"
+                    mb="1rem"
                   >
                     {takeNotesData?.data.attributes.title}
                   </Typography>
                   <Typography variant="body1" className="space">
-                    {takeNotesData?.data.attributes.content}
-                  </Typography>
-                  <Button variant="contained">
-                    {/* Accept */}
+                    {takeNotesData?.data.attributes.content} 
+                    <Link
+                    variant="body1"
+                    href="https://example.com"
+                    style={{
+                      color: '#00653E',
+                      fontWeight: 'bold',
+                      marginBottom: '30px',
+                      marginLeft: '5px',
+                    }}
+                  >
                     {takeNotesData?.data.attributes.link}
-                  </Button>
-                  <h3 className="btmTip">
+                  </Link>
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    color="primary.main"
+                    mb="1rem"
+                    mt="1rem"
+                  >
                     {takeNotesData?.data.attributes.question}
-                  </h3>
+                  </Typography>
                 </Paper>
               </Grid>
             </Grid>

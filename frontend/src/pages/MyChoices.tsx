@@ -26,6 +26,7 @@ import {
   mychoices_sections,
   mychoices_needhelp,
 } from "../utils/types";
+import { Container } from "@mui/material";
 import useFetch from "../hooks/useFetch";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from "../utils/url_config";
 import axios from "axios";
@@ -341,67 +342,58 @@ const MyChoices = () => {
             {" "}
             {/* mt:"81px" */}
             {pageTitlesData?.data.attributes.pageTitle != null ? (
-              <Typography className="compare-your-choices">
+              <Typography variant="h2" color="primary" sx={{ textAlign: 'center', mb: 6 }} className="compare-your-choices">
                 {pageTitlesData?.data.attributes.pageTitle}
               </Typography>
             ) : null}
           </Grid>
           {/* Sub title */}
           {pageTitlesData?.data.attributes != null ? (
-            <Grid
-              container
-              item
-              className="subTitle"
-              xl={8}
-              lg={8}
-              md={8}
-              sm={8}
-              xs={8}
-              sx={{
-                justifyContent: "space-between",
-                mt: "1.6rem",
-              }}
-            >
-              {!isMobile ? (
-                <Grid item>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle1}
-                  </Typography>
+            <Container maxWidth="lg">
+                <Grid container spacing={2} justifyContent="center">
+                    {!isMobile ? (
+                        <Grid item xs={4}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle1}
+                            </Typography>
+                        </Grid>
+                    ) : (
+                        <Grid item sm={12} xs={12}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle1}
+                            </Typography>
+                        </Grid>
+                    )}
+
+                    {!isMobile ? (
+                        <Grid item xs={4}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle2}
+                            </Typography>
+                        </Grid>
+                    ) : (
+                        <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle2}
+                            </Typography>
+                        </Grid>
+                    )}
+                    {!isMobile ? (
+                        <Grid item xs={4}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle3}
+                            </Typography>
+                        </Grid>
+                    ) : (
+                        <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
+                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                                {pageTitlesData?.data.attributes.subTitle3}
+                            </Typography>
+                        </Grid>
+                    )}
+
                 </Grid>
-              ) : (
-                <Grid item sm={12} xs={12}>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle1}
-                  </Typography>
-                </Grid>
-              )}
-              {!isMobile ? (
-                <Grid item>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle2}
-                  </Typography>
-                </Grid>
-              ) : (
-                <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle2}
-                  </Typography>
-                </Grid>
-              )}
-              {!isMobile ? (
-                <Grid item>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle3}
-                  </Typography>
-                </Grid>
-              ) : (
-                <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
-                  <Typography>
-                    {pageTitlesData?.data.attributes.subTitle3}
-                  </Typography>
-                </Grid>
-              )}
-            </Grid>
+            </Container>
           ) : null}
           {/* Details Part */}
           {/* section Timing */}
@@ -415,80 +407,76 @@ const MyChoices = () => {
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           > 
-            {sectionsData?.data[0].attributes.title != null ? (
-              <Grid container>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography className="FourTagsStyle">
-                    {" "}
-                    {sectionsData?.data[0].attributes.title.title}
-                  </Typography>
+          <Container maxWidth="lg">
+                {sectionsData?.data[0].attributes.title != null ? (
+                    <Grid container>
+                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" className="FourTagsStyle">
+                            {" "}
+                            {sectionsData?.data[0].attributes.title.title}
+                          </Typography>
+                        </Grid>
+                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                          <Typography variant="body1" className="four-tags-subtitle">
+                            {" "}
+                            {sectionsData?.data[0].attributes.title.description}
+                          </Typography>
+                        </Grid>
+                        {/* line */}
+                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                          <Divider sx={{ mt: "1rem" }} className="vector" />
+                        </Grid>
+                    </Grid>
+                ) : null}
+                {/* section of data (and circles) */}
+                <Grid
+                  container
+                  sx={{
+                    mt: "4rem",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {sectionsData?.data[0].attributes.content1[0].picture1.data
+                     != null ? (
+                    <Grid item xs={4} textAlign="center">
+                      <img
+                        src={
+                          REACT_APP_api_base_url +
+                          sectionsData?.data[0].attributes.content1[0].picture1.data
+                            .attributes.url
+                        }
+                      />
+                    </Grid>
+                  ) : null}
+                  {sectionsData?.data[0].attributes.content2[0].picture1.data
+                      !=
+                  null ? (
+                    <Grid item xs={4} textAlign="center">
+                    {sectionsData?.data[0].attributes.content2[0].picture1.data &&
+                      <img
+                        src={
+                          REACT_APP_api_base_url +
+                          sectionsData?.data[0].attributes.content2[0].picture1.data
+                            .attributes.url
+                        }
+                      />}
+                    </Grid>
+                  ) : null}
+                  { sectionsData?.data[0].attributes.content3[0].picture1.data
+                     !=
+                    null && !isMobile ? (
+                    <Grid item xs={4} textAlign="center">
+                      <img
+                        src={
+                          REACT_APP_api_base_url +
+                          sectionsData?.data[0].attributes.content3[0].picture1.data
+                            .attributes.url
+                        }
+                      />
+                    </Grid>
+                  ) : null}
                 </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography className="four-tags-subtitle">
-                    {" "}
-                    {sectionsData?.data[0].attributes.title.description}
-                  </Typography>
-                </Grid>
-                {/* line */}
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Divider sx={{ mt: "1rem" }} className="vector" />
-                </Grid>
-              </Grid>
-            ) : null}
-            {/* section of data (and circles) */}
-            <Grid
-              container
-              item
-              xl={10}
-              lg={10}
-              md={10}
-              sm={10}
-              xs={10}
-              sx={{
-                mt: "4rem",
-                justifyContent: "space-between",
-              }}
-            >
-              {sectionsData?.data[0].attributes.content1[0].picture1.data
-                 != null ? (
-                <Grid item width="10rem" height="10rem">
-                  <img
-                    src={
-                      REACT_APP_api_base_url +
-                      sectionsData?.data[0].attributes.content1[0].picture1.data
-                        .attributes.url
-                    }
-                  />
-                </Grid>
-              ) : null}
-              {sectionsData?.data[0].attributes.content2[0].picture1.data
-                  !=
-              null ? (
-                <Grid item width="10rem" height="10rem">
-                {sectionsData?.data[0].attributes.content2[0].picture1.data &&
-                  <img
-                    src={
-                      REACT_APP_api_base_url +
-                      sectionsData?.data[0].attributes.content2[0].picture1.data
-                        .attributes.url
-                    }
-                  />}
-                </Grid>
-              ) : null}
-              { sectionsData?.data[0].attributes.content3[0].picture1.data
-                 !=
-                null && !isMobile ? (
-                <Grid item width="10rem" height="10rem">
-                  <img
-                    src={
-                      REACT_APP_api_base_url +
-                      sectionsData?.data[0].attributes.content3[0].picture1.data
-                        .attributes.url
-                    }
-                  />
-                </Grid>
-              ) : null}
-            </Grid>
+            </Container>
           </Grid>
           {/* section Labor Time */}
           <Grid
@@ -501,81 +489,77 @@ const MyChoices = () => {
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
-            {sectionsData?.data[1].attributes.title != null ? (
-              <Grid container>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography className="FourTagsStyle">
-                    {" "}
-                    {sectionsData?.data[1].attributes.title.title}
-                  </Typography>
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography className="four-tags-subtitle">
-                    {" "}
-                    {sectionsData?.data[1].attributes.title.description}
-                  </Typography>
-                </Grid>
-                {/* line */}
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Divider sx={{ mt: "1rem" }} className="vector" />
-                </Grid>
-              </Grid>
-            ) : null}
-            {/* section of data (and circles) */}
-            <Grid
-              container
-              item
-              xl={10}
-              lg={10}
-              md={10}
-              sm={10}
-              xs={10}
-              sx={{
-                mt: "4rem",
-                justifyContent: "space-between",
-              }}
-            >
-              {sectionsData?.data[1].attributes != null ? (
-                <Fragment>
-                  <Grid item width="10rem" height="10rem">
-                  {sectionsData?.data[1].attributes.content1[0].picture1
-                          .data !=null &&
-                    <img
-                      src={
-                        REACT_APP_api_base_url +
-                        sectionsData?.data[1].attributes.content1[0].picture1
-                          .data.attributes.url
-                      }
-                    />}
-                  </Grid>
-                  <Grid item width="10rem" height="10rem">
-                   {sectionsData?.data[1].attributes.content1[0].picture1
-                          .data !=null &&
-                    <img
-                      src={
-                        REACT_APP_api_base_url +
-                        sectionsData?.data[1].attributes.content2[0].picture1
-                          .data.attributes.url
-                      }
-                    />}
-                  </Grid>
-                  {!isMobile ? (
-                    <Grid item width="10rem" height="10rem">
-                      {sectionsData?.data[1].attributes.content3[0].picture1
-                            .data &&
-                      <img
-                        src={
-                          REACT_APP_api_base_url +
-                          sectionsData?.data[1].attributes.content3[0].picture1
-                            .data.attributes.url
-                        }
-                      />
-                    }
+            <Container maxWidth="lg">
+                {sectionsData?.data[1].attributes.title != null ? (
+                  <Grid container>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" className="FourTagsStyle">
+                        {" "}
+                        {sectionsData?.data[1].attributes.title.title}
+                      </Typography>
                     </Grid>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Typography variant="body1" className="four-tags-subtitle">
+                        {" "}
+                        {sectionsData?.data[1].attributes.title.description}
+                      </Typography>
+                    </Grid>
+                    {/* line */}
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Divider sx={{ mt: "1rem" }} className="vector" />
+                    </Grid>
+                  </Grid>
+                ) : null}
+                {/* section of data (and circles) */}
+                <Grid
+                  container
+                  sx={{
+                    mt: "4rem",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {sectionsData?.data[1].attributes != null ? (
+                    <Fragment>
+                      <Grid item xs={4} textAlign="center">
+                      {sectionsData?.data[1].attributes.content1[0].picture1
+                              .data !=null &&
+                        <img
+                          src={
+                            REACT_APP_api_base_url +
+                            sectionsData?.data[1].attributes.content1[0].picture1
+                              .data.attributes.url
+                          }
+                        />}
+                      </Grid>
+                      <Grid item xs={4} textAlign="center">
+                       {sectionsData?.data[1].attributes.content1[0].picture1
+                              .data !=null &&
+                        <img
+                          src={
+                            REACT_APP_api_base_url +
+                            sectionsData?.data[1].attributes.content2[0].picture1
+                              .data.attributes.url
+                          }
+                        />}
+                      </Grid>
+                      {!isMobile ? (
+                        <Grid item xs={4} textAlign="center">
+                          {sectionsData?.data[1].attributes.content3[0].picture1
+                                .data &&
+                          <img
+                            src={
+                              REACT_APP_api_base_url +
+                              sectionsData?.data[1].attributes.content3[0].picture1
+                                .data.attributes.url
+                            }
+                          />
+                        }
+                        </Grid>
+                      ) : null}
+                    </Fragment>
                   ) : null}
-                </Fragment>
-              ) : null}
-            </Grid>
+                </Grid>
+            </Container>
           </Grid>
           {/* Experience Section */}
           <Grid
@@ -588,170 +572,163 @@ const MyChoices = () => {
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
-            {sectionsData?.data[2].attributes.title != null ? (
-              <Grid container>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography display="inline" className="FourTagsStyle">
-                    {" "}
-                    {sectionsData?.data[2].attributes.title.title}
-                  </Typography>
-                  <Typography display="inline" className="experience-7">
-                    {sectionsData?.data[2].attributes.title.titleNumber}
-                  </Typography>
-                </Grid>
+            <Container maxWidth="lg">
+                {sectionsData?.data[2].attributes.title != null ? (
+                  <Grid container>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline" className="FourTagsStyle">
+                        {" "}
+                        {sectionsData?.data[2].attributes.title.title}
+                      </Typography>
+                      <Typography display="inline" className="experience-7">
+                        {sectionsData?.data[2].attributes.title.titleNumber}
+                      </Typography>
+                    </Grid>
 
-                {/* line */}
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Divider sx={{ mt: "1rem" }} className="vector" />
-                </Grid>
-              </Grid>
-            ) : null}
-            {/* section of data (and circles) */}
-            <Grid
-              container
-              item
-              xl={9}
-              lg={9}
-              md={9}
-              sm={9}
-              xs={9}
-              sx={{
-                mt: "4rem",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  {sectionsData?.data[2].attributes.content1[0].picture1.data
-                       !=
-                  null ? (
-                    <img
-                      src={
-                        REACT_APP_api_base_url +
-                        sectionsData?.data[2].attributes.content1[0].picture1
-                          .data.attributes.url
-                      }
-                    />
-                  ) : null}
-                </Grid>
+                    {/* line */}
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Divider sx={{ mt: "1rem" }} className="vector" />
+                    </Grid>
+                  </Grid>
+                ) : null}
+                {/* section of data (and circles) */}
                 <Grid
-                  item
-                  width="10.6875rem"
-                  height="4.5625rem"
+                  container
                   sx={{
-                    mt: "2rem",
-                    display: "flex",
-                    justifyContent: "center",
+                    mt: "4rem",
+                    justifyContent: "space-between",
                     alignItems: "center",
                   }}
                 >
-                  {sectionsData?.data[2].attributes.content1[0].content1 !=
-                  null ? (
-                    <Typography className="experience-body-content">
-                      {sectionsData?.data[2].attributes.content1[0].content1}
-                    </Typography>
-                  ) : null}
-                </Grid>
-              </Grid>
-
-              {!isMobile ? (
-                <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
-                  {/* {REACT_APP_api_base_url +
-                  sectionsData?.data[2].attributes.content2[0].picture1.data
-                    .attributes.url !=
-                null ? ( */}
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  {sectionsData?.data[2].attributes.content2[0].picture1
-                          .data !=null &&
-                    <img
-                      src={
-                        REACT_APP_api_base_url +
-                        sectionsData?.data[2].attributes.content2[0].picture1
-                          .data.attributes.url
-                      }
-                    /> } 
-                  </Grid>
-                  {/* ) : null} */}
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    width="10.6875rem"
-                    height="4.5625rem"
-                    sx={{
-                      mt: "1rem",
-                      ml: "7.5rem",
-                    }}
-                  >
-                    {sectionsData?.data[2].attributes.content2[0].content1 !=
-                    null ? (
-                      <Typography className="experience-body-content">
-                        {sectionsData?.data[2].attributes.content2[0].content1}
-                      </Typography>
-                    ) : null}
-                  </Grid>
-                </Grid>
-              ) : (
-                <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                  {/* {REACT_APP_api_base_url +
-                  sectionsData?.data[2].attributes.content2[0].picture1.data
-                    .attributes.url !=
-                null ? ( */}
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={
-                        REACT_APP_api_base_url +
-                        "/uploads/half_heart2_ef349c5ca6.png"
-                      }
-                    />
+                  <Grid item container xl={5} lg={5} md={5} sm={5} xs={5} justifyContent="center">
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
+                      {sectionsData?.data[2].attributes.content1[0].picture1.data
+                           !=
+                      null ? (
+                        <img
+                          src={
+                            REACT_APP_api_base_url +
+                            sectionsData?.data[2].attributes.content1[0].picture1
+                              .data.attributes.url
+                          }
+                        />
+                      ) : null}
+                    </Grid>
+                    <Grid
+                      item
+                      width="10.6875rem"
+                      height="4.5625rem"
+                      sx={{
+                        mt: "2rem",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {sectionsData?.data[2].attributes.content1[0].content1 !=
+                      null ? (
+                        <Typography className="experience-body-content">
+                          {sectionsData?.data[2].attributes.content1[0].content1}
+                        </Typography>
+                      ) : null}
+                    </Grid>
                   </Grid>
 
-                  {/* ) : null} */}
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    width="10.6875rem"
-                    height="4.5625rem"
-                    sx={{
-                      mt: "2rem",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    {sectionsData?.data[2].attributes.content2[0].content1 !=
-                    null ? (
-                      <Typography
-                        className="experience-body-content"
-                        textAlign="center"
+                  {!isMobile ? (
+                    <Grid container item xl={7} lg={7} md={7} sm={7} xs={7} justifyContent="center">
+                      {/* {REACT_APP_api_base_url +
+                      sectionsData?.data[2].attributes.content2[0].picture1.data
+                        .attributes.url !=
+                    null ? ( */}
+                      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
+                      {sectionsData?.data[2].attributes.content2[0].picture1
+                              .data !=null &&
+                        <img
+                          src={
+                            REACT_APP_api_base_url +
+                            sectionsData?.data[2].attributes.content2[0].picture1
+                              .data.attributes.url
+                          }
+                        /> } 
+                      </Grid>
+                      {/* ) : null} */}
+                      <Grid
+                        item
+                        width="12rem"
+                        height="4.5625rem"
+                        sx={{
+                            mt: "2rem",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
                       >
-                        {sectionsData?.data[2].attributes.content2[0].content1}
-                      </Typography>
-                    ) : null}
-                  </Grid>
+                        {sectionsData?.data[2].attributes.content2[0].content1 !=
+                        null ? (
+                          <Typography className="experience-body-content">
+                            {sectionsData?.data[2].attributes.content2[0].content1}
+                          </Typography>
+                        ) : null}
+                      </Grid>
+                    </Grid>
+                  ) : (
+                    <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
+                      {/* {REACT_APP_api_base_url +
+                      sectionsData?.data[2].attributes.content2[0].picture1.data
+                        .attributes.url !=
+                    null ? ( */}
+                      <Grid
+                        item
+                        xl={12}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <img
+                          src={
+                            REACT_APP_api_base_url +
+                            "/uploads/half_heart2_ef349c5ca6.png"
+                          }
+                        />
+                      </Grid>
+
+                      {/* ) : null} */}
+                      <Grid
+                        item
+                        xl={12}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                        width="10.6875rem"
+                        height="4.5625rem"
+                        sx={{
+                          mt: "2rem",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {sectionsData?.data[2].attributes.content2[0].content1 !=
+                        null ? (
+                          <Typography
+                            className="experience-body-content"
+                            textAlign="center"
+                          >
+                            {sectionsData?.data[2].attributes.content2[0].content1}
+                          </Typography>
+                        ) : null}
+                      </Grid>
+                    </Grid>
+                  )}
                 </Grid>
-              )}
-            </Grid>
+            </Container>
           </Grid>
           {/* Pain Medication Section */}
           <Grid
@@ -764,130 +741,126 @@ const MyChoices = () => {
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
-            {sectionsData?.data[3].attributes.title != null ? (
-              <Grid container>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography display="inline" className="FourTagsStyle">
-                    {" "}
-                    {sectionsData?.data[3].attributes.title.title}
-                  </Typography>
-                  <Typography display="inline" className="experience-7">
-                    {" "}
-                    {sectionsData?.data[3].attributes.title.titleNumber}
-                  </Typography>
-                </Grid>
-
-                {/* line */}
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Divider sx={{ mt: "1rem" }} className="vector" />
-                </Grid>
-              </Grid>
-            ) : null}
-            {/* section of data (and circles) */}
-            <Grid
-              container
-              item
-              xl={9}
-              lg={9}
-              md={9}
-              sm={9}
-              xs={9}
-              sx={{
-                mt: "4rem",
-                justifyContent: "space-between",
-              }}
-            >
-              <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                {sectionsData?.data[3].attributes.content1[0].picture1.data
-                     !=
-                null ? (
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    width="10rem"
-                    height="10rem"
-                  >
-                    {!isMobile ? (
-                      <img
-                        src={
-                          REACT_APP_api_base_url +
-                          sectionsData?.data[3].attributes.content1[0].picture1
-                            .data.attributes.url
-                        }
-                      />
-                    ) : (
-                      <img
-                        src={
-                          REACT_APP_api_base_url +
-                          "/uploads/52_2_06ce6e4a8d.png"
-                        }
-                      />
-                    )}
-                  </Grid>
-                ) : null}
-              </Grid>
-
-              <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
-                {
-                  sectionsData?.data[3].attributes.content2[0].picture1.data
-                    !=
-                null ? (
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    width="27.5625rem"
-                    height="10rem"
-                    sx={{ ml: "4.5rem" }}
-                  >
-                    {!isMobile ? (
-                      <img
-                        src={
-                          REACT_APP_api_base_url +
-                          sectionsData?.data[3].attributes.content2[0].picture1
-                            .data.attributes.url
-                        }
-                      />
-                    ) : (
-                      <img
-                        src={
-                          REACT_APP_api_base_url +
-                          "/uploads/small_49_bbd721f9c6.png"
-                        }
-                      />
-                    )}
-                  </Grid>
-                ) : null}
-                {sectionsData?.data[3].attributes.content2[0].content1 !=
-                null ? (
-                  <Grid
-                    item
-                    xl={7}
-                    lg={7}
-                    md={7}
-                    sm={7}
-                    xs={7}
-                    sx={{
-                      mt: "3rem",
-                      ml: "10rem",
-                    }}
-                  >
-                    {!isMobile ? (
-                      <Typography className="no-difference">
-                        {sectionsData?.data[3].attributes.content2[0].content1}
+            <Container maxWidth="lg">
+                {sectionsData?.data[3].attributes.title != null ? (
+                  <Grid container>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline" className="FourTagsStyle">
+                        {" "}
+                        {sectionsData?.data[3].attributes.title.title}
                       </Typography>
+                      <Typography display="inline" className="experience-7">
+                        {" "}
+                        {sectionsData?.data[3].attributes.title.titleNumber}
+                      </Typography>
+                    </Grid>
+
+                    {/* line */}
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Divider sx={{ mt: "1rem" }} className="vector" />
+                    </Grid>
+                  </Grid>
+                ) : null}
+                {/* section of data (and circles) */}
+                <Grid
+                  container
+                  item
+                  sx={{
+                    mt: "4rem",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Grid container item xl={5} lg={5} md={5} sm={5} xs={5} flexDirection="column">
+                    {sectionsData?.data[3].attributes.content1[0].picture1.data
+                         !=
+                    null ? (
+                      <Grid
+                        item
+                        xl={12}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                        width="10rem"
+                        height="10rem"
+                      >
+                        {!isMobile ? (
+                          <img
+                            src={
+                              REACT_APP_api_base_url +
+                              sectionsData?.data[3].attributes.content1[0].picture1
+                                .data.attributes.url
+                            }
+                          />
+                        ) : (
+                          <img
+                            src={
+                              REACT_APP_api_base_url +
+                              "/uploads/52_2_06ce6e4a8d.png"
+                            }
+                          />
+                        )}
+                      </Grid>
                     ) : null}
                   </Grid>
-                ) : null}
-              </Grid>
-            </Grid>
+
+                  <Grid container item xl={7} lg={7} md={7} sm={7} xs={7} flexDirection="row" justifyContent="center">
+                    {
+                      sectionsData?.data[3].attributes.content2[0].picture1.data
+                        !=
+                    null ? (
+                      <Grid
+                        item
+                        xl={12}
+                        lg={12}
+                        md={12}
+                        sm={12}
+                        xs={12}
+                        width="27.5625rem"
+                        height="10rem"
+                        textAlign="center"
+                      >
+                        {!isMobile ? (
+                          <img
+                            src={
+                              REACT_APP_api_base_url +
+                              sectionsData?.data[3].attributes.content2[0].picture1
+                                .data.attributes.url
+                            }
+                          />
+                        ) : (
+                          <img
+                            src={
+                              REACT_APP_api_base_url +
+                              "/uploads/small_49_bbd721f9c6.png"
+                            }
+                          />
+                        )}
+                      </Grid>
+                    ) : null}
+                    {sectionsData?.data[3].attributes.content2[0].content1 !=
+                    null ? (
+                      <Grid
+                        item
+                        xl={7}
+                        lg={7}
+                        md={7}
+                        sm={7}
+                        xs={7}
+                        sx={{
+                          mt: "3rem",
+                        }}
+                      >
+                        {!isMobile ? (
+                          <Typography className="no-difference">
+                            {sectionsData?.data[3].attributes.content2[0].content1}
+                          </Typography>
+                        ) : null}
+                      </Grid>
+                    ) : null}
+                  </Grid>
+                </Grid>
+            </Container>
           </Grid>
           {/* Same */}
           {sameSection?.data.attributes != null ? (
@@ -935,818 +908,811 @@ const MyChoices = () => {
             container
             sx={{ alignItems: "center", justifyContent: "center" }}
           >
-            {/* title */}
-            {sectionsData?.data[4].attributes.title != null ? (
-              <Grid
-                container
-                item
-                xl={8}
-                lg={8}
-                md={8}
-                sm={8}
-                xs={8}
-                sx={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mt: "6rem",
-                }}
-              >
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography
-                    display="inline"
-                    className="potential-risks-title"
-                    variant="h4"
+            <Container maxWidth="lg">
+                {/* title */}
+                {sectionsData?.data[4].attributes.title != null ? (
+                  <Grid
+                    container
+                    item
+                    sx={{
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mt: "6rem",
+                    }}
                   >
-                    {sectionsData?.data[4].attributes.title.title}
-                  </Typography>
-                  <Typography display="inline" className="potential-risks-6">
-                    {" "}
-                    {sectionsData?.data[4].attributes.title.titleNumber}
-                  </Typography>
-                </Grid>
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Typography className="potential-risks-subtitle">
-                    {" "}
-                    {sectionsData?.data[4].attributes.title.description}
-                  </Typography>
-                </Grid>
-              </Grid>
-            ) : null}
-
-            {/* view risks */}
-
-            <Grid
-              container
-              item
-              xl={8}
-              lg={8}
-              md={8}
-              sm={8}
-              xs={8}
-              sx={{
-                mt: "2rem",
-              }}
-            >
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon className="expandIcon" />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                  className="view-risks-accordion"
-                >
-                  {risksAccordionTitle?.data.attributes.title != null ? (
-                    <Grid
-                      container
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <Typography
-                        className="view-risks-title"
-                        sx={{ flexGrow: 1, textAlign: "center" }}
+                        sx={{ fontSize: 36, mb: 0}}
+                        display="inline"
+                        className="potential-risks-title"
+                        variant="h5"
                       >
-                        {risksAccordionTitle?.data.attributes.title}
+                        {sectionsData?.data[4].attributes.title.title}
+                      </Typography>
+                      <Typography display="inline" className="potential-risks-6">
+                        {" "}
+                        {sectionsData?.data[4].attributes.title.titleNumber}
                       </Typography>
                     </Grid>
-                  ) : null}
-                </AccordionSummary>
-                <AccordionDetails className="view-risks-details">
-                  <Grid
-                    container
-                    sx={{
-                      mt: "4.5rem",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Grid
-                      container
-                      item
-                      xl={11}
-                      lg={11}
-                      md={11}
-                      sm={11}
-                      xs={11}
-                      sx={{ alignItems: "center", justifyContent: "center" }}
-                    >
-                      {sectionsData?.data[5].attributes.title != null ? (
-                        <Grid container>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              display="inline"
-                              className="FourTagsStyle"
-                              bgcolor={lightGreen}
-                            >
-                              {" "}
-                              {sectionsData?.data[5].attributes.title.title}
-                            </Typography>
-                            <Typography
-                              sx={{ ml: "0.25rem" }}
-                              display="inline"
-                              className="cesarean-birth-8"
-                            >
-                              {
-                                sectionsData?.data[5].attributes.title
-                                  .titleNumber
-                              }
-                            </Typography>
-                          </Grid>
-
-                          {/* line */}
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Divider
-                              sx={{ mt: "0.75rem" }}
-                              className="vector-risks"
-                            />
-                          </Grid>
-                        </Grid>
-                      ) : null}
-                      <Grid
-                        container
-                        item
-                        xl={10}
-                        lg={10}
-                        md={10}
-                        sm={10}
-                        xs={10}
-                        sx={{
-                          mt: "4rem",
-                        }}
-                        justifyContent="space-between"
-                      >
-                        {!isMobile ? (
-                          <Fragment>
-                            <Grid item>
-                              {sectionsData?.data[5].attributes.content1[0]
-                                .picture1.data != null ? (
-                                <img
-                                  width="180.45px"
-                                  height="243px"
-                                  src={
-                                    REACT_APP_api_base_url +
-                                    sectionsData?.data[5].attributes.content1[0]
-                                      .picture1.data.attributes.url
-                                  }
-                                />
-                              ) : null}
-                            </Grid>
-                            <Grid item>
-                              {sectionsData?.data[5].attributes.content2[0]
-                                  .picture1.data !=
-                              null ? (
-                                <img
-                                  width="180.45px"
-                                  height="243px"
-                                  src={
-                                    REACT_APP_api_base_url +
-                                    sectionsData?.data[5].attributes.content2[0]
-                                      .picture1.data.attributes.url
-                                  }
-                                />
-                              ) : null}
-                            </Grid>
-                            <Grid item>
-                              {sectionsData?.data[5].attributes.content3[0]
-                                  .picture1.data !=
-                              null ? (
-                                <img
-                                  width="180.45px"
-                                  height="283px"
-                                  src={
-                                    REACT_APP_api_base_url +
-                                    sectionsData?.data[5].attributes.content3[0]
-                                      .picture1.data.attributes.url
-                                  }
-                                />
-                              ) : null}
-                            </Grid>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/20_50583c15d3.png"
-                                }
-                              />
-                            </Grid>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/22_38f6f42618.png"
-                                }
-                              />
-                            </Grid>
-                          </Fragment>
-                        )}
-                      </Grid>
-                    </Grid>
-                    <Grid
-                      container
-                      item
-                      xl={11}
-                      lg={11}
-                      md={11}
-                      sm={11}
-                      xs={11}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: "1.5rem",
-                      }}
-                    >
-                      {sectionsData?.data[6].attributes.title != null ? (
-                        <Grid container>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              display="inline"
-                              className="FourTagsStyle"
-                            >
-                              {" "}
-                              {sectionsData?.data[6].attributes.title.title}
-                            </Typography>
-                            <Typography
-                              sx={{ ml: "0.25rem" }}
-                              display="inline"
-                              className="cesarean-birth-8"
-                            >
-                              {
-                                sectionsData?.data[6].attributes.title
-                                  .titleNumber
-                              }
-                            </Typography>
-                          </Grid>
-
-                          {/* line */}
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Divider
-                              sx={{ mt: "0.75rem" }}
-                              className="vector-risks"
-                            />
-                          </Grid>
-                        </Grid>
-                      ) : null}
-                      <Grid
-                        container
-                        item
-                        xl={10}
-                        lg={10}
-                        md={10}
-                        sm={10}
-                        xs={10}
-                        sx={{
-                          mt: "4rem",
-                        }}
-                        justifyContent="space-between"
-                      >
-                        {!isMobile ? (
-                          <Fragment>
-                            <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                {sectionsData?.data[6].attributes.content1[0]
-                                    .picture1.data !=
-                                null ? (
-                                  <img
-                                    width="180.45px"
-                                    height="239px"
-                                    src={
-                                      REACT_APP_api_base_url +
-                                      sectionsData?.data[6].attributes
-                                        .content1[0].picture1.data.attributes
-                                        .url
-                                    }
-                                  />
-                                ) : null}
-                              </Grid>
-                              <Grid item>
-                                <Typography className="potential-risks-small-content"></Typography>
-                              </Grid>
-                            </Grid>
-                            <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                {sectionsData?.data[6].attributes.content2[0]
-                                    .picture1.data !=
-                                null ? (
-                                  <img
-                                    width="446px"
-                                    height="239px"
-                                    src={
-                                      REACT_APP_api_base_url +
-                                      sectionsData?.data[6].attributes
-                                        .content2[0].picture1.data.attributes
-                                        .url
-                                    }
-                                  />
-                                ) : null}
-                              </Grid>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                <Grid
-                                  item
-                                  xl={8}
-                                  lg={8}
-                                  md={8}
-                                  sm={8}
-                                  xs={8}
-                                  sx={{
-                                    mt: "2rem",
-                                    ml: "6.3rem",
-                                  }}
-                                >
-                                  {sectionsData?.data[6].attributes.content2[0]
-                                    .content1 != null ? (
-                                    <Typography className="potential-risks-small-content">
-                                      {
-                                        sectionsData?.data[6].attributes
-                                          .content2[0].content1
-                                      }
-                                    </Typography>
-                                  ) : null}
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/5_878076863a.png"
-                                }
-                              />
-                            </Grid>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/6_a78ca23ba2.png"
-                                }
-                              />
-                            </Grid>
-                          </Fragment>
-                        )}
-                      </Grid>
-                    </Grid>
-
-                    <Grid
-                      container
-                      item
-                      xl={11}
-                      lg={11}
-                      md={11}
-                      sm={11}
-                      xs={11}
-                      sx={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: "1.5rem",
-                      }}
-                    >
-                      {sectionsData?.data[7].attributes.title != null ? (
-                        <Grid container>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              display="inline"
-                              className="FourTagsStyle"
-                            >
-                              {" "}
-                              {sectionsData?.data[7].attributes.title.title}
-                            </Typography>
-                            <Typography
-                              sx={{ ml: "0.25rem" }}
-                              display="inline"
-                              className="cesarean-birth-8"
-                            >
-                              {
-                                sectionsData?.data[7].attributes.title
-                                  .titleNumber
-                              }
-                            </Typography>
-                          </Grid>
-
-                          {/* line */}
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Divider
-                              sx={{ mt: "0.75rem" }}
-                              className="vector-risks"
-                            />
-                          </Grid>
-                        </Grid>
-                      ) : null}
-                      <Grid
-                        container
-                        item
-                        xl={10}
-                        lg={10}
-                        md={10}
-                        sm={10}
-                        xs={10}
-                        sx={{
-                          mt: "4rem",
-                        }}
-                        justifyContent="space-between"
-                      >
-                        {!isMobile ? (
-                          <Fragment>
-                            <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                {sectionsData?.data[7].attributes.content1[0]
-                                    .picture1.data !=
-                                null ? (
-                                  <img
-                                    width="180.45px"
-                                    height="254px"
-                                    src={
-                                      REACT_APP_api_base_url +
-                                      sectionsData?.data[7].attributes
-                                        .content1[0].picture1.data.attributes
-                                        .url
-                                    }
-                                  />
-                                ) : null}
-                              </Grid>
-                              <Grid item>
-                                <Typography className="potential-risks-small-content"></Typography>
-                              </Grid>
-                            </Grid>
-                            <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                { sectionsData?.data[7].attributes.content2[0]
-                                    .picture1.data !=
-                                null ? (
-                                  <img
-                                    width="449px"
-                                    height="264px"
-                                    src={
-                                      REACT_APP_api_base_url +
-                                      sectionsData?.data[7].attributes
-                                        .content2[0].picture1.data.attributes
-                                        .url
-                                    }
-                                  />
-                                ) : null}
-                              </Grid>
-                              <Grid
-                                item
-                                xl={12}
-                                lg={12}
-                                md={12}
-                                sm={12}
-                                xs={12}
-                              >
-                                <Grid
-                                  item
-                                  xl={8}
-                                  lg={8}
-                                  md={8}
-                                  sm={8}
-                                  xs={8}
-                                  sx={{
-                                    mt: "2rem",
-                                    ml: "6.3rem",
-                                  }}
-                                >
-                                  {sectionsData?.data[7].attributes.content2[0]
-                                    .content1 != null ? (
-                                    <Typography className="potential-risks-small-content">
-                                      {
-                                        sectionsData?.data[7].attributes
-                                          .content2[0].content1
-                                      }
-                                    </Typography>
-                                  ) : null}
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/0_1_e2f96c9d64.png"
-                                }
-                              />
-                            </Grid>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/0_4_3d2232ef5b.png"
-                                }
-                              />
-                            </Grid>
-                          </Fragment>
-                        )}
-                      </Grid>
-                    </Grid>
-
-                    <Grid
-                      container
-                      item
-                      xl={11}
-                      lg={11}
-                      md={11}
-                      sm={11}
-                      xs={11}
-                      sx={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mt: "1.5rem",
-                        mb: "1.5rem",
-                      }}
-                    >
-                      {sectionsData?.data[8].attributes.title != null ? (
-                        <Grid container>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              display="inline"
-                              className="FourTagsStyle"
-                            >
-                              {" "}
-                              {sectionsData?.data[8].attributes.title.title}
-                            </Typography>
-                            <Typography
-                              sx={{ ml: "0.25rem" }}
-                              display="inline"
-                              className="cesarean-birth-8"
-                            >
-                              {
-                                sectionsData?.data[8].attributes.title
-                                  .titleNumber
-                              }
-                            </Typography>
-                          </Grid>
-                          <Grid
-                            item
-                            xl={12}
-                            lg={12}
-                            md={12}
-                            sm={12}
-                            xs={12}
-                            sx={{ mt: "0.5rem" }}
-                          >
-                            <Typography className="four-tags-subtitle">
-                              {" "}
-                              {
-                                sectionsData?.data[8].attributes.title
-                                  .description
-                              }
-                            </Typography>
-                          </Grid>
-
-                          {/* line */}
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Divider
-                              sx={{ mt: "0.75rem" }}
-                              className="vector-risks"
-                            />
-                          </Grid>
-                        </Grid>
-                      ) : null}
-                      <Grid
-                        container
-                        item
-                        xl={10}
-                        lg={10}
-                        md={10}
-                        sm={10}
-                        xs={10}
-                        sx={{
-                          mt: "4rem",
-                        }}
-                        justifyContent="space-between"
-                      >
-                        {!isMobile ? (
-                          <Fragment>
-                            <Grid
-                              item
-                              xl={3}
-                              lg={3}
-                              md={3}
-                              sm={3}
-                              xs={3}
-                              sx={{ mt: "4.5rem" }}
-                            >
-                              {sectionsData?.data[8].attributes.content1[0]
-                                .content1 != null ? (
-                                <Typography className="potential-risks-small-content">
-                                  {
-                                    sectionsData?.data[8].attributes.content1[0]
-                                      .content1
-                                  }
-                                </Typography>
-                              ) : null}
-                            </Grid>
-                            <Grid item>
-                            
-                              {sectionsData?.data[8].attributes.content2[0].picture1.data != null && sectionsData?.data[8].attributes.content2[0].picture1.data.attributes.url != undefined ? (
-                                <img
-                                  width="180.45px"
-                                  height="243px"
-                                  src={
-                                    REACT_APP_api_base_url +
-                                    sectionsData?.data[8].attributes.content2[0]
-                                      .picture1.data.attributes.url
-                                  }
-                                />
-                              ) : null}
-                            </Grid>
-
-                            <Grid item>
-                            {sectionsData?.data[8]?.attributes.content3[0].picture1.data != null ? (
-                                <img
-                                  width="180.45px"
-                                  height="235.66px"
-                                  src={
-                                    REACT_APP_api_base_url +
-                                    sectionsData?.data[8].attributes.content3[0]
-                                      .picture1.data.attributes.url
-                                  }
-                                />
-                              ) : null}
-                            </Grid>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Grid item sx={{ mb: "2rem" }}>
-                              <img
-                                src={
-                                  REACT_APP_api_base_url +
-                                  "/uploads/13_f2ab97da78.png"
-                                }
-                              />
-                            </Grid>
-                            <Grid
-                              item
-                              sm={5}
-                              xs={5}
-                              sx={{
-                                mb: "2rem",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                display: "flex",
-                              }}
-                            >
-                              <Typography className="potential-risks-small-content">
-                                {
-                                  sectionsData?.data[8].attributes.content1[0]
-                                    .content1
-                                }
-                              </Typography>
-                            </Grid>
-                          </Fragment>
-                        )}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </AccordionDetails>
-                {forAll ? (
-                  <Grid
-                    container
-                    className="for-all-rectangle"
-                    sx={{
-                      pt: "3rem",
-                      pb: "2rem",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
-                      <Typography className="potential-risks-small-content">
-                        {forAll?.data[0].attributes.title}
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Typography className="potential-risks-subtitle">
+                        {" "}
+                        {sectionsData?.data[4].attributes.title.description}
                       </Typography>
-                    </Grid>
-                    <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                      <Grid container sx={{ mt: "1.5rem" }}>
-                        <Typography className="potential-risks-small-content2">
-                          <FiberManualRecordIcon
-                            sx={{ fontSize: 10, pr: "0.3125rem" }}
-                          />
-                          <Typography
-                            display="inline"
-                            className="potential-risks-small-content2"
-                            bgcolor={lightGreen}
-                            onClick={handleClick}
-                          >
-                            {forAll?.data[0].attributes.content[0].popup1}
-                          </Typography>
-                          <Popup
-                            open={open}
-                            anchorEl={anchorEl}
-                            handleClose={handleClose}
-                            title={forAll?.data[1].attributes.title}
-                            text={forAll?.data[1].attributes.content[0].content}
-                          />{" "}
-                          <Typography
-                            display="inline"
-                            className="potential-risks-small-content2"
-                            bgcolor={lightGreen}
-                            onClick={handleClickPneu}
-                          >
-                            {forAll?.data[0].attributes.content[0].popup2}
-                          </Typography>
-                          <Popup
-                            open={openPneu}
-                            anchorEl={anchorElPneu}
-                            handleClose={handleClosePneu}
-                            title={forAll?.data[2].attributes.title}
-                            text={forAll?.data[2].attributes.content[0].content}
-                          />
-                          {forAll?.data[0].attributes.content[0].content}
-                          <Typography
-                            display="inline"
-                            className="for-all-small-number"
-                          >
-                            {forAll?.data[0].attributes.content[0].number}
-                          </Typography>
-                        </Typography>
-                      </Grid>
-                      <Grid container sx={{ mt: "1rem" }}>
-                        <Typography className="potential-risks-small-content2">
-                          <FiberManualRecordIcon
-                            sx={{ fontSize: 10, pr: "0.3125rem" }}
-                          />
-                          {forAll?.data[0].attributes.content[1].content}
-                          <Typography
-                            display="inline"
-                            className="for-all-small-number"
-                          >
-                            {forAll?.data[0].attributes.content[1].number}
-                          </Typography>
-                        </Typography>
-                      </Grid>
-                      <Grid container sx={{ mt: "1rem" }}>
-                        <Typography className="potential-risks-small-content2">
-                          <FiberManualRecordIcon
-                            sx={{ fontSize: 10, pr: "0.3125rem" }}
-                          />
-                          {forAll?.data[0].attributes.content[2].content}
-                          <Typography
-                            display="inline"
-                            className="for-all-small-number"
-                          >
-                            {forAll?.data[0].attributes.content[2].number}
-                          </Typography>
-                        </Typography>
-                      </Grid>
-                      <Grid container sx={{ mt: "1rem" }}>
-                        <Typography className="potential-risks-small-content2">
-                          <FiberManualRecordIcon
-                            sx={{ fontSize: 10, pr: "0.3125rem" }}
-                          />
-                          {forAll?.data[0].attributes.content[3].content}
-                          <Typography
-                            display="inline"
-                            className="for-all-small-number"
-                          >
-                            {forAll?.data[0].attributes.content[3].number}
-                          </Typography>
-                        </Typography>
-                      </Grid>
                     </Grid>
                   </Grid>
                 ) : null}
-              </Accordion>
-            </Grid>
+
+                {/* view risks */}
+
+                <Grid
+                  container
+                  item
+                  sx={{
+                    mt: "2rem",
+                  }}
+                >
+                  <Accordion className="view-risks-accordion-main">
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon className="expandIcon" />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      className="view-risks-accordion"
+                    >
+                      {risksAccordionTitle?.data.attributes.title != null ? (
+                        <Grid
+                          container
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <Typography
+                            className="view-risks-title"
+                            sx={{ flexGrow: 1, textAlign: "center" }}
+                          >
+                            {risksAccordionTitle?.data.attributes.title}
+                          </Typography>
+                        </Grid>
+                      ) : null}
+                    </AccordionSummary>
+                    <AccordionDetails className="view-risks-details">
+                      <Grid
+                        container
+                        sx={{
+                          mt: "4.5rem",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Grid
+                          container
+                          item
+                          xl={11}
+                          lg={11}
+                          md={11}
+                          sm={11}
+                          xs={11}
+                          sx={{ alignItems: "center", justifyContent: "center" }}
+                        >
+                          {sectionsData?.data[5].attributes.title != null ? (
+                            <Grid container>
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Typography
+                                  display="inline"
+                                  className="FourTagsStyle"
+                                  bgcolor={lightGreen}
+                                >
+                                  {" "}
+                                  {sectionsData?.data[5].attributes.title.title}
+                                </Typography>
+                                <Typography
+                                  sx={{ ml: "0.25rem" }}
+                                  display="inline"
+                                  className="cesarean-birth-8"
+                                >
+                                  {
+                                    sectionsData?.data[5].attributes.title
+                                      .titleNumber
+                                  }
+                                </Typography>
+                              </Grid>
+
+                              {/* line */}
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Divider
+                                  sx={{ mt: "0.75rem" }}
+                                  className="vector-risks"
+                                />
+                              </Grid>
+                            </Grid>
+                          ) : null}
+                          <Grid
+                            container
+                            item
+                            xl={10}
+                            lg={10}
+                            md={10}
+                            sm={10}
+                            xs={10}
+                            sx={{
+                              mt: "4rem",
+                            }}
+                            justifyContent="space-between"
+                          >
+                            {!isMobile ? (
+                              <Fragment>
+                                <Grid item>
+                                  {sectionsData?.data[5].attributes.content1[0]
+                                    .picture1.data != null ? (
+                                    <img
+                                      width="180.45px"
+                                      height="243px"
+                                      src={
+                                        REACT_APP_api_base_url +
+                                        sectionsData?.data[5].attributes.content1[0]
+                                          .picture1.data.attributes.url
+                                      }
+                                    />
+                                  ) : null}
+                                </Grid>
+                                <Grid item>
+                                  {sectionsData?.data[5].attributes.content2[0]
+                                      .picture1.data !=
+                                  null ? (
+                                    <img
+                                      width="180.45px"
+                                      height="243px"
+                                      src={
+                                        REACT_APP_api_base_url +
+                                        sectionsData?.data[5].attributes.content2[0]
+                                          .picture1.data.attributes.url
+                                      }
+                                    />
+                                  ) : null}
+                                </Grid>
+                                <Grid item>
+                                  {sectionsData?.data[5].attributes.content3[0]
+                                      .picture1.data !=
+                                  null ? (
+                                    <img
+                                      width="180.45px"
+                                      height="283px"
+                                      src={
+                                        REACT_APP_api_base_url +
+                                        sectionsData?.data[5].attributes.content3[0]
+                                          .picture1.data.attributes.url
+                                      }
+                                    />
+                                  ) : null}
+                                </Grid>
+                              </Fragment>
+                            ) : (
+                              <Fragment>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/20_50583c15d3.png"
+                                    }
+                                  />
+                                </Grid>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/22_38f6f42618.png"
+                                    }
+                                  />
+                                </Grid>
+                              </Fragment>
+                            )}
+                          </Grid>
+                        </Grid>
+                        <Grid
+                          container
+                          item
+                          xl={11}
+                          lg={11}
+                          md={11}
+                          sm={11}
+                          xs={11}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            mt: "1.5rem",
+                          }}
+                        >
+                          {sectionsData?.data[6].attributes.title != null ? (
+                            <Grid container>
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Typography
+                                  display="inline"
+                                  className="FourTagsStyle"
+                                >
+                                  {" "}
+                                  {sectionsData?.data[6].attributes.title.title}
+                                </Typography>
+                                <Typography
+                                  sx={{ ml: "0.25rem" }}
+                                  display="inline"
+                                  className="cesarean-birth-8"
+                                >
+                                  {
+                                    sectionsData?.data[6].attributes.title
+                                      .titleNumber
+                                  }
+                                </Typography>
+                              </Grid>
+
+                              {/* line */}
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Divider
+                                  sx={{ mt: "0.75rem" }}
+                                  className="vector-risks"
+                                />
+                              </Grid>
+                            </Grid>
+                          ) : null}
+                          <Grid
+                            container
+                            item
+                            xl={10}
+                            lg={10}
+                            md={10}
+                            sm={10}
+                            xs={10}
+                            sx={{
+                              mt: "4rem",
+                            }}
+                            justifyContent="space-between"
+                          >
+                            {!isMobile ? (
+                              <Fragment>
+                                <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    {sectionsData?.data[6].attributes.content1[0]
+                                        .picture1.data !=
+                                    null ? (
+                                      <img
+                                        width="180.45px"
+                                        height="239px"
+                                        src={
+                                          REACT_APP_api_base_url +
+                                          sectionsData?.data[6].attributes
+                                            .content1[0].picture1.data.attributes
+                                            .url
+                                        }
+                                      />
+                                    ) : null}
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography className="potential-risks-small-content"></Typography>
+                                  </Grid>
+                                </Grid>
+                                <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    {sectionsData?.data[6].attributes.content2[0]
+                                        .picture1.data !=
+                                    null ? (
+                                      <img
+                                        width="446px"
+                                        height="239px"
+                                        src={
+                                          REACT_APP_api_base_url +
+                                          sectionsData?.data[6].attributes
+                                            .content2[0].picture1.data.attributes
+                                            .url
+                                        }
+                                      />
+                                    ) : null}
+                                  </Grid>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    <Grid
+                                      item
+                                      xl={8}
+                                      lg={8}
+                                      md={8}
+                                      sm={8}
+                                      xs={8}
+                                      sx={{
+                                        mt: "2rem",
+                                        ml: "6.3rem",
+                                      }}
+                                    >
+                                      {sectionsData?.data[6].attributes.content2[0]
+                                        .content1 != null ? (
+                                        <Typography className="potential-risks-small-content">
+                                          {
+                                            sectionsData?.data[6].attributes
+                                              .content2[0].content1
+                                          }
+                                        </Typography>
+                                      ) : null}
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </Fragment>
+                            ) : (
+                              <Fragment>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/5_878076863a.png"
+                                    }
+                                  />
+                                </Grid>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/6_a78ca23ba2.png"
+                                    }
+                                  />
+                                </Grid>
+                              </Fragment>
+                            )}
+                          </Grid>
+                        </Grid>
+
+                        <Grid
+                          container
+                          item
+                          xl={11}
+                          lg={11}
+                          md={11}
+                          sm={11}
+                          xs={11}
+                          sx={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            mt: "1.5rem",
+                          }}
+                        >
+                          {sectionsData?.data[7].attributes.title != null ? (
+                            <Grid container>
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Typography
+                                  display="inline"
+                                  className="FourTagsStyle"
+                                >
+                                  {" "}
+                                  {sectionsData?.data[7].attributes.title.title}
+                                </Typography>
+                                <Typography
+                                  sx={{ ml: "0.25rem" }}
+                                  display="inline"
+                                  className="cesarean-birth-8"
+                                >
+                                  {
+                                    sectionsData?.data[7].attributes.title
+                                      .titleNumber
+                                  }
+                                </Typography>
+                              </Grid>
+
+                              {/* line */}
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Divider
+                                  sx={{ mt: "0.75rem" }}
+                                  className="vector-risks"
+                                />
+                              </Grid>
+                            </Grid>
+                          ) : null}
+                          <Grid
+                            container
+                            item
+                            xl={10}
+                            lg={10}
+                            md={10}
+                            sm={10}
+                            xs={10}
+                            sx={{
+                              mt: "4rem",
+                            }}
+                            justifyContent="space-between"
+                          >
+                            {!isMobile ? (
+                              <Fragment>
+                                <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    {sectionsData?.data[7].attributes.content1[0]
+                                        .picture1.data !=
+                                    null ? (
+                                      <img
+                                        width="180.45px"
+                                        height="254px"
+                                        src={
+                                          REACT_APP_api_base_url +
+                                          sectionsData?.data[7].attributes
+                                            .content1[0].picture1.data.attributes
+                                            .url
+                                        }
+                                      />
+                                    ) : null}
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography className="potential-risks-small-content"></Typography>
+                                  </Grid>
+                                </Grid>
+                                <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    { sectionsData?.data[7].attributes.content2[0]
+                                        .picture1.data !=
+                                    null ? (
+                                      <img
+                                        width="449px"
+                                        height="264px"
+                                        src={
+                                          REACT_APP_api_base_url +
+                                          sectionsData?.data[7].attributes
+                                            .content2[0].picture1.data.attributes
+                                            .url
+                                        }
+                                      />
+                                    ) : null}
+                                  </Grid>
+                                  <Grid
+                                    item
+                                    xl={12}
+                                    lg={12}
+                                    md={12}
+                                    sm={12}
+                                    xs={12}
+                                  >
+                                    <Grid
+                                      item
+                                      xl={8}
+                                      lg={8}
+                                      md={8}
+                                      sm={8}
+                                      xs={8}
+                                      sx={{
+                                        mt: "2rem",
+                                        ml: "6.3rem",
+                                      }}
+                                    >
+                                      {sectionsData?.data[7].attributes.content2[0]
+                                        .content1 != null ? (
+                                        <Typography className="potential-risks-small-content">
+                                          {
+                                            sectionsData?.data[7].attributes
+                                              .content2[0].content1
+                                          }
+                                        </Typography>
+                                      ) : null}
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </Fragment>
+                            ) : (
+                              <Fragment>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/0_1_e2f96c9d64.png"
+                                    }
+                                  />
+                                </Grid>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/0_4_3d2232ef5b.png"
+                                    }
+                                  />
+                                </Grid>
+                              </Fragment>
+                            )}
+                          </Grid>
+                        </Grid>
+
+                        <Grid
+                          container
+                          item
+                          xl={11}
+                          lg={11}
+                          md={11}
+                          sm={11}
+                          xs={11}
+                          sx={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            mt: "1.5rem",
+                            mb: "1.5rem",
+                          }}
+                        >
+                          {sectionsData?.data[8].attributes.title != null ? (
+                            <Grid container>
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Typography
+                                  display="inline"
+                                  className="FourTagsStyle"
+                                >
+                                  {" "}
+                                  {sectionsData?.data[8].attributes.title.title}
+                                </Typography>
+                                <Typography
+                                  sx={{ ml: "0.25rem" }}
+                                  display="inline"
+                                  className="cesarean-birth-8"
+                                >
+                                  {
+                                    sectionsData?.data[8].attributes.title
+                                      .titleNumber
+                                  }
+                                </Typography>
+                              </Grid>
+                              <Grid
+                                item
+                                xl={12}
+                                lg={12}
+                                md={12}
+                                sm={12}
+                                xs={12}
+                                sx={{ mt: "0.5rem" }}
+                              >
+                                <Typography className="four-tags-subtitle">
+                                  {" "}
+                                  {
+                                    sectionsData?.data[8].attributes.title
+                                      .description
+                                  }
+                                </Typography>
+                              </Grid>
+
+                              {/* line */}
+                              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <Divider
+                                  sx={{ mt: "0.75rem" }}
+                                  className="vector-risks"
+                                />
+                              </Grid>
+                            </Grid>
+                          ) : null}
+                          <Grid
+                            container
+                            item
+                            xl={10}
+                            lg={10}
+                            md={10}
+                            sm={10}
+                            xs={10}
+                            sx={{
+                              mt: "4rem",
+                            }}
+                            justifyContent="space-between"
+                          >
+                            {!isMobile ? (
+                              <Fragment>
+                                <Grid
+                                  item
+                                  xl={3}
+                                  lg={3}
+                                  md={3}
+                                  sm={3}
+                                  xs={3}
+                                  sx={{ mt: "4.5rem" }}
+                                >
+                                  {sectionsData?.data[8].attributes.content1[0]
+                                    .content1 != null ? (
+                                    <Typography className="potential-risks-small-content">
+                                      {
+                                        sectionsData?.data[8].attributes.content1[0]
+                                          .content1
+                                      }
+                                    </Typography>
+                                  ) : null}
+                                </Grid>
+                                <Grid item>
+                                
+                                  {sectionsData?.data[8].attributes.content2[0].picture1.data != null && sectionsData?.data[8].attributes.content2[0].picture1.data.attributes.url != undefined ? (
+                                    <img
+                                      width="180.45px"
+                                      height="243px"
+                                      src={
+                                        REACT_APP_api_base_url +
+                                        sectionsData?.data[8].attributes.content2[0]
+                                          .picture1.data.attributes.url
+                                      }
+                                    />
+                                  ) : null}
+                                </Grid>
+
+                                <Grid item>
+                                {sectionsData?.data[8]?.attributes.content3[0].picture1.data != null ? (
+                                    <img
+                                      width="180.45px"
+                                      height="235.66px"
+                                      src={
+                                        REACT_APP_api_base_url +
+                                        sectionsData?.data[8].attributes.content3[0]
+                                          .picture1.data.attributes.url
+                                      }
+                                    />
+                                  ) : null}
+                                </Grid>
+                              </Fragment>
+                            ) : (
+                              <Fragment>
+                                <Grid item sx={{ mb: "2rem" }}>
+                                  <img
+                                    src={
+                                      REACT_APP_api_base_url +
+                                      "/uploads/13_f2ab97da78.png"
+                                    }
+                                  />
+                                </Grid>
+                                <Grid
+                                  item
+                                  sm={5}
+                                  xs={5}
+                                  sx={{
+                                    mb: "2rem",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    display: "flex",
+                                  }}
+                                >
+                                  <Typography className="potential-risks-small-content">
+                                    {
+                                      sectionsData?.data[8].attributes.content1[0]
+                                        .content1
+                                    }
+                                  </Typography>
+                                </Grid>
+                              </Fragment>
+                            )}
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </AccordionDetails>
+                    {forAll ? (
+                      <Grid
+                        container
+                        className="for-all-rectangle"
+                        sx={{
+                          pt: "3rem",
+                          pb: "2rem",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
+                          <Typography className="potential-risks-small-content">
+                            {forAll?.data[0].attributes.title}
+                          </Typography>
+                        </Grid>
+                        <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
+                          <Grid container sx={{ mt: "1.5rem" }}>
+                            <Typography className="potential-risks-small-content2">
+                              <FiberManualRecordIcon
+                                sx={{ fontSize: 10, pr: "0.3125rem" }}
+                              />
+                              <Typography
+                                display="inline"
+                                className="potential-risks-small-content2"
+                                bgcolor={lightGreen}
+                                onClick={handleClick}
+                              >
+                                {forAll?.data[0].attributes.content[0].popup1}
+                              </Typography>
+                              <Popup
+                                open={open}
+                                anchorEl={anchorEl}
+                                handleClose={handleClose}
+                                title={forAll?.data[1].attributes.title}
+                                text={forAll?.data[1].attributes.content[0].content}
+                              />{" "}
+                              <Typography
+                                display="inline"
+                                className="potential-risks-small-content2"
+                                bgcolor={lightGreen}
+                                onClick={handleClickPneu}
+                              >
+                                {forAll?.data[0].attributes.content[0].popup2}
+                              </Typography>
+                              <Popup
+                                open={openPneu}
+                                anchorEl={anchorElPneu}
+                                handleClose={handleClosePneu}
+                                title={forAll?.data[2].attributes.title}
+                                text={forAll?.data[2].attributes.content[0].content}
+                              />
+                              {forAll?.data[0].attributes.content[0].content}
+                              <Typography
+                                display="inline"
+                                className="for-all-small-number"
+                              >
+                                {forAll?.data[0].attributes.content[0].number}
+                              </Typography>
+                            </Typography>
+                          </Grid>
+                          <Grid container sx={{ mt: "1rem" }}>
+                            <Typography className="potential-risks-small-content2">
+                              <FiberManualRecordIcon
+                                sx={{ fontSize: 10, pr: "0.3125rem" }}
+                              />
+                              {forAll?.data[0].attributes.content[1].content}
+                              <Typography
+                                display="inline"
+                                className="for-all-small-number"
+                              >
+                                {forAll?.data[0].attributes.content[1].number}
+                              </Typography>
+                            </Typography>
+                          </Grid>
+                          <Grid container sx={{ mt: "1rem" }}>
+                            <Typography className="potential-risks-small-content2">
+                              <FiberManualRecordIcon
+                                sx={{ fontSize: 10, pr: "0.3125rem" }}
+                              />
+                              {forAll?.data[0].attributes.content[2].content}
+                              <Typography
+                                display="inline"
+                                className="for-all-small-number"
+                              >
+                                {forAll?.data[0].attributes.content[2].number}
+                              </Typography>
+                            </Typography>
+                          </Grid>
+                          <Grid container sx={{ mt: "1rem" }}>
+                            <Typography className="potential-risks-small-content2">
+                              <FiberManualRecordIcon
+                                sx={{ fontSize: 10, pr: "0.3125rem" }}
+                              />
+                              {forAll?.data[0].attributes.content[3].content}
+                              <Typography
+                                display="inline"
+                                className="for-all-small-number"
+                              >
+                                {forAll?.data[0].attributes.content[3].number}
+                              </Typography>
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    ) : null}
+                  </Accordion>
+                </Grid>
+            </Container>
           </Grid>
           {/* Learn about your choices */}
           {learnAboutData ? (
