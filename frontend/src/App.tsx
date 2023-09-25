@@ -10,6 +10,8 @@ import MyStuff from './pages/MyStuff'
 import MyValues from './pages/MyValues'
 import MyChoices from './pages/MyChoices'
 import Details from './pages/Details'
+import Details2 from './pages/Details2'
+import Details3 from './pages/Details3'
 import Question from './components/Questions/Question'
 import QuizResult from './components/Questions/QuizResult'
 import { BrowserRouter } from 'react-router-dom'
@@ -145,7 +147,9 @@ const Main = () => {
           <Route path="/MyValues" element={<MyValues />} />
           <Route path="/question/:id" element={<Question />} />
           <Route path="/QuizResult" element={<QuizResult />} />
-          <Route path="/Details" element={<Details />} />
+          <Route path="/Details/1" element={<Details />} />
+          <Route path="/Details/2" element={<Details2 />} />
+          <Route path="/Details/3" element={<Details3 />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

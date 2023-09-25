@@ -211,11 +211,29 @@ button.container {
 
 
 .accordion-details #panel1a-header {
-    border-bottom: 1px solid #B3B3B3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     min-height: auto !important;
     margin-bottom: 1rem;
+    padding: 0px;
 }
 
 .accordion-details #panel1a-header .MuiAccordionSummary-content {
     margin: 0;
+}
+
+.link-btn {
+    border: 1px solid #0c3a25;
+    color: #0c3a25;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Public Sans';
+    padding: 5px 12px;
+}
+
+.link-btn:hover{
+    background-color: #0c3a25;
+    color: #ffffff;
+    border-color: #0c3a25;
 }

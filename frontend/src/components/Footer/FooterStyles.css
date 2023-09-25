@@ -107,3 +107,22 @@ hr {
     font-family: Public Sans;
     font-size: 1rem;
 }
+
+.white-btn{
+  background: white; 
+  font-size: 18px;
+  border-radius: 30px; 
+  padding: 0.7rem 1.3rem; 
+  text-transform: inherit; 
+  text-decoration: none;
+  font-family: Public Sans;
+  margin-top: 1rem;
+}
+
+.footer-divider{
+  margin-bottom: 20px !important;
+}
+
+button:hover a {
+    color: inherit;
+}

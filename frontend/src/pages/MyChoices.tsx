@@ -342,7 +342,7 @@ const MyChoices = () => {
             {" "}
             {/* mt:"81px" */}
             {pageTitlesData?.data.attributes.pageTitle != null ? (
-              <Typography variant="h2" color="primary" sx={{ textAlign: 'center', mb: 6 }} className="compare-your-choices">
+              <Typography variant="h2" color="primary" sx={{ textAlign: 'center', mb: 6 }}>
                 {pageTitlesData?.data.attributes.pageTitle}
               </Typography>
             ) : null}
@@ -411,7 +411,7 @@ const MyChoices = () => {
                 {sectionsData?.data[0].attributes.title != null ? (
                     <Grid container>
                         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" className="FourTagsStyle">
+                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main">
                             {" "}
                             {sectionsData?.data[0].attributes.title.title}
                           </Typography>
@@ -493,7 +493,7 @@ const MyChoices = () => {
                 {sectionsData?.data[1].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" className="FourTagsStyle">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main">
                         {" "}
                         {sectionsData?.data[1].attributes.title.title}
                       </Typography>
@@ -576,7 +576,7 @@ const MyChoices = () => {
                 {sectionsData?.data[2].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline" className="FourTagsStyle">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline">
                         {" "}
                         {sectionsData?.data[2].attributes.title.title}
                       </Typography>
@@ -745,7 +745,7 @@ const MyChoices = () => {
                 {sectionsData?.data[3].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline" className="FourTagsStyle">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline">
                         {" "}
                         {sectionsData?.data[3].attributes.title.title}
                       </Typography>
@@ -924,7 +924,6 @@ const MyChoices = () => {
                       <Typography
                         sx={{ fontSize: 36, mb: 0}}
                         display="inline"
-                        className="potential-risks-title"
                         variant="h5"
                       >
                         {sectionsData?.data[4].attributes.title.title}
@@ -1727,156 +1726,145 @@ const MyChoices = () => {
                 mt: "5.4375rem",
               }}
             >
-              <Typography className="learn-choices">
-                {learnAboutData?.data.attributes.title}
-              </Typography>
+              <Container maxWidth="lg">
+                <Typography sx={{ fontSize: 36, mb: 0}} textAlign="center" variant="h5" color="primary.main">
+                  {learnAboutData?.data.attributes.title}
+                </Typography>
+              </Container>
             </Grid>
           ) : null}
           {learnAboutData?.data.attributes ? (
             <Grid
               container
               item
-              xl={8}
-              lg={8}
-              md={8}
-              sm={8}
-              xs={8}
               sx={{ mt: "2.7rem" }}
             >
-              {!isMobile ? (
-                <Grid
-                  container
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <Grid item>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle1}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle2}
-                    </Typography>
-                  </Grid>
+              <Container maxWidth="lg">
+                {!isMobile ? (
+                  <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Grid item xs={4}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle1}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle2}
+                      </Typography>
+                    </Grid>
 
-                  <Grid item>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle3}
-                    </Typography>
+                    <Grid item xs={4}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle3}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
-              ) : (
-                <Grid container alignItems="center">
-                  <Grid item sm={12} xs={12}>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle1}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12} xs={12}>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle2}
-                    </Typography>
-                  </Grid>
+                ) : (
+                  <Grid container alignItems="center">
+                    <Grid item sm={12} xs={12}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle1}
+                      </Typography>
+                    </Grid>
+                    <Grid item sm={12} xs={12}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle2}
+                      </Typography>
+                    </Grid>
 
-                  <Grid item sm={12} xs={12}>
-                    <Typography className="learn-choices-subTitle">
-                      {learnAboutData?.data.attributes.subTitle3}
-                    </Typography>
+                    <Grid item sm={12} xs={12}>
+                      <Typography className="learn-choices-subTitle">
+                        {learnAboutData?.data.attributes.subTitle3}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
-              )}
+                )}
 
-              {!isMobile ? (
-                <Grid
-                  container
-                  item
-                  sx={{ mt: "1.5rem" }}
-                  justifyContent="space-between"
-                  xl={11}
-                  lg={11}
-                  md={11}
-                  sm={11}
-                  xs={11}
-                >
-                  <Grid item>
-                    <Link to="/Details">
+                {!isMobile ? (
+                  <Grid
+                    container
+                    item
+                    sx={{ mt: "1.5rem" }}
+                    justifyContent="space-between"
+                  >
+                    <Grid item xs={4} textAlign="center">
+                      <Link to="/Details">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button1}
+                        </button>
+                      </Link>
+                    </Grid>
+                    <Grid item xs={4} textAlign="center">
                       <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button1}
+                        {learnAboutData?.data.attributes.button2}
                       </button>
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <button className="learn-more-button ">
-                      {learnAboutData?.data.attributes.button2}
-                    </button>
-                  </Grid>
-                  <Grid item>
-                    <button className="learn-more-button ">
-                      {learnAboutData?.data.attributes.button3}
-                    </button>
-                  </Grid>
-                </Grid>
-              ) : (
-                <Grid
-                  container
-                  item
-                  sx={{ mt: "1.5rem" }}
-                  xl={11}
-                  lg={11}
-                  md={11}
-                  sm={11}
-                  xs={11}
-                >
-                  <Grid
-                    item
-                    sm={12}
-                    xs={12}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Link to="/Details">
+                    </Grid>
+                    <Grid item xs={4} textAlign="center">
                       <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button1}
+                        {learnAboutData?.data.attributes.button3}
                       </button>
-                    </Link>
+                    </Grid>
                   </Grid>
+                ) : (
                   <Grid
+                    container
                     item
-                    sm={12}
-                    xs={12}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+                    sx={{ mt: "1.5rem" }}
                   >
-                    <button className="learn-more-button ">
-                      {learnAboutData?.data.attributes.button2}
-                    </button>
+                    <Grid
+                      item
+                      sm={12}
+                      xs={12}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Link to="/Details">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button1}
+                        </button>
+                      </Link>
+                    </Grid>
+                    <Grid
+                      item
+                      sm={12}
+                      xs={12}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button2}
+                      </button>
+                    </Grid>
+                    <Grid
+                      item
+                      sm={12}
+                      xs={12}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button3}
+                      </button>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    sm={12}
-                    xs={12}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <button className="learn-more-button ">
-                      {learnAboutData?.data.attributes.button3}
-                    </button>
-                  </Grid>
-                </Grid>
-              )}
+                )}
+              </Container>
             </Grid>
           ) : null}
-          {/*Sources */}'
+          {/*Sources */}
           {sourceData ? (
             <Grid
               container
@@ -1890,27 +1878,29 @@ const MyChoices = () => {
                 mt: "5.5rem",
               }}
             >
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className="sources">Sources</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {sourceData?.data.map((item) => (
-                    <Grid sx={{ mt: "1.75rem" }}>
-                      <Sources
-                        key={item.id}
-                        number={item.attributes.sourceNum}
-                        text1={item.attributes.sourceContent}
-                        text2={item.attributes.sourceLinkText}
-                      />
-                    </Grid>
-                  ))}
-                </AccordionDetails>
-              </Accordion>
+              <Container maxWidth="lg">
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className="sources">Sources</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {sourceData?.data.map((item) => (
+                      <Grid sx={{ mt: "1.75rem" }}>
+                        <Sources
+                          key={item.id}
+                          number={item.attributes.sourceNum}
+                          text1={item.attributes.sourceContent}
+                          text2={item.attributes.sourceLinkText}
+                        />
+                      </Grid>
+                    ))}
+                  </AccordionDetails>
+                </Accordion>
+              </Container>
             </Grid>
           ) : null}
           {/* need help */}

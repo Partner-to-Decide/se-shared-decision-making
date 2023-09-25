@@ -52,7 +52,7 @@ import {
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 
-function Details() {
+function Details2() {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [anchorElBirth, setAnchorElBirth] = useState<HTMLButtonElement | null>(
     null
@@ -1366,19 +1366,19 @@ function Details() {
                   >
                     {detailsTopicData?.data.attributes.title}
                   </Typography>
-                  <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                  <Typography variant="body1" mb="1.3rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                     <CaretRight size={16} /> {detailsTopicData?.data.attributes.text1}
                   </Typography>
-                  <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                  <Typography variant="body1" mb="1.3rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                     <CaretRight size={16} /> {detailsTopicData?.data.attributes.text2}
                   </Typography>
                   <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                     <CaretRight size={16} /> {detailsTopicData?.data.attributes.text3}
                   </Typography>
                 </Paper>
-                <Grid container spacing={1} style={{ marginBottom: '20px' }}>
+                <Grid container spacing={2} style={{ marginBottom: '20px' }}>
                   <Grid item>
-                    <Link href="#" className="link-btn">
+                    <Button>
                       <LinkSimpleHorizontal
                         size={24}
                         style={{ marginRight: '5px' }}
@@ -1387,10 +1387,10 @@ function Details() {
                         detailsButtonSetData?.data[0].attributes.buttonset1[0]
                           .button1
                       }
-                    </Link>
+                    </Button>
                   </Grid>
                   <Grid item>
-                    <Link href="#" className="link-btn">
+                    <Button>
                       <EnvelopeSimple
                         size={24}
                         style={{ marginRight: '5px' }}
@@ -1399,10 +1399,10 @@ function Details() {
                         detailsButtonSetData?.data[0].attributes.buttonset1[0]
                           .button2
                       }
-                    </Link>
+                    </Button>
                   </Grid>
                   <Grid item>
-                    <Link href="#" className="link-btn">
+                    <Button>
                       <BookmarkSimple
                         size={24}
                         style={{ marginRight: '5px' }}
@@ -1411,7 +1411,7 @@ function Details() {
                         detailsButtonSetData?.data[0].attributes.buttonset1[0]
                           .button3
                       }
-                    </Link>
+                    </Button>
                   </Grid>
                 </Grid>
                 <Paper elevation={0}>
@@ -1457,4 +1457,4 @@ function Details() {
   )
 }
 
-export default Details
+export default Details2

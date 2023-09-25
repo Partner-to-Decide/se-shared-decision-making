@@ -82,9 +82,7 @@ const FooterBar = () => {
                        ))}
                     </MenuList>
                     : null }
-                    <Button sx={{ background: 'white', fontSize: '18px', borderRadius: '30px', padding: '0.7rem 1.3rem', textTransform: 'inherit' }}>
-                      <Link href={FooterData?.data[0].attributes.Footer_section_data1[0].ButtonLink}>{FooterData?.data[0].attributes.Footer_section_data1[0].ButtonText}</Link>
-                  </Button>
+                      <Link className="btn white-btn" href={FooterData?.data[0].attributes.Footer_section_data1[0].ButtonLink}>{FooterData?.data[0].attributes.Footer_section_data1[0].ButtonText}</Link>
                 </Grid>
                  :
                  null
@@ -94,10 +92,18 @@ const FooterBar = () => {
                 <Grid item xs={3}>
                   <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.data[0].attributes.Footer_Decision_Aid[0].MenuHeading}</Typography>
                    <MenuList className="footer-menu">
-                       {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item) => (<>
-                            <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href={'/'+item.Link_url} style={{ color: '#fff' }}>{item.Link_Name}</Link></MenuItem>
-                              {item.Divider ==true ? <Divider sx={{ borderColor: '#DFF0D8'}} /> :null}
-                        </> ))}
+                      {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item, index) => (
+                        [
+                          <MenuItem key={index} sx={{ mb: 2.5, p: 0 }}>
+                            <Link href={'/' + item.Link_url} style={{ color: '#fff' }}>
+                              {item.Link_Name}
+                            </Link>
+                          </MenuItem>,
+                          item.Divider === true ? (
+                            <Divider className="footer-divider" key={`divider-${index}`} sx={{ borderColor: '#DFF0D8' }} />
+                          ) : null,
+                        ]
+                      ))}
                     </MenuList>
                 </Grid>
                   :
