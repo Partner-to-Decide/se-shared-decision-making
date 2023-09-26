@@ -1792,21 +1792,25 @@ const MyChoices = () => {
                     justifyContent="space-between"
                   >
                     <Grid item xs={4} textAlign="center">
-                      <Link to="/Details">
+                      <Link to="/Details/wait-for-labor">
                         <button className="learn-more-button ">
                           {learnAboutData?.data.attributes.button1}
                         </button>
                       </Link>
                     </Grid>
                     <Grid item xs={4} textAlign="center">
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button2}
-                      </button>
+                     <Link to="/Details/41-42-week-induction">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button2}
+                        </button>
+                      </Link>
                     </Grid>
                     <Grid item xs={4} textAlign="center">
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button3}
-                      </button>
+                      <Link to="/Details/39-41-week-induction">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button3}
+                        </button>
+                      </Link>
                     </Grid>
                   </Grid>
                 ) : (
@@ -1825,7 +1829,7 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Link to="/Details">
+                      <Link to="/Details/wait-for-labor">
                         <button className="learn-more-button ">
                           {learnAboutData?.data.attributes.button1}
                         </button>
@@ -1841,9 +1845,11 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button2}
-                      </button>
+                      <Link to="/Details/41-42-week-induction">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button2}
+                        </button>
+                      </Link>
                     </Grid>
                     <Grid
                       item
@@ -1855,9 +1861,11 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button3}
-                      </button>
+                      <Link to="/Details/39-41-week-induction">
+                        <button className="learn-more-button ">
+                          {learnAboutData?.data.attributes.button3}
+                        </button>
+                      </Link>
                     </Grid>
                   </Grid>
                 )}

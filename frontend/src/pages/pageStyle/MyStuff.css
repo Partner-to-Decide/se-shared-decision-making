@@ -97,6 +97,8 @@
     box-shadow: 0 0;
     outline: none;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .question button.edit-btn {
     position: absolute;
