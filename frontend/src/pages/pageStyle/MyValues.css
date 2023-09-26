@@ -1,5 +1,18 @@
 /* MyValues.css */
 /* begin page */
+
+.my-value-main{
+    background-image: url('../../siteImages/my-value-shape-left.svg'), url('../../siteImages/my-value-shape-right.svg');
+    background-repeat: no-repeat;
+    background-position: left -50px, right 90px;
+    background-size: 30%;
+}
+.my-value-main-inner {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 600px;
+}
 .ContentContainer {
   display: flex;
   flex-direction: column;
@@ -206,9 +219,30 @@
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  gap: 60px;
+  gap: 50px;
+  margin-top: 50px;
 }
-
+.pre-next-container button {
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+}
+.pre-next-container button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #DFF0D8;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+.pre-next-container button:hover span{
+    background: #0C3A25;
+}
+.pre-next-container button:hover span svg path{
+    fill: #fff;
+}
 .Previous {
   background-color: #0C3A25;
   border: none;
@@ -397,4 +431,136 @@
 
 .download-btn:hover {
   background-color: #333;
+}
+.css-xdmu94-MuiContainer-root {
+    max-width: 567px;
+}
+.css-1vrzke9 {
+    background-color: #0C3A25;
+    padding: 16px;
+    border-radius: 100px;
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin: 0 auto 50px;
+    font-family: 'Public Sans';
+}
+.step-slider {
+    max-width: 400px;
+    margin: 40px auto 40px;
+    width: 100%;
+    display: block;
+}
+.heading5 {
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: 'Public Sans';
+    letter-spacing: 0;
+}
+.heading3{
+   font-size: 30px;
+   line-height: 32px;
+   color:#0C3A25;
+   font-weight: 500;
+   font-family: 'Public Sans';
+}
+.step-slider .MuiSlider-thumb {
+    width: 37px;
+    height: 37px;
+    background-color: #0C3A25;
+    border: 1px solid #000000;
+    box-shadow: 5px 7px 17px 1px rgb(0 0 0 / 26%);
+}
+.step-slider .MuiSlider-rail{
+  border-radius: 0px;
+}
+.step-slider .MuiSlider-markLabel {
+    max-width: 75px;
+    display: block;
+    white-space: pre-wrap;
+    text-align: center;
+    font-family: 'Public Sans';
+    top: 50px;
+}
+.drag-text{
+    margin-top: 85px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Public Sans';
+    font-size: 12px;
+}
+.nav-step-slider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.nav-step-slider .MuiSlider-thumb,
+.nav-step-slider  .MuiSlider-track,
+.nav-step-slider .MuiSlider-rail {
+    display: none;
+}
+.nav-step-slider .MuiSlider-mark {
+    width: 100%;
+    border-radius: 10px;
+    height: 5px;
+    position: initial;
+    display: inline-block;
+    margin-right: 20px;
+    background-color: transparent;
+    box-shadow: 0px 0px 4px 0px #00000025;
+}
+.nav-step-slider .MuiSlider-mark.MuiSlider-markActive{
+    background-color: #0C3A25;
+    box-shadow:none;
+}
+.back_btn {
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+}
+.back_btn a {
+    color: #0C3A25;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Public Sans';
+    padding-bottom: 0px;
+    border-bottom: 1px solid #0C3A25;
+    text-decoration: none;
+}
+.progress-bar .MuiStepConnector-horizontal {
+    display: none;
+}
+.progress-bar .MuiStep-horizontal {
+    margin-right: 20px;
+    width: 100%;
+    padding: 0px;
+}
+.progress-bar .MuiStepLabel-iconContainer{
+    height: 5px;
+    width:100%;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: 0px 0px 4px 0px #00000025;
+}
+.progress-bar .MuiStepLabel-iconContainer svg,
+.progress-bar .MuiStepLabel-labelContainer{
+    display: none;
+}
+.progress-bar .MuiStepLabel-iconContainer.Mui-active,
+.progress-bar .MuiStepLabel-iconContainer.Mui-completed {
+    background: #0C3A25;
+}
+.progress-bar .MuiStepConnector-horizontal .MuiStepConnector-line {  
+    border-color: transparent;
+    box-shadow: 0px 0px 4px 0px #00000025;
+    border-top-width: 5px;
+    border-radius: 10px;
 }

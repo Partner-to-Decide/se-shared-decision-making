@@ -12,6 +12,61 @@ export interface section_data {
   }
 }
 
+
+export interface Details_data {
+  data: {
+    attributes: {
+      Title:string
+      slug:string
+      DetailsSection: Details_section_data
+      details_content:details_content1[]
+      details_grid:details_grids[]
+      DetailSubtitle:details_subtitle[]
+      PotentialRisks:Details_PotentialRisks[]
+      details_author:details_authors[]
+    }
+  }
+}
+
+export interface Details_PotentialRisks {
+      titlenumber: string
+      content: string
+      Title: string
+      image:image_data
+}
+
+export interface details_content1 {
+  data: {
+    attributes: {
+      content1: {
+        id: number
+        title: string | null
+        Description: string | null
+        link: string | null
+      }[]
+      content2: {
+        id: number
+        title: string | null
+        Description: string | null
+        link: string | null
+      }[]
+      content3: {
+        id: number
+        title: string | null
+        Description: string | null
+        link: string | null
+      }[]
+    }
+  }[]
+}
+
+export interface Details_section_data {
+      Content: string
+      Link: string
+      Title: string
+}
+
+
 export interface image_data {
   data: image_attribute
 }

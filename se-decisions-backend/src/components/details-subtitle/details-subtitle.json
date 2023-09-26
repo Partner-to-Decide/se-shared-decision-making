@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_details_subtitle_details_subtitles",
+  "info": {
+    "displayName": "Details-Subtitle"
+  },
+  "options": {},
+  "attributes": {
+    "subtitle1": {
+      "type": "string"
+    },
+    "subtitle2": {
+      "type": "string"
+    },
+    "subtitle2Link": {
+      "type": "string"
+    }
+  }
+}

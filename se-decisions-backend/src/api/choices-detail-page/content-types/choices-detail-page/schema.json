@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "choices_detail_pages",
+  "info": {
+    "singularName": "choices-detail-page",
+    "pluralName": "choices-detail-pages",
+    "displayName": "choices-detail-page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "details_content": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::details-content.details-content"
+    },
+    "DetailTopics": {
+      "displayName": "Details-topics",
+      "type": "component",
+      "repeatable": false,
+      "component": "details-topics.details-topics"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "details_grid": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::details-grid.details-grid"
+    },
+    "DetailSubtitle": {
+      "displayName": "Details-Subtitle",
+      "type": "component",
+      "repeatable": false,
+      "component": "details-subtitle.details-subtitle"
+    },
+    "DetailsSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "details-section-data.details-section-data"
+    },
+    "PotentialRisks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "details-potential-risks.details-potential-risks"
+    },
+    "details_author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::details-author.details-author"
+    }
+  }
+}

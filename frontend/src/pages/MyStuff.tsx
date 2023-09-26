@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, ThemeProvider, Typography, Stack, Button } from "@mui/material";
+import { Box, Divider, Grid, Container, ThemeProvider, Typography, Stack, Button } from "@mui/material";
 import Layout from "../components/Layout";
 import "../components/NoteModal/Note.css";
 import Note from "../components/NoteModal/Note";
@@ -20,6 +20,43 @@ import axios from "axios";
 import html2canvas from "html2canvas";
 import { StyledEngineProvider } from "@mui/material/styles";
 import Loading from '../components/Loading';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
+
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ py: 3, px: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 export default function MyStuff() {
   const lightGreen = '#dff0d8';
@@ -33,6 +70,14 @@ export default function MyStuff() {
   const [isPdfGeneration, setIsPdfGeneration] = useState(false);
   const [isloading, setLoading] = useState(false);
   const [languageState, setLanguageState] = useState("en");
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+
   const addNote = function (value: string) {
     return setNote((notes) => [...notes, value]);
   };
@@ -134,49 +179,77 @@ export default function MyStuff() {
 
       <Layout>
         <div>
+
           <Grid container columns={{ xl: 12, lg: 12, md: 12 }} item xl={12} lg={12} md={12}
             sx={{
               backgroundColor: "#FAF6ED", direction: "column",
               mt: 0, pt: 8, pb: 8, display: "flex", alignItems: "center", justifyContent: "center"
             }} >
-            {/* Main title */}
-            <Grid item xl={5} lg={5} md={5} sx={{ alignItems: "center" }}>
-              {pageTitlesData?.data.attributes.Title != null ? (
-                <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
-                  {pageTitlesData?.data.attributes.Title}
-                </Typography>
-              ) : null}
-              {pageTitlesData?.data.attributes.Description != null ? (
-                <Typography gutterBottom style={{ width: '100%', height: 'auto', fontSize: 16, fontWeight:400, lineHeight:'24px', fontFamily:'Public Sans' }} color="text.primary">
-                  {pageTitlesData?.data.attributes.Description}
-                </Typography>
-              ) : null}
-         
-            </Grid>
-            
-            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 8 }}>
-              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "space-between" }}>
-               {sameSection?.data != null ? (
-                  <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
-                    <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} isloading={isloading} />  
-                  </div>
-                ) : null}
-              </Grid>
-            </Grid>
-            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 3 }}>
-              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
-                <Typography variant="h4" color="primary.main" fontWeight="500">Save Your Questions</Typography>
-              </Grid>
-            </Grid>
-            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
-              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
-                 <Stack spacing={2} direction="row">
-                  <Button className="save-ques-btn" variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
-                  <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
-                </Stack>
-              </Grid>
-            </Grid>
+
+                <Container maxWidth="md">
+
+                    <Box>
+                        <Tabs className="tabs-head" value={value} onChange={handleChange} aria-label="basic tabs example">
+                          <Tab label="Saved" {...a11yProps(0)} />
+                          <Tab label="Checklist" {...a11yProps(1)} />
+                        </Tabs>
+                    </Box>
+
+                    <CustomTabPanel value={value} index={0}>
+
+                        <Grid item xs={12} sx={{ alignItems: "center" }}>
+                          
+                            <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
+                              Values Summary
+                            </Typography>
+                    
+                        </Grid>
+                        
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={1}>
+
+                        {/* Main title */}
+                        <Grid item xs={12} sx={{ alignItems: "center" }}>
+                          {pageTitlesData?.data.attributes.Title != null ? (
+                            <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
+                              {pageTitlesData?.data.attributes.Title}
+                            </Typography>
+                          ) : null}
+                          {pageTitlesData?.data.attributes.Description != null ? (
+                            <Typography gutterBottom style={{ width: '100%', height: 'auto', fontSize: 16, fontWeight:400, lineHeight:'24px', fontFamily:'Public Sans' }} color="text.primary">
+                              {pageTitlesData?.data.attributes.Description}
+                            </Typography>
+                          ) : null}
+                        </Grid>
+
+                        <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 8 }}>
+                          <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "space-between" }}>
+                           {sameSection?.data != null ? (
+                              <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
+                                <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} isloading={isloading} />  
+                              </div>
+                            ) : null}
+                          </Grid>
+                        </Grid>
+                        <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 3 }}>
+                          <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "center" }}>
+                            <Typography variant="h4" color="primary.main" fontWeight="500">Save Your Questions</Typography>
+                          </Grid>
+                        </Grid>
+                        <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
+                          <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "center" }}>
+                             <Stack spacing={2} direction="row">
+                              <Button className="save-ques-btn" variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
+                              <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+
+                    </CustomTabPanel>
+
+                </Container>
           </Grid>
+
         </div>
       </Layout>
     </StyledEngineProvider>

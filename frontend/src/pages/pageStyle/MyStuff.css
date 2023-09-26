@@ -205,7 +205,11 @@
     font-weight: 500;
     font-family: ClashGrotesk-Medium;
 }
-html, body {
-    height: 100%;
-    width: 100%;
+.tabs-head button {
+    font-family: ClashGrotesk-Medium;
+    font-size: 24px;
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0 20px 0 0;
+    max-width: initial !important;
 }

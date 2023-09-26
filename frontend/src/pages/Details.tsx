@@ -35,6 +35,7 @@ import DottedCircle04 from '../siteImages/DottedCircles/DottedCircle04.png'
 import DottedCircle22 from '../siteImages/DottedCircles/DottedCircle22.png'
 import { Popup } from '../components/Popup'
 import {
+  Details_data,
   details_authors,
   details_buttonset,
   details_content,
@@ -49,6 +50,7 @@ import {
   details_topic,
   details_waiting,
 } from '../utils/types'
+import { useNavigate, useParams } from "react-router-dom";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 
@@ -95,41 +97,17 @@ function Details() {
     })
   }, [])
 
-  const [detailsWaitingData, setDetailsWaitingData] =
-    useState<details_waiting>()
+  const { slug } = useParams();
 
-  const [detailsTopicData, setDetailsTopicData] = useState<details_topic>()
-
-  const [takeNotesData, setTakeNotesData] = useState<details_takenotes>()
-
-  const [detailsAuthorsData, setDetailsAuthorsData] =
-    useState<details_authors>()
-
-  const [detailsButtonSetData, setDetailsButtonSetData] =
-    useState<details_buttonset>()
-
-  const [detailsContentData, setDetailsContentData] =
-    useState<details_content>()
-
-  const [detailsGridsData, setDetailsGridsData] = useState<details_grids>()
-
-  const [detailsPotentialRiskData, setDetailsPotentialRiskData] =
-    useState<details_potential_risk>()
-
-  const [riskContentData, setRiskContentData] = useState<details_risk_content>()
-
-  const [detailsSubtitleData, setDetailsSubtitleData] =
-    useState<details_subtitle>()
-
-  const [detailsSectionData, setDetailsSectionData] =
-    useState<details_section>()
+  const [detailsSectionData, setDetailsSectionData] = useState<Details_data>()
 
   useEffect(() => {
-    const fetchDetailsSectionData = async () => {
+
+   const fetchDetailsData = async () => {
       try {
         const result = await axios.get(
           REACT_APP_api_base_url +
-            '/api/details-sections?populate=deep&locale=' +
+           `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
             localStorage.getItem('language')
         )
         setDetailsSectionData(result.data)
@@ -138,10 +116,10 @@ function Details() {
         try {
           const result = await axios.get(
             REACT_APP_api_base_url +
-              '/api/details-sections?populate=deep&locale=' +
+              `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
               DEFAULT_LANGUAGE
           )
-          setDetailsSectionData(result.data)
+         setDetailsSectionData(result.data.data[0].attributes)
         } catch (error) {
           console.error(
             'Error fetching learn about data with default locale: ',
@@ -150,322 +128,64 @@ function Details() {
         }
       }
     }
-    const fetchDetailsSubtitleData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-subtitles?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsSubtitleData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-subtitles?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsSubtitleData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchRiskContentData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-risk-content?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setRiskContentData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-risk-content?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setRiskContentData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchTakeNotesData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-take-note?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setTakeNotesData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-take-note?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setTakeNotesData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsWaitingData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-waiting?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsWaitingData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-waiting?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsWaitingData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsTopicData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-topic?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsTopicData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-topic?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsTopicData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsAuthorsData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-authors?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsAuthorsData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-authors?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsAuthorsData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsContentData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-contents?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsContentData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-contents?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsContentData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsButtonSetData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-button-sets?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsButtonSetData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-button-sets?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsButtonSetData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsGridsData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-grids?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsGridsData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-grids?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsGridsData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    const fetchDetailsPotentialRiskData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-potential-risks?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsPotentialRiskData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
-        try {
-          const result = await axios.get(
-            REACT_APP_api_base_url +
-              '/api/details-potential-risks?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsPotentialRiskData(result.data)
-        } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
-        }
-      }
-    }
-    fetchRiskContentData()
-    fetchDetailsWaitingData()
-    fetchDetailsTopicData()
-    fetchDetailsAuthorsData()
-    fetchDetailsContentData()
-    fetchDetailsButtonSetData()
-    fetchDetailsGridsData()
-    fetchDetailsPotentialRiskData()
-    fetchTakeNotesData()
-    fetchDetailsSubtitleData()
-    fetchDetailsSectionData()
+   fetchDetailsData()
   }, [languageState])
 
-  return (
-    <StyledEngineProvider injectFirst>
-      <Layout>
-        <div className="root">
-          <Container maxWidth="lg">
-            <Grid container spacing={2} pt="2rem" pb="3rem">
-              <Grid item xs={12} md={7}>
-                <Paper elevation={0} className="mainText">
-                <Grid container spacing={2} mb="2rem">
-                    <Grid item>
-                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                            <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> {detailsWaitingData?.data.attributes.title1}
-                        </Typography>
-                    </Grid>
-                    <Grid item ml='auto'>
-                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                            <Clock size={20} style={{ marginRight: '5px' }} />
-                            {detailsWaitingData?.data.attributes.title2}
-                        </Typography>
-                    </Grid>
-                </Grid>
-                 <Typography variant="h2" mb="0.7rem" color="primary.main">
-                    {detailsWaitingData?.data.attributes.title3}
-                  </Typography>
-                  <Typography variant="h4" color="primary.main">
-                    {detailsWaitingData?.data.attributes.title4}
-                  </Typography>
-                  <img
-                    src={FirstImg}
-                    id="first-image"
-                    alt="firstimg"
-                    style={{ marginBottom: '30px' }}
-                  />
-                  <Typography
-                    variant="h4"
-                    component="h2"
-                    className="secondTitle"
-                  >
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: 15,
-                        height: 35,
-                        borderRadius: '0',
-                        backgroundColor: '#DFF0D8',
-                        marginRight: 20,
-                      }}
-                    />
-                    {detailsContentData?.data[0].attributes.content1[0].title}
-                  </Typography>
+  console.log('detailsSectionData',detailsSectionData?.data[0]?.attributes);
+  return (  
+      <StyledEngineProvider injectFirst>
+        <Layout>
+            <div className="root">
+              <Container maxWidth="lg">
+                  <Grid container spacing={2} pt="2rem" pb="3rem">
+                      <Grid item xs={12} md={7}>
+                          <Paper elevation={0} className="mainText">
+                               <Grid container spacing={2} mb="2rem">
+                                  <Grid item>
+                                      <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                          <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> {detailsSectionData?.data[0]?.attributes.Title}
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item ml='auto'>
+                                      <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                          <Clock size={20} style={{ marginRight: '5px' }} />
+                                          5 mins read
+                                      </Typography>
+                                  </Grid>
+                              </Grid>
+
+                               <Typography variant="h2" mb="0.7rem" color="primary.main">
+                                {detailsSectionData?.data[0]?.attributes.Title}
+                              </Typography>
+                              <Typography variant="h4" color="primary.main">
+                                {detailsSectionData?.data[0]?.attributes.Title}
+                              </Typography>
+                                <img
+                                    src={FirstImg}
+                                    id="first-image"
+                                    alt="firstimg"
+                                    style={{ marginBottom: '30px' }}
+                                  />
+                                <Typography
+                                  variant="h4"
+                                  component="h2"
+                                  className="secondTitle"
+                                >
+                                <span
+                                  style={{
+                                    display: 'inline-block',
+                                    width: 15,
+                                    height: 35,
+                                    borderRadius: '0',
+                                    backgroundColor: '#DFF0D8',
+                                    marginRight: 20,
+                                  }}
+                                />
+                            { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content1[0].title }
+                         </Typography>
                   <Typography variant="body1" className="bodyText">
-                    {
-                      detailsContentData?.data[0].attributes.content1[0]
+                   {
+                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content1[0]
                         .Description
                     }
                   </Typography>
@@ -484,11 +204,11 @@ function Details() {
                         marginRight: 20,
                       }}
                     />
-                    {detailsContentData?.data[0].attributes.content2[0].title}
+                   { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content2[0].title }
                   </Typography>
                   <Typography variant="body1" className="bodyText">
-                    {
-                      detailsContentData?.data[0].attributes.content2[0]
+                   {
+                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content2[0]
                         .Description
                     }
                   </Typography>
@@ -527,11 +247,11 @@ function Details() {
                         marginRight: 20,
                       }}
                     />
-                    {detailsContentData?.data[0].attributes.content3[0].title}
+                     { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content3[0].title }
                   </Typography>
                   <Typography variant="body1" className="bodyText">
                     {
-                      detailsContentData?.data[0].attributes.content3[0]
+                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content3[0]
                         .Description
                     }
                   </Typography>
@@ -545,7 +265,8 @@ function Details() {
                     </Link>
                   </Typography>
                 </Paper>
-                <Grid container spacing={2}>
+
+                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
@@ -555,13 +276,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids1[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids1[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids1[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids1[0]
                             .Description
                         }
                       </Typography>
@@ -580,7 +301,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids1[0].range
                           }
                         </Typography>
@@ -594,7 +315,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids1[0].unit
                           }
                         </Typography>
@@ -610,13 +331,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids2[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids2[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids2[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids2[0]
                             .Description
                         }
                       </Typography>
@@ -635,7 +356,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids2[0].range
                           }
                         </Typography>
@@ -649,7 +370,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids2[0].unit
                           }
                         </Typography>
@@ -665,13 +386,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids3[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids3[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids3[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids3[0]
                             .Description
                         }
                       </Typography>
@@ -692,7 +413,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids3[0].range
                           }
                         </Typography>
@@ -706,7 +427,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsGridsData?.data[0].attributes
+                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
                               .Details_Grids3[0].unit
                           }
                         </Typography>
@@ -722,13 +443,13 @@ function Details() {
                         className="bottomTitle"
                         >
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids4[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids4[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
                             .Description
                         }
                       </Typography>
@@ -749,26 +470,26 @@ function Details() {
                           }}
                         >
                         {
-                          detailsGridsData?.data[0].attributes.Details_Grids4[0]
+                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
                             .unit
                         }
                       </Typography>
                     </Paper>
                   </Grid>
                 </Grid>
-                <Paper className="post1" elevation={0}>
+                 <Paper className="post1" elevation={0}>
                   <Typography variant="body1" textAlign="center" lineHeight="24px">
-                    {detailsSubtitleData?.data[0].attributes.subtitle1} <br />
+                    {detailsSectionData?.data[0]?.attributes.DetailSubtitle.subtitle1} <br />
                     <Link
-                      href="https://example.com"
+                      href={'/'+detailsSectionData?.data[0].attributes.DetailSubtitle.subtitle2Link}
                       style={{ color: '#00653E' }}
                     >
-                      {detailsSubtitleData?.data[0].attributes.subtitle2}
+                      {detailsSectionData?.data[0].attributes.DetailSubtitle.subtitle2}
                     </Link>
                     .
                   </Typography>
                 </Paper>
-                <Paper elevation={0}>
+                 <Paper elevation={0}>
                   <Typography
                     variant="h4"
                     component="h2"
@@ -777,8 +498,7 @@ function Details() {
                     className="secondTitle title2"
                   >
                     {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data1[0].Title
+                      detailsSectionData?.data[0]?.attributes?.DetailsSection.Title
                     }
                   </Typography>
                   <Typography
@@ -787,8 +507,7 @@ function Details() {
                     mb="2rem"
                   >
                     {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data1[0].Content
+                      detailsSectionData?.data[0]?.attributes?.DetailsSection.Content
                     }
                   </Typography>
                   <Accordion elevation={0}>
@@ -811,103 +530,33 @@ function Details() {
                             textAlign: 'center' 
                         }}
                       >
-                        {
-                          detailsSectionData?.data[0].attributes
-                            .Details_Section_Data2[0].Title
-                        }
+                       View Risks
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails style={{ backgroundColor: '#FAF6ED', padding: '3rem' }}>
                       <Grid container spacing={4}>
-                        <Grid item xs={6}>
-                          <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
-                            {' '}
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk1[0].title 
-                            }
-                          </Typography>
-                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk1[0].content
-                            }
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
-                            {' '}
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk2[0].title
-                            } 6,8
-                          </Typography>
-                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk2[0].content
-                            }
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <img
-                            style={{ marginLeft: '58px', marginTop: '20px' }}
-                            width="180.45px"
-                            height="239px"
-                            src={DottedCircle6}
-                            alt="DottedCircle6"
-                          />
-                        </Grid>
-                        <Grid item xs={6}>
-                          <img
-                            style={{ marginLeft: '58px', marginTop: '20px' }}
-                            width="180.45px"
-                            height="239px"
-                            src={DottedCircle04}
-                            alt="DottedCircle0.4"
-                          />
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography
-                            variant="h4"
-                            display="inline-block"
-                            fontSize="1.25rem"
-                            mb="0.7rem"
-                            bgcolor="#dff0d8"
-                            onClick={handleClickBirth}
-                          >
-                            {' '}
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk3[0].title
-                            }
-                          </Typography>
-                          <Popup
-                            open={openBirth}
-                            anchorEl={anchorElBirth}
-                            handleClose={handleCloseBirth}
-                            title="Cesarean Birth"
-                            text="(or Cesarean section or C-section) is the delivery of
-                            a baby through surgical cuts(incisions) made in the pregnant persons abdomen and uterus."
-                          />
-                          <Typography variant="body1" lineHeight="24px" color="primary.dark">
-                            {
-                              detailsPotentialRiskData?.data[0].attributes
-                                .risk3[0].content
-                            }
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}></Grid>
-                        <Grid item xs={6}>
-                          <img
-                            style={{ marginLeft: '58px', marginTop: '20px' }}
-                            width="180.45px"
-                            height="239px"
-                            src={DottedCircle22}
-                            alt="DottedCircle22"
-                          />
-                        </Grid>
-                        <Grid item xs={6}></Grid>
+
+                        {detailsSectionData?.data[0]?.attributes?.PotentialRisks.map((item, index) => (
+                          [
+                          <Grid item xs={6}>
+                              <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
+                                {' '}
+                                {item.title}
+                                {item.titlenumber}
+                              </Typography>
+                              <Typography variant="body1" lineHeight="24px" color="primary.dark">
+                                 {item.content}
+                              </Typography>
+                              <img
+                                  style={{ marginLeft: '58px', marginTop: '20px' }}
+                                  width="180.45px"
+                                  height="239px"
+                                  src={(REACT_APP_api_base_url || "") + item.image.data.attributes.url}
+                                  alt="DottedCircle6"
+                               />
+                          </Grid>
+                          ]
+                        ))}
                       </Grid>
                     </AccordionDetails>
                     <Grid
@@ -997,7 +646,7 @@ function Details() {
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
                             />
-                            {riskContentData?.data.attributes.content2}{' '}
+                           Severe tear in the vagina.
                             <Typography
                               display="inline"
                               className="foot-small-number"
@@ -1014,7 +663,7 @@ function Details() {
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
                             />
-                            {riskContentData?.data.attributes.content3}{' '}
+                           Too much bleeding after the birth. {' '}
                             <Typography
                               display="inline"
                               className="foot-small-number"
@@ -1031,7 +680,7 @@ function Details() {
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
                             />
-                            {riskContentData?.data.attributes.content4}{' '}
+                            Needing help from tools like forceps or a vacuum.{' '}
                             <Typography
                               display="inline"
                               className="foot-small-number"
@@ -1050,10 +699,7 @@ function Details() {
                     mb="0.7rem"
                     className="secondTitle"
                   >
-                    {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data3[0].Title
-                    }
+                   Authors
                   </Typography>
                   <Divider
                     style={{
@@ -1065,10 +711,7 @@ function Details() {
                     variant="body1"
                     lineHeight='24px'
                   >
-                    {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data3[0].Content
-                    }
+                    This decision aid was made by a group of public health and medical experts led by Partner to Decide.
                   </Typography>
                   <Link
                     variant="body1"
@@ -1079,10 +722,7 @@ function Details() {
                       marginBottom: '30px',
                     }}
                   >
-                    {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data3[0].Link
-                    }
+                    Led by Partner to Decide
                   </Link>
                   <Grid
                     container
@@ -1108,10 +748,10 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors1[0]
+                     {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors1[0]
                             .name
-                        }
+                      }
                       </p>
                       <p
                         style={{
@@ -1121,10 +761,10 @@ function Details() {
                           color: '#4D4D4D',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors1[0]
+                       {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors1[0]
                             .Description
-                        }
+                      }
                       </p>
                     </Grid>
                     <Grid
@@ -1156,10 +796,10 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors2[0]
+                         {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors2[0]
                             .name
-                        }
+                      }
                       </p>
                       <p
                         style={{
@@ -1169,10 +809,10 @@ function Details() {
                           color: '#4D4D4D',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors2[0]
+                      {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors2[0]
                             .Description
-                        }
+                      }
                       </p>
                     </Grid>
                     <Grid
@@ -1194,10 +834,10 @@ function Details() {
                           marginTop: '7px',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors3[0]
+                         {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors3[0]
                             .name
-                        }
+                      }
                       </p>
                       <p
                         style={{
@@ -1207,10 +847,10 @@ function Details() {
                           color: '#4D4D4D',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors3[0]
+                      {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors3[0]
                             .Description
-                        }
+                      }
                       </p>
                     </Grid>
                     <Grid
@@ -1232,10 +872,10 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors4[0]
+                           {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors4[0]
                             .name
-                        }
+                      }
                       </p>
                       <p
                         style={{
@@ -1245,10 +885,10 @@ function Details() {
                           color: '#4D4D4D',
                         }}
                       >
-                        {
-                          detailsAuthorsData?.data[0].attributes.authors4[0]
+                         {
+                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors4[0]
                             .Description
-                        }
+                      }
                       </p>
                     </Grid>
                     <Grid
@@ -1316,10 +956,7 @@ function Details() {
                       marginTop: '50px',
                     }}
                   >
-                    {
-                      detailsSectionData?.data[0].attributes
-                        .Details_Section_Data3[0].textbeforelink
-                    }
+                    Explore
                   </Typography>
                   <Divider
                     style={{
@@ -1330,32 +967,24 @@ function Details() {
                   <Grid container spacing={2} style={{ marginBottom: '20px' }}>
                     <Grid item>
                       <Button sx={{ fontSize: '18px' }}>
-                        {
-                          detailsButtonSetData?.data[0].attributes.buttonset2[0]
-                            .button1
-                        }
+                       Wait for Labor
                       </Button>
                     </Grid>
                     <Grid item>
                       <Button fontSize="18px">
-                        {
-                          detailsButtonSetData?.data[0].attributes.buttonset2[0]
-                            .button2
-                        }
+                        41-42 WK Induction
                       </Button>
                     </Grid>
                     <Grid item>
                       <Button fontSize="18px">
-                        {
-                          detailsButtonSetData?.data[0].attributes.buttonset2[0]
-                            .button3
-                        }
+                        Compare Choices
                       </Button>
                     </Grid>
                   </Grid>
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={1}></Grid>
+
+           <Grid item xs={12} md={1}></Grid>
               <Grid item xs={12} md={4}>
                 <Paper elevation={0} className="post">
                   <Typography
@@ -1364,16 +993,16 @@ function Details() {
                     mb="1rem"
                     className="rightTitle"
                   >
-                    {detailsTopicData?.data.attributes.title}
+                  Topics
                   </Typography>
                   <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text1}
+                    <CaretRight size={16} /> What is spontaneous labor?
                   </Typography>
                   <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text2}
+                    <CaretRight size={16} /> What is it like to wait for spontaneous labor?
                   </Typography>
                   <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> {detailsTopicData?.data.attributes.text3}
+                    <CaretRight size={16} /> What are the differences for me and my baby?
                   </Typography>
                 </Paper>
                 <Grid container spacing={1} style={{ marginBottom: '20px' }}>
@@ -1383,10 +1012,7 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                      {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
-                          .button1
-                      }
+                     Link
                     </Link>
                   </Grid>
                   <Grid item>
@@ -1395,10 +1021,7 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                      {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
-                          .button2
-                      }
+                      Email
                     </Link>
                   </Grid>
                   <Grid item>
@@ -1407,10 +1030,7 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                      {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
-                          .button3
-                      }
+                      Bookmark
                     </Link>
                   </Grid>
                 </Grid>
@@ -1421,10 +1041,10 @@ function Details() {
                     color="primary.main"
                     mb="1rem"
                   >
-                    {takeNotesData?.data.attributes.title}
+                   Take Notes As You Go!
                   </Typography>
                   <Typography variant="body1" className="space">
-                    {takeNotesData?.data.attributes.content} 
+                   To highlight text or create notes, press and hold the words. You'll find your saved notes, summary, and checklist in.
                     <Link
                     variant="body1"
                     href="https://example.com"
@@ -1435,7 +1055,7 @@ function Details() {
                       marginLeft: '5px',
                     }}
                   >
-                    {takeNotesData?.data.attributes.link}
+                    My Stuff
                   </Link>
                   </Typography>
                   <Typography
@@ -1445,15 +1065,15 @@ function Details() {
                     mb="1rem"
                     mt="1rem"
                   >
-                    {takeNotesData?.data.attributes.question}
+                   Where does my data go?
                   </Typography>
                 </Paper>
               </Grid>
             </Grid>
           </Container>
-        </div>
-      </Layout>
-    </StyledEngineProvider>
+       </div>
+    </Layout>
+</StyledEngineProvider>
   )
 }
 

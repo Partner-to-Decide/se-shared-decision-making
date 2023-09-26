@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_details_topics_details_topics",
+  "info": {
+    "displayName": "Details-topics"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "SidebarTopics": {
+      "displayName": "Topics",
+      "type": "component",
+      "repeatable": true,
+      "component": "topics.topics"
+    }
+  }
+}

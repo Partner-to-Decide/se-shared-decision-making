@@ -44,6 +44,10 @@ export default function BasicSelect() {
         <MenuItem value={"en"}>English</MenuItem>
         <MenuItem value={"es"}>Español</MenuItem>
         <MenuItem value={"bah"}>Kreyòl ayisyen</MenuItem>
+        <MenuItem value={"pt-BR"}>Portuguese</MenuItem>
+        <MenuItem value={"vi"}>Vietnamese</MenuItem>
+        <MenuItem value={"zh"}>Chinese</MenuItem>
+        <MenuItem value={"ar"}>Arabic</MenuItem>
       </Select>
     </Box>
   );
