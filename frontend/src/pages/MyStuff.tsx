@@ -18,8 +18,10 @@ import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from "../utils/url_config";
 import jsPDF from "jspdf";
 import axios from "axios";
 import html2canvas from "html2canvas";
+import { StyledEngineProvider } from "@mui/material/styles";
+import Loading from '../components/Loading';
+
 export default function MyStuff() {
-  const darkGreen = "#0c3a25";
   const lightGreen = '#dff0d8';
   const [sameSection, setSameSection] = useState<mystuff_page_questions_list>();
   const [pageTitlesData, setPageTitlesData] =
@@ -51,32 +53,24 @@ export default function MyStuff() {
   const downloadSummary = () => {
     setIsPdfGeneration(true);
     setLoading(true);
-      const element = document.getElementById('pdf-page'); // Get the container element by its ID
-    var orientation = 'portrait';
+    const element = document.getElementById('pdf-page'); // Get the container element by its ID
     var options = {
-      margin: [0, 0, 0, 0], // [top, right, bottom, left]
+      margin: 0, // [top, right, bottom, left]
       enableLinks: true,
       filename: 'Quiz-result.pdf',
-      image: { type: 'jpeg', quality: 1.0 },
+      image: { type: 'jpeg', quality: 0.98 },
       css: 'custom-styles',
-      html2canvas: {
-        scale: 2.0, 
-                scrollX: 0, 
-                scrollY:0, 
-        letterRendering: true
-      },
+      html2canvas: { scale: 2 },
       jsPDF: {
         orientation: 'portrait', 
-        unit: 'pt', 
-        format: 'letter', 
-        compressPDF: true,
-        pagebreak: { mode: ['css', 'legacy'], before: '.before', after: '.after', avoid: '.avoid' }
+        unit: 'mm', 
+        format: 'a4', 
       }
     };
     window.setTimeout(() => {
         html2pdf().set(options).from(element).save().then(() => {
             setIsPdfGeneration(false);
-            // setLoading(false);
+            setLoading(false);
         });
     }, 500);
   };
@@ -132,52 +126,59 @@ export default function MyStuff() {
   }, [languageState]);
   //returns index of where edit occurs
   return (
-    <Layout>
-      <div>
-        <Grid container columns={{ xl: 12, lg: 12, md: 12 }} item xl={12} lg={12} md={12}
-          sx={{
-            backgroundColor: "#FAF6ED", direction: "column",
-            mt: 0, pt: 8, pb: 8, display: "flex", alignItems: "center", justifyContent: "center"
-          }} >
-          {/* Main title */}
-          <Grid item xl={5} lg={5} md={5} sx={{ alignItems: "center" }}>
-            {pageTitlesData?.data.attributes.Title != null ? (
-              <Typography variant="h4" color={darkGreen} fontWeight="500" style={{ marginBottom: '1rem' }}>
-                {pageTitlesData?.data.attributes.Title}
-              </Typography>
-            ) : null}
-            {pageTitlesData?.data.attributes.Description != null ? (
-              <Typography gutterBottom style={{ width: '100%', height: 'auto', fontSize: 16, fontWeight:400, lineHeight:'24px', fontFamily:'Public Sans' }} color="text.primary">
-                {pageTitlesData?.data.attributes.Description}
-              </Typography>
-            ) : null}
-       
-          </Grid>
-          
-          <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 8 }}>
-            <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "space-between" }}>
-             {sameSection?.data != null ? (
-                <div id="pdf-page" ref={summaryGridRef} style={{ width: '100%', height: '100%', paddingLeft: '1rem', paddingRight: '1rem' }}>
-                  <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} />  
-                </div>
+    <StyledEngineProvider injectFirst>
+
+      {isloading == true &&
+        <Loading />
+      }
+
+      <Layout>
+        <div>
+          <Grid container columns={{ xl: 12, lg: 12, md: 12 }} item xl={12} lg={12} md={12}
+            sx={{
+              backgroundColor: "#FAF6ED", direction: "column",
+              mt: 0, pt: 8, pb: 8, display: "flex", alignItems: "center", justifyContent: "center"
+            }} >
+            {/* Main title */}
+            <Grid item xl={5} lg={5} md={5} sx={{ alignItems: "center" }}>
+              {pageTitlesData?.data.attributes.Title != null ? (
+                <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
+                  {pageTitlesData?.data.attributes.Title}
+                </Typography>
               ) : null}
+              {pageTitlesData?.data.attributes.Description != null ? (
+                <Typography gutterBottom style={{ width: '100%', height: 'auto', fontSize: 16, fontWeight:400, lineHeight:'24px', fontFamily:'Public Sans' }} color="text.primary">
+                  {pageTitlesData?.data.attributes.Description}
+                </Typography>
+              ) : null}
+         
+            </Grid>
+            
+            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 8 }}>
+              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "space-between" }}>
+               {sameSection?.data != null ? (
+                  <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
+                    <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} isloading={isloading} />  
+                  </div>
+                ) : null}
+              </Grid>
+            </Grid>
+            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 3 }}>
+              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
+                <Typography variant="h4" color="primary.main" fontWeight="500">Save Your Questions</Typography>
+              </Grid>
+            </Grid>
+            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
+              <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
+                 <Stack spacing={2} direction="row">
+                  <Button className="save-ques-btn" variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
+                  <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
+                </Stack>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 3 }}>
-            <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
-              <Typography variant="h4" color={darkGreen} fontWeight="500">Save Your Questions</Typography>
-            </Grid>
-          </Grid>
-          <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
-            <Grid container item xl={5} lg={5} md={5} sx={{ alignItems: "center", justifyContent: "center" }}>
-               <Stack spacing={2} direction="row">
-                <Button className="save-ques-btn" variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
-                <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        </Grid>
-      </div>
-    </Layout>
+        </div>
+      </Layout>
+    </StyledEngineProvider>
   );
 }

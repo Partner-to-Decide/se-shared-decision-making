@@ -29,14 +29,31 @@
     position: relative;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-size: 14px;
-    min-height: 17px;
+    min-height: 27px;
     display: flex;
     align-items: flex-start;
 }
 .question.pdf-ques{
     padding: 14px 22px 14px 28px;
     display: block;
+    color: #0C3A25;
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: ClashGrotesk-Medium;
 }
+
+.tooltop-pdf h4{
+    font-family: "Public Sans";
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+.tooltop-pdf p{
+    color: #0C3A25;
+    font-size: 1.15rem;
+    font-family: "Public Sans";
+}
+
 .question-outer .MuiCheckbox-root.Mui-checked + .question {
     background: #F4FCF0;
 }
@@ -165,3 +182,30 @@
     font-weight: bold;
 }
 
+.loading-screem {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    background: rgb(255 255 255 / 86%);
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loading-screem img.logo-icon {
+    margin-bottom: 20px;
+}
+.loading-screem h4 {
+    color: #0C3A25;
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: ClashGrotesk-Medium;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+}

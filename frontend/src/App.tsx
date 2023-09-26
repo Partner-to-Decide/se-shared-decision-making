@@ -82,16 +82,16 @@ majorTheme.typography.h2 = {
 };
 
 majorTheme.typography.h3 = {
-  fontSize: '1.5rem',
+  fontSize: '2.5rem',
   fontWeight: 'normal',
   fontFamily: 'ClashGrotesk-Medium',
-  '@media (min-width:600px)': {
+  '@media (max-width:600px)': {
     fontSize: '1.5rem',
     fontFamily: 'ClashGrotesk-Medium',
     fontWeight: 'normal',
   },
-  [majorTheme.breakpoints.up('md')]: {
-    fontSize: '2.5rem',
+  [majorTheme.breakpoints.down('md')]: {
+    fontSize: '1.5rem',
     fontWeight: 'normal',
     fontFamily: 'ClashGrotesk-Medium',
   },

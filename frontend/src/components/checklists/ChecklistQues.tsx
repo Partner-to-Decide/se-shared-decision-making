@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { Grid, Container, Typography } from "@mui/material";
 import Link from '@mui/material/Link';
-
 import EditIcon from '../../siteImages/icons/pencil-icon.svg';
 import PlusIcon from '../../siteImages/icons/plus-icon.svg';
 import TooltipIcon from '../../siteImages/icons/tooltip-icon.svg';
@@ -13,13 +12,16 @@ import TooltipIcon from '../../siteImages/icons/tooltip-icon.svg';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const ChecklistQues = (props:any) => {
+
   const quizquestions = props.quiz.data;
+  const isloading = props.isloading
 
   interface Question {
     text: string;
     id: number;
     tooltip: string;
     isEditing: boolean;
+    isChecked: boolean;
   }
   const [questions, setQuestions] = useState<Question[]>(() => {
     const savedQuestions = getCookie('Questions');
@@ -67,6 +69,7 @@ const ChecklistQues = (props:any) => {
           tooltip: item.attributes.Tooltip,
           id: item.id,
           isEditing: false,
+          isChecked: false,
         }));
       setQuestions(defaultQuestions);
       localStorage.setItem('Questions', JSON.stringify(defaultQuestions));
@@ -118,7 +121,16 @@ const ChecklistQues = (props:any) => {
     setQuestions(updatedQuestions);
   };
   const handleAddQuestion = () => {
-    const updatedQuestions = [...questions, { id: Date.now(), text: '',tooltip: '', isEditing: true }];
+    const updatedQuestions = [...questions, { id: Date.now(), text: '',tooltip: '', isEditing: true,isChecked: true }];
+    setQuestions(updatedQuestions);
+  };
+
+  const handleCheckboxChange = (id) => {
+
+    const updatedQuestions = questions.map((question) =>
+      question.id === id ? { ...question, isChecked: !question.isChecked } : question
+    );
+     console.log(updatedQuestions,'updatedQuestions');
     setQuestions(updatedQuestions);
   };
 
@@ -136,12 +148,11 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.4)',
   },
 }));
-
+  
   return (
     <div className="checklist-outer" style={{ width: '100%' }}>
-
       {props.isPdfGeneration &&
-        <Grid container sx={{display:'flex', justifyContent:'center', marginBottom: '2rem'}} className="nav-logo">
+        <Grid container sx={{display:'flex', justifyContent:'center',paddingTop: '2rem', marginBottom: '2rem'}} className="nav-logo">
            <img 
               className="nav" 
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAAUCAMAAAATD+fuAAAALVBMVEVMaXELOiUJNyQLOSUMOiQMOSQMOCQLOSQQQCAMOiUMOiMLOSQNOSMLOiUMOiWr+0M3AAAADnRSTlMA3CSjgL9AYBDvkHBQYmAN9wAAAAAJcEhZcwAAA+gAAAPoAbV7UmsAAAOBSURBVHicxZfZstsgDEC1ggCP/v9zWwmInbU3M51WL4lZxJHQYgP8KyGe0gd9vVUr/CcpzV2O2tH1+GrjaP4APSRkHF+b/72gY/5W9G4fV9oVx9gfoQ915yqMKH+Jm97dpS5oIHT8SK2u10d8hIbDPX+H49+hZvkTNFBz/qRC3ctH6LKgoXp7R03vOF6t9T9Dw3AfH3QYkf0M+vFSfuK8ZyH8CTSgt89hDT+Eru72pfOel2KkSCWAg1G5voOWlVyFEXlfMAnvLetuC6PWDV064po+oUtGktW644kAykEX5xFYDKTYsdcZgR2rihVpriJEyIWK3uWJXqDJI6pNsVDd6rt3sopIYNJyKWMxEpwlT5pQYe/P0NZVeB5ljKbuCNq8hSpiDUdOswf2HoMABWuNEnxDi384+fo1T/QCDaEYeB6EHib3qaL4AM5Z6E7nrdR5bk/qu/AgDu8dEdzUHFlIOXZFrpfmqIUko1HiOMJGoVK0HDe4hK6JMUHtJTR6g7JqSAmVdc1SaOrxsKctoZcbrEU4nNC4E9EyuGuujWiY0GlULiOgmfwldE+uW9QnNO6SVS5lQq/QzRF4zVks0m1B/Ejew7Y8YjodObVwqk1f2IoKKiW5wv51wIIucx97hT6hrDkB36dpQp919uYJeAwPBQ2v0NDWi8HNOtvQ6dMNnQxWGXVYQqOIcGvRW2vTMTTTNd34Alq8g3qJ01TKNOIZeo/xSaoX6OLeAZ07po7MzIuagDa/h0aZ1q3t5RhS83FdQjrvHXR1jpI+TYbX0G0m+fbZMzRHqKHj0vEGup7Qw72fXfKM6dSbYTRm3LyGJkfozrf8egXNl9B6FR6UFW/m9JLTzm0q7pGAnvX4E/Qxk/c1tLnPfP8AfebfZVbPdw/M/KGIkSl2b0FC9z2SdfrcPWP6amHiUTjqHTRE9u1cp/oMHSCyCjStShWyj7XaVtORbZtIVOtpAfUFvV+rJG0reTnZF4DY/fyWMHQxKNr8oO5tXQi7QiVbINS8W/gqupUSod/6cEg4UUYcWw3K7D8Q24a7IzNHr5LlVHHno9RoBuF+LkSiBge6C2WrGEMF3ecg1nJEQ+rxCXS6ygYiih05zDwLJSnigBoDUfjnhqqtaQXLdZd3llgcNZC6Ii4FOZ5fG/HBEW8mt1FGxOxocQPaGoqB5bpjzmoBnSlIIzT+Zv0FBGokW+QMFWsAAAAASUVORK5CYII=" 
@@ -158,7 +169,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
               <>
                 <Checkbox {...label} />
                 <div className="question">
-                  <input type="text" value={question.text} onChange={(e) => handleQuestionTextChange(index, e.target.value)} autoFocus />
+                  <input type="text" value={question.text} onChange={(e) => handleQuestionTextChange(index, e.target.value)} />
                   <div className="edit-case-btn-group">
                     <button className="delete-btn" onClick={() => handleDeleteQuestion(index)}>Delete</button>
                     <button className="cancel-btn" onClick={() => handleCancelEdit(index)}>Cancel</button>
@@ -168,31 +179,33 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
               </>
             ) : (
               <>
-                {props.isPdfGeneration == true ? (
-                  <div className="question pdf-ques">
-                    {question.text}
-                    <div style={{ marginTop: '10px', display: 'block', width: '100%' }}>
-                      <h4>Learn more about</h4>
-                      {question.tooltip}
+                {props.isPdfGeneration == true ? (<>
+                  {question.isChecked === true &&
+                    <div className="question pdf-ques">
+                       {question.text}
+                        <div className="tooltop-pdf" style={{ marginTop: '7px', display: 'block', width: '100%' }}>
+                          <h4>Learn more about</h4>
+                          <p>{question.tooltip}</p>
+                        </div>
                     </div>
-                  </div>
-                ) : (<>
-                  <Checkbox {...label} />
-                  <div className="question hello">
-                    {question.text} 
+                  }
+                </>) : (<>
+                  <Checkbox {...label}  checked={question.isChecked === true ? true : false } onChange={() => handleCheckboxChange(question.id)}/>
+                  <div className="question">
+                    {question.text}
+                    {question.tooltip != null ? (
                     <HtmlTooltip
                       title={
                         <React.Fragment>
                           <Typography color="inherit">Learn more about</Typography>
-                             {question != null ? (
-                               <Link href="#">{question.tooltip}</Link>
-                              ) : null}
+                          <Link href="#">{question.tooltip}</Link>
                         </React.Fragment>
                       }
                       placement="top"
                     >
                       <div className="tooltip-icon"><img src={TooltipIcon} alt="Tooltip Icon" /></div>
                     </HtmlTooltip>
+                    ) : null}
                     <button className="edit-btn" onClick={() => handleEditQuestion(index)}><img src={EditIcon} alt="Edit Icon" /></button>
                   </div>
                 </>) 
