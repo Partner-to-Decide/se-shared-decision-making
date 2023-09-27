@@ -131,7 +131,13 @@ function Details() {
    fetchDetailsData()
   }, [languageState])
 
-  console.log('detailsSectionData',detailsSectionData?.data[0]?.attributes);
+
+  const DetailsData = detailsSectionData?.data[0]?.attributes;
+  const SideTopics  = detailsSectionData?.data[0]?.attributes?.DetailTopics; 
+  const details_content = DetailsData?.details_content?.data?.attributes.content1;
+
+  console.log('detailsSectionDatatestt',details_content);
+
   return (  
       <StyledEngineProvider injectFirst>
         <Layout>
@@ -143,35 +149,43 @@ function Details() {
                                <Grid container spacing={2} mb="2rem">
                                   <Grid item>
                                       <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                                          <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> {detailsSectionData?.data[0]?.attributes.Title}
+                                          <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> 
+                                          {DetailsData?.Title}
                                       </Typography>
                                   </Grid>
                                   <Grid item ml='auto'>
                                       <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
                                           <Clock size={20} style={{ marginRight: '5px' }} />
-                                          5 mins read
+                                          { DetailsData?.DetailsWaiting?.ReadingTime }
                                       </Typography>
                                   </Grid>
                               </Grid>
 
                                <Typography variant="h2" mb="0.7rem" color="primary.main">
-                                {detailsSectionData?.data[0]?.attributes.Title}
+                                {DetailsData?.Title}
                               </Typography>
                               <Typography variant="h4" color="primary.main">
-                                {detailsSectionData?.data[0]?.attributes.Title}
+                                { DetailsData?.DetailsWaiting?.title1 }
                               </Typography>
-                                <img
-                                    src={FirstImg}
-                                    id="first-image"
+
+                              {details_content?.map((item, index) => (
+                                [<>
+                                  {item.image?.data ?
+                                    <img
+                                    src={(REACT_APP_api_base_url || "") + item.image.data?.attributes?.url}
+                                    id={'first-image-'+item.Imagelayout}
+                                    className={'imagelayout-'+item.Imagelayout}
                                     alt="firstimg"
                                     style={{ marginBottom: '30px' }}
-                                  />
+                                    />
+                                  :null }
+
                                 <Typography
                                   variant="h4"
                                   component="h2"
                                   className="secondTitle"
-                                >
-                                <span
+                                  >
+                                  <span
                                   style={{
                                     display: 'inline-block',
                                     width: 15,
@@ -180,91 +194,30 @@ function Details() {
                                     backgroundColor: '#DFF0D8',
                                     marginRight: 20,
                                   }}
-                                />
-                            { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content1[0].title }
-                         </Typography>
-                  <Typography variant="body1" className="bodyText">
-                   {
-                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content1[0]
-                        .Description
-                    }
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    component="h2"
-                    className="secondTitle"
-                  >
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: 15,
-                        height: 35,
-                        borderRadius: '0',
-                        backgroundColor: '#DFF0D8',
-                        marginRight: 20,
-                      }}
-                    />
-                   { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content2[0].title }
-                  </Typography>
-                  <Typography variant="body1" className="bodyText">
-                   {
-                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content2[0]
-                        .Description
-                    }
-                  </Typography>
-                  <Typography variant="body1" className="linkText">
-                    Learn more about{' '}
-                    <Link
-                      href="https://example.com"
-                      style={{ color: '#00653E', fontWeight: 'bold' }}
-                    >
-                      starting labor
-                    </Link>
-                  </Typography>
-                  <Avatar
-                    alt="Profile Picture"
-                    src={SecondImg}
-                    sx={{
-                      width: '40rem',
-                      height: '25rem',
-                      borderRadius: '6px',
-                      marginBottom: '2rem',
-                      marginTop: '3rem',
-                    }}
-                  />
-                  <Typography
-                    variant="h4"
-                    component="h2"
-                    className="secondTitle"
-                  >
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: 15,
-                        height: 35,
-                        borderRadius: '0',
-                        backgroundColor: '#DFF0D8',
-                        marginRight: 20,
-                      }}
-                    />
-                     { detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content3[0].title }
-                  </Typography>
-                  <Typography variant="body1" className="bodyText">
-                    {
-                      detailsSectionData?.data[0]?.attributes.details_content.data.attributes.content3[0]
-                        .Description
-                    }
-                  </Typography>
-                  <Typography variant="body1" className="bodyText" mb="2rem">
-                    Compare the differences using{' '}
-                    <Link
-                      href="https://example.com"
-                      style={{ color: '#00653E', fontWeight: 'bold' }}
-                    >
-                      my choices
-                    </Link>
-                  </Typography>
-                </Paper>
+                                  />
+                                  { item.title }
+                                  </Typography>
+                                  {item.Description ?
+                                  <Typography variant="body1" className="bodyText">
+                                  {
+                                    item.Description
+                                  }
+                                  </Typography>
+                                  : null }
+
+                                  {item.link?
+                                  <Typography variant="body1" className="linkText">
+                                   { item.linktitle1?item.linktitle1:null }{' '}
+                                    <Link
+                                    href={item.link}
+                                    style={{ color: '#00653E', fontWeight: 'bold' }}
+                                    >
+                                   {item.linktitle2? item.linktitle2 :null}
+                                    </Link>
+                              </Typography>
+                              : null }
+                          </>]))}
+                     </Paper>
 
                  <Grid container spacing={2}>
                   <Grid item xs={6}>
@@ -276,13 +229,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids1[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids1[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
                             .Description
                         }
                       </Typography>
@@ -301,7 +254,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids1[0].range
                           }
                         </Typography>
@@ -315,7 +268,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids1[0].unit
                           }
                         </Typography>
@@ -331,13 +284,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids2[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids2[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
                             .Description
                         }
                       </Typography>
@@ -356,7 +309,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids2[0].range
                           }
                         </Typography>
@@ -370,7 +323,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids2[0].unit
                           }
                         </Typography>
@@ -386,13 +339,13 @@ function Details() {
                         className="bottomTitle"
                       >
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids3[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids3[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
                             .Description
                         }
                       </Typography>
@@ -413,7 +366,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids3[0].range
                           }
                         </Typography>
@@ -427,7 +380,7 @@ function Details() {
                           }}
                         >
                           {
-                            detailsSectionData?.data[0]?.attributes.details_grid.data.attributes
+                            DetailsData?.details_grid.data.attributes
                               .Details_Grids3[0].unit
                           }
                         </Typography>
@@ -443,13 +396,13 @@ function Details() {
                         className="bottomTitle"
                         >
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .Title
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .Description
                         }
                       </Typography>
@@ -470,7 +423,7 @@ function Details() {
                           }}
                         >
                         {
-                          detailsSectionData?.data[0]?.attributes.details_grid.data.attributes.Details_Grids4[0]
+                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .unit
                         }
                       </Typography>
@@ -479,12 +432,12 @@ function Details() {
                 </Grid>
                  <Paper className="post1" elevation={0}>
                   <Typography variant="body1" textAlign="center" lineHeight="24px">
-                    {detailsSectionData?.data[0]?.attributes.DetailSubtitle.subtitle1} <br />
+                    {DetailsData?.DetailSubtitle.subtitle1} <br />
                     <Link
-                      href={'/'+detailsSectionData?.data[0].attributes.DetailSubtitle.subtitle2Link}
+                      href={'/'+DetailsData?.DetailSubtitle.subtitle2Link}
                       style={{ color: '#00653E' }}
                     >
-                      {detailsSectionData?.data[0].attributes.DetailSubtitle.subtitle2}
+                      {DetailsData?.DetailSubtitle.subtitle2}
                     </Link>
                     .
                   </Typography>
@@ -498,7 +451,7 @@ function Details() {
                     className="secondTitle title2"
                   >
                     {
-                      detailsSectionData?.data[0]?.attributes?.DetailsSection.Title
+                      DetailsData?.DetailsSection.Title
                     }
                   </Typography>
                   <Typography
@@ -507,7 +460,7 @@ function Details() {
                     mb="2rem"
                   >
                     {
-                      detailsSectionData?.data[0]?.attributes?.DetailsSection.Content
+                      DetailsData?.DetailsSection.Content
                     }
                   </Typography>
                   <Accordion elevation={0}>
@@ -536,7 +489,7 @@ function Details() {
                     <AccordionDetails style={{ backgroundColor: '#FAF6ED', padding: '3rem' }}>
                       <Grid container spacing={4}>
 
-                        {detailsSectionData?.data[0]?.attributes?.PotentialRisks.map((item, index) => (
+                        {DetailsData?.PotentialRisks.map((item, index) => (
                           [
                           <Grid item xs={6}>
                               <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
@@ -749,7 +702,7 @@ function Details() {
                         }}
                       >
                      {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors1[0]
+                        DetailsData?.details_author.data.attributes.authors1[0]
                             .name
                       }
                       </p>
@@ -762,7 +715,7 @@ function Details() {
                         }}
                       >
                        {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors1[0]
+                        DetailsData?.details_author.data.attributes.authors1[0]
                             .Description
                       }
                       </p>
@@ -796,10 +749,7 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                         {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors2[0]
-                            .name
-                      }
+                      { DetailsData?.details_author.data.attributes.authors2[0].name }
                       </p>
                       <p
                         style={{
@@ -810,7 +760,7 @@ function Details() {
                         }}
                       >
                       {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors2[0]
+                        DetailsData?.details_author.data.attributes.authors2[0]
                             .Description
                       }
                       </p>
@@ -834,8 +784,8 @@ function Details() {
                           marginTop: '7px',
                         }}
                       >
-                         {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors3[0]
+                     {
+                        DetailsData?.details_author.data.attributes.authors3[0]
                             .name
                       }
                       </p>
@@ -848,7 +798,7 @@ function Details() {
                         }}
                       >
                       {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors3[0]
+                        DetailsData?.details_author.data.attributes.authors3[0]
                             .Description
                       }
                       </p>
@@ -872,8 +822,8 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                           {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors4[0]
+                     {
+                        DetailsData?.details_author.data.attributes.authors4[0]
                             .name
                       }
                       </p>
@@ -885,8 +835,8 @@ function Details() {
                           color: '#4D4D4D',
                         }}
                       >
-                         {
-                        detailsSectionData?.data[0]?.attributes?.details_author.data.attributes.authors4[0]
+                      {
+                        DetailsData?.details_author.data.attributes.authors4[0]
                             .Description
                       }
                       </p>
@@ -986,6 +936,8 @@ function Details() {
 
            <Grid item xs={12} md={1}></Grid>
               <Grid item xs={12} md={4}>
+
+              { SideTopics ?
                 <Paper elevation={0} className="post">
                   <Typography
                     variant="h6"
@@ -993,18 +945,21 @@ function Details() {
                     mb="1rem"
                     className="rightTitle"
                   >
-                  Topics
+                  {SideTopics?.Title}
                   </Typography>
-                  <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> What is spontaneous labor?
-                  </Typography>
-                  <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> What is it like to wait for spontaneous labor?
-                  </Typography>
-                  <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                    <CaretRight size={16} /> What are the differences for me and my baby?
-                  </Typography>
+                  {SideTopics?.SidebarTopics.map((item, index) => (
+                   <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                     <CaretRight key={index} size={16} />
+                     {item.Link ?
+                     <Link href={item.Link}>
+                       {item.Text}
+                     </Link>
+                     : item.Text }
+                   </Typography>
+                  ))}
                 </Paper>
+                : null }
+
                 <Grid container spacing={1} style={{ marginBottom: '20px' }}>
                   <Grid item>
                     <Link href="#" className="link-btn">

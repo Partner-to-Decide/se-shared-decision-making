@@ -19,17 +19,23 @@ const Header = () => {
 
   const [headerState, setHeaderState] = useState(false);
   const [HeaderMenusData, setHeaderMenusData] = useState<header_section>();
+
   const showHeader = () => {
     setHeaderState(!headerState)
   }
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.addEventListener('storage', () => {
+       setLanguageState(localStorage.getItem('language') || 'en')   
+    });
+  }, []);
+  
+  useEffect(() => {
     axios.get(REACT_APP_api_base_url + '/api/headers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
       setHeaderMenusData(result.data.data[0].attributes)
       return result;
     })
-
   }, [languageState]);
 
   useEffect(() => {

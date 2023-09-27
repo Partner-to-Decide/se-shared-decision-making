@@ -14,6 +14,7 @@ export default function BasicSelect() {
   const [lang, setlang] = React.useState<string>(selectedLang);
 
   const handleChange = (event: SelectChangeEvent) => {
+    console.log('event.target.value',event.target.value as string)
     setlang(event.target.value as string);
   };
 
@@ -32,7 +33,7 @@ export default function BasicSelect() {
       console.log("is null")
     }
   },[])
-
+  console.log('localStorage.getItem("language")',localStorage.getItem("language"));
   return (
     <Box sx={{ minWidth: 120 }}>
       <Select

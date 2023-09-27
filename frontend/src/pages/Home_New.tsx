@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { Button, CardContent, Container, Grid, responsiveFontSizes, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import { section_data, home_choice_section, home_info_section, decision_aid_section,home_about_section} from "../utils/types";
 import { Box } from "@mui/system";
 import Card from '@mui/material/Card';
@@ -15,6 +16,9 @@ import { REACT_APP_api_base_url } from "../utils/url_config";
 export default function Home() {
   // Home page still requires CSS styling to make responsiveness (ideally using bootsrap of grids), for testing use the Chrome inspection tools for diff devices
   //makes call to Strapi api, however pls check to make sure directory is still accurate
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const selectedLang = queryParams.get('lang') || 'en';
 
   const [mainSectionData, setMainSectionData] = useState<section_data>();
   const [choiceSectionData, setChoiceSectionData] = useState<home_choice_section>();
@@ -28,7 +32,7 @@ export default function Home() {
   const [aboutSectionLoaded, setAboutSectionLoaded] = useState(false);
 
   const [isMobile, setIsMobile] = useState(false);
-  const [languageState, setLanguageState] = useState('en');
+  const [languageState, setLanguageState] = useState(selectedLang);
   const [width, setWidth] = useState<number>(window.innerWidth);
 
   function handleWindowSizeChange() {
@@ -53,14 +57,6 @@ export default function Home() {
        setLanguageState(localStorage.getItem('language') || 'en')   
     });
   }, []);
-
-  // store.subscribe(() => {
-  //   // When state will be updated(in our case, when items will be fetched), 
-  //   // we will update local component state and force component to rerender 
-  //   // with new data.
-
-  //   setLanguageState(store.getState().language.language)
-  // });
 
   useEffect(() => {
 
@@ -122,8 +118,6 @@ export default function Home() {
       setAboutSectionLoaded(true)
     }
   }, [aboutSection]);
-
-
 
 
   const changeSelection = (title:string) => {

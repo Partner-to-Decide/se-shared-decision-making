@@ -18,14 +18,31 @@ export interface Details_data {
     attributes: {
       Title:string
       slug:string
+      DetailsWaiting: detailsWaiting
       DetailsSection: Details_section_data
       details_content:details_content1[]
       details_grid:details_grids[]
       DetailSubtitle:details_subtitle[]
       PotentialRisks:Details_PotentialRisks[]
       details_author:details_authors[]
+      DetailTopics:Sidebar_topic
     }
   }
+}
+
+export interface Sidebar_topic {
+  DetailTopics: {
+    Title:string
+    SidebarTopics: {
+      Text: string
+      Link: string
+    }
+  }[]
+}
+
+export interface detailsWaiting {
+      title1: string
+      ReadingTime: string
 }
 
 export interface Details_PotentialRisks {
@@ -43,21 +60,14 @@ export interface details_content1 {
         title: string | null
         Description: string | null
         link: string | null
-      }[]
-      content2: {
-        id: number
-        title: string | null
-        Description: string | null
-        link: string | null
-      }[]
-      content3: {
-        id: number
-        title: string | null
-        Description: string | null
-        link: string | null
+         data: {
+          attributes: {
+              image:image_data
+            }
+          }
       }[]
     }
-  }[]
+  }
 }
 
 export interface Details_section_data {

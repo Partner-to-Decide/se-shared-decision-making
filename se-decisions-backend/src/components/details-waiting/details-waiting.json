@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_details_waiting_details_waitings",
+  "info": {
+    "displayName": "Details-Waiting"
+  },
+  "options": {},
+  "attributes": {
+    "ReadingTime": {
+      "type": "string"
+    },
+    "title1": {
+      "type": "string"
+    }
+  }
+}

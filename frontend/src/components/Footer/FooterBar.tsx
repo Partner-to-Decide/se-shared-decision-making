@@ -30,20 +30,11 @@ const FooterBar = () => {
     window.dispatchEvent(new Event('storage'));
   };
 
-  React.useEffect(() => {
-    localStorage.setItem("language", lang!);
-    window.dispatchEvent(new Event('storage'))
-    console.log(localStorage.getItem("language"))
-  }, [lang]);
-
-  React.useEffect(() => {
-    if(localStorage.getItem("language") != null){
-      console.log("not null")
-      setlang(localStorage.getItem("language")!)
-    }else{
-      console.log("is null")
-    }
-  },[])
+  useEffect(() => {
+    window.addEventListener('storage', () => {
+       setlang(localStorage.getItem('language') || 'en')   
+    });
+  }, []);
 
   useEffect(() => {
     axios.get(REACT_APP_api_base_url + '/api/footers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
@@ -57,7 +48,7 @@ const FooterBar = () => {
       setFooterState(true)
     }
   }, [FooterData]);
-
+  
   return (
     <div>
       <div className="allFooter">
