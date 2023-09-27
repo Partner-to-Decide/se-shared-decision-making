@@ -220,6 +220,7 @@ function Details() {
                      </Paper>
 
                  <Grid container spacing={2}>
+
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
@@ -231,6 +232,10 @@ function Details() {
                         {
                           DetailsData?.details_grid.data.attributes.Details_Grids1[0]
                             .Title
+                        }
+                        {
+                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
+                            .TitleNumber
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
@@ -275,6 +280,7 @@ function Details() {
                       </Avatar>
                     </Paper>
                   </Grid>
+                  
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
@@ -286,6 +292,11 @@ function Details() {
                         {
                           DetailsData?.details_grid.data.attributes.Details_Grids2[0]
                             .Title
+                        }
+
+                        {
+                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
+                            .TitleNumber
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
@@ -341,6 +352,11 @@ function Details() {
                         {
                           DetailsData?.details_grid.data.attributes.Details_Grids3[0]
                             .Title
+                        }
+
+                          {
+                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
+                            .TitleNumber
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
@@ -398,6 +414,10 @@ function Details() {
                         {
                           DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .Title
+                        }
+                          {
+                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
+                            .TitleNumber
                         }
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">

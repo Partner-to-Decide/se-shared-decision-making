@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-values-question",
     "pluralName": "my-values-questions",
-    "displayName": "MyValues-question"
+    "displayName": "MyValues-question",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,14 @@
         }
       },
       "component": "my-values-page.my-values-page"
+    },
+    "questionId": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer"
     }
   }
 }
