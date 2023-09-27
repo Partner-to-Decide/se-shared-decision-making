@@ -237,3 +237,17 @@ button.container {
     color: #ffffff;
     border-color: #0c3a25;
 }
+
+img#first-image-shape {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+img#first-image-round {
+    margin-top: 50px;
+    border-radius: 200px;
+    width: 85%;
+    object-fit: cover;
+    object-position: top;
+}

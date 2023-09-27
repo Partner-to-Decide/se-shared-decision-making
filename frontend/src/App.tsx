@@ -10,6 +10,7 @@ import MyStuff from './pages/MyStuff'
 import MyValues from './pages/MyValues'
 import MyChoices from './pages/MyChoices'
 import Details from './pages/Details'
+import StartingLabor from './pages/StartingLabor'
 import Question from './components/Questions/Question'
 import QuizResult from './components/Questions/QuizResult'
 import { BrowserRouter } from 'react-router-dom'
@@ -146,6 +147,7 @@ const Main = () => {
           <Route path="/question/:id" element={<Question />} />
           <Route path="/QuizResult" element={<QuizResult />} />
           <Route path="/Details/:slug" element={<Details />} />
+          <Route path="/starting-labor" element={<StartingLabor />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -174,7 +174,7 @@ const Question = () => {
                                     <ProgressBar currentStep={currentStep} totalSteps={questionTotal} />
                                 </Grid>
 
-                                <Box component="span" bgcolor="#0C3A25" sx={{ p: 2, borderRadius: '100px', color: '#ffffff' }}>
+                                <Box component="span" className="question-id" bgcolor="#0C3A25" sx={{ p: 2, borderRadius: '100px', color: '#ffffff' }}>
                                     {question.id}
                                 </Box>
 
