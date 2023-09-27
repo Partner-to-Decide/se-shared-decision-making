@@ -9,6 +9,11 @@ import html2canvas from "html2canvas";
 
 const QuizResult = () => {
   const rating = useSelector((state: RootState) => state.rating);
+  const storedRating = localStorage.getItem('QuizQuestions');
+  console.log('rating',rating);
+  if (rating.lessImportant.length > 0) {
+    localStorage.setItem('QuizQuestions', JSON.stringify(rating));
+  }
   const summaryGridRef = useRef<HTMLDivElement>(null);
 
   const renderArray = (arr: string[]) => {

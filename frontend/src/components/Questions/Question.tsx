@@ -96,6 +96,7 @@ const Question = () => {
             const data = await response.json();
             const dataTotal = await responseTotal.json();
             console.log('Fetched data:', data.data.attributes);
+            // console.log('Fetched data:', dataTotal.data);
             setQuestion(data.data);
             setQuestionTotal(dataTotal.data.length);
 
@@ -185,21 +186,21 @@ const Question = () => {
                                  <Typography variant="h3" fontSize="2rem" color="primary.main">
                                     {question.attributes.question_detail[0].question_content}
                                 </Typography>
-
-                                <CustomSlider
-                                    className="step-slider"
-                                    value={sliderValue}
-                                    step={null}
-                                    marks={[
-                                        { value: 1, label: "Least Important", },
-                                        { value: 2 },
-                                        { value: 3 },
-                                        { value: 4, label: "Most Important" },
-                                    ]}
-                                    min={1}
-                                    max={4}
-                                    onChange={(event, value) => handleSliderChange(value)}
-                                />
+                            
+                                    <CustomSlider
+                                        className="step-slider"
+                                        value={sliderValue}
+                                        step={null}
+                                        marks={[
+                                            { value: 1, label: "Least Important", },
+                                            { value: 2 },
+                                            { value: 3 },
+                                            { value: 4, label: "Most Important" },
+                                        ]}
+                                        min={1}
+                                        max={4}
+                                        onChange={(event, value) => handleSliderChange(value)}
+                                    />
 
                                 <p className="drag-text">
                                     Drag slider to indicate your preference

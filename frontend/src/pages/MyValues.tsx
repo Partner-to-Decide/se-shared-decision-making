@@ -19,6 +19,7 @@ export default function MyValues() {
             className="my-value-main"
             >
             <Container maxWidth="sm">
+            <Grid className="my-value-content">
                 <Typography variant="h2" color="primary.main">
                     Your values, <br/>your choices!
                 </Typography>
@@ -33,6 +34,7 @@ export default function MyValues() {
                       </button>
                     </Link>
                 </div>
+                </Grid>
             </Container>
         </Grid>
       </Layout>

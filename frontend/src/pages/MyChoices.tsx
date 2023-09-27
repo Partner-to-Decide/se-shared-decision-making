@@ -11,6 +11,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import Layout from "../components/Layout";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "./pageStyle/MyChoices.scss";
+import "./pageStyle/MyChoices.css";
 import { Sources } from "../components/AccordionContent/Sources";
 import { Popup } from "../components/Popup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -406,6 +407,7 @@ const MyChoices = () => {
             sm={8}
             xs={8}
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
+            className="TimeBlock"
           > 
           <Container maxWidth="lg">
                 {sectionsData?.data[0].attributes.title != null ? (
@@ -430,6 +432,7 @@ const MyChoices = () => {
                 ) : null}
                 {/* section of data (and circles) */}
                 <Grid
+                  className="TimeBlock-content"
                   container
                   sx={{
                     mt: "4rem",
@@ -438,7 +441,7 @@ const MyChoices = () => {
                 >
                   {sectionsData?.data[0].attributes.content1[0].picture1.data
                      != null ? (
-                    <Grid item xs={4} textAlign="center">
+                    <Grid item xs={6} sm={4} textAlign="center" >
                       <img
                         src={
                           REACT_APP_api_base_url +
@@ -451,7 +454,7 @@ const MyChoices = () => {
                   {sectionsData?.data[0].attributes.content2[0].picture1.data
                       !=
                   null ? (
-                    <Grid item xs={4} textAlign="center">
+                    <Grid item xs={6} sm={4} textAlign="center">
                     {sectionsData?.data[0].attributes.content2[0].picture1.data &&
                       <img
                         src={
@@ -465,7 +468,7 @@ const MyChoices = () => {
                   { sectionsData?.data[0].attributes.content3[0].picture1.data
                      !=
                     null && !isMobile ? (
-                    <Grid item xs={4} textAlign="center">
+                    <Grid item xs={6} sm={4} textAlign="center">
                       <img
                         src={
                           REACT_APP_api_base_url +
@@ -480,6 +483,7 @@ const MyChoices = () => {
           </Grid>
           {/* section Labor Time */}
           <Grid
+            className="TimeBlock"
             container
             item
             xl={8}
@@ -512,6 +516,7 @@ const MyChoices = () => {
                 ) : null}
                 {/* section of data (and circles) */}
                 <Grid
+                  className="TimeBlock-content"
                   container
                   sx={{
                     mt: "4rem",
@@ -563,6 +568,7 @@ const MyChoices = () => {
           </Grid>
           {/* Experience Section */}
           <Grid
+            className="TimeBlock"
             container
             item
             xl={8}
@@ -732,6 +738,7 @@ const MyChoices = () => {
           </Grid>
           {/* Pain Medication Section */}
           <Grid
+            className="TimeBlock"
             container
             item
             xl={8}
@@ -763,6 +770,7 @@ const MyChoices = () => {
                 ) : null}
                 {/* section of data (and circles) */}
                 <Grid
+                  className="TimeBlock-content"
                   container
                   item
                   sx={{
@@ -866,6 +874,7 @@ const MyChoices = () => {
           {sameSection?.data.attributes != null ? (
             <Grid container sx={{ justifyContent: "center" }}>
               <Grid
+                className="quote-box"
                 item
                 sx={{
                   mt: "5rem",
@@ -912,6 +921,7 @@ const MyChoices = () => {
                 {/* title */}
                 {sectionsData?.data[4].attributes.title != null ? (
                   <Grid
+                   className="Risks-section"
                     container
                     item
                     sx={{
@@ -945,6 +955,7 @@ const MyChoices = () => {
                 {/* view risks */}
 
                 <Grid
+                className="viewrisks"
                   container
                   item
                   sx={{
@@ -1614,12 +1625,12 @@ const MyChoices = () => {
                           justifyContent: "center",
                         }}
                       >
-                        <Grid item xl={7} lg={7} md={7} sm={7} xs={7}>
+                        <Grid className="for-all-rectangle-col" item xl={7} lg={7} md={7} sm={7} xs={7}>
                           <Typography className="potential-risks-small-content">
                             {forAll?.data[0].attributes.title}
                           </Typography>
                         </Grid>
-                        <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
+                        <Grid className="for-all-rectangle-col" item xl={6} lg={6} md={6} sm={6} xs={6}>
                           <Grid container sx={{ mt: "1.5rem" }}>
                             <Typography className="potential-risks-small-content2">
                               <FiberManualRecordIcon
@@ -1792,25 +1803,21 @@ const MyChoices = () => {
                     justifyContent="space-between"
                   >
                     <Grid item xs={4} textAlign="center">
-                      <Link to="/Details/wait-for-labor">
+                      <Link to="/Details">
                         <button className="learn-more-button ">
                           {learnAboutData?.data.attributes.button1}
                         </button>
                       </Link>
                     </Grid>
                     <Grid item xs={4} textAlign="center">
-                     <Link to="/Details/41-42-week-induction">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button2}
-                        </button>
-                      </Link>
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button2}
+                      </button>
                     </Grid>
                     <Grid item xs={4} textAlign="center">
-                      <Link to="/Details/39-41-week-induction">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button3}
-                        </button>
-                      </Link>
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button3}
+                      </button>
                     </Grid>
                   </Grid>
                 ) : (
@@ -1829,7 +1836,7 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Link to="/Details/wait-for-labor">
+                      <Link to="/Details">
                         <button className="learn-more-button ">
                           {learnAboutData?.data.attributes.button1}
                         </button>
@@ -1845,11 +1852,9 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Link to="/Details/41-42-week-induction">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button2}
-                        </button>
-                      </Link>
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button2}
+                      </button>
                     </Grid>
                     <Grid
                       item
@@ -1861,11 +1866,9 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      <Link to="/Details/39-41-week-induction">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button3}
-                        </button>
-                      </Link>
+                      <button className="learn-more-button ">
+                        {learnAboutData?.data.attributes.button3}
+                      </button>
                     </Grid>
                   </Grid>
                 )}
@@ -1875,6 +1878,7 @@ const MyChoices = () => {
           {/*Sources */}
           {sourceData ? (
             <Grid
+              className="source-section"
               container
               item
               xl={8}
@@ -1887,8 +1891,9 @@ const MyChoices = () => {
               }}
             >
               <Container maxWidth="lg">
-                <Accordion>
+                <Accordion className="source-accordion">
                   <AccordionSummary
+                    className="panel1a-header"
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
@@ -1925,7 +1930,7 @@ const MyChoices = () => {
               direction="column"
               sx={{ mt: "5.25rem" }}
             >
-              <Grid item width="16.4375rem" height="25.6875rem">
+              <Grid item width="16.4375rem" height="25.6875rem" className="william-image">
                 <img
                   src={
                     REACT_APP_api_base_url +
@@ -1935,6 +1940,7 @@ const MyChoices = () => {
                 />
               </Grid>
               <Grid
+                className="william-image-content"
                 item
                 sx={{
                   ml: "3rem",
@@ -1951,9 +1957,6 @@ const MyChoices = () => {
                 <Typography className="need-help-choosing-text">
                   {needHelpData?.data.attributes.content}
                 </Typography>
-              </Grid>
-
-              <Grid item sx={{ ml: "3rem", mt: "1.5rem" }}>
                 <Link to="/MyValues">
                   <button className="find-out-button ">
                     {needHelpData?.data.attributes.buttonContent}

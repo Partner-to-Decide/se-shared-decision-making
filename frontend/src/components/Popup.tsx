@@ -2,7 +2,7 @@ import * as React from "react";
 import Popover from "@mui/material/Popover";
 import { Grid, Typography } from "@mui/material";
 
-export const Popup = ({ title, text, open, anchorEl, handleClose }: any) => {
+export const Popup = ({ title, text, open, anchorEl, handleClose, position }: any) => {
   const darkGreen = "#0c3a25";
   const lightGreen = "#dff0d8";
   return (
@@ -11,17 +11,22 @@ export const Popup = ({ title, text, open, anchorEl, handleClose }: any) => {
       anchorEl={anchorEl}
       onClose={handleClose}
       anchorOrigin={{
-        vertical: "bottom",
+        vertical: 'top',
         horizontal: "left",
       }}
+      transformOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+
     >
-      <Grid container sx={{ width: "315px" }} borderRadius="12px">
+      <Grid container sx={{ width: "315px", padding: '1.4rem 1.4rem' }} borderRadius="12px">
         <Typography
+          variant="h4"
+          mb="1.3rem"
           bgcolor={lightGreen}
           color={darkGreen}
           sx={{
-            ml: "18px",
-            mt: "21px",
             mixBlendMode: "multiply",
             opacity: "0,6",
             fontFamily: "Clash Grotesk",
@@ -39,18 +44,7 @@ export const Popup = ({ title, text, open, anchorEl, handleClose }: any) => {
         <Typography
           color="#666666"
           sx={{
-            ml: "24px",
-            mt: "19px",
-            mb: "24px",
-            width: "257px",
-            fontFamily: "Public Sans",
-            fontWeight: "400",
-            fontSize: "16px",
             lineHeight: "150%",
-            fontStyle: "normal",
-            flex: "none",
-            order: "0",
-            flexGrow: "0",
           }}
         >
           {text}

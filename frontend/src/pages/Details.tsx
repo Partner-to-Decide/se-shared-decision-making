@@ -989,40 +989,6 @@ function Details() {
                     </Link>
                   </Grid>
                 </Grid>
-                <Paper elevation={0}>
-                  <Typography
-                    variant="h4"
-                    component="h3"
-                    color="primary.main"
-                    mb="1rem"
-                  >
-                   Take Notes As You Go!
-                  </Typography>
-                  <Typography variant="body1" className="space">
-                   To highlight text or create notes, press and hold the words. You'll find your saved notes, summary, and checklist in.
-                    <Link
-                    variant="body1"
-                    href="https://example.com"
-                    style={{
-                      color: '#00653E',
-                      fontWeight: 'bold',
-                      marginBottom: '30px',
-                      marginLeft: '5px',
-                    }}
-                  >
-                    My Stuff
-                  </Link>
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    component="h3"
-                    color="primary.main"
-                    mb="1rem"
-                    mt="1rem"
-                  >
-                   Where does my data go?
-                  </Typography>
-                </Paper>
               </Grid>
             </Grid>
           </Container>

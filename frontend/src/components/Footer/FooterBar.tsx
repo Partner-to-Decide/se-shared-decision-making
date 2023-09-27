@@ -30,11 +30,20 @@ const FooterBar = () => {
     window.dispatchEvent(new Event('storage'));
   };
 
-  useEffect(() => {
-    window.addEventListener('storage', () => {
-       setlang(localStorage.getItem('language') || 'en')   
-    });
-  }, []);
+  React.useEffect(() => {
+    localStorage.setItem("language", lang!);
+    window.dispatchEvent(new Event('storage'))
+    console.log(localStorage.getItem("language"))
+  }, [lang]);
+
+  React.useEffect(() => {
+    if(localStorage.getItem("language") != null){
+      console.log("not null")
+      setlang(localStorage.getItem("language")!)
+    }else{
+      console.log("is null")
+    }
+  },[])
 
   useEffect(() => {
     axios.get(REACT_APP_api_base_url + '/api/footers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
@@ -48,14 +57,14 @@ const FooterBar = () => {
       setFooterState(true)
     }
   }, [FooterData]);
-  
+
   return (
     <div>
       <div className="allFooter">
         <Container maxWidth="xl">
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className="allFooterInner">
             {footerState && FooterData?.data[0].attributes.Footer_section_data1[0]?
-                <Grid item xs={3}>
+                <Grid item xs={3} className="Footercol">
                     <Box
                       component="img"
                       alt="Logo"
@@ -78,36 +87,52 @@ const FooterBar = () => {
                  :
                  null
                }
-                <Grid item xs={1}></Grid>
+                <Grid item xs={1} className="Footercol-blank"></Grid>
                 {footerState && FooterData?.data[0].attributes.Footer_Decision_Aid[0]?
-                <Grid item xs={3}>
-                  <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.data[0].attributes.Footer_Decision_Aid[0].MenuHeading}</Typography>
-                   <MenuList className="footer-menu">
-                      {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item, index) => (
-                        [
-                          <MenuItem key={index} sx={{ mb: 2.5, p: 0 }}>
-                            <Link href={'/' + item.Link_url} style={{ color: '#fff' }}>
-                              {item.Link_Name}
-                            </Link>
-                          </MenuItem>,
-                          item.Divider === true ? (
-                            <Divider className="footer-divider" key={`divider-${index}`} sx={{ borderColor: '#DFF0D8' }} />
-                          ) : null,
-                        ]
-                      ))}
-                    </MenuList>
+                <Grid item xs={3} className="Footercol">
+                <div className="Footercol-half">
+                  <div className="Footercol-half-left">
+                    <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.data[0].attributes.Footer_Decision_Aid[0].MenuHeading}</Typography>
+                     <MenuList className="footer-menu">
+                        {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item, index) => (
+                          [
+                            <MenuItem key={index} sx={{ mb: 2.5, p: 0 }}>
+                              <Link href={'/' + item.Link_url} style={{ color: '#fff' }}>
+                                {item.Link_Name}
+                              </Link>
+                            </MenuItem>,
+                            item.Divider === true ? (
+                              <Divider className="footer-divider" key={`divider-${index}`} sx={{ borderColor: '#DFF0D8' }} />
+                            ) : null,
+                          ]
+                        ))}
+                      </MenuList>
+                      </div>
+                      <div className="Footercol-half-right hide-for-desktop">
+                         <Typography className="footer-title" variant="h4" gutterBottom>Download a PDF</Typography>
+                        <MenuList className="footer-menu">
+                            <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('en')}>English</Link></MenuItem>
+                            <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('es')}>Español</Link></MenuItem>
+                            <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('bah')}>Kreyòl Ayisyen</Link></MenuItem>
+                        </MenuList>
+                      </div>
+                    </div>
                 </Grid>
                   :
                  null
                }
-                <Grid item xs={2}></Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2} className="Footercol-blank"></Grid>
+                <Grid item xs={3} className="Footercol">
+                  <div className="hide-for-mobile">
                     <Typography className="footer-title" variant="h4" gutterBottom>Download a PDF</Typography>
                     <MenuList className="footer-menu">
                         <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('en')}>English</Link></MenuItem>
                         <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('es')}>Español</Link></MenuItem>
                         <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href="#" style={{ color: '#fff' }} onClick={() => handleLanguageChange('bah')}>Kreyòl Ayisyen</Link></MenuItem>
                     </MenuList>
+                    </div>
+                    <div className="hide-for-desktop">
+                    </div>
                 </Grid>
             </Grid>       
         </Container>
