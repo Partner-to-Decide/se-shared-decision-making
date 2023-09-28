@@ -173,6 +173,8 @@ const Question = () => {
 
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;
+        setQuestionSr(parseInt(currentStepKey) + 1);
+        setCurrentStep(parseInt(currentStepKey) + 1);
 
         if (questionsByLanguage[languageState][nextKey] !== 'quiz') {
             setQuestionSr(nextKey);
@@ -189,8 +191,9 @@ const Question = () => {
 
     // previous button
     const handlePrevious = () => {
-
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
+        setQuestionSr(parseInt(currentStepKey) + 1);
+        setCurrentStep(parseInt(currentStepKey) + 1);
         const prevKey = parseInt(currentStepKey) - 1;
 
         if (prevKey !== -1) {
@@ -247,7 +250,7 @@ const Question = () => {
                                 </Grid>
 
                                 <Box component="span" className="question-id" bgcolor="#0C3A25" sx={{ p: 2, borderRadius: '100px', color: '#ffffff' }}>
-                                    {question.id}
+                                    {questionSr}
                                 </Box>
 
                                 <Container maxWidth="sm">
@@ -261,7 +264,7 @@ const Question = () => {
                                 </Container>
                                 {question.id === 19 ?
                                     <CustomSlider
-                                        className="step-slider"
+                                        className="step-slider step-slider-v2"
                                         value={sliderValue}
                                         step={null}
                                         marks={[

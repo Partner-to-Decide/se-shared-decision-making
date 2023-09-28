@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_risks_and_benefits_risks_benefits",
+  "info": {
+    "displayName": "Risks_Benefits"
+  },
+  "options": {},
+  "attributes": {
+    "Icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "content": {
+      "type": "richtext"
+    }
+  }
+}

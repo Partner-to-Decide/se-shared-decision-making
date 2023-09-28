@@ -18,11 +18,17 @@ import FirstImg from '../../siteImages/pexels-william-fortunato-6392989.png'
 
 
 const QuizResult = () => {
-  const rating = useSelector((state: RootState) => state.rating);
-  const storedRating = localStorage.getItem('QuizQuestions');
+  //const rating = useSelector((state: RootState) => state.rating);
+  //const storedRating = localStorage.getItem('QuizQuestions');
+  const storedRating = localStorage.getItem('QuizQuestions')|| '';
+  let rating;
+  if(storedRating){
+    rating = JSON.parse(storedRating);
+  }
+
   //console.log('rating', rating);
   //if (rating.lessImportant.length > 0) {
-  localStorage.setItem('QuizQuestions', JSON.stringify(rating));
+  //localStorage.setItem('QuizQuestions', JSON.stringify(rating));
   //}
   const summaryGridRef = useRef<HTMLDivElement>(null);
 
@@ -163,91 +169,96 @@ const QuizResult = () => {
                   })}
                 </Stack>
               </div>
-              <div className="summary-box choice-ques">
-                {rating.choiceOne.length > 0 &&
-                  <>
-                    <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                    WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                    </Typography>
-                    <Stack direction="row" spacing={4}>
-                          <Grid item width='148px' textAlign="center">
-                            <Box className="icon-shape">
-                              <Clock size={32} weight="light" />
-                            </Box>
-                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                            {choiceArray.choiceOne}
-                            </Typography>
-                          </Grid>
-                    </Stack>
-                  </>}
-                {rating.choiceTwo.length > 0 &&
-                  <>
-                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                  </Typography>
-                  <Stack direction="row" spacing={4}>
-                        <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
-                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {choiceArray.choiceTwo}
-                          </Typography>
-                        </Grid>
-                  </Stack>
-                </>}
-                {rating.choiceThree.length > 0 &&
-                  <>
-                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                  </Typography>
-                  <Stack direction="row" spacing={4}>
-                        <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
-                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {choiceArray.choiceThree}
-                          </Typography>
-                        </Grid>
-                  </Stack>
-                </>}
-                {rating.choiceFour.length > 0 &&
-                  <>
-                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                  </Typography>
-                  <Stack direction="row" spacing={4}>
-                        <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
-                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {choiceArray.choiceFour}
-                          </Typography>
-                        </Grid>
-                  </Stack>
-                </>}
-                {rating.choiceFive.length > 0 &&
-                  <>
-                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                  </Typography>
-                  <Stack direction="row" spacing={4}>
-                        <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
-                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {choiceArray.choiceFive}
-                          </Typography>
-                        </Grid>
-                  </Stack>
-                </>
-
-                }
-              </div>
             </div>
+
+            <div className="summary-box choice-ques">
+                <Container maxWidth="md">
+                        {rating.choiceOne.length > 0 &&
+                          <>
+                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                            WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                            </Typography>
+                                <Stack direction="row" spacing={4} justifyContent="center">
+                                      <Grid item width='148px' textAlign="center">
+                                        <Box className="icon-shape">
+                                          <Clock size={32} weight="light" />
+                                        </Box>
+                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                        {choiceArray.choiceOne}
+                                        </Typography>
+                                      </Grid>
+                                </Stack>
+                          </>}
+                        {rating.choiceTwo.length > 0 &&
+                          <>
+                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                          </Typography>
+                              <Stack direction="row" spacing={4} justifyContent="center">
+                                    <Grid item width='148px' textAlign="center">
+                                      <Box className="icon-shape">
+                                        <Clock size={32} weight="light" />
+                                      </Box>
+                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                      {choiceArray.choiceTwo}
+                                      </Typography>
+                                    </Grid>
+                              </Stack>
+                        </>}
+                        {rating.choiceThree.length > 0 &&
+                          <>
+                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                          </Typography>
+                              <Stack direction="row" spacing={4} justifyContent="center">
+                                    <Grid item width='148px' textAlign="center">
+                                      <Box className="icon-shape">
+                                        <Clock size={32} weight="light" />
+                                      </Box>
+                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                      {choiceArray.choiceThree}
+                                      </Typography>
+                                    </Grid>
+                              </Stack>
+                        </>}
+                        {rating.choiceFour.length > 0 &&
+                          <>
+                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                          </Typography>
+                              <Stack direction="row" spacing={4} justifyContent="center">
+                                    <Grid item width='148px' textAlign="center">
+                                      <Box className="icon-shape">
+                                        <Clock size={32} weight="light" />
+                                      </Box>
+                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                      {choiceArray.choiceFour}
+                                      </Typography>
+                                    </Grid>
+                              </Stack>
+                        </>}
+                        {rating.choiceFive.length > 0 &&
+                          <>
+                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                          </Typography>
+                              <Stack direction="row" spacing={4} justifyContent="center">
+                                    <Grid item width='148px' textAlign="center">
+                                      <Box className="icon-shape">
+                                        <Clock size={32} weight="light" />
+                                      </Box>
+                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                      {choiceArray.choiceFive}
+                                      </Typography>
+                                    </Grid>
+                              </Stack>
+                        </>
+
+                        }
+                
+                </Container>
+              </div>
+
           </Grid>
 
 

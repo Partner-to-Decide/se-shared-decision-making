@@ -58,6 +58,8 @@ export const ratingSlice = createSlice({
         state[category].push(questionText);
       }
 
+      localStorage.setItem('QuizQuestions', JSON.stringify(state));
+
     },
     resetCategories: (state) => {
       state.leastImportant = [];

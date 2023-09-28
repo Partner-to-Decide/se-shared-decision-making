@@ -13,6 +13,11 @@ import {
   Divider,
   Box,
 } from '@mui/material'
+import {
+  Details_data,
+  details_buttonset,
+  details_section,
+} from '../utils/types'
 import Layout from '../components/Layout'
 import Button from '../components/Button/Button'
 import { CloudUpload } from '@mui/icons-material'
@@ -29,10 +34,51 @@ import {
   CheckCircle,
 } from '@phosphor-icons/react'
 import './pageStyle/StartingLabor.css'
-
+import { useNavigate, useParams } from "react-router-dom";
+import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
+import axios from 'axios'
 import FirstImg from '../siteImages/pexels-william-fortunato-6392989.png'
 
+
+
 function StartingLabor() {
+
+const [detailsButtonSetData, setDetailsButtonSetData] = useState<details_buttonset>()
+
+  const [languageState, setLanguageState] = useState('en')
+  useEffect(() => {
+    window.addEventListener('storage', () => {
+      setLanguageState(localStorage.getItem('language') || 'en')
+    })
+  }, [])
+useEffect(() => {
+    const fetchDetailsButtonSetData = async () => {
+      try {
+        const result = await axios.get(
+          REACT_APP_api_base_url +
+            '/api/details-button-sets?populate=deep&locale=' +
+            localStorage.getItem('language')
+        )
+        setDetailsButtonSetData(result.data)
+      } catch (error) {
+        console.error('Error fetching learn about data: ', error)
+        try {
+          const result = await axios.get(
+            REACT_APP_api_base_url +
+              '/api/details-button-sets?populate=deep&locale=' +
+              DEFAULT_LANGUAGE
+          )
+          setDetailsButtonSetData(result.data)
+        } catch (error) {
+          console.error(
+            'Error fetching learn about data with default locale: ',
+            error
+          )
+        }
+      }
+    }
+   fetchDetailsButtonSetData()
+  }, [languageState])
 
   return (  
       <StyledEngineProvider injectFirst>

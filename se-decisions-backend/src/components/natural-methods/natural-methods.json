@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_natural_methods_natural_methods",
+  "info": {
+    "displayName": "NaturalMethods"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "RisksandBenefits": {
+      "displayName": "Risks_Benefits",
+      "type": "component",
+      "repeatable": true,
+      "component": "risks-and-benefits.risks-benefits"
+    }
+  }
+}

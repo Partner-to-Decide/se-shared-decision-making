@@ -212,7 +212,7 @@ function Details() {
                                <Grid container spacing={2} mb="2rem">
                                   <Grid item>
                                       <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                                          <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> 
+                                          <span><Link href="/Home" color="#4D4D4D" sx={{ textDecoration: 'none' }}>Home</Link> <CaretRight size={16} /></span> 
                                           {DetailsData?.Title}
                                       </Typography>
                                   </Grid>
@@ -1008,7 +1008,7 @@ function Details() {
                       [
                     <Grid item>
                       <Button sx={{ fontSize: '18px' }}>
-                        <Link href={item.ButtonLink}>{item.ButtonText}</Link>
+                        <Link href={item.ButtonLink} sx={{ textDecoration: 'none' }}>{item.ButtonText}</Link>
                       </Button>
                     </Grid>
                      ] 
