@@ -251,3 +251,10 @@ img#first-image-round {
     object-fit: cover;
     object-position: top;
 }
+
+
+.source-content p{
+  font-size: 1rem;
+  color: #000000;
+  line-height: 20px;
+}

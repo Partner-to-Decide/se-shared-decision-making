@@ -26,6 +26,7 @@ export interface Details_data {
       PotentialRisks:Details_PotentialRisks[]
       details_author:details_authors[]
       DetailTopics:Sidebar_topic
+      source:source
     }
   }
 }

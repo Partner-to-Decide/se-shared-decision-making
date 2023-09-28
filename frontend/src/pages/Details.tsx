@@ -135,8 +135,9 @@ function Details() {
   const DetailsData = detailsSectionData?.data[0]?.attributes;
   const SideTopics  = detailsSectionData?.data[0]?.attributes?.DetailTopics; 
   const details_content = DetailsData?.details_content?.data?.attributes.content1;
+  const details_source = DetailsData?.source?.data?.attributes.source1;
 
-  console.log('detailsSectionDatatestt',details_content);
+  console.log('detailsSectionDatatestt',details_source);
 
   return (  
       <StyledEngineProvider injectFirst>
@@ -280,7 +281,7 @@ function Details() {
                       </Avatar>
                     </Paper>
                   </Grid>
-                  
+
                   <Grid item xs={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
@@ -579,10 +580,10 @@ function Details() {
                               handleClose={handleClose}
                               title="Seizure"
                               text='Infant seizures are bursts of electrical activity in
-                        the brain that can cause chewing motions and
-                        "bicycling" movements. They can be caused by the
-                        baby not getting enough oxygen during the birth
-                        process.'
+                                the brain that can cause chewing motions and
+                                "bicycling" movements. They can be caused by the
+                                baby not getting enough oxygen during the birth
+                                process.'
                             />
                             ,{' '}
                             <Typography
@@ -884,38 +885,21 @@ function Details() {
                         mb="0.7rem"
                         className="secondTitle"
                     >
-                        Sources
+                      Sources
                     </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Grid>
-                        <Sources
-                          number="6"
-                          text1=" Middleton P, Shepherd E, Morris J, Crowther CA, Gomersall JC. Induction of labour at or beyond 37 weeks’ gestation. Cochrane Database Syst Rev. July 2020. 
-
-                          doi:10.1002/14651858.CD004945.pub5 *NICU and perinatal death rates calculated using the GRADE system to convert relative risks with the SWEPIS study as the baseline
-          
-                          risk estimates **C-section rate calculated using the GRADE system to convert relative risks with the ARRIVE study as the baseline
-          
-                          risk estimate. The 2020 Cochrane Review includes the ARRIVE trial and the SWEPSIS trial within the findings."
-                          text2="Source"
-                        />
-                      </Grid>
-                      <Grid sx={{ mt: '28px' }}>
-                        <Sources
-                          number="7"
-                          text1="Coates D, Goodfellow A, Sinclair L. Induction of labour: Experiences of care and decision-making of women and clinicians. 
-                          Women and Birth. 2020;33:e1-e14. 8. Sotiriadis A, Petousis S, Thilaganathan B, et al. Maternal and perinatal outcomes after elective induction of labor at 39 weeks in uncomplicated singleton pregnancy: a meta-analysis. Ultrasound Obstet Gynecol. 2019;53(1):26-35. doi:10.1002/UOG.20140. "
-                          text2="Source"
-                        />
-                      </Grid>
-                      <Grid sx={{ mt: '28px' }}>
-                        <Sources
-                          number="8"
-                          text1="C8. Sotiriadis A, Petousis S, Thilaganathan B, et al. Maternal and perinatal outcomes after elective induction of labor at 39 weeks in uncomplicated singleton pregnancy: a meta-analysis. Ultrasound Obstet Gynecol. 2019;53(1):26-35. doi:10.1002/UOG.20140."
-                          text2="Source"
-                        />
-                      </Grid>
+                      {details_source?.map((item, index) => (
+                      [
+                          <Grid>
+                            <Sources
+                              number={index}
+                              text1={item.sourcecontent}
+                              text2={item.link}
+                            />
+                          </Grid>
+                        ] 
+                       ))}
                     </AccordionDetails>
                   </Accordion>
                   <Typography

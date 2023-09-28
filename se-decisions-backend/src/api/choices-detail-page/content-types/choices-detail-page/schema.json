@@ -95,6 +95,11 @@
           "localized": true
         }
       }
+    },
+    "source": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::source.source"
     }
   }
 }

@@ -1,8 +1,8 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, Link } from '@mui/material'
 
 export const Sources = ({ number, text1, text2 }: any) => {
   return (
-    <Grid container>
+    <Grid container mb="2rem">
       <Grid
         item
         borderRadius="50%"
@@ -24,18 +24,8 @@ export const Sources = ({ number, text1, text2 }: any) => {
         </Typography>
       </Grid>
       <Grid item sx={{ ml: '32px', width: '500px' }}>
-        <Typography
-          paragraph
-          fontFamily="Public Sans"
-          fontWeight="400"
-          fontSize="14px"
-          lineHeight="20px"
-          display="inline"
-          color="#000000"
-        >
-          {text1}
-        </Typography>
-        <Typography
+        <div dangerouslySetInnerHTML={{ __html: text1 }} className="source-content"></div>
+        <Link href={text2}
           display="inline"
           fontFamily="Public Sans"
           fontWeight="700"
@@ -43,9 +33,7 @@ export const Sources = ({ number, text1, text2 }: any) => {
           lineHeight="24px"
           color="#00653E"
           sx={{ ml: '10px', textDecoration: 'underline' }}
-        >
-          {text2}
-        </Typography>
+          >Source</Link>
       </Grid>
     </Grid>
   )
