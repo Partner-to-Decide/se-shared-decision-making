@@ -688,4 +688,24 @@ export interface details_waiting {
   }
 }
 
+
+export interface welocome_page {
+  data: {
+    id: number
+    attributes: {
+      title: string
+      welcome_message: string
+      locale:string
+      localizations:{
+        data:{
+          attributes:{
+             title: string
+             locale:string
+             welcome_message: string
+          }
+        }[]
+      }
+    }
+  }
+}
 //--------------------------------- MyValues page. Quesions
