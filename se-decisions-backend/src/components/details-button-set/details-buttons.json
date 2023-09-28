@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_details_button_set_details_buttons",
+  "info": {
+    "displayName": "DetailsButtons"
+  },
+  "options": {},
+  "attributes": {
+    "BtnLinks": {
+      "displayName": "BtnLinks",
+      "type": "component",
+      "repeatable": true,
+      "component": "btn-links.btn-links"
+    },
+    "TopHeading": {
+      "type": "string"
+    }
+  }
+}

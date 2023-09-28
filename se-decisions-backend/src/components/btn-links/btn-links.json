@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_btn_links_btn_links",
+  "info": {
+    "displayName": "BtnLinks"
+  },
+  "options": {},
+  "attributes": {
+    "ButtonText": {
+      "type": "string"
+    },
+    "ButtonLink": {
+      "type": "string"
+    }
+  }
+}

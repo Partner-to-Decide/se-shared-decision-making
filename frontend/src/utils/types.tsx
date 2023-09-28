@@ -27,10 +27,19 @@ export interface Details_data {
       details_author:details_authors[]
       DetailTopics:Sidebar_topic
       source:source
+      DetailsButtons:detailsbuttonset[]
     }
   }
 }
 
+export interface detailsbuttonset {
+     TopHeading:string
+      BtnLinks: {
+        id: number
+        ButtonLink: string | null
+        ButtonText: string | null
+      }[]
+}
 export interface Sidebar_topic {
   DetailTopics: {
     Title:string
@@ -398,6 +407,10 @@ export interface details_authors {
   data: {
     id: number
     attributes: {
+      Heading:string
+      content:string
+      ButtonText:string
+      btnlink:string
       authors1: {
         id: number
         name: string | null
@@ -569,6 +582,7 @@ export interface source {
     attributes: {
       source1: {
         id: number
+        SourceNumber: string
         content: string | null
         link: string | null
       }[]

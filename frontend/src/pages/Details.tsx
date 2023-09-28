@@ -65,13 +65,14 @@ function Details() {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
-
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const handleClose = () => {
     setAnchorEl(null)
   }
   const open = Boolean(anchorEl)
 
   const handleClickBirth = (event: React.MouseEvent<HTMLButtonElement>) => {
+       console.log('openBirthss',event.currentTarget)
     setAnchorElBirth(event.currentTarget)
   }
 
@@ -79,10 +80,12 @@ function Details() {
     setAnchorElBirth(null)
   }
   const openBirth = Boolean(anchorElBirth)
-
+  console.log('openBirth',openBirth)
   const handleClickPneu = (event: React.MouseEvent<HTMLButtonElement>) => {
+   
     setAnchorElPneu(event.currentTarget)
   }
+
   const handleClosePneu = () => {
     setAnchorElPneu(null)
   }
@@ -100,6 +103,12 @@ function Details() {
   const { slug } = useParams();
 
   const [detailsSectionData, setDetailsSectionData] = useState<Details_data>()
+
+  const [detailsButtonSetData, setDetailsButtonSetData] =
+    useState<details_buttonset>()
+
+  const [detailsAuthorsData, setDetailsAuthorsData] =
+    useState<details_authors>()
 
   useEffect(() => {
 
@@ -128,6 +137,60 @@ function Details() {
         }
       }
     }
+
+     const fetchDetailsAuthorsData = async () => {
+      try {
+        const result = await axios.get(
+          REACT_APP_api_base_url +
+            '/api/details-authors?populate=deep&locale=' +
+            localStorage.getItem('language')
+        )
+        setDetailsAuthorsData(result.data)
+      } catch (error) {
+        console.error('Error fetching learn about data: ', error)
+        try {
+          const result = await axios.get(
+            REACT_APP_api_base_url +
+              '/api/details-authors?populate=deep&locale=' +
+              DEFAULT_LANGUAGE
+          )
+          setDetailsAuthorsData(result.data)
+        } catch (error) {
+          console.error(
+            'Error fetching learn about data with default locale: ',
+            error
+          )
+        }
+      }
+    }
+
+    const fetchDetailsButtonSetData = async () => {
+      try {
+        const result = await axios.get(
+          REACT_APP_api_base_url +
+            '/api/details-button-sets?populate=deep&locale=' +
+            localStorage.getItem('language')
+        )
+        setDetailsButtonSetData(result.data)
+      } catch (error) {
+        console.error('Error fetching learn about data: ', error)
+        try {
+          const result = await axios.get(
+            REACT_APP_api_base_url +
+              '/api/details-button-sets?populate=deep&locale=' +
+              DEFAULT_LANGUAGE
+          )
+          setDetailsButtonSetData(result.data)
+        } catch (error) {
+          console.error(
+            'Error fetching learn about data with default locale: ',
+            error
+          )
+        }
+      }
+    }
+   fetchDetailsAuthorsData()
+   fetchDetailsButtonSetData()
    fetchDetailsData()
   }, [languageState])
 
@@ -136,15 +199,14 @@ function Details() {
   const SideTopics  = detailsSectionData?.data[0]?.attributes?.DetailTopics; 
   const details_content = DetailsData?.details_content?.data?.attributes.content1;
   const details_source = DetailsData?.source?.data?.attributes.source1;
-
-  console.log('detailsSectionDatatestt',details_source);
+  const details_buttonset = DetailsData?.DetailsButtons;
 
   return (  
       <StyledEngineProvider injectFirst>
         <Layout>
             <div className="root">
               <Container maxWidth="lg">
-                  <Grid container spacing={2} pt="2rem" pb="3rem">
+                   <Grid container spacing={2} pt="2rem" pb="3rem" alignItems="flex-start">
                       <Grid item xs={12} md={7}>
                           <Paper elevation={0} className="mainText">
                                <Grid container spacing={2} mb="2rem">
@@ -454,13 +516,7 @@ function Details() {
                  <Paper className="post1" elevation={0}>
                   <Typography variant="body1" textAlign="center" lineHeight="24px">
                     {DetailsData?.DetailSubtitle.subtitle1} <br />
-                    <Link
-                      href={'/'+DetailsData?.DetailSubtitle.subtitle2Link}
-                      style={{ color: '#00653E' }}
-                    >
-                      {DetailsData?.DetailSubtitle.subtitle2}
-                    </Link>
-                    .
+                    {DetailsData?.DetailSubtitle.subtitle2}.
                   </Typography>
                 </Paper>
                  <Paper elevation={0}>
@@ -513,11 +569,25 @@ function Details() {
                         {DetailsData?.PotentialRisks.map((item, index) => (
                           [
                           <Grid item xs={6}>
-                              <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
-                                {' '}
-                                {item.title}
-                                {item.titlenumber}
+                             
+                            {item?.popuptitle ?
+                              <Typography
+                                  display="inline"
+                                  className="ThreeTagsStyle"
+                                  bgcolor="#dff0d8"
+                                  onClick={handleClickBirth}
+                                  variant="h4"
+                                  fontSize="1.25rem"
+                                  mb="0.7rem"
+                                >
+                                {item.title} {item.titlenumber}
                               </Typography>
+                              :
+                             <Typography variant="h4" fontSize="1.25rem" component="h3" mb="0.7rem">
+                                {' '}
+                                {item.title} {item.titlenumber}
+                              </Typography>
+                            }
                               <Typography variant="body1" lineHeight="24px" color="primary.dark">
                                  {item.content}
                               </Typography>
@@ -528,6 +598,14 @@ function Details() {
                                   src={(REACT_APP_api_base_url || "") + item.image.data.attributes.url}
                                   alt="DottedCircle6"
                                />
+                                
+                              <Popup
+                                open={openBirth}
+                                anchorEl={anchorElBirth}
+                                handleClose={handleCloseBirth}
+                                title={item?.popuptitle}
+                                text={item?.popupcontent}
+                              />
                           </Grid>
                           ]
                         ))}
@@ -673,7 +751,7 @@ function Details() {
                     mb="0.7rem"
                     className="secondTitle"
                   >
-                   Authors
+                   {detailsAuthorsData?.data[0].attributes?.Heading}
                   </Typography>
                   <Divider
                     style={{
@@ -685,18 +763,18 @@ function Details() {
                     variant="body1"
                     lineHeight='24px'
                   >
-                    This decision aid was made by a group of public health and medical experts led by Partner to Decide.
+                    {detailsAuthorsData?.data[0].attributes?.content}
                   </Typography>
                   <Link
                     variant="body1"
-                    href="https://example.com"
+                    href={detailsAuthorsData?.data[0].attributes?.btnlink}
                     style={{
                       color: '#00653E',
                       fontWeight: 'bold',
                       marginBottom: '30px',
                     }}
                   >
-                    Led by Partner to Decide
+                    {detailsAuthorsData?.data[0].attributes?.ButtonText}
                   </Link>
                   <Grid
                     container
@@ -710,6 +788,7 @@ function Details() {
                     >
                       <Avatar alt="Remy Sharp" sx={{ width: 70, height: 70 }} />
                     </Grid>
+
                     <Grid
                       item
                       xs={4}
@@ -723,7 +802,7 @@ function Details() {
                         }}
                       >
                      {
-                        DetailsData?.details_author.data.attributes.authors1[0]
+                        detailsAuthorsData?.data[0].attributes.authors1[0]
                             .name
                       }
                       </p>
@@ -736,7 +815,7 @@ function Details() {
                         }}
                       >
                        {
-                        DetailsData?.details_author.data.attributes.authors1[0]
+                        detailsAuthorsData?.data[0].attributes.authors1[0]
                             .Description
                       }
                       </p>
@@ -770,7 +849,7 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                      { DetailsData?.details_author.data.attributes.authors2[0].name }
+                      {detailsAuthorsData?.data[0].attributes.authors2[0].name }
                       </p>
                       <p
                         style={{
@@ -781,7 +860,7 @@ function Details() {
                         }}
                       >
                       {
-                        DetailsData?.details_author.data.attributes.authors2[0]
+                        detailsAuthorsData?.data[0].attributes.authors2[0]
                             .Description
                       }
                       </p>
@@ -806,7 +885,7 @@ function Details() {
                         }}
                       >
                      {
-                        DetailsData?.details_author.data.attributes.authors3[0]
+                        detailsAuthorsData?.data[0].attributes.authors3[0]
                             .name
                       }
                       </p>
@@ -819,7 +898,7 @@ function Details() {
                         }}
                       >
                       {
-                        DetailsData?.details_author.data.attributes.authors3[0]
+                        detailsAuthorsData?.data[0].attributes.authors3[0]
                             .Description
                       }
                       </p>
@@ -844,7 +923,7 @@ function Details() {
                         }}
                       >
                      {
-                        DetailsData?.details_author.data.attributes.authors4[0]
+                        detailsAuthorsData?.data[0].attributes.authors4[0]
                             .name
                       }
                       </p>
@@ -857,7 +936,7 @@ function Details() {
                         }}
                       >
                       {
-                        DetailsData?.details_author.data.attributes.authors4[0]
+                        detailsAuthorsData?.data[0].attributes.authors4[0]
                             .Description
                       }
                       </p>
@@ -873,6 +952,7 @@ function Details() {
                       style={{ marginTop: 10, marginBottom: 10 }}
                     />
                   </Grid>
+                  {details_source?
                   <Accordion className="accordion-details" style={{ marginTop: '50px', boxShadow: '0 0' }}>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -893,7 +973,7 @@ function Details() {
                       [
                           <Grid>
                             <Sources
-                              number={index}
+                              number={item.SourceNumber}
                               text1={item.sourcecontent}
                               text2={item.link}
                             />
@@ -902,6 +982,9 @@ function Details() {
                        ))}
                     </AccordionDetails>
                   </Accordion>
+                  : null }
+                {details_buttonset &&
+                 <>
                   <Typography
                     variant="h4"
                     component="h2"
@@ -910,36 +993,33 @@ function Details() {
                       marginTop: '50px',
                     }}
                   >
-                    Explore
+                  {details_buttonset?.TopHeading}
                   </Typography>
+
                   <Divider
                     style={{
                       height: '3px',
                       marginBottom: '20px',
                     }}
                   />
+
                   <Grid container spacing={2} style={{ marginBottom: '20px' }}>
+                    {details_buttonset?.BtnLinks.map((item, index) => (
+                      [
                     <Grid item>
                       <Button sx={{ fontSize: '18px' }}>
-                       Wait for Labor
+                        <Link href={item.ButtonLink}>{item.ButtonText}</Link>
                       </Button>
                     </Grid>
-                    <Grid item>
-                      <Button fontSize="18px">
-                        41-42 WK Induction
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <Button fontSize="18px">
-                        Compare Choices
-                      </Button>
-                    </Grid>
+                     ] 
+                    ))}
                   </Grid>
+                </>}
                 </Paper>
               </Grid>
 
            <Grid item xs={12} md={1}></Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={4} className="sidebar-sticky">
 
               { SideTopics ?
                 <Paper elevation={0} className="post">
@@ -955,7 +1035,7 @@ function Details() {
                    <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                      <CaretRight key={index} size={16} />
                      {item.Link ?
-                     <Link href={item.Link}>
+                     <Link href={item.Link} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
                        {item.Text}
                      </Link>
                      : item.Text }
@@ -971,7 +1051,10 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                     Link
+                      {
+                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                          .button1
+                      }
                     </Link>
                   </Grid>
                   <Grid item>
@@ -980,7 +1063,10 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                      Email
+                      {
+                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                          .button2
+                      }
                     </Link>
                   </Grid>
                   <Grid item>
@@ -989,7 +1075,10 @@ function Details() {
                         size={24}
                         style={{ marginRight: '5px' }}
                       />
-                      Bookmark
+                      {
+                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                          .button3
+                      }
                     </Link>
                   </Grid>
                 </Grid>

@@ -6,9 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "content": {
-      "type": "richtext"
-    },
     "link": {
       "type": "string"
     },
@@ -19,6 +16,9 @@
         "preset": "standard"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "SourceNumber": {
+      "type": "integer"
     }
   }
 }

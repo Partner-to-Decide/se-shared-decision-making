@@ -100,6 +100,22 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::source.source"
+    },
+    "DetailsButtons": {
+      "displayName": "DetailsButtons",
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "details-button-set.details-buttons"
+    },
+    "details_button_set": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::details-button-set.details-button-set"
     }
   }
 }
