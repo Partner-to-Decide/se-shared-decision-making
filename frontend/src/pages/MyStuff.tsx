@@ -341,7 +341,7 @@ export default function MyStuff() {
                             </Grid>
                             <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 3 }}>
                               <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "center" }}>
-                                <Typography variant="h4" color="primary.main" fontWeight="500">Save Your Questions</Typography>
+                                <Typography variant="h3" fontSize="2.25rem" color="primary.main" fontWeight="500">Save Your Questions</Typography>
                               </Grid>
                             </Grid>
                             <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>

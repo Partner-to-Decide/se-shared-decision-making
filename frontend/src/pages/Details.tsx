@@ -273,7 +273,7 @@ function Details() {
                                    { item.linktitle1?item.linktitle1:null }{' '}
                                     <Link
                                     href={item.link}
-                                    style={{ color: '#00653E', fontWeight: 'bold' }}
+                                    style={{ color: '#00653E', fontWeight: 'bold', textTransform: 'capitalize' }}
                                     >
                                    {item.linktitle2? item.linktitle2 :null}
                                     </Link>
@@ -296,10 +296,10 @@ function Details() {
                           DetailsData?.details_grid.data.attributes.Details_Grids1[0]
                             .Title
                         }
-                        {
+                        <span>{
                           DetailsData?.details_grid.data.attributes.Details_Grids1[0]
                             .TitleNumber
-                        }
+                        }</span>
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
@@ -357,10 +357,10 @@ function Details() {
                             .Title
                         }
 
-                        {
+                        <span>{
                           DetailsData?.details_grid.data.attributes.Details_Grids2[0]
                             .TitleNumber
-                        }
+                        }</span>
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
@@ -417,10 +417,10 @@ function Details() {
                             .Title
                         }
 
-                          {
+                          <span>{
                           DetailsData?.details_grid.data.attributes.Details_Grids3[0]
                             .TitleNumber
-                        }
+                        }</span>
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
@@ -478,10 +478,10 @@ function Details() {
                           DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .Title
                         }
-                          {
+                          <span>{
                           DetailsData?.details_grid.data.attributes.Details_Grids4[0]
                             .TitleNumber
-                        }
+                        }</span>
                       </Typography>
                       <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                         {
@@ -535,6 +535,7 @@ function Details() {
                     variant="body1"
                     color="primary.dark"
                     mb="2rem"
+                    fontSize="14px"
                   >
                     {
                       DetailsData?.DetailsSection.Content

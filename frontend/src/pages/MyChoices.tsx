@@ -935,13 +935,16 @@ const MyChoices = () => {
                         sx={{ fontSize: 36, mb: 0}}
                         display="inline"
                         variant="h5"
+                        className="secondTitle title2"
                       >
                         {sectionsData?.data[4].attributes.title.title}
                       </Typography>
-                      <Typography display="inline" className="potential-risks-6">
-                        {" "}
-                        {sectionsData?.data[4].attributes.title.titleNumber}
-                      </Typography>
+                      {sectionsData?.data[4].attributes.title.titleNumber &&
+                        <Typography display="inline" className="potential-risks-6">
+                          {" "}
+                          {sectionsData?.data[4].attributes.title.titleNumber}
+                        </Typography>
+                      }
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <Typography className="potential-risks-subtitle">

@@ -354,7 +354,7 @@
 .summary-box.choice-ques {
     width: 100%;
     text-align: center;
-    background: #DFF0D8;
+    background: #b9bfaf;
     margin-bottom: 5rem;
 }
 
@@ -363,7 +363,7 @@
 }
 
 .important {
-  background-color: #b9bfaf;
+  background-color: #ffffff;
 }
 
 .less-important {

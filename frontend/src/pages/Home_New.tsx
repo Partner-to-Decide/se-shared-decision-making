@@ -1,6 +1,6 @@
 import "./pageStyle/Home.scss"
 import Layout from "../components/Layout";
-import { Button, CardContent, Container, Grid, responsiveFontSizes, Typography } from "@mui/material";
+import { CardContent, Container, Grid, responsiveFontSizes, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
@@ -12,6 +12,9 @@ import Progress from "../components/Graphics/Progress";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { REACT_APP_api_base_url } from "../utils/url_config";
+
+import { styled } from '@mui/material/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
 
 export default function Home() {
   // Home page still requires CSS styling to make responsiveness (ideally using bootsrap of grids), for testing use the Chrome inspection tools for diff devices
@@ -123,6 +126,19 @@ export default function Home() {
   const changeSelection = (title:string) => {
     setSelectedInfoSectionData(getSelection(infoSectionData, title))
   }
+
+  const WhiteStyleButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color: '#0C3A25',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    px: 3,
+    py: 1,
+    textTransform: 'capitalize', 
+    fontSize: '1.125rem',
+    '&:hover': {
+      backgroundColor: '#F4FCF0',
+    },
+  }));
 
   return (
     <Layout>
@@ -242,8 +258,8 @@ export default function Home() {
 
                     </Container>
 
-                    <Grid item xs={12} textAlign="center">
-                      <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#ffffff', borderRadius: '25px', color: '#0C3A25', textTransform: 'capitalize', fontSize: '1.125rem'}}>Compare All</Button>
+                    <Grid item xs={12} textAlign="center" mt="3rem">
+                      <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
                     </Grid>
                 </Grid>
 

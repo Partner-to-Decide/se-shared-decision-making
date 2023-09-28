@@ -207,15 +207,19 @@
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 24px;
   color: #000000;
+}
+
+.view-risks-accordion-main {
+    box-shadow: 0 0;
 }
 
 .view-risks-accordion {
   background-color: #A86133;
   border-radius: 12px;
-  width: 874px;
+  width: 100%;
   height: 48px;
 }
 
@@ -245,29 +249,30 @@
 }
 
 .learn-choices-subTitle {
-  font-family: "Clash Grotesk";
+  font-family: ClashGrotesk-Medium;
   font-style: normal;
   font-feature-settings: "ss01" on;
   color: #0c3a25;
-  font-size: 21px;
+  font-size: 24px;
   line-height: 26px;
   font-weight: 500;
   text-align: center;
 }
 
 .learn-more-button {
-  font-family: "Clash Grotesk";
-  font-style: normal;
-  font-feature-settings: "ss01" on;
-  border: 1px solid #0c3a25;
-  border-radius: 25px;
-  height: 43px;
-  width: 105px;
-  background-color: #FFFFFF;
-  color: #0c3a25;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 22px;
+    font-family: "Public Sans";
+    font-style: normal;
+    font-feature-settings: "ss01" on;
+    border: 1px solid #0c3a25;
+    border-radius: 25px;
+    height: 43px;
+    width: 119px;
+    background-color: #FFFFFF;
+    color: #0c3a25;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    display: inline-block;
 }
 
 .sources-accordion {
@@ -298,9 +303,8 @@
 }
 
 .need-help-choosing {
-  font-family: "Clash Grotesk";
+  font-family: ClashGrotesk-Medium;
   font-style: normal;
-  font-feature-settings: "ss01" on;
   font-weight: 500;
   font-size: 36px;
   line-height: 41px;
@@ -315,7 +319,7 @@
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 21px;
   font-feature-settings: "ss01" on;
   color: #FFFFFF;
@@ -366,10 +370,6 @@
 }
 .Risks-section .MuiTypography-h5{
   color: #A86133;
-}
-.potential-risks-subtitle {
-    font-size: 14px;
-    line-height: 20px;
 }
 .view-risks-accordion {
     width: 100%;
@@ -437,13 +437,7 @@
     height: auto;
     width: 100%;
 }
-.need-help-choosing {
-    font-family: 'Public Sans';
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 26px;
-    padding-bottom: 0px;
-}
+
 .need-help-choosing-text {
     font-size: 12px;
     line-height: 16px;

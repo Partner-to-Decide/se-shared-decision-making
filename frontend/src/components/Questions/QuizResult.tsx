@@ -271,12 +271,12 @@ const QuizResult = () => {
 
               <Grid container>
 
-                <Grid item xs={5} sx={{ position: 'relative' }}>
+                <Grid item xs={4} sx={{ position: 'relative' }}>
                   <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
                     What's Next?
                   </Typography>
 
-                  <Typography variant="body2" mb="3.5rem">
+                  <Typography variant="body1" lineHeight="24px" mb="3.5rem">
                     Use this summary to share what is important to you with your provider. Ask your care provider questions you have and tell them what you choose.
                   </Typography>
 
@@ -286,7 +286,7 @@ const QuizResult = () => {
 
                   <Grid container spacing={1} style={{ marginBottom: '20px' }}>
                     <Grid item>
-                      <Link href="#" className="link-btn">
+                      <Link href="#" className="link-btn" style={{ fontSize: '18px' }}>
                         <EnvelopeSimple
                           size={24}
                           style={{ marginRight: '5px' }}
@@ -295,7 +295,7 @@ const QuizResult = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="#" className="link-btn" onClick={downloadSummary}>
+                      <Link href="#" className="link-btn" onClick={downloadSummary} style={{ fontSize: '18px' }}>
                         <DownloadSimple
                           size={24}
                           style={{ marginRight: '5px' }}
@@ -304,7 +304,7 @@ const QuizResult = () => {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/MyStuff" className="link-btn">
+                      <Link href="/MyStuff" className="link-btn" style={{ fontSize: '18px' }}>
                         <PushPinSimple
                           size={24}
                           style={{ marginRight: '5px' }}
@@ -316,13 +316,13 @@ const QuizResult = () => {
 
                 </Grid>
 
-                <Grid item xs={2}></Grid>
+                <Grid item xs={4}></Grid>
 
                 <Grid item xs={4} sx={{ position: 'relative' }}>
                   <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
                     Don’t Know What to Ask?
                   </Typography>
-                  <Typography variant="body2">
+                  <Typography variant="body1" lineHeight="24px">
                     See suggested questions and add to them.
                   </Typography>
                   <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem' }}>View Questions</Button>
