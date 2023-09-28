@@ -69,7 +69,10 @@ const Question = () => {
     // control slider value
     const [sliderValue, setSliderValue] = useState(1);
     // global language
+    // const [languageState, setLanguageState] = useState('en');
     const [languageState, setLanguageState] = useState('en');
+
+    const [questionSr, setQuestionSr] = useState(1);
 
     useEffect(() => {
         // Sets the language at page load. If no language in local storage then uses english by default
@@ -113,6 +116,10 @@ const Question = () => {
         };
 
         fetchQuestion();
+
+        let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
+        setQuestionSr(parseInt(currentStepKey) + 1);
+        setCurrentStep(parseInt(currentStepKey) + 1);
     }, [id]);
 
 
@@ -134,27 +141,70 @@ const Question = () => {
         setSliderValue(value as number);
     };
 
-    // next button
+    let questionsByLanguage = [];
+    questionsByLanguage['en'] = [1, 2, 3, 4, 5, 6, 19, 'quiz'];
+    questionsByLanguage['es'] = [7, 9, 10, 11, 12, 13, 19, 'quiz'];
+    questionsByLanguage['bah'] = [8, 14, 15, 16, 17, 18, 19, 'quiz'];
+
     const handleNext = () => {
-      const nextId = parseInt(id!) + 1;
-      if (nextId === 7) {
-        navigate(`/QuizResult`);
-      } else {
-        navigate(`/question/${nextId}`);
-        setCurrentStep(nextId); // Update the currentStep state
-      }
+
+
+        let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
+        const nextKey = parseInt(currentStepKey) + 1;
+        
+        if (questionsByLanguage[languageState][nextKey] !== 'quiz') {
+            setQuestionSr(nextKey);
+            const nextId = questionsByLanguage[languageState][nextKey];
+
+            navigate(`/question/${nextId}`);
+            setCurrentStep(nextId); // Update the currentStep state
+
+        } else {
+            navigate(`/QuizResult`);
+        }
+
     };
 
     // previous button
     const handlePrevious = () => {
-      const prevId = parseInt(id!) - 1;
-      if (prevId === 0) {
-        navigate("/MyValues");
-      } else {
-        navigate(`/question/${prevId}`);
-        setCurrentStep(prevId); // Update the currentStep state
-      }
+
+        let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
+        const prevKey = parseInt(currentStepKey) - 1;
+        
+        if (prevKey !== -1) {
+            setQuestionSr(prevKey);
+            const prevId = questionsByLanguage[languageState][prevKey];
+
+            navigate(`/question/${prevId}`);
+            setCurrentStep(prevId); // Update the currentStep state
+
+        } else {
+            navigate(`/MyValues`);
+        }
     };
+
+    // // next button
+    // const handleNext = () => {
+    //   const nextId = parseInt(id!) + 1;
+    //   if (nextId === 7) {
+    //     navigate(`/QuizResult`);
+    //   } else {
+    //     navigate(`/question/${nextId}`);
+    //     setCurrentStep(nextId); // Update the currentStep state
+    //   }
+    // };
+
+    // // previous button
+    // const handlePrevious = () => {
+    //   const prevId = parseInt(id!) - 1;
+    //   if (prevId === 0) {
+    //     navigate("/MyValues");
+    //   } else {
+    //     navigate(`/question/${prevId}`);
+    //     setCurrentStep(prevId); // Update the currentStep state
+    //   }
+    // };
+
 
     return (
         <StyledEngineProvider injectFirst>
