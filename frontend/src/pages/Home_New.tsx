@@ -241,6 +241,10 @@ export default function Home() {
                         </Grid>
 
                     </Container>
+
+                    <Grid item xs={12} textAlign="center">
+                      <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#ffffff', borderRadius: '25px', color: '#0C3A25', textTransform: 'capitalize', fontSize: '1.125rem'}}>Compare All</Button>
+                    </Grid>
                 </Grid>
 
               :
@@ -290,6 +294,7 @@ export default function Home() {
                 </Grid>
               </Grid>
               }
+              
             </Fragment>
           )
           :null
@@ -328,7 +333,7 @@ export default function Home() {
                                 <Grid item xs={4}>
                                     <Container className="stats_text" sx={{marginLeft: '-110px', width:'calc(100% + 110px)'}} maxWidth={false} disableGutters={true}>
                                       <Typography sx={{ fontSize: '72px' }} className="info_stat_number" variant="h1" color="primary.main">{selectedInfoSectionData?.Information_Stat_Number + '%'}</Typography>
-                                      <Typography sx={{width:'100%', fontSize: '36px'}} className="info_content_additional" variant="h4" color="primary.main">{selectedInfoSectionData?.Information_Additional_Info}</Typography>
+                                      <Typography sx={{width:'100%', fontSize: '36px'}} className="info_content_additional" variant="h3" color="primary.main">{selectedInfoSectionData?.Information_Additional_Info}</Typography>
                                     </Container>
                                 </Grid>
                             </Grid>
@@ -428,7 +433,7 @@ export default function Home() {
                                         <Typography variant="body2" sx={{ mb: 2 }} color="primary.dark" gutterBottom>
                                             {data.Para_Description}
                                         </Typography>
-                                        <Typography variant="body2" color="primary.main" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={data.Para_Link}>
+                                        <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={data.Para_Link}>
                                             {data.Para_Link_Filler}
                                         </Typography>
                                     </div>

@@ -257,4 +257,10 @@ img#first-image-round {
   font-size: 1rem;
   color: #000000;
   line-height: 20px;
+  margin-bottom: 20px;
 }
+
+.source-content p br{
+  display:none;
+}
+

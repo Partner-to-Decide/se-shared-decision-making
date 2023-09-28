@@ -168,8 +168,8 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
             {question.isEditing ? (
               <>
                 <Checkbox {...label} />
-                <div className="question">
-                  <input type="text" value={question.text} onChange={(e) => handleQuestionTextChange(index, e.target.value)} />
+                <div className="question no-flex">
+                  <input type="text" value={question.text} autoFocus onChange={(e) => handleQuestionTextChange(index, e.target.value)} />
                   <div className="edit-case-btn-group">
                     <button className="delete-btn" onClick={() => handleDeleteQuestion(index)}>Delete</button>
                     <button className="cancel-btn" onClick={() => handleCancelEdit(index)}>Cancel</button>

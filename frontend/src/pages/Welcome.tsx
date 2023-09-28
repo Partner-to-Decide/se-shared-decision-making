@@ -16,7 +16,7 @@ const Welcome = () => {
         <div className="welcome-section">
             <Container maxWidth="sm">
               <div className="allWelcome">
-                <p>Pick one to continue</p>
+                <p style={{ marginBottom: '1.5rem' }}>Pick one to continue</p>
 
                 <button className="Welcome" onClick={() => navigateHome('en')}>
                   <h1>

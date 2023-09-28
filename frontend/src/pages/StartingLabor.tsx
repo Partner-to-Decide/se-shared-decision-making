@@ -39,7 +39,7 @@ function StartingLabor() {
         <Layout>
             <div className="root">
                 <Container maxWidth="lg">
-                    <Grid container spacing={2} pt="2rem" pb="3rem">
+                    <Grid container spacing={2} pt="2rem" pb="3rem" alignItems="flex-start">
 
                         <Grid item xs={12} md={7}>
                           <Paper elevation={0} className="mainText">
@@ -211,7 +211,7 @@ function StartingLabor() {
 
                         <Grid item xs={12} md={1}></Grid>
                             
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={4} className="sidebar-sticky">
                             <Paper elevation={0} className="post">
                                   <Typography
                                     variant="h6"

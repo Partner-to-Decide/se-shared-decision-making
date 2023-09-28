@@ -61,16 +61,9 @@ p{
 }
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@200;300;400;500;600;700&display=swap');
 @import 'ClashGrotesk_Complete/ClashGrotesk_Complete/Fonts/WEB/css/clash-grotesk.css';
 
-@font-face {
-    font-family: 'Public Sans';
-    src: url('PublicSans_Font/PublicSans-Regular.woff2') format('woff2'),
-        url('PublicSans_Font/PublicSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
  * {
   margin: 0;

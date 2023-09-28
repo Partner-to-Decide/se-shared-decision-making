@@ -96,7 +96,7 @@ const Question = () => {
             const data = await response.json();
             const dataTotal = await responseTotal.json();
             console.log('Fetched data:', data.data.attributes);
-            // console.log('Fetched data:', dataTotal.data);
+            console.log('Fetched data:', dataTotal.data);
             setQuestion(data.data);
             setQuestionTotal(dataTotal.data.length);
 
@@ -159,12 +159,11 @@ const Question = () => {
     return (
         <StyledEngineProvider injectFirst>
             <Layout>
-
                 <Grid
                     container
                     columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
                     bgcolor="#F4FCF0"
-                    pt="4rem"
+                    pt="3rem"
                     pb="4rem"
                     className="my-value-main"
                 >
@@ -179,13 +178,15 @@ const Question = () => {
                                     {question.id}
                                 </Box>
 
-                                <Typography variant="h5" letterSpacing="1.5px" mb="1.5rem" color="primary.main">
-                                    {question.attributes.question_detail[0].intro_sentance}
-                                </Typography>
+                                <Container maxWidth="sm">
+                                    <Typography variant="h5" letterSpacing="1.5px" mb="1.5rem" color="primary.main">
+                                        {question.attributes.question_detail[0].intro_sentance}
+                                    </Typography>
 
-                                 <Typography variant="h3" fontSize="2rem" color="primary.main">
-                                    {question.attributes.question_detail[0].question_content}
-                                </Typography>
+                                     <Typography variant="h3" fontSize="2rem" color="primary.main">
+                                        {question.attributes.question_detail[0].question_content}
+                                    </Typography>
+                                </Container>
                             
                                     <CustomSlider
                                         className="step-slider"

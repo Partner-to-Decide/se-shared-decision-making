@@ -340,14 +340,14 @@
   grid-gap: 0px;
   width: 100%;
   /* max-width: 1500px; */
-  padding-bottom: 5%;
+  padding-bottom: 4%;
 }
 
 .summary-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 50px 30px;
   /* border-radius: 5px; */
 }
 
@@ -567,7 +567,7 @@
 
 .progress-bar .step {
     height: 5px;
-    width:100%;
+    width: 85px;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0px 0px 4px 0px #00000025;
@@ -580,8 +580,8 @@
 }
 .progress-bar {
     display: flex;
+    justify-content: center;
 }
-
 .progress-bar .step:before {
     content: "";
     background: #0C3A25;
@@ -593,40 +593,61 @@
     border-radius: 10px;
     transition: 0.3s ease-in-out;
 }
-
 .progress-bar .step.active:before {
     width: 100%;
 }
 
+.hero-results-section{
+    background-image: url('../../siteImages/hero-bg-result.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 350px;
+}
 
+.view-question-bottom-img{
+    width: 100%;
+}
+
+.summary-box .icon-shape{
+    background: #F4FCF0;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.4rem;
+}
+
+@media(max-width:767px){
+    .summary-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 @media(max-width:600px){
-.my-value-main{
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    .my-value-main{
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .step-slider {
+        max-width: 100%;
+        width: 80%;
+    }
+    .step-slider .MuiSlider-rail {
+        width: 100%;
+    }
+    .MuiTypography-h5{
+        margin-bottom: 0.5rem;
+    }
+    .step-slider .MuiSlider-thumb {
+        width: 30px;
+        height: 30px;
+    }
+    .my-value-content {
+        padding: 100px 20px;
+    }
+    .my-value-content p.QuizIntro {
+        width: 100%;
+    }
 }
-.step-slider {
-    max-width: 100%;
-    width: 80%;
-}
-.step-slider .MuiSlider-rail {
-    width: 100%;
-}
-.MuiTypography-h5{
-    margin-bottom: 0.5rem;
-}
-.step-slider .MuiSlider-thumb {
-    width: 30px;
-    height: 30px;
-}
-.my-value-content {
-    padding: 100px 20px;
-}
-.my-value-content p.QuizIntro {
-    width: 100%;
-}
-}
-
-
-
-
