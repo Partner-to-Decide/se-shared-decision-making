@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "starting_labor_pages",
+  "info": {
+    "singularName": "starting-labor-page",
+    "pluralName": "starting-labor-pages",
+    "displayName": "StartingLabor-page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title"
+    }
+  }
+}

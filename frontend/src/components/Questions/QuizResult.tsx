@@ -20,10 +20,10 @@ import FirstImg from '../../siteImages/pexels-william-fortunato-6392989.png'
 const QuizResult = () => {
   const rating = useSelector((state: RootState) => state.rating);
   const storedRating = localStorage.getItem('QuizQuestions');
-  console.log('rating',rating);
-  if (rating.lessImportant.length > 0) {
-    localStorage.setItem('QuizQuestions', JSON.stringify(rating));
-  }
+  //console.log('rating', rating);
+  //if (rating.lessImportant.length > 0) {
+  localStorage.setItem('QuizQuestions', JSON.stringify(rating));
+  //}
   const summaryGridRef = useRef<HTMLDivElement>(null);
 
   const renderArray = (arr: string[]) => {
@@ -38,6 +38,13 @@ const QuizResult = () => {
     ));
   };
 
+  const choiceArray = {
+      choiceOne: "My labor starts on its own",
+      choiceTwo: "My baby comes sooner than later",
+      choiceThree: "Less time in the hospital and fewer interventions",
+      choiceFour: "Lower risks to me and my baby after 41-42 weeks",
+      choiceFive: "Personal and/or cultural reasons"
+    };
 
   // todo: can not download
   const downloadSummary = async () => {
@@ -63,178 +70,262 @@ const QuizResult = () => {
     <StyledEngineProvider injectFirst>
       <Layout>
         <div ref={summaryGridRef}>
-            <Grid
-              container
-              columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
-              pt="3rem"
-              pb="4rem"
-              className="hero-results-section"
-            >
-                <Container maxWidth="md">
-        
-                </Container>
-            </Grid>
+          <Grid
+            container
+            columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+            pt="3rem"
+            pb="4rem"
+            className="hero-results-section"
+          >
+            <Container maxWidth="md">
 
-            <Grid
-              container
-              columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
-            >
-                <div className="summary-grid" >
-                    <div className="summary-box most-important">
-                        <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                            Most Important
+            </Container>
+          </Grid>
+
+          <Grid
+            container
+            columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+          >
+            <div className="summary-grid" >
+              <div className="summary-box most-important">
+                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  Most Important
+                </Typography>
+                <Stack direction="row" spacing={4}>
+                  {rating.mostImportant.map((cur, index) => {
+                    return (
+                      <Grid item width='148px' textAlign="center">
+                        <Box className="icon-shape">
+                          <Clock size={32} weight="light" />
+                        </Box>
+                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {cur}
                         </Typography>
-                        <Stack direction="row" spacing={4}>
-                            {rating.mostImportant.map((cur, index) => {
-                                return (
-                                    <Grid item width='148px' textAlign="center">
-                                        <Box className="icon-shape">
-                                            <Clock size={32} weight="light" />
-                                        </Box>
-                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                            {cur}
-                                        </Typography>
-                                    </Grid>
-                                )
-                            })}
-                        </Stack>
-                    </div>
-                    <div className="summary-box important">
-                        <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                            Important
+                      </Grid>
+                    )
+                  })}
+                </Stack>
+              </div>
+              <div className="summary-box important">
+                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  Important
+                </Typography>
+                <Stack direction="row" spacing={4}>
+                  {rating.important.map((cur, index) => {
+                    return (
+                      <Grid item width='148px' textAlign="center">
+                        <Box className="icon-shape">
+                          <Clock size={32} weight="light" />
+                        </Box>
+                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {cur}
                         </Typography>
-                        <Stack direction="row" spacing={4}>
-                            {rating.important.map((cur, index) => {
-                                return (
-                                    <Grid item width='148px' textAlign="center">
-                                        <Box className="icon-shape">
-                                            <Clock size={32} weight="light" />
-                                        </Box>
-                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                            {cur}
-                                        </Typography>
-                                    </Grid>
-                                )
-                            })}
-                        </Stack>
-                    </div>
-                    <div className="summary-box less-important">
-                        <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                            Less Important
+                      </Grid>
+                    )
+                  })}
+                </Stack>
+              </div>
+              <div className="summary-box less-important">
+                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  Less Important
+                </Typography>
+                <Stack direction="row" spacing={4}>
+                  {rating.lessImportant.map((cur, index) => {
+                    return (
+                      <Grid item width='148px' textAlign="center">
+                        <Box className="icon-shape">
+                          <Clock size={32} weight="light" />
+                        </Box>
+                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {cur}
                         </Typography>
-                        <Stack direction="row" spacing={4}>
-                            {rating.lessImportant.map((cur, index) => {
-                                return (
-                                    <Grid item width='148px' textAlign="center">
-                                        <Box className="icon-shape">
-                                            <Clock size={32} weight="light" />
-                                        </Box>
-                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                            {cur}
-                                        </Typography>
-                                    </Grid>
-                                )
-                            })}
-                        </Stack>
-                    </div>
-                    <div className="summary-box least-important">
-                        <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                            Least Important
+                      </Grid>
+                    )
+                  })}
+                </Stack>
+              </div>
+              <div className="summary-box least-important">
+                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  Least Important
+                </Typography>
+                <Stack direction="row" spacing={4}>
+                  {rating.leastImportant.map((cur, index) => {
+                    return (
+                      <Grid item width='148px' textAlign="center">
+                        <Box className="icon-shape">
+                          <Clock size={32} weight="light" />
+                        </Box>
+                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {cur}
                         </Typography>
-                        <Stack direction="row" spacing={4}>
-                            {rating.leastImportant.map((cur, index) => {
-                                return (
-                                    <Grid item width='148px' textAlign="center">
-                                        <Box className="icon-shape">
-                                            <Clock size={32} weight="light" />
-                                        </Box>
-                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                            {cur}
-                                        </Typography>
-                                    </Grid>
-                                )
-                            })}
-                        </Stack>
-                    </div>
-                  </div>
-            </Grid>
-
-
-            <Grid
-              container
-              columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
-              pb="5rem"
-            >
-                <Container maxWidth="xl">
-
-                    <Grid container>
-
-                        <Grid item xs={5} sx={{ position: 'relative' }}>
-                            <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
-                                What's Next?
+                      </Grid>
+                    )
+                  })}
+                </Stack>
+              </div>
+              <div className="summary-box choice-ques">
+                {rating.choiceOne.length > 0 &&
+                  <>
+                    <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                    WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                    </Typography>
+                    <Stack direction="row" spacing={4}>
+                          <Grid item width='148px' textAlign="center">
+                            <Box className="icon-shape">
+                              <Clock size={32} weight="light" />
+                            </Box>
+                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                            {choiceArray.choiceOne}
                             </Typography>
-
-                            <Typography variant="body2" mb="3.5rem">
-                                Use this summary to share what is important to you with your provider. Ask your care provider questions you have and tell them what you choose.
-                            </Typography>
-
-                            <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
-                                Save Your Summary
-                            </Typography>
-
-                            <Grid container spacing={1} style={{ marginBottom: '20px' }}>
-                              <Grid item>
-                                <Link href="#" className="link-btn">
-                                  <EnvelopeSimple
-                                    size={24}
-                                    style={{ marginRight: '5px' }}
-                                  />
-                                  Email
-                                </Link>
-                              </Grid>
-                              <Grid item>
-                                <Link href="#" className="link-btn" onClick={downloadSummary}>
-                                  <DownloadSimple
-                                    size={24}
-                                    style={{ marginRight: '5px' }}
-                                  />
-                                  Download
-                                </Link>
-                              </Grid>
-                              <Grid item>
-                                <Link href="/MyStuff" className="link-btn">
-                                  <PushPinSimple
-                                    size={24}
-                                    style={{ marginRight: '5px' }}
-                                  />
-                                  My Stuff
-                                </Link>
-                              </Grid>
-                            </Grid>
-
+                          </Grid>
+                    </Stack>
+                  </>}
+                {rating.choiceTwo.length > 0 &&
+                  <>
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                  </Typography>
+                  <Stack direction="row" spacing={4}>
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {choiceArray.choiceTwo}
+                          </Typography>
                         </Grid>
-
-                        <Grid item xs={2}></Grid>
-
-                        <Grid item xs={4} sx={{ position: 'relative' }}>
-                            <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
-                                Don’t Know What to Ask? 
-                            </Typography>
-                            <Typography variant="body2">
-                                See suggested questions and add to them.
-                            </Typography>
-                            <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>View Questions</Button>
-                            <Grid item mt="3rem">
-                                <img className="view-question-bottom-img" src={FirstImg} alt="" />
-                            </Grid>
+                  </Stack>
+                </>}
+                {rating.choiceThree.length > 0 &&
+                  <>
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                  </Typography>
+                  <Stack direction="row" spacing={4}>
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {choiceArray.choiceThree}
+                          </Typography>
                         </Grid>
+                  </Stack>
+                </>}
+                {rating.choiceFour.length > 0 &&
+                  <>
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                  </Typography>
+                  <Stack direction="row" spacing={4}>
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {choiceArray.choiceFour}
+                          </Typography>
+                        </Grid>
+                  </Stack>
+                </>}
+                {rating.choiceFive.length > 0 &&
+                  <>
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                  WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                  </Typography>
+                  <Stack direction="row" spacing={4}>
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                          {choiceArray.choiceFive}
+                          </Typography>
+                        </Grid>
+                  </Stack>
+                </>
+
+                }
+              </div>
+            </div>
+          </Grid>
+
+
+          <Grid
+            container
+            columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+            pb="5rem"
+          >
+            <Container maxWidth="xl">
+
+              <Grid container>
+
+                <Grid item xs={5} sx={{ position: 'relative' }}>
+                  <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
+                    What's Next?
+                  </Typography>
+
+                  <Typography variant="body2" mb="3.5rem">
+                    Use this summary to share what is important to you with your provider. Ask your care provider questions you have and tell them what you choose.
+                  </Typography>
+
+                  <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
+                    Save Your Summary
+                  </Typography>
+
+                  <Grid container spacing={1} style={{ marginBottom: '20px' }}>
+                    <Grid item>
+                      <Link href="#" className="link-btn">
+                        <EnvelopeSimple
+                          size={24}
+                          style={{ marginRight: '5px' }}
+                        />
+                        Email
+                      </Link>
                     </Grid>
+                    <Grid item>
+                      <Link href="#" className="link-btn" onClick={downloadSummary}>
+                        <DownloadSimple
+                          size={24}
+                          style={{ marginRight: '5px' }}
+                        />
+                        Download
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href="/MyStuff" className="link-btn">
+                        <PushPinSimple
+                          size={24}
+                          style={{ marginRight: '5px' }}
+                        />
+                        My Stuff
+                      </Link>
+                    </Grid>
+                  </Grid>
 
-                </Container>
-            </Grid>
+                </Grid>
+
+                <Grid item xs={2}></Grid>
+
+                <Grid item xs={4} sx={{ position: 'relative' }}>
+                  <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
+                    Don’t Know What to Ask?
+                  </Typography>
+                  <Typography variant="body2">
+                    See suggested questions and add to them.
+                  </Typography>
+                  <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem' }}>View Questions</Button>
+                  <Grid item mt="3rem">
+                    <img className="view-question-bottom-img" src={FirstImg} alt="" />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+            </Container>
+          </Grid>
         </div>
-      </Layout>
-    </StyledEngineProvider>
+      </Layout >
+    </StyledEngineProvider >
   );
 };
 

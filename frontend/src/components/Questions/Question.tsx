@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../../pages/pageStyle/MyValues.css";
 import { StyledEngineProvider } from "@mui/material/styles";
 import ProgressBar from "./ProgressBar";
+import axios from "axios";
 import { Box, Divider, Grid, Container, ThemeProvider, Typography, Stack, Button } from "@mui/material";
 
 const CustomSlider = styled(Slider)({
@@ -98,22 +99,28 @@ const Question = () => {
             console.log(process.env.REACT_APP_api_base_url + `/api/my-values-questions/${id}?populate=deep&locale=` + languageState)
             const data = await response.json();
             const dataTotal = await responseTotal.json();
-            console.log('Fetched data:', data.data.attributes);
+            console.log('Fetched data:', data.data);
             console.log('Fetched data:', dataTotal.data);
             setQuestion(data.data);
             setQuestionTotal(dataTotal.data.length);
 
             // add this line to dispatch the default value
-            const categoryLabels: (keyof typeof categories)[] = [
-                "leastImportant",
-                "lessImportant",
-                "important",
-                "mostImportant",
-            ];
-            const defaultCategory = categoryLabels[0]; // "leastImportant"
-            dispatch(addToCategory({ category: defaultCategory, questionText: data.data.attributes.question_detail[0].question_content }));
-            setSliderValue(1); // reset slider value to 1
-        };
+            //console.log('question.id ', question.id);
+                console.log(question?.id);
+                const categoryLabels: (keyof typeof categories)[] = [
+                    "leastImportant",
+                    "lessImportant",
+                    "important",
+                    "mostImportant",
+                ];
+                const defaultCategory = categoryLabels[0]; // "leastImportant"
+                dispatch(addToCategory({ category: defaultCategory, questionText: data.data.attributes.question_detail[0].question_content, isChoice: false }));
+                
+    
+                setSliderValue(1); // reset slider value to 1
+            }
+            
+        
 
         fetchQuestion();
 
@@ -126,18 +133,33 @@ const Question = () => {
     // update results array when user click the slider
     // todo: error
     const handleSliderChange = (
-        value: number | number[]
+        value: number | number[],
     ) => {
-        const categoryLabels: (keyof typeof categories)[] = [
-            "leastImportant",
-            "lessImportant",
-            "important",
-            "mostImportant",
-        ];
 
-        const category = categoryLabels[value as number - 1];
+
         // const category = value as number - 1;
-        dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content }));
+        if (question.id === 19) {
+            const categoryLabels: (keyof typeof categories)[] = [
+                "choiceOne",
+                "choiceTwo",
+                "choiceThree",
+                "choiceFour",
+                "choiceFive",
+            ];
+
+            const category = categoryLabels[value as number - 1];
+            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content, isChoice: true }));
+        } else {
+            const categoryLabels: (keyof typeof categories)[] = [
+                "leastImportant",
+                "lessImportant",
+                "important",
+                "mostImportant",
+            ];
+
+            const category = categoryLabels[value as number - 1];
+            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content, isChoice: false }));
+        }
         setSliderValue(value as number);
     };
 
@@ -151,7 +173,7 @@ const Question = () => {
 
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;
-        
+
         if (questionsByLanguage[languageState][nextKey] !== 'quiz') {
             setQuestionSr(nextKey);
             const nextId = questionsByLanguage[languageState][nextKey];
@@ -170,7 +192,7 @@ const Question = () => {
 
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const prevKey = parseInt(currentStepKey) - 1;
-        
+
         if (prevKey !== -1) {
             setQuestionSr(prevKey);
             const prevId = questionsByLanguage[languageState][prevKey];
@@ -233,12 +255,26 @@ const Question = () => {
                                         {question.attributes.question_detail[0].intro_sentance}
                                     </Typography>
 
-                                     <Typography variant="h3" fontSize="2rem" color="primary.main">
+                                    <Typography variant="h3" fontSize="2rem" color="primary.main">
                                         {question.attributes.question_detail[0].question_content}
                                     </Typography>
                                 </Container>
-                            
+                                {question.id === 19 ?
                                     <CustomSlider
+                                        className="step-slider"
+                                        value={sliderValue}
+                                        step={null}
+                                        marks={[
+                                            { value: 1, label: "My labor starts on its own", },
+                                            { value: 2, label: "My baby comes sooner than later" },
+                                            { value: 3, label: "Less time in the hospital and fewer interventions" },
+                                            { value: 4, label: "Lower risks to me and my baby after 41-42 weeks" },
+                                            { value: 5, label: "Personal and/or cultural reasons" },
+                                        ]}
+                                        min={1}
+                                        max={5}
+                                        onChange={(event, value) => handleSliderChange(value)}
+                                    /> : <CustomSlider
                                         className="step-slider"
                                         value={sliderValue}
                                         step={null}
@@ -251,18 +287,18 @@ const Question = () => {
                                         min={1}
                                         max={4}
                                         onChange={(event, value) => handleSliderChange(value)}
-                                    />
+                                    />}
 
                                 <p className="drag-text">
                                     Drag slider to indicate your preference
                                 </p>
                                 <div className="pre-next-container">
                                     <button onClick={handlePrevious} className="Previous-circle"><span><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.99991 12L7.40991 10.59L2.82991 6L7.40991 1.41L5.99991 -1.23266e-07L-8.72135e-05 6L5.99991 12Z" fill="#0C3A25"/>
+                                        <path d="M5.99991 12L7.40991 10.59L2.82991 6L7.40991 1.41L5.99991 -1.23266e-07L-8.72135e-05 6L5.99991 12Z" fill="#0C3A25" />
                                     </svg>
                                     </span>Back</button>
                                     <button onClick={handleNext} className="Next-circle"><span><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2.00009 0L0.590088 1.41L5.17009 6L0.590088 10.59L2.00009 12L8.00009 6L2.00009 0Z" fill="#0C3A25"/>
+                                        <path d="M2.00009 0L0.590088 1.41L5.17009 6L0.590088 10.59L2.00009 12L8.00009 6L2.00009 0Z" fill="#0C3A25" />
                                     </svg>
                                     </span>Next</button>
                                 </div>

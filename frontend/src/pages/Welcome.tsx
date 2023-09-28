@@ -60,7 +60,7 @@ const Welcome = () => {
    const sortedData = Otherlangdata?.sort((a: any, b: any) => {
           return a.id - b.id;
         });
-  console.log(Otherlangdata);
+   
   return (
       <div>
         <div className="welcome-section">
