@@ -129,6 +129,7 @@ export interface image_data {
 
 export interface header_section {
   Header_Logo:image_data
+  HeaderMobile_Logo:image_data
   Header_Link: header_menu_items[]
 }
 export interface header_menu_items{
