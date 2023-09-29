@@ -12,7 +12,7 @@ import Layout from "../components/Layout";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "./pageStyle/MyChoices.scss";
 import "./pageStyle/MyChoices.css";
-import { Sources } from "../components/AccordionContent/Sources";
+import { Sources } from "../components/AccordionContent/Sources-details";
 import { Popup } from "../components/Popup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
@@ -334,8 +334,8 @@ const MyChoices = () => {
             sm={8}
             xs={8}
             sx={{
-              mb: "2rem",
-              mt: "5.1rem",
+              mb: !isMobile ? "2rem" : "",
+              mt: !isMobile ? "5.1rem" : "2.5rem" ,
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -349,53 +349,37 @@ const MyChoices = () => {
             ) : null}
           </Grid>
           {/* Sub title */}
-          {pageTitlesData?.data.attributes != null ? (
-            <Container maxWidth="lg">
-                <Grid container spacing={2} justifyContent="center">
-                    {!isMobile ? (
-                        <Grid item xs={4}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle1}
-                            </Typography>
-                        </Grid>
-                    ) : (
-                        <Grid item sm={12} xs={12}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle1}
-                            </Typography>
-                        </Grid>
-                    )}
+          {!isMobile ? (
+           <>
+            {pageTitlesData?.data.attributes != null ? (
+              <Container maxWidth="lg">
+                  <Grid container spacing={2} justifyContent="center">
+                      <Grid item xs={4}>
+                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                              {pageTitlesData?.data.attributes.subTitle1}
+                          </Typography>
+                      </Grid>
+                  
+                  
+                      <Grid item xs={4}>
+                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                              {pageTitlesData?.data.attributes.subTitle2}
+                          </Typography>
+                      </Grid>
+                  
+                  
+                      <Grid item xs={4}>
+                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
+                              {pageTitlesData?.data.attributes.subTitle3}
+                          </Typography>
+                      </Grid>
+                  </Grid>
+              </Container>
+            ) : null}
+          </>) : (
+            ""
+          )}
 
-                    {!isMobile ? (
-                        <Grid item xs={4}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle2}
-                            </Typography>
-                        </Grid>
-                    ) : (
-                        <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle2}
-                            </Typography>
-                        </Grid>
-                    )}
-                    {!isMobile ? (
-                        <Grid item xs={4}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle3}
-                            </Typography>
-                        </Grid>
-                    ) : (
-                        <Grid item sm={12} xs={12} sx={{ mt: "0.6rem" }}>
-                            <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                                {pageTitlesData?.data.attributes.subTitle3}
-                            </Typography>
-                        </Grid>
-                    )}
-
-                </Grid>
-            </Container>
-          ) : null}
           {/* Details Part */}
           {/* section Timing */}
           <Grid
@@ -413,7 +397,7 @@ const MyChoices = () => {
                 {sectionsData?.data[0].attributes.title != null ? (
                     <Grid container>
                         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main">
+                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
                             {" "}
                             {sectionsData?.data[0].attributes.title.title}
                           </Typography>
@@ -497,7 +481,7 @@ const MyChoices = () => {
                 {sectionsData?.data[1].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
                         {" "}
                         {sectionsData?.data[1].attributes.title.title}
                       </Typography>
@@ -582,7 +566,7 @@ const MyChoices = () => {
                 {sectionsData?.data[2].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
                         {" "}
                         {sectionsData?.data[2].attributes.title.title}
                       </Typography>
@@ -697,9 +681,11 @@ const MyChoices = () => {
                         }}
                       >
                         <img
+                          className="w-full"
                           src={
                             REACT_APP_api_base_url +
-                            "/uploads/half_heart2_ef349c5ca6.png"
+                            sectionsData?.data[2].attributes.content2[0].picture1
+                              .data.attributes.url
                           }
                         />
                       </Grid>
@@ -752,7 +738,7 @@ const MyChoices = () => {
                 {sectionsData?.data[3].attributes.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color="primary.main" display="inline">
+                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
                         {" "}
                         {sectionsData?.data[3].attributes.title.title}
                       </Typography>
@@ -804,7 +790,8 @@ const MyChoices = () => {
                           <img
                             src={
                               REACT_APP_api_base_url +
-                              "/uploads/52_2_06ce6e4a8d.png"
+                              sectionsData?.data[3].attributes.content1[0].picture1
+                                .data.attributes.url
                             }
                           />
                         )}
@@ -840,7 +827,8 @@ const MyChoices = () => {
                           <img
                             src={
                               REACT_APP_api_base_url +
-                              "/uploads/small_49_bbd721f9c6.png"
+                              sectionsData?.data[3].attributes.content2[0].picture1
+                                .data.attributes.url
                             }
                           />
                         )}
@@ -965,7 +953,7 @@ const MyChoices = () => {
                     mt: "2rem",
                   }}
                 >
-                  <Accordion className="view-risks-accordion-main">
+                  <Accordion className="view-risks-accordion-main details-accordion">
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon className="expandIcon" />}
                       aria-controls="panel1a-content"
@@ -987,7 +975,7 @@ const MyChoices = () => {
                         </Grid>
                       ) : null}
                     </AccordionSummary>
-                    <AccordionDetails className="view-risks-details">
+                    <AccordionDetails className="view-risks-details" sx={{ py: 3 }}>
                       <Grid
                         container
                         sx={{
@@ -1038,20 +1026,21 @@ const MyChoices = () => {
                               </Grid>
                             </Grid>
                           ) : null}
-                          <Grid
-                            container
-                            item
-                            xl={10}
-                            lg={10}
-                            md={10}
-                            sm={10}
-                            xs={10}
-                            sx={{
-                              mt: "4rem",
-                            }}
-                            justifyContent="space-between"
-                          >
-                            {!isMobile ? (
+                          
+                          {!isMobile ? (
+                            <Grid
+                              container
+                              item
+                              xl={10}
+                              lg={10}
+                              md={10}
+                              sm={10}
+                              xs={10}
+                              sx={{
+                                mt: "4rem",
+                              }}
+                              justifyContent="space-between"
+                            >
                               <Fragment>
                                 <Grid item>
                                   {sectionsData?.data[5].attributes.content1[0]
@@ -1098,27 +1087,40 @@ const MyChoices = () => {
                                   ) : null}
                                 </Grid>
                               </Fragment>
+                            </Grid>
                             ) : (
-                              <Fragment>
-                                <Grid item sx={{ mb: "2rem" }}>
+                              <Grid
+                                container
+                                item
+                                xs={12}
+                                spacing={2}
+                                sx={{
+                                  mt: "2rem",
+                                }}
+                                justifyContent="space-between"
+                              >
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/20_50583c15d3.png"
+                                        sectionsData?.data[5].attributes.content1[0]
+                                          .picture1.data.attributes.url
                                     }
                                   />
                                 </Grid>
-                                <Grid item sx={{ mb: "2rem" }}>
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/22_38f6f42618.png"
+                                        sectionsData?.data[5].attributes.content2[0]
+                                          .picture1.data.attributes.url
                                     }
                                   />
                                 </Grid>
-                              </Fragment>
+                            </Grid>
                             )}
-                          </Grid>
                         </Grid>
                         <Grid
                           container
@@ -1166,20 +1168,21 @@ const MyChoices = () => {
                               </Grid>
                             </Grid>
                           ) : null}
-                          <Grid
-                            container
-                            item
-                            xl={10}
-                            lg={10}
-                            md={10}
-                            sm={10}
-                            xs={10}
-                            sx={{
-                              mt: "4rem",
-                            }}
-                            justifyContent="space-between"
-                          >
-                            {!isMobile ? (
+
+                          {!isMobile ? (
+                            <Grid
+                              container
+                              item
+                              xl={10}
+                              lg={10}
+                              md={10}
+                              sm={10}
+                              xs={10}
+                              sx={{
+                                mt: "4rem",
+                              }}
+                              justifyContent="space-between"
+                            >
                               <Fragment>
                                 <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
                                   <Grid
@@ -1266,27 +1269,42 @@ const MyChoices = () => {
                                   </Grid>
                                 </Grid>
                               </Fragment>
+                            </Grid>
                             ) : (
-                              <Fragment>
-                                <Grid item sx={{ mb: "2rem" }}>
+                              <Grid
+                                container
+                                item
+                                xs={12}
+                                spacing={2}
+                                sx={{
+                                  mt: "2rem",
+                                }}
+                                justifyContent="space-between"
+                              >
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/5_878076863a.png"
+                                          sectionsData?.data[6].attributes
+                                            .content1[0].picture1.data.attributes
+                                            .url
                                     }
                                   />
                                 </Grid>
-                                <Grid item sx={{ mb: "2rem" }}>
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/6_a78ca23ba2.png"
+                                          sectionsData?.data[6].attributes
+                                            .content2[0].picture1.data.attributes
+                                            .url
                                     }
                                   />
                                 </Grid>
-                              </Fragment>
+                              </Grid>
                             )}
-                          </Grid>
                         </Grid>
 
                         <Grid
@@ -1334,20 +1352,20 @@ const MyChoices = () => {
                               </Grid>
                             </Grid>
                           ) : null}
-                          <Grid
-                            container
-                            item
-                            xl={10}
-                            lg={10}
-                            md={10}
-                            sm={10}
-                            xs={10}
-                            sx={{
-                              mt: "4rem",
-                            }}
-                            justifyContent="space-between"
-                          >
-                            {!isMobile ? (
+                          {!isMobile ? (
+                            <Grid
+                              container
+                              item
+                              xl={10}
+                              lg={10}
+                              md={10}
+                              sm={10}
+                              xs={10}
+                              sx={{
+                                mt: "4rem",
+                              }}
+                              justifyContent="space-between"
+                            >
                               <Fragment>
                                 <Grid item xl={5} lg={5} md={5} sm={5} xs={5}>
                                   <Grid
@@ -1434,27 +1452,42 @@ const MyChoices = () => {
                                   </Grid>
                                 </Grid>
                               </Fragment>
+                            </Grid>
                             ) : (
-                              <Fragment>
-                                <Grid item sx={{ mb: "2rem" }}>
+                              <Grid
+                                container
+                                item
+                                xs={12}
+                                spacing={2}
+                                sx={{
+                                  mt: "2rem",
+                                }}
+                                justifyContent="space-between"
+                              >
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/0_1_e2f96c9d64.png"
+                                          sectionsData?.data[7].attributes
+                                            .content1[0].picture1.data.attributes
+                                            .url
                                     }
                                   />
                                 </Grid>
-                                <Grid item sx={{ mb: "2rem" }}>
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/0_4_3d2232ef5b.png"
+                                          sectionsData?.data[7].attributes
+                                            .content2[0].picture1.data.attributes
+                                            .url
                                     }
                                   />
                                 </Grid>
-                              </Fragment>
+                              </Grid>
                             )}
-                          </Grid>
                         </Grid>
 
                         <Grid
@@ -1520,20 +1553,20 @@ const MyChoices = () => {
                               </Grid>
                             </Grid>
                           ) : null}
-                          <Grid
-                            container
-                            item
-                            xl={10}
-                            lg={10}
-                            md={10}
-                            sm={10}
-                            xs={10}
-                            sx={{
-                              mt: "4rem",
-                            }}
-                            justifyContent="space-between"
-                          >
-                            {!isMobile ? (
+                          {!isMobile ? (
+                            <Grid
+                              container
+                              item
+                              xl={10}
+                              lg={10}
+                              md={10}
+                              sm={10}
+                              xs={10}
+                              sx={{
+                                mt: "4rem",
+                              }}
+                              justifyContent="space-between"
+                            >
                               <Fragment>
                                 <Grid
                                   item
@@ -1583,13 +1616,25 @@ const MyChoices = () => {
                                   ) : null}
                                 </Grid>
                               </Fragment>
+                            </Grid>
                             ) : (
-                              <Fragment>
-                                <Grid item sx={{ mb: "2rem" }}>
+                              <Grid
+                                container
+                                item
+                                xs={12}
+                                spacing={2}
+                                sx={{
+                                  mt: "2rem",
+                                }}
+                                justifyContent="space-between"
+                              >
+                                <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
+                                    className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                      "/uploads/13_f2ab97da78.png"
+                                        sectionsData?.data[8].attributes.content2[0]
+                                          .picture1.data.attributes.url
                                     }
                                   />
                                 </Grid>
@@ -1611,11 +1656,11 @@ const MyChoices = () => {
                                     }
                                   </Typography>
                                 </Grid>
-                              </Fragment>
+                              </Grid>
                             )}
-                          </Grid>
                         </Grid>
                       </Grid>
+
                     </AccordionDetails>
                     {forAll ? (
                       <Grid
@@ -1760,118 +1805,70 @@ const MyChoices = () => {
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Grid item xs={4}>
-                      <Typography className="learn-choices-subTitle">
+                    <Grid item xs={6} md={4} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle1}
                       </Typography>
+
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link1}>
+                          {learnAboutData?.data.attributes.button1}
+                      </Link>
+
                     </Grid>
-                    <Grid item xs={4}>
-                      <Typography className="learn-choices-subTitle">
+                    <Grid item xs={6} md={4} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle2}
                       </Typography>
+
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link2}>
+                        {learnAboutData?.data.attributes.button2}
+                      </Link>
+
                     </Grid>
 
-                    <Grid item xs={4}>
-                      <Typography className="learn-choices-subTitle">
+                    <Grid item xs={6} md={4} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle3}
                       </Typography>
+
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link3}>
+                        {learnAboutData?.data.attributes.button3}
+                      </Link>
+
                     </Grid>
                   </Grid>
                 ) : (
-                  <Grid container alignItems="center">
-                    <Grid item sm={12} xs={12}>
-                      <Typography className="learn-choices-subTitle">
+                  <Grid container spacing={4} alignItems="center">
+                    <Grid item xs={6} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle1}
                       </Typography>
+
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link1}>
+                          {learnAboutData?.data.attributes.button1}
+                      </Link>
+
                     </Grid>
-                    <Grid item sm={12} xs={12}>
-                      <Typography className="learn-choices-subTitle">
+                    <Grid item xs={6} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle2}
                       </Typography>
+
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link2}>
+                        {learnAboutData?.data.attributes.button2}
+                      </Link>
+
                     </Grid>
 
-                    <Grid item sm={12} xs={12}>
-                      <Typography className="learn-choices-subTitle">
+                    <Grid item xs={6} textAlign="center">
+                      <Typography className="learn-choices-subTitle" mb="1.5rem">
                         {learnAboutData?.data.attributes.subTitle3}
                       </Typography>
-                    </Grid>
-                  </Grid>
-                )}
 
-                {!isMobile ? (
-                  <Grid
-                    container
-                    item
-                    sx={{ mt: "1.5rem" }}
-                    justifyContent="space-between"
-                  >
-                    <Grid item xs={4} textAlign="center">
-                      <Link to="/Details">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button1}
-                        </button>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={4} textAlign="center">
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button2}
-                      </button>
-                    </Grid>
-                    <Grid item xs={4} textAlign="center">
-                      <button className="learn-more-button ">
+                      <Link className="learn-more-button" to={learnAboutData?.data.attributes.link3}>
                         {learnAboutData?.data.attributes.button3}
-                      </button>
-                    </Grid>
-                  </Grid>
-                ) : (
-                  <Grid
-                    container
-                    item
-                    sx={{ mt: "1.5rem" }}
-                  >
-                    <Grid
-                      item
-                      sm={12}
-                      xs={12}
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Link to="/Details">
-                        <button className="learn-more-button ">
-                          {learnAboutData?.data.attributes.button1}
-                        </button>
                       </Link>
-                    </Grid>
-                    <Grid
-                      item
-                      sm={12}
-                      xs={12}
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button2}
-                      </button>
-                    </Grid>
-                    <Grid
-                      item
-                      sm={12}
-                      xs={12}
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <button className="learn-more-button ">
-                        {learnAboutData?.data.attributes.button3}
-                      </button>
+
                     </Grid>
                   </Grid>
                 )}
@@ -1894,14 +1891,22 @@ const MyChoices = () => {
               }}
             >
               <Container maxWidth="lg">
-                <Accordion className="source-accordion">
+                <Accordion className="accordion-details source-accordion" style={{ boxShadow: '0 0' }}>
                   <AccordionSummary
                     className="panel1a-header"
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className="sources">Sources</Typography>
+                    <Typography
+                        variant="h4"
+                        component="h2"
+                        mb="0.7rem"
+                        className="secondTitle"
+                    >
+                      Sources
+                    </Typography>
+
                   </AccordionSummary>
                   <AccordionDetails>
                     {sourceData?.data.map((item) => (

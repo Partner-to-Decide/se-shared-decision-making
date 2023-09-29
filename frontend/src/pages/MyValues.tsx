@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import LayoutNested from "../components/LayoutNested";
 import "./pageStyle/MyValues.css"
 //import "../ClashGrotesk_Complete/Fonts/WEB/css/clash-grotesk.css"
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 export default function MyValues() {
   return (
     <StyledEngineProvider injectFirst>
-      <Layout>
+      <LayoutNested>
         <Grid
             container
             columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
@@ -37,7 +37,7 @@ export default function MyValues() {
                 </Grid>
             </Container>
         </Grid>
-      </Layout>
+      </LayoutNested>
     </StyledEngineProvider>
   );
 }

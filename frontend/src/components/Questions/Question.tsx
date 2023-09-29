@@ -1,6 +1,6 @@
 // Question.tsx
 import React, { useEffect, useState } from "react";
-import Layout from "../Layout";
+import LayoutNested from "../LayoutNested";
 import { Slider } from "@mui/material";
 import { styled } from "@mui/system";
 import Link from '@mui/material/Link';
@@ -233,7 +233,7 @@ const Question = () => {
 
     return (
         <StyledEngineProvider injectFirst>
-            <Layout>
+            <LayoutNested>
                 <Grid
                     container
                     columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
@@ -314,7 +314,7 @@ const Question = () => {
                         )}
                     </Container>
                 </Grid>
-            </Layout>
+            </LayoutNested>
         </StyledEngineProvider>
     );
 };

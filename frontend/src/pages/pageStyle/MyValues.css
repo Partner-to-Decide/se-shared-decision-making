@@ -651,6 +651,9 @@
     .my-value-main{
         padding-top: 2rem;
         padding-bottom: 2rem;
+        background-image: none;
+        height: calc(100vh - 88px);
+        min-height: 610px;
     }
     .step-slider {
         max-width: 100%;
@@ -667,9 +670,18 @@
         height: 30px;
     }
     .my-value-content {
-        padding: 100px 20px;
+        padding: 100px 40px;
     }
     .my-value-content p.QuizIntro {
         width: 100%;
+    }
+    .step-slider.step-slider-v2 {
+        width: 90%;
+        max-width: 100%;
+    }
+    .step-slider.step-slider-v2 span.MuiSlider-markLabel {
+        max-width: 60px;
+        width: 60px;
+        font-size: 11px;
     }
 }

@@ -11,6 +11,7 @@ import { header_section} from "../../utils/types";
 import { REACT_APP_api_base_url } from "../../utils/url_config";
 import Link from '@mui/material/Link';
 import CloseIcon from '@mui/icons-material/Close';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -113,7 +114,7 @@ const Header = () => {
         </Grid>
         : 
         <AppBar position="static" sx={{ py: 3, px: 3, boxShadow:'1', background: '#ffffff' }}>
-            <Grid container sx={{ alignItems: 'center' }} className="responsive">
+            <Grid container sx={{ alignItems: 'center' }}>
                 <Grid className="nav-logo">
                     {HeaderMenusData?
                      <Link href="/Home"> <img className="nav" src={(REACT_APP_api_base_url || "") + HeaderMenusData?.Header_Logo.data[0].attributes.url} alt="Logo" /></Link>
@@ -122,7 +123,7 @@ const Header = () => {
                 </Grid>
 
                 <Grid ml="auto">
-                    <Button className="menu-btn" onClick={toggleDrawer(true)}>Menu</Button>
+                    <Button className="menu-btn" onClick={toggleDrawer(true)}>Menu <ExpandMoreIcon /></Button>
                 </Grid>
 
             </Grid>

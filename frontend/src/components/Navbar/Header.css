@@ -104,7 +104,7 @@
     margin: 0 10px 6px 0 !important;
 }
 
-.menu-btn {
+header .menu-btn {
     color: #0C3A25 !important;
     border: 1px solid #0C3A25;
     border-radius: 20px;
@@ -112,9 +112,9 @@
     margin: 0 !important;
     min-width: 154px;
     text-align: left;
-    display: block;
+    display: flex;
     text-transform: capitalize;
     font-family: ClashGrotesk-Medium;
     font-size: 1rem;
+    justify-content: space-between;
 }
-
