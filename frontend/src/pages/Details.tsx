@@ -602,12 +602,15 @@ function Details() {
                     </Paper>
                   </Grid>
                 </Grid>
-                 <Paper className="post1" elevation={0}>
-                  <Typography variant="body1" textAlign="center" lineHeight="24px">
-                    {DetailsData?.DetailSubtitle.subtitle1} <br />
-                    {DetailsData?.DetailSubtitle.subtitle2}.
-                  </Typography>
-                </Paper>
+                 <Grid className="same-rectangle" item>
+                    <Typography display="block" className="same-for-all-opts">
+                      {DetailsData?.DetailSubtitle.subtitle1}
+                    </Typography>
+
+                    <Typography display="block" className="same-breastfeed">
+                      {DetailsData?.DetailSubtitle.subtitle2}.
+                    </Typography>
+                </Grid>
                  <Paper elevation={0}>
                   <Typography
                     variant="h4"
