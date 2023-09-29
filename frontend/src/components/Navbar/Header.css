@@ -103,3 +103,18 @@
     text-decoration: none;
     margin: 0 10px 6px 0 !important;
 }
+
+.menu-btn {
+    color: #0C3A25 !important;
+    border: 1px solid #0C3A25;
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin: 0 !important;
+    min-width: 154px;
+    text-align: left;
+    display: block;
+    text-transform: capitalize;
+    font-family: ClashGrotesk-Medium;
+    font-size: 1rem;
+}
+

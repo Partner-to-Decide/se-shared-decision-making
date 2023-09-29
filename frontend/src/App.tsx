@@ -147,7 +147,7 @@ const Main = () => {
           <Route path="/question/:id" element={<Question />} />
           <Route path="/QuizResult" element={<QuizResult />} />
           <Route path="/Details/:slug" element={<Details />} />
-          <Route path="/starting-labor" element={<StartingLabor />} />
+          <Route path="/:slug" element={<StartingLabor />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -112,7 +112,7 @@ const Header = () => {
             </Container>
         </Grid>
         : 
-        <AppBar position="static" sx={{ py: 2, px: 3, boxShadow:'1', background: '#ffffff' }}>
+        <AppBar position="static" sx={{ py: 3, px: 3, boxShadow:'1', background: '#ffffff' }}>
             <Grid container sx={{ alignItems: 'center' }} className="responsive">
                 <Grid className="nav-logo">
                     {HeaderMenusData?
