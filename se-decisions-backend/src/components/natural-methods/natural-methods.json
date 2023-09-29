@@ -1,21 +1,40 @@
 {
   "collectionName": "components_natural_methods_natural_methods",
   "info": {
-    "displayName": "NaturalMethods"
+    "displayName": "NaturalMethods",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "SectionHeading": {
       "type": "string"
     },
-    "content": {
+    "Content": {
       "type": "richtext"
     },
-    "RisksandBenefits": {
+    "PotentialBenefits": {
       "displayName": "Risks_Benefits",
       "type": "component",
       "repeatable": true,
       "component": "risks-and-benefits.risks-benefits"
+    },
+    "Category": {
+      "type": "string"
+    },
+    "PotentialRisks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "risks-and-benefits.risks-benefits"
+    },
+    "RightImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "starting-labor-page",
     "pluralName": "starting-labor-pages",
-    "displayName": "StartingLabor-page",
+    "displayName": "Starting-Labor-Page",
     "description": ""
   },
   "options": {
@@ -28,7 +28,7 @@
       "type": "uid",
       "targetField": "Title"
     },
-    "wait_time": {
+    "WaitTime": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -44,7 +44,7 @@
         }
       }
     },
-    "Featured_Image": {
+    "FeaturedImage": {
       "type": "media",
       "multiple": false,
       "required": false,

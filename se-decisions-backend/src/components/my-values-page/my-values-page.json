@@ -10,7 +10,7 @@
       "type": "integer",
       "required": true
     },
-    "intro_sentance": {
+    "intro_sentence": {
       "type": "string",
       "default": "HOW IMPORTANT IS ..."
     },

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-choices-section",
     "pluralName": "my-choices-sections",
-    "displayName": "MyChoices-section"
+    "displayName": "MyChoices-Section",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

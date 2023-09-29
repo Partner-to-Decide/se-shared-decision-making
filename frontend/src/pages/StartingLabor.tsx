@@ -13,11 +13,7 @@ import {
   Divider,
   Box,
 } from '@mui/material'
-import {
-  Details_data,
-  details_buttonset,
-  details_section,
-} from '../utils/types'
+
 import Layout from '../components/Layout'
 import Button from '../components/Button/Button'
 import { CloudUpload } from '@mui/icons-material'
@@ -34,6 +30,13 @@ import {
   CheckCircle,
 } from '@phosphor-icons/react'
 import './pageStyle/StartingLabor.css'
+
+import {
+  Labor_data,
+  details_buttonset,
+  Labor_Topics,
+} from '../utils/types'
+
 import { useNavigate, useParams } from "react-router-dom";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
@@ -43,43 +46,105 @@ import FirstImg from '../siteImages/pexels-william-fortunato-6392989.png'
 
 function StartingLabor() {
 
+const [detailsLaborData, setLaborDetailsData] = useState<Labor_data>()
+const [LaborTopicsData, setLaborTopicsData] = useState<Labor_Topics>()
 const [detailsButtonSetData, setDetailsButtonSetData] = useState<details_buttonset>()
+const [languageState, setLanguageState] = useState('en')
 
-  const [languageState, setLanguageState] = useState('en')
+const { slug } = useParams()
+
   useEffect(() => {
     window.addEventListener('storage', () => {
       setLanguageState(localStorage.getItem('language') || 'en')
     })
   }, [])
-useEffect(() => {
-    const fetchDetailsButtonSetData = async () => {
-      try {
-        const result = await axios.get(
-          REACT_APP_api_base_url +
-            '/api/details-button-sets?populate=deep&locale=' +
-            localStorage.getItem('language')
-        )
-        setDetailsButtonSetData(result.data)
-      } catch (error) {
-        console.error('Error fetching learn about data: ', error)
+
+  useEffect(() => {
+
+      const fetchLaborDetailsData = async () => {
         try {
           const result = await axios.get(
             REACT_APP_api_base_url +
-              '/api/details-button-sets?populate=deep&locale=' +
-              DEFAULT_LANGUAGE
-          )
-          setDetailsButtonSetData(result.data)
+            `/api/starting-labor-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
+            localStorage.getItem('language')
+            )
+          setLaborDetailsData(result.data)
         } catch (error) {
-          console.error(
-            'Error fetching learn about data with default locale: ',
-            error
-          )
+          console.error('Error fetching learn about data: ', error)
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              `/api/starting-labor-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
+              DEFAULT_LANGUAGE
+              )
+            setLaborDetailsData(result.data.data[0].attributes)
+          } catch (error) {
+            console.error(
+              'Error fetching learn about data with default locale: ',
+              error
+              )
+          }
         }
       }
-    }
-   fetchDetailsButtonSetData()
+
+      const fetchLaborTopics = async () => {
+        try {
+          const result = await axios.get(
+            REACT_APP_api_base_url +
+            '/api/starting-labor-topics?populate=deep&locale=' +
+            localStorage.getItem('language')
+            )
+          setLaborTopicsData(result.data)
+        } catch (error) {
+          console.error('Error fetching learn about data: ', error)
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              '/api/details-button-sets?populate=deep&locale=' +
+              DEFAULT_LANGUAGE
+              )
+            setLaborTopicsData(result.data)
+          } catch (error) {
+            console.error(
+              'Error fetching learn about data with default locale: ',
+              error
+              )
+          }
+        }
+      }
+
+      const fetchDetailsButtonSetData = async () => {
+        try {
+          const result = await axios.get(
+            REACT_APP_api_base_url +
+            '/api/details-button-sets?populate=deep&locale=' +
+            localStorage.getItem('language')
+            )
+          setDetailsButtonSetData(result.data)
+        } catch (error) {
+          console.error('Error fetching learn about data: ', error)
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              '/api/details-button-sets?populate=deep&locale=' +
+              DEFAULT_LANGUAGE
+              )
+            setDetailsButtonSetData(result.data)
+          } catch (error) {
+            console.error(
+              'Error fetching learn about data with default locale: ',
+              error
+              )
+          }
+        }
+      }
+      fetchLaborTopics()
+      fetchLaborDetailsData()
+      fetchDetailsButtonSetData()
   }, [languageState])
 
+  const LaborsData = detailsLaborData?.data[0].attributes;
+  const source     = LaborsData?.source?.data?.attributes.source1;
   return (  
       <StyledEngineProvider injectFirst>
         <Layout>
@@ -92,27 +157,29 @@ useEffect(() => {
                                <Grid container spacing={2} mb="2rem">
                                     <Grid item>
                                         <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                                            <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> STARTING LABOR
+                                            <span><Link href="/Home" color="#4D4D4D">Home</Link> <CaretRight size={16} /></span> {LaborsData?.Title}
                                         </Typography>
                                     </Grid>
                                 </Grid>
 
                                <Typography variant="h2" mb="1rem" color="primary.main">
-                                    What Can Help Me Start Labor?
+                                  {LaborsData?.PageTitle}
                                 </Typography>
 
                                 <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
                                     <Clock size={20} style={{ marginRight: '5px' }} />
-                                    5 mins read
+                                   {LaborsData?.WaitTime}
                                 </Typography>
 
-                                <img
-                                    src={FirstImg}
+                              {LaborsData?.FeaturedImage?
+                               <img
+                                    src={(REACT_APP_api_base_url || "") + LaborsData?.FeaturedImage?.data?.attributes?.url}
                                     id="first-image"
                                     alt="firstimg"
                                     style={{ marginBottom: '30px' }}
                                 />
-
+                                : null }
+                            {LaborTopicsData?.data?.map((topics, index) => ([ <>
                                 <Typography
                                     variant="h4"
                                     component="h2"
@@ -121,7 +188,7 @@ useEffect(() => {
                                       marginTop: '50px',
                                     }}
                                   >
-                                    Natural Methods
+                                  {topics?.attributes?.Heading}
                                   </Typography>
                                   <Divider
                                     style={{
@@ -131,8 +198,10 @@ useEffect(() => {
                                     }}
                                   />
 
-
+                               
+                              {topics?.attributes?.LaborTopics.map((item, index) => ([ 
                                 <Grid container spacing={2} mt="2.5rem" mb="3rem">
+
                                     <Grid item container flexDirection="row" flexWrap="nowrap" md={7}>
                                         <span
                                           style={{
@@ -144,14 +213,14 @@ useEffect(() => {
                                             marginRight: 20,
                                           }}
                                         />
-
+                                    
                                         <Box>
                                             <Typography variant="h4" component="h2" color="primary.main" className="labor-block-title">
-                                                Nipple Stimulation
+                                              {item.SectionHeading}
                                             </Typography>
 
                                             <Typography variant="body1" className="labor-block-desc">
-                                                Nipple stimulation can be done manually or with a breast pump and may help your labor to begin.
+                                               {item.Content}
                                             </Typography>
 
                                             <Accordion className="accordion-details" style={{ marginTop: '50px', boxShadow: '0 0' }}>
@@ -169,89 +238,75 @@ useEffect(() => {
                                                     Risks and Benefits
                                                 </Typography>
                                                 </AccordionSummary>
+                                                {item.PotentialBenefits?
                                                 <AccordionDetails sx={{ padding: 0 }}>
                                                     <Grid item>
-                                                        <Typography variant="body1" color="primary.dark" className="labor-acc-text" sx={{ display: 'flex' }}>
-                                                            <XCircle size={32} weight="fill" style={{ minWidth: '30px', color: '#A86133', marginRight: '10px' }} />
-                                                            Nisl eget sed odio natoque vitae a et tincid lrunt cras.
+                                                    {item?.PotentialBenefits?.map((benefits, index) => ([
+                                                        <Typography key={index} variant="body1" color="primary.dark" className="labor-acc-text" sx={{ display: 'flex' }}>
+                                                           <CheckCircle size={32} weight="fill" style={{ minWidth: '30px', color: '#0C3A25', marginRight: '10px' }} />
+                                                           {benefits.Content}
                                                         </Typography>
+                                                      ]))}
 
-                                                        <Typography variant="body1" color="primary.dark" className="labor-acc-text" sx={{ display: 'flex' }}>
-                                                            <CheckCircle size={32} weight="fill" style={{ minWidth: '30px', color: '#0C3A25', marginRight: '10px' }} />
-                                                            Praesent dictumst tempor elementum feugiat. Leo, vitae, morbi leo facilisis nunc, sed lacus.
+                                                      {item?.PotentialRisks?.map((risk, index) => ([
+                                                        <Typography key={index} variant="body1" color="primary.dark" className="labor-acc-text" sx={{ display: 'flex' }}>
+                                                           <XCircle size={32} weight="fill" style={{ minWidth: '30px', color: '#A86133', marginRight: '10px' }} />
+                                                           {risk.Content}
                                                         </Typography>
-
-                                                        <Typography variant="body1" color="primary.dark" className="labor-acc-text" sx={{ display: 'flex' }}>
-                                                            <CheckCircle size={32} weight="fill" style={{ minWidth: '30px', color: '#0C3A25', marginRight: '10px' }} />
-                                                            Praesent dictumst tempor elementum feugiat. Leo, vitae, morbi leo facilisis nunc, sed lacus.
-                                                        </Typography>
-
-                                                    </Grid>
-                                                  
-                                                </AccordionDetails>
+                                                      ]))}
+                                                   </Grid>
+                                                 </AccordionDetails>
+                                                : null }
                                             </Accordion>
                                         </Box>
-
-                                    </Grid>
-                                    <Grid item md={5}>
+                                      </Grid>
+                                    {item?.RightImage?
+                                     <Grid item md={5}>
                                         <img
-                                            src={FirstImg}
+                                            src={(REACT_APP_api_base_url || "") + item?.RightImage?.data?.attributes?.url}
                                             className="content-block-img"
                                             alt="firstimg"
                                             style={{ marginBottom: '30px' }}
                                         />
                                     </Grid>
+                                    : null }
                                 </Grid>
-
-
-
-                                <Accordion className="accordion-details" style={{ marginTop: '50px', boxShadow: '0 0' }}>
-                                    <AccordionSummary
-                                      expandIcon={<ExpandMoreIcon />}
-                                      aria-controls="panel1a-content"
-                                      id="panel1a-header"
-                                    >
-                                      <Typography
-                                        variant="h4"
-                                        component="h2"
-                                        mb="0.7rem"
-                                        className="secondTitle"
-                                    >
-                                        Sources
-                                    </Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                      <Grid>
-                                        <Sources
-                                          number="6"
-                                          text1=" Middleton P, Shepherd E, Morris J, Crowther CA, Gomersall JC. Induction of labour at or beyond 37 weeks’ gestation. Cochrane Database Syst Rev. July 2020. 
-
-                                          doi:10.1002/14651858.CD004945.pub5 *NICU and perinatal death rates calculated using the GRADE system to convert relative risks with the SWEPIS study as the baseline
-                          
-                                          risk estimates **C-section rate calculated using the GRADE system to convert relative risks with the ARRIVE study as the baseline
-                          
-                                          risk estimate. The 2020 Cochrane Review includes the ARRIVE trial and the SWEPSIS trial within the findings."
-                                          text2="Source"
-                                        />
-                                      </Grid>
-                                      <Grid sx={{ mt: '28px' }}>
-                                        <Sources
-                                          number="7"
-                                          text1="Coates D, Goodfellow A, Sinclair L. Induction of labour: Experiences of care and decision-making of women and clinicians. 
-                                          Women and Birth. 2020;33:e1-e14. 8. Sotiriadis A, Petousis S, Thilaganathan B, et al. Maternal and perinatal outcomes after elective induction of labor at 39 weeks in uncomplicated singleton pregnancy: a meta-analysis. Ultrasound Obstet Gynecol. 2019;53(1):26-35. doi:10.1002/UOG.20140. "
-                                          text2="Source"
-                                        />
-                                      </Grid>
-                                      <Grid sx={{ mt: '28px' }}>
-                                        <Sources
-                                          number="8"
-                                          text1="C8. Sotiriadis A, Petousis S, Thilaganathan B, et al. Maternal and perinatal outcomes after elective induction of labor at 39 weeks in uncomplicated singleton pregnancy: a meta-analysis. Ultrasound Obstet Gynecol. 2019;53(1):26-35. doi:10.1002/UOG.20140."
-                                          text2="Source"
-                                        />
-                                      </Grid>
-                                    </AccordionDetails>
-                                  </Accordion>
-
+                              ]))}
+                             </> 
+                             ]
+                            ))}
+                
+                          {source?
+                            <Accordion className="accordion-details" style={{ marginTop: '50px', boxShadow: '0 0' }}>
+                              <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h4"
+                                  component="h2"
+                                  mb="0.7rem"
+                                  className="secondTitle"
+                              >
+                                Sources
+                              </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                {source?.map((item, index) => (
+                                [
+                                    <Grid>
+                                      <Sources
+                                        number={item.SourceNumber}
+                                        text1={item.sourcecontent}
+                                        text2={item.link}
+                                      />
+                                    </Grid>
+                                  ] 
+                                 ))}
+                              </AccordionDetails>
+                            </Accordion>
+                            : null }
                             </Paper>
                         </Grid>
 
@@ -267,43 +322,20 @@ useEffect(() => {
                                   >
                                   Topics
                                   </Typography>
-
-                                  <Grid xs={12} mb="2rem">
+                                  {LaborTopicsData?.data?.map((topics, index) => ([
+                                  <Grid xs={12} key={index} className="side-topics">
                                       <Typography variant="body1" mb="1.1rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                         Natural Methods
+                                        {topics?.attributes?.Heading}
                                       </Typography>
-
-                                      <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Nipple Stimulation
+                                      {topics?.attributes?.LaborTopics.map((item, index) => ([ 
+                                      <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                                        <CaretRight size={16} /> {item.SectionHeading}
                                       </Typography>
-                                      <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Membrane Sweeps
-                                      </Typography>
-                                      <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Acupuncture
-                                      </Typography>
+                                      ]))}
                                   </Grid>
-
-                                  <Grid xs={12}>
-                                      <Typography variant="body1" mb="1.1rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                         Medicince and Treatments
-                                      </Typography>
-
-                                      <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Prostaglandins
-                                      </Typography>
-                                      <Typography variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Cervical Balloon
-                                      </Typography>
-                                      <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Pitocin
-                                      </Typography>
-                                      <Typography variant="body1" mb="0.8rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> Break the Water
-                                      </Typography>
-                                  </Grid>
-
+                                ]))}
                             </Paper>
+
                             <Grid container spacing={1} style={{ marginBottom: '20px' }}>
                                   <Grid item>
                                     <Link href="#" className="link-btn">
@@ -311,7 +343,10 @@ useEffect(() => {
                                         size={24}
                                         style={{ marginRight: '5px' }}
                                       />
-                                     Link
+                                      {
+                                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                          .button1
+                                      }
                                     </Link>
                                   </Grid>
                                   <Grid item>
@@ -320,7 +355,10 @@ useEffect(() => {
                                         size={24}
                                         style={{ marginRight: '5px' }}
                                       />
-                                      Email
+                                      {
+                                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                          .button2
+                                      }
                                     </Link>
                                   </Grid>
                                   <Grid item>
@@ -329,7 +367,10 @@ useEffect(() => {
                                         size={24}
                                         style={{ marginRight: '5px' }}
                                       />
-                                      Bookmark
+                                       {
+                                          detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                            .button3
+                                        }
                                     </Link>
                                   </Grid>
                             </Grid>

@@ -12,7 +12,43 @@ export interface section_data {
   }
 }
 
+export interface Labor_data {
+   data: {
+    attributes: {
+       Title:string
+       slug:string
+       WaitTime:string
+       PageTitle:string
+       FeaturedImage:image_data
+       source:source
+    }
+  }
+}
 
+export interface Labor_Topics {
+   data: {
+    attributes: {
+       Heading:string
+       LaborTopics:LaborTopics[]
+    }
+  }[]
+}
+
+export interface LaborTopics {
+    id: number
+    Category:string
+    Content:string
+    SectionHeading:string
+    RightImage:image_data
+    PotentialBenefits:RisksandBenefits[]
+    PotentialRisks:RisksandBenefits[]
+}
+
+
+export interface RisksandBenefits {
+  id: number
+  Content:string
+}
 export interface Details_data {
   data: {
     attributes: {

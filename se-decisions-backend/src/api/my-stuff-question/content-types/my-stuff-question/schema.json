@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-stuff-question",
     "pluralName": "my-stuff-questions",
-    "displayName": "MyStuff-question"
+    "displayName": "MyStuff-Question",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
