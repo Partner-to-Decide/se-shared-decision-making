@@ -42,9 +42,18 @@ import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 import FirstImg from '../siteImages/pexels-william-fortunato-6392989.png'
 
-
-
+function scrollToSection(e, sectionId) {
+  e.preventDefault();
+  const target = document.querySelector(`#${sectionId}`);
+  if (target instanceof HTMLElement) { // Assert the type
+    window.scrollTo({
+      top: target.offsetTop,
+      behavior: 'smooth',
+    });
+  }
+}
 function StartingLabor() {
+
 
 const [detailsLaborData, setLaborDetailsData] = useState<Labor_data>()
 const [LaborTopicsData, setLaborTopicsData] = useState<Labor_Topics>()
@@ -214,7 +223,7 @@ const { slug } = useParams()
                                           }}
                                         />
                                     
-                                        <Box>
+                                        <Box id={'section'+item.id}>
                                             <Typography variant="h4" component="h2" color="primary.main" className="labor-block-title">
                                               {item.SectionHeading}
                                             </Typography>
@@ -328,9 +337,11 @@ const { slug } = useParams()
                                         {topics?.attributes?.Heading}
                                       </Typography>
                                       {topics?.attributes?.LaborTopics.map((item, index) => ([ 
-                                      <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                                        <CaretRight size={16} /> {item.SectionHeading}
-                                      </Typography>
+                                        <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)}>
+                                         <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                                           <CaretRight size={16} /> {item.SectionHeading}
+                                        </Typography>
+                                      </Link>
                                       ]))}
                                   </Grid>
                                 ]))}

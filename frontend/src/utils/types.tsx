@@ -368,6 +368,7 @@ export interface mychoices_source_data {
       sourceNum: string
       sourceContent: string
       sourceLinkText: string
+      sourceLink: string
     }
   }[]
 }

@@ -12,7 +12,7 @@ import Layout from "../components/Layout";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "./pageStyle/MyChoices.scss";
 import "./pageStyle/MyChoices.css";
-import { Sources } from "../components/AccordionContent/Sources-details";
+import { Sources } from "../components/AccordionContent/Sources";
 import { Popup } from "../components/Popup";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
@@ -1915,7 +1915,8 @@ const MyChoices = () => {
                           key={item.id}
                           number={item.attributes.sourceNum}
                           text1={item.attributes.sourceContent}
-                          text2={item.attributes.sourceLinkText}
+                          text2={item.attributes.sourceLink}
+                          text3={item.attributes.sourceLinkText}
                         />
                       </Grid>
                     ))}
