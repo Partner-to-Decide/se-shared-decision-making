@@ -172,13 +172,13 @@ export default function Home() {
                     </Container>
                 </Grid>
               :
-              <Grid className="hero_container" container minHeight={'70vh'} sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'20px'}}>
+              <Grid className="hero_container" container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'3rem 1.3rem'}}>
                 <Grid container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}> 
                   <Box className="textBox" sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}} component={Container}>
-                    <Typography data-testid="hero-title" sx={{fontSize:46}} variant="h2" className="title_text" color="text.primary" gutterBottom>
-                      {mainSectionData?.data.attributes.Hero_Title}
+                    <Typography sx={{ fontWeight:500, fontSize:'36px'}} variant="h2" className="title_text" color="primary" gutterBottom>
+                        {mainSectionData?.data.attributes.Hero_Title}
                     </Typography>
-                    <Typography data-testid="hero-desc" sx={{alignSelf:'flex-start'}} className="description_text" color="text.primary" gutterBottom>
+                    <Typography sx={{ fontWeight:400, fontSize:'16px', fontFamily:'Public Sans', lineHeight:'24px'}} className="description_text" color="primary.dark" gutterBottom>
                       {mainSectionData?.data.attributes.Hero_Description}
                     </Typography>
                   </Box>
@@ -264,14 +264,14 @@ export default function Home() {
                 </Grid>
 
               :
-              <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', padding:'30px', flexDirection:'column', width:'100%', minHeight:'60vh', backgroundColor:'#0C3A25'}}>
-                <Typography component={'h1'} sx={{color:'white', fontSize:'26px', padding:'20px', marginBottom:'20px'}}>
-                  {choiceSectionData?.Title}
+              <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', padding:'4rem 1rem 4rem 1rem', flexDirection:'row', width:'100%', backgroundColor:'#0C3A25'}}>
+                 <Typography data-testid="choice-title" variant="h2" color="primary.contrastText" sx={{ mb: 3 }}>
+                    {choiceSectionData?.Title}
                 </Typography>
                 <Grid container sx={{display:"flex", flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                   {choiceSectionData?.Fact_Card_Content.map(card => {
                     return(
-                      <Accordion sx={{margin:'20px', borderRadius:'10px', backgroundColor:'#DDEFD8'}}>
+                      <Accordion className="choice-accordion">
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
@@ -279,35 +279,53 @@ export default function Home() {
                         >
                           <Typography>{card.card_title}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
-                        <CardContent sx={{padding:'0px'}}>
-                          <Box sx={{padding:'10px', display:'flex', flexDirection:'column', minHeight:'89px', justifyContent:'flex-start', alignItems:'flex-start'}}>
-                            <Typography sx={{ fontSize: 20, lineHeight:1.5 }} color="text.primary" gutterBottom>
-                              {card.card_subtext}
-                            </Typography>
-                          </Box>
-                          <Box sx={{display:'flex', justifyContent:'flex-start', alignItems:'flex-start', flexDirection:'column', width:'80%', fontSize:'16px', padding:'10px'}}>
-                            <h4 style={{marginBottom:'10px', fontFamily: 'Clash Grotesk Medium'}}>Quick Facts</h4>
-                            <Box sx={{maxWidth:'100%'}}>
-                              {card.fact_point.map(fact => {
-                                return (
-                                  <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-start', alignItems:'center', padding:'0px', marginBottom:'5px'}}>
-                                    <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
-                                    <Typography sx={{ fontSize: 16, lineHeight:1.5}} color="text.primary" gutterBottom>
-                                      {fact.fact_body}
-                                    </Typography>
-                                  </div>
-                                )
-                              })}
-                            </Box>
-                          </Box>
-                        </CardContent>
+                        <AccordionDetails sx={{ background:'#F4FCF0', borderBottomLeftRadius:'10px', borderBottomRightRadius:'10px' }}>
+                            <CardContent sx={{padding:'0px' }}>
+                              <Box sx={{padding:'10px', display:'flex', flexDirection:'column', minHeight:'89px', justifyContent:'flex-start', alignItems:'flex-start'}}>
+                                <Typography sx={{ fontSize: 20, lineHeight:1.5 }} color="text.primary" gutterBottom>
+                                  {card.card_subtext}
+                                </Typography>
+                              </Box>
+                              <Box sx={{ padding:'10px', display:"flex", flexDirection:'column', height: '100%' }}>
+                                <Typography sx={{ fontSize: 16, fontWeight: 700, textTransform: 'uppercase', mb: 2, letterSpacing: 2}} variant="h5" color="primary.main" gutterBottom>
+                                  Quick Facts
+                                </Typography>
+                                <Box component={Container} sx={{maxWidth:'100%'}} disableGutters={true}>
+                                  {card.fact_point.map(fact => {
+                                    return (
+                                      <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-start', padding:'0px', marginBottom:'8px'}}>
+                                        <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
+                                        <Typography sx={{ fontSize: 16, lineHeight:'24px'}} color="primary.main" gutterBottom>
+                                          {fact.fact_body}
+                                        </Typography>
+                                      </div>
+                                    )
+                                  })}
+                                </Box>
+
+                                {card.card_link?
+                                    <Box sx={{ mt: 'auto' }}>
+                                      <Typography sx={{fontSize:16, fontFamily:'Public Sans', fontWeight: 'bold'}} component="a" href={card.card_link}>
+                                        Learn More
+                                      </Typography>
+                                    </Box>
+                                :
+                                null
+                                }
+
+                              </Box>
+                            </CardContent>
                         </AccordionDetails>
                       </Accordion>
                     )
                   })
                   }
                 </Grid>
+
+                <Grid item xs={12} textAlign="center" mt="3rem">
+                  <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
+                </Grid>
+
               </Grid>
               }
               
@@ -358,28 +376,37 @@ export default function Home() {
                     </Container>
                 </Grid>
               :
-              <Grid container sx={{paddingTop:'30px', display:'flex', flexDirection:'column', minHeight:'60vh'}} className="info_section">
+              <Grid container sx={{pt: 5, pb: 8, display:'flex', flexDirection:'column'}} className="info_section">
                 <Container maxWidth={false} className="info_content">
                   <Container className="info_content_left" sx={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
-                    <Typography sx={{width:'100%', fontSize: 56}} component={'h2'}>{selectedInfoSectionData?.Information_Full_Title}</Typography>
-                    <Typography sx={{width:'100%'}} component={'small'}>{selectedInfoSectionData?.Information_Caution_Text}</Typography>
-                    <Typography className="info_content_answer" component={'h1'}>{selectedInfoSectionData?.Information_Answer}</Typography>
-                    <Typography sx={{width:'100% !important', marginTop:'10px'}} className="info_content_description" component={'p'}>{selectedInfoSectionData?.Information_Description}</Typography>
+                    <Typography sx={{ mb: 1, fontWeight: 700, color: '#0C3A25', lineHeight: 'inherit' }} textAlign="center" className="info_content_title" variant="h2">{selectedInfoSectionData?.Information_Full_Title}</Typography>
+                    <Typography component={'small'} variant="body1" textAlign="center">{selectedInfoSectionData?.Information_Caution_Text}</Typography>
+
+                    <Typography sx={{ mt: 4, mb: 1 }} className="info_content_answer" variant="h2" color="primary.main">{selectedInfoSectionData?.Information_Answer}</Typography>
+                    <Typography sx={{width: '90%', lineHeight: 'inherit'}} className="info_content_description" color="primary.dark" variant="body1">{selectedInfoSectionData?.Information_Description}</Typography>
+
                   </Container>
-                  <Box className="info_nav" component={Container} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '20px', fontSize: '25px'}}>
-                    {infoSectionData.map(data => {
-                      return (
-                        <Typography id={data.Information_Short_Title} onClick={() => changeSelection(data.Information_Short_Title)} className={`info_nav_text ${data.Information_Short_Title==selectedInfoSectionData?.Information_Short_Title? 'active':null}`} component={'h4'}>{data.Information_Short_Title}</Typography>
-                      )
-                    })}
-                  </Box>
-                  <Container className="info_content_right">
-                    <Progress offset={`${selectedInfoSectionData?.Information_Stat_Number}`}></Progress>
-                    <Container className="stats_text" maxWidth={false} disableGutters={true}>
-                      <Typography className="info_stat_number" component={'h1'}>{selectedInfoSectionData?.Information_Stat_Number + '%'}</Typography>
-                      <Typography className="info_content_additional" component={'p'}>{selectedInfoSectionData?.Information_Additional_Info}</Typography>
-                    </Container>
-                  </Container>
+
+
+                    <Box className="info_nav" component={Container} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '20px', fontSize: '25px'}}>
+                      {infoSectionData.map(data => {
+                        return (
+                          <Typography variant="h4" sx={{ fontSize: 'inherit', fontWeight: 600 }} id={data.Information_Short_Title} onClick={() => changeSelection(data.Information_Short_Title)} className={`info_nav_text ${data.Information_Short_Title==selectedInfoSectionData?.Information_Short_Title? 'active':null}`}>{data.Information_Short_Title}</Typography>
+                        )
+                      })}
+                    </Box>
+
+                    <Grid container item xs={12} sx={{ alignItems: 'center', padding: '20px' }}>
+                        <Grid item xs={7} className="info_canvas" sx={{ pt: 3 }}>
+                            <Progress offset={`${selectedInfoSectionData?.Information_Stat_Number}`}></Progress>
+                        </Grid>
+                        <Grid item xs={5}>
+                            <Container className="stats_text" sx={{marginLeft: '-80px', width:'calc(100% + 110px)'}} maxWidth={false} disableGutters={true}>
+                              <Typography className="info_stat_number" variant="h2" color="primary.main">{selectedInfoSectionData?.Information_Stat_Number + '%'}</Typography>
+                              <Typography sx={{width:'100%', fontSize: '24px'}} className="info_content_additional" variant="h4" color="primary.main">{selectedInfoSectionData?.Information_Additional_Info}</Typography>
+                            </Container>
+                        </Grid>
+                    </Grid>
                 </Container>
               </Grid>
               }
@@ -391,6 +418,7 @@ export default function Home() {
         {decisionSectionLoaded?
           (
             <Fragment>
+            {!isMobile?
                 <Grid container sx={{ pt: 7, pb: 12, background:'#FAF6ED' }}>
                     <Container maxWidth="lg">
                         <Grid container spacing={2}>
@@ -413,6 +441,29 @@ export default function Home() {
                         </Grid>
                     </Container>
                 </Grid>
+                :
+                <Grid container sx={{ pt: 6, pb: 8, pl: 3, pr: 3, background:'#FAF6ED' }}>
+                    <Container maxWidth="lg">
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
+                                <Typography variant="h2" sx={{ mt: 2, width: '300px' }} color="primary.main" gutterBottom textAlign="center">
+                                    {decisonAidSection?.Section_Title}
+                                </Typography>
+                                <Typography variant="body2" color="primary.main" gutterBottom sx={{ width: '300px' }}>
+                                    {decisonAidSection?.Section_Description}
+                                </Typography>
+                                <Button sx={{ px: 3, py: 1, mt: 4, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>{decisonAidSection?.Button_Text}</Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                                {decisonAidSection?
+                                    <img className="hero_image_decision" src={(REACT_APP_api_base_url || "") + decisonAidSection.Section_Image.data.attributes.url} alt="" />
+                                    :null
+                                }
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grid>
+             }
             </Fragment>
           )
           :
@@ -423,7 +474,8 @@ export default function Home() {
          {aboutSectionLoaded?
           (
             <Fragment>
-                <Grid className="about-section" container sx={{ pt: 10, pb: 12, background:'#ffffff' }}>
+                {!isMobile?
+                <Grid className="about-section" container sx={{ pt: 10, pb: 12, backgroundColor:'#ffffff' }}>
                     <Container maxWidth="lg">
                         <Grid container spacing={2} sx={{ alignItems: 'center' }}>
                             <Grid item xs={4}>
@@ -459,6 +511,52 @@ export default function Home() {
                         </Grid>
                     </Container>
                 </Grid>
+                : 
+                    <Grid className="about-section" container sx={{ pt: 8, pb: 10, pl: 3, pr: 3, backgroundColor:'#ffffff' }}>
+                        <Container maxWidth="lg">
+                            <Grid container spacing={2} sx={{ alignItems: 'center' }}>
+                                <Grid item xs={12}>
+                                    <div className="aboutSection" style={{ marginBottom: '3rem' }}>
+                                        <Typography variant="h2" sx={{ mb: 2 }} color="primary.main" gutterBottom>
+                                            {aboutSection?.About_Paras['0'].Para_Title}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ mb: 2 }} color="primary.dark" gutterBottom>
+                                            {aboutSection?.About_Paras['0'].Para_Description}
+                                        </Typography>
+                                        <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={aboutSection?.About_Paras['0'].Para_Link}>
+                                            {aboutSection?.About_Paras['0'].Para_Link_Filler}
+                                        </Typography>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={12} sx={{ mb: 4 }}>
+                                    {aboutSection?
+                                        <img className="hero_image_about" src={(REACT_APP_api_base_url || "") + aboutSection.Creator_Image.data.attributes.url} alt="" />
+                                        :null
+                                    }
+                                    <Typography variant="body1" color="text.primary" gutterBottom sx={{ textAlign: 'center', mb: 1, mt: 2 }}>
+                                        {aboutSection?.Creator_Name}
+                                    </Typography>
+                                    <Typography variant="body1" color="text.primary" gutterBottom sx={{ textAlign: 'center' }}>
+                                        Founder of Partner to Decide
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div className="aboutSection">
+                                        <Typography variant="h2" sx={{ mb: 2 }} color="primary.main" gutterBottom>
+                                            {aboutSection?.About_Paras['1'].Para_Title}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ mb: 2 }} color="primary.dark" gutterBottom>
+                                            {aboutSection?.About_Paras['1'].Para_Description}
+                                        </Typography>
+                                        <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={aboutSection?.About_Paras['1'].Para_Link}>
+                                            {aboutSection?.About_Paras['1'].Para_Link_Filler}
+                                        </Typography>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </Container>
+                    </Grid>
+                }
             </Fragment>
           )
           :

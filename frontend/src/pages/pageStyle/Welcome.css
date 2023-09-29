@@ -67,3 +67,17 @@ p {
 .Welcome svg {
     margin-left: 1rem;
 }
+
+
+@media (max-width: 767px){
+    .welcome-section {
+        padding: 5rem 3rem;
+        background-position: left -140px, right 47vh;
+        background-size: auto;
+        min-height: calc(100vh - 10rem);
+    }
+    button.skip {
+        margin: 50px auto;
+        border-radius: 30px;
+    }
+}

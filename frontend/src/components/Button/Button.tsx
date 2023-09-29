@@ -20,6 +20,7 @@ const MenuButton = ({ children, routeName, onClick }: any) => {
         boxShadow: "none",
         ":hover": { color: "white" },
       }}
+      className={active ? "active-btn" : ""}
       variant="contained"
       onClick={onClick}
     >

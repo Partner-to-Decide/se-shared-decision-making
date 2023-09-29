@@ -269,7 +269,32 @@ img#first-image-round {
     margin-left: 7px;
 }
 
-div#panel1a-header > div {
+.details-accordion div#panel1a-header > div {
     align-items: center;
     flex-grow: inherit;
 }
+
+
+@media screen and (max-width: 769px) {
+    .mainText{
+      padding: 0px;
+    }
+    img#first-image-round {
+      width: 100%;
+      margin-top: 30px;
+    }
+    .secondTitle{
+      font-size: 24px;
+    }
+    .bodyText {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .bottomTitle {
+        font-size: 1.5rem;
+    }
+    .maintitle2{
+      font-size: 32px;
+    }
+}
+

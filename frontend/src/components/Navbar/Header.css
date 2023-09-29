@@ -1,12 +1,4 @@
 @media screen and (max-width: 700px) {
-    .header {
-      display: none ;
-      top: 3.7rem;
-      left: 0;
-      width: 100%;
-      background-color: #fff;
-    }
-
     .header .nav-list{
         flex-direction: column;
         justify-content: space-between;
@@ -54,4 +46,60 @@
 
 .language-selector fieldset {
     border: none;
+}
+
+.toggle-drawer .MuiDrawer-paper {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.toggle-drawer .menu-list {
+    border-top: 1px solid #D8D8D8;
+    padding: 10px 0;
+}
+
+.toggle-drawer .menu-list:first-child {
+    border-top: 0;
+}
+.toggle-drawer .menu-list button {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    text-align: left;
+    padding: 17px 17px;
+    font-size: 16px;
+    color: #0C3A25;
+    border: none;
+}
+
+.toggle-drawer .menu-list button.active-btn {
+    background: #DFF0D8;
+}
+
+
+.language-selector {
+    border-top: 1px solid #B3B3B3;
+    padding-top: 20px;
+}
+
+
+.cross-icon {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+}
+
+
+.language-menu li {
+    display: inline-block;
+}
+
+.language-menu li a {
+    color: #0C3A25 !important;
+    border: 1px solid #0C3A25;
+    border-radius: 20px;
+    padding: 8px 13px;
+    text-decoration: none;
+    margin: 0 10px 6px 0 !important;
 }

@@ -55,6 +55,10 @@ import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 
 function Details() {
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [anchorElBirth, setAnchorElBirth] = useState<HTMLButtonElement | null>(
     null
@@ -90,6 +94,12 @@ function Details() {
     setAnchorElPneu(null)
   }
   const openPneu = Boolean(anchorElPneu)
+
+  useEffect(() => {
+    if(width<=768){
+      setIsMobile(true)
+    }
+  }, [width]);
 
   /* language fetch */
 
@@ -209,19 +219,22 @@ function Details() {
                    <Grid container spacing={2} pt="2rem" pb="3rem" alignItems="flex-start">
                       <Grid item xs={12} md={7}>
                           <Paper elevation={0} className="mainText">
-                               <Grid container spacing={2} mb="2rem">
+
+                               <Grid container spacing={2} mb={!isMobile ? "2rem" : "1rem"}>
                                   <Grid item>
                                       <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
                                           <span><Link href="/Home" color="#4D4D4D" sx={{ textDecoration: 'none' }}>Home</Link> <CaretRight size={16} /></span> 
                                           {DetailsData?.Title}
                                       </Typography>
                                   </Grid>
-                                  <Grid item ml='auto'>
-                                      <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                                          <Clock size={20} style={{ marginRight: '5px' }} />
-                                          { DetailsData?.DetailsWaiting?.ReadingTime }
-                                      </Typography>
-                                  </Grid>
+                                  {!isMobile &&
+                                    <Grid item ml='auto'>
+                                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                            <Clock size={20} style={{ marginRight: '5px' }} />
+                                            { DetailsData?.DetailsWaiting?.ReadingTime }
+                                        </Typography>
+                                    </Grid>
+                                  }
                               </Grid>
 
                                <Typography variant="h2" mb="0.7rem" color="primary.main">
@@ -230,6 +243,82 @@ function Details() {
                               <Typography variant="h4" color="primary.main">
                                 { DetailsData?.DetailsWaiting?.title1 }
                               </Typography>
+
+                              {isMobile &&
+                                <Grid item mt="1.5rem">
+                                    <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                        <Clock size={20} style={{ marginRight: '5px' }} />
+                                        { DetailsData?.DetailsWaiting?.ReadingTime }
+                                    </Typography>
+                                </Grid>
+                              }
+
+                             {isMobile &&
+                                <Grid item xs={12} mb="3rem">
+
+                                  { SideTopics ?
+                                    <Paper elevation={0} className="post">
+                                      <Typography
+                                        variant="h6"
+                                        component="h3"
+                                        mb="1rem"
+                                        className="rightTitle"
+                                      >
+                                      {SideTopics?.Title}
+                                      </Typography>
+                                      {SideTopics?.SidebarTopics.map((item, index) => (
+                                       <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
+                                         <CaretRight key={index} size={16} />
+                                         {item.Link ?
+                                         <Link href={item.Link} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
+                                           {item.Text}
+                                         </Link>
+                                         : item.Text }
+                                       </Typography>
+                                      ))}
+                                    </Paper>
+                                    : null }
+
+                                    <Grid container spacing={1} style={{ marginBottom: '20px' }}>
+                                      <Grid item>
+                                        <Link href="#" className="link-btn">
+                                          <LinkSimpleHorizontal
+                                            size={24}
+                                            style={{ marginRight: '5px' }}
+                                          />
+                                          {
+                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                              .button1
+                                          }
+                                        </Link>
+                                      </Grid>
+                                      <Grid item>
+                                        <Link href="#" className="link-btn">
+                                          <EnvelopeSimple
+                                            size={24}
+                                            style={{ marginRight: '5px' }}
+                                          />
+                                          {
+                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                              .button2
+                                          }
+                                        </Link>
+                                      </Grid>
+                                      <Grid item>
+                                        <Link href="#" className="link-btn">
+                                          <BookmarkSimple
+                                            size={24}
+                                            style={{ marginRight: '5px' }}
+                                          />
+                                          {
+                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                              .button3
+                                          }
+                                        </Link>
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
+                                }
 
                               {details_content?.map((item, index) => (
                                 [<>
@@ -284,7 +373,7 @@ function Details() {
 
                  <Grid container spacing={2}>
 
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
                         variant="h4" 
@@ -344,7 +433,7 @@ function Details() {
                     </Paper>
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
                         variant="h4" 
@@ -404,7 +493,7 @@ function Details() {
                       </Avatar>
                     </Paper>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography
                         variant="h4" 
@@ -466,7 +555,7 @@ function Details() {
                       </Avatar>
                     </Paper>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={6}>
                     <Paper elevation={0} className="whitePost">
                       <Typography 
                         variant="h4" 
@@ -525,7 +614,7 @@ function Details() {
                     component="h2"
                     mt="3rem"
                     mb="0.7rem"
-                    className="secondTitle title2"
+                    className="secondTitle title2 maintitle2"
                   >
                     {
                       DetailsData?.DetailsSection.Title
@@ -536,12 +625,13 @@ function Details() {
                     color="primary.dark"
                     mb="2rem"
                     fontSize="14px"
+                    lineHeight="20px"
                   >
                     {
                       DetailsData?.DetailsSection.Content
                     }
                   </Typography>
-                  <Accordion elevation={0}>
+                  <Accordion elevation={0} className="details-accordion">
                     <AccordionSummary
                       expandIcon={
                         <ExpandMoreIcon style={{ color: '#FFFFFF' }} />
@@ -550,8 +640,7 @@ function Details() {
                       id="panel1a-header"
                       style={{
                         backgroundColor: '#A86133',
-                        borderTopLeftRadius: '10px',
-                        borderTopRightRadius: '10px',
+                        borderRadius: '10px',
                       }}
                     >
                       <Typography
@@ -750,7 +839,7 @@ function Details() {
                     component="h2"
                     mt="3rem"
                     mb="0.7rem"
-                    className="secondTitle"
+                    className="secondTitle maintitle2"
                   >
                    {detailsAuthorsData?.data[0].attributes?.Heading}
                   </Typography>
@@ -989,7 +1078,7 @@ function Details() {
                   <Typography
                     variant="h4"
                     component="h2"
-                    className="secondTitle"
+                    className="secondTitle maintitle2"
                     style={{
                       marginTop: '50px',
                     }}
@@ -1019,7 +1108,10 @@ function Details() {
                 </Paper>
               </Grid>
 
-           <Grid item xs={12} md={1}></Grid>
+            {!isMobile &&
+              <Grid item xs={12} md={1}></Grid>
+            }
+            {!isMobile &&
               <Grid item xs={12} md={4} className="sidebar-sticky">
 
               { SideTopics ?
@@ -1084,6 +1176,7 @@ function Details() {
                   </Grid>
                 </Grid>
               </Grid>
+              }
             </Grid>
           </Container>
        </div>

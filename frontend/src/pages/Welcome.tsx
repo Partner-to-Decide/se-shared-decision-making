@@ -12,7 +12,9 @@ import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 const Welcome = () => {
   const navigate = useNavigate()
-
+  const [isMobile, setIsMobile] = useState(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  
   const navigateHome = (language) => {
     navigate(`/Home?lang=${language}`)
   }
@@ -25,6 +27,12 @@ const Welcome = () => {
       setLanguageState(localStorage.getItem('language') || 'en')
     })
   }, [])
+
+  useEffect(() => {
+    if(width<=768){
+      setIsMobile(true)
+    }
+  }, [width]);
 
   useEffect(() => {
     const fetchDetailsWelcomeData = async () => {
@@ -99,9 +107,11 @@ const Welcome = () => {
               </div>
             </Container>
         </div>
-        <div className="footer">
-          <FooterBar />
-        </div>
+        {!isMobile &&
+          <div className="footer">
+            <FooterBar />
+          </div>
+        }
    </div>
   )
 }

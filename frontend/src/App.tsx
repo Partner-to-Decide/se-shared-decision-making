@@ -62,12 +62,12 @@ const majorTheme = createTheme({
 })
 
 majorTheme.typography.h2 = {
-  fontSize: '1.5rem',
+  fontSize: '2.25rem',
   fontWeight: 'normal',
   fontFamily: 'ClashGrotesk-Medium',
   lineHeight: 1,
   '@media (min-width:600px)': {
-    fontSize: '1.5rem',
+    fontSize: '2.25rem',
     fontFamily: 'ClashGrotesk-Medium',
     fontWeight: 'normal',
     lineHeight: 1,
