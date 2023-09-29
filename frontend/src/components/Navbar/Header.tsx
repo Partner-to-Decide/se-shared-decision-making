@@ -117,7 +117,7 @@ const Header = () => {
             <Grid container sx={{ alignItems: 'center' }}>
                 <Grid className="nav-logo">
                     {HeaderMenusData?
-                     <Link href="/Home"> <img className="nav" src={(REACT_APP_api_base_url || "") + HeaderMenusData?.HeaderMobile_Logo.data[0].attributes.url} alt="Logo" /></Link>
+                     <Link href="/Home"> <img className="nav" src={(REACT_APP_api_base_url || "") + HeaderMenusData?.HeaderMobile_Logo.data.attributes.url} alt="Logo" /></Link>
                         :null
                       }
                 </Grid>

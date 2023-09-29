@@ -44,7 +44,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ py: 3, px: 3 }}>
+        <Box className="box-wrapper" sx={{ py: 3, px: 3 }}>
           {children}
         </Box>
       )}
@@ -71,6 +71,16 @@ export default function MyStuff() {
   const [languageState, setLanguageState] = useState("en");
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    if(width<=768){
+      setIsMobile(true)
+    }
+  }, [width]);
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -214,7 +224,7 @@ export default function MyStuff() {
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <Grid item xs={12} pl="1.5rem" pr="1.5rem" sx={{ alignItems: "center" }}>
+                        <Grid item xs={12} pl={!isMobile ? "1.5rem" : ""} pr={!isMobile ? "1.5rem"  : ""} sx={{ alignItems: "center" }}>
                           
                             <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
                                 Values Summary
@@ -226,10 +236,10 @@ export default function MyStuff() {
                                             <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
                                                 Most Important
                                             </Typography>
-                                            <Grid container spacing={5}>
+                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
                                                {rating.mostImportant.map((cur, index) => {
                                                     return (
-                                                        <Grid item md={4} textAlign="center">
+                                                        <Grid item xs={6} md={4} textAlign="center">
                                                              <Box className="icon-shape">
                                                                 <Clock size={32} weight="light" />
                                                             </Box>
@@ -247,10 +257,10 @@ export default function MyStuff() {
                                             <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
                                                 Important
                                             </Typography>
-                                            <Grid container spacing={5}>
+                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
                                                 {rating.important.map((cur, index) => {
                                                     return (
-                                                        <Grid item md={4} textAlign="center">
+                                                        <Grid item xs={6} md={4} textAlign="center">
                                                              <Box className="icon-shape">
                                                                 <Clock size={32} weight="light" />
                                                             </Box>
@@ -268,10 +278,10 @@ export default function MyStuff() {
                                             <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
                                                 Less Important
                                             </Typography>
-                                            <Grid container spacing={5}>
+                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
                                                 {rating.lessImportant.map((cur, index) => {
                                                     return (
-                                                        <Grid item md={4} textAlign="center">
+                                                        <Grid item xs={6} md={4} textAlign="center">
                                                              <Box className="icon-shape">
                                                                 <Clock size={32} weight="light" />
                                                             </Box>
@@ -297,11 +307,11 @@ export default function MyStuff() {
                                                 <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
                                                    Least Important
                                                 </Typography>
-                                                <Grid container spacing={5}>
+                                                <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
 
                                                     {rating.leastImportant.map((cur, index) => {
                                                         return (
-                                                            <Grid item md={4} textAlign="center">
+                                                            <Grid item xs={6} md={4} textAlign="center">
                                                                  <Box className="icon-shape">
                                                                     <Clock size={32} weight="light" />
                                                                 </Box>
@@ -323,7 +333,7 @@ export default function MyStuff() {
                     </CustomTabPanel>
 
                     <CustomTabPanel value={value} index={1}>
-                        <Grid xs={12} pl="1.5rem" pr="1.5rem">
+                        <Grid xs={12} pl={!isMobile ? "1.5rem" : ""} pr={!isMobile ? "1.5rem"  : ""}>
                             <Grid item xs={12} sx={{ alignItems: "center" }}>
                               {pageTitlesData?.data.attributes.Title != null ? (
                                 <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
