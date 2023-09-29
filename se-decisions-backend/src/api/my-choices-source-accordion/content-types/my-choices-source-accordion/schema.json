@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-choices-source-accordion",
     "pluralName": "my-choices-source-accordions",
-    "displayName": "MyChoices-sourceAccordion"
+    "displayName": "MyChoices-sourceAccordion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,14 +24,6 @@
       },
       "type": "string"
     },
-    "sourceContent": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "text"
-    },
     "sourceLinkText": {
       "pluginOptions": {
         "i18n": {
@@ -38,6 +31,19 @@
         }
       },
       "type": "string"
+    },
+    "sourceContent": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

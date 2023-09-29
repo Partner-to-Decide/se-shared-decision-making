@@ -93,6 +93,12 @@ export default function MyStuff() {
   const editNoteIndex = (index: any) => {
     setIndex(index);
   };
+
+  useEffect(() => {
+    window.addEventListener("storage", () => {
+      setLanguageState(localStorage.getItem("language") || "en");
+    });
+  }, []);
     // todo: can not download
   const downloadSummary = () => {
     setIsPdfGeneration(true);

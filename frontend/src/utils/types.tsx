@@ -320,6 +320,9 @@ export interface mychoices_page_learn_about {
       button1: string
       button2: string
       button3: string
+      link1: string
+      link2: string
+      link3: string
     }
   }
 }
