@@ -28,7 +28,7 @@ export default function MyValues() {
                     <p className="QuizIntro">Reflect on what is most important to you. Answer six short questions and use the to talk to your provider.</p>
                 </div>
                 <div>
-                    <Link to="/question/1">
+                    <Link to="/question/1" style={{ marginTop: '1rem', display: 'inline-block' }}>
                       <button className="Begin">
                         Begin
                       </button>

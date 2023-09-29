@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Layout from "../Layout";
+import LayoutNested from "../LayoutNested";
 import { RootState } from "../../redux/store";
 import "../../pages/pageStyle/MyValues.css"
 import jsPDF from "jspdf";
@@ -20,11 +20,23 @@ import FirstImg from '../../siteImages/pexels-william-fortunato-6392989.png'
 const QuizResult = () => {
   //const rating = useSelector((state: RootState) => state.rating);
   //const storedRating = localStorage.getItem('QuizQuestions');
+
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(false);
+
   const storedRating = localStorage.getItem('QuizQuestions')|| '';
   let rating;
   if(storedRating){
     rating = JSON.parse(storedRating);
   }
+
+   useEffect(() => {
+    if (width <= 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
 
   //console.log('rating', rating);
   //if (rating.lessImportant.length > 0) {
@@ -74,7 +86,7 @@ const QuizResult = () => {
 
   return (
     <StyledEngineProvider injectFirst>
-      <Layout>
+      <LayoutNested>
         <div ref={summaryGridRef}>
           <Grid
             container
@@ -84,7 +96,16 @@ const QuizResult = () => {
             className="hero-results-section"
           >
             <Container maxWidth="md">
-
+             {!isMobile ? (
+                ""
+              ) : (<> 
+                <Typography variant="h2" mb="1rem" color="primary.main" textAlign="center">
+                  All Done!
+                </Typography>
+                <Typography variant="h3" color="primary.main" textAlign="center">
+                  Here is a summary of what matters most to you.
+                </Typography>
+              </>)}
             </Container>
           </Grid>
 
@@ -93,168 +114,176 @@ const QuizResult = () => {
             columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
           >
             <div className="summary-grid" >
-              <div className="summary-box most-important">
-                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  Most Important
-                </Typography>
-                <Stack direction="row" spacing={4}>
-                  {rating.mostImportant.map((cur, index) => {
-                    return (
-                      <Grid item width='148px' textAlign="center">
-                        <Box className="icon-shape">
-                          <Clock size={32} weight="light" />
-                        </Box>
-                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {cur}
-                        </Typography>
-                      </Grid>
-                    )
-                  })}
-                </Stack>
-              </div>
-              <div className="summary-box important">
-                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  Important
-                </Typography>
-                <Stack direction="row" spacing={4}>
-                  {rating.important.map((cur, index) => {
-                    return (
-                      <Grid item width='148px' textAlign="center">
-                        <Box className="icon-shape">
-                          <Clock size={32} weight="light" />
-                        </Box>
-                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {cur}
-                        </Typography>
-                      </Grid>
-                    )
-                  })}
-                </Stack>
-              </div>
-              <div className="summary-box less-important">
-                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  Less Important
-                </Typography>
-                <Stack direction="row" spacing={4}>
-                  {rating.lessImportant.map((cur, index) => {
-                    return (
-                      <Grid item width='148px' textAlign="center">
-                        <Box className="icon-shape">
-                          <Clock size={32} weight="light" />
-                        </Box>
-                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {cur}
-                        </Typography>
-                      </Grid>
-                    )
-                  })}
-                </Stack>
-              </div>
-              <div className="summary-box least-important">
-                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                  Least Important
-                </Typography>
-                <Stack direction="row" spacing={4}>
-                  {rating.leastImportant.map((cur, index) => {
-                    return (
-                      <Grid item width='148px' textAlign="center">
-                        <Box className="icon-shape">
-                          <Clock size={32} weight="light" />
-                        </Box>
-                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                          {cur}
-                        </Typography>
-                      </Grid>
-                    )
-                  })}
-                </Stack>
-              </div>
+              {rating.mostImportant.length > 0 &&
+                <div className="summary-box most-important">
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                    Most Important
+                  </Typography>
+                  <Stack direction="row" flexWrap="wrap">
+                    {rating.mostImportant.map((cur, index) => {
+                      return (
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                            {cur}
+                          </Typography>
+                        </Grid>
+                      )
+                    })}
+                  </Stack>
+                </div>
+              }
+              {rating.important.length > 0 &&
+                <div className="summary-box important">
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                    Important
+                  </Typography>
+                  <Stack direction="row" flexWrap="wrap">
+                    {rating.important.map((cur, index) => {
+                      return (
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                            {cur}
+                          </Typography>
+                        </Grid>
+                      )
+                    })}
+                  </Stack>
+                </div>
+              }
+              {rating.lessImportant.length > 0 &&
+                <div className="summary-box less-important">
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                    Less Important
+                  </Typography>
+                  <Stack direction="row" flexWrap="wrap">
+                    {rating.lessImportant.map((cur, index) => {
+                      return (
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                            {cur}
+                          </Typography>
+                        </Grid>
+                      )
+                    })}
+                  </Stack>
+                </div>
+              }
+              {rating.leastImportant.length > 0 &&
+                <div className="summary-box least-important">
+                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                    Least Important
+                  </Typography>
+                  <Stack direction="row" flexWrap="wrap">
+                    {rating.leastImportant.map((cur, index) => {
+                      return (
+                        <Grid item width='148px' textAlign="center">
+                          <Box className="icon-shape">
+                            <Clock size={32} weight="light" />
+                          </Box>
+                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                            {cur}
+                          </Typography>
+                        </Grid>
+                      )
+                    })}
+                  </Stack>
+                </div>
+              }
             </div>
 
             <div className="summary-box choice-ques">
                 <Container maxWidth="md">
-                        {rating.choiceOne.length > 0 &&
-                          <>
-                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                            WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                            </Typography>
-                                <Stack direction="row" spacing={4} justifyContent="center">
-                                      <Grid item width='148px' textAlign="center">
-                                        <Box className="icon-shape">
-                                          <Clock size={32} weight="light" />
-                                        </Box>
-                                        <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                        {choiceArray.choiceOne}
-                                        </Typography>
-                                      </Grid>
-                                </Stack>
-                          </>}
-                        {rating.choiceTwo.length > 0 &&
-                          <>
-                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                          </Typography>
-                              <Stack direction="row" spacing={4} justifyContent="center">
-                                    <Grid item width='148px' textAlign="center">
-                                      <Box className="icon-shape">
-                                        <Clock size={32} weight="light" />
-                                      </Box>
-                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                      {choiceArray.choiceTwo}
-                                      </Typography>
-                                    </Grid>
-                              </Stack>
-                        </>}
-                        {rating.choiceThree.length > 0 &&
-                          <>
-                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                          </Typography>
-                              <Stack direction="row" spacing={4} justifyContent="center">
-                                    <Grid item width='148px' textAlign="center">
-                                      <Box className="icon-shape">
-                                        <Clock size={32} weight="light" />
-                                      </Box>
-                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                      {choiceArray.choiceThree}
-                                      </Typography>
-                                    </Grid>
-                              </Stack>
-                        </>}
-                        {rating.choiceFour.length > 0 &&
-                          <>
-                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                          </Typography>
-                              <Stack direction="row" spacing={4} justifyContent="center">
-                                    <Grid item width='148px' textAlign="center">
-                                      <Box className="icon-shape">
-                                        <Clock size={32} weight="light" />
-                                      </Box>
-                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                      {choiceArray.choiceFour}
-                                      </Typography>
-                                    </Grid>
-                              </Stack>
-                        </>}
-                        {rating.choiceFive.length > 0 &&
-                          <>
-                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                          WHAT SHOULD I KNOW ABOUT THESE CHOICES?
-                          </Typography>
-                              <Stack direction="row" spacing={4} justifyContent="center">
-                                    <Grid item width='148px' textAlign="center">
-                                      <Box className="icon-shape">
-                                        <Clock size={32} weight="light" />
-                                      </Box>
-                                      <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                                      {choiceArray.choiceFive}
-                                      </Typography>
-                                    </Grid>
-                              </Stack>
-                        </>
+                    {rating.choiceOne.length > 0 &&
+                      <>
+                        <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                        WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                        </Typography>
+                            <Stack direction="row" spacing={4} justifyContent="center">
+                                  <Grid item width='148px' textAlign="center">
+                                    <Box className="icon-shape">
+                                      <Clock size={32} weight="light" />
+                                    </Box>
+                                    <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                    {choiceArray.choiceOne}
+                                    </Typography>
+                                  </Grid>
+                            </Stack>
+                      </>}
+                    {rating.choiceTwo.length > 0 &&
+                      <>
+                      <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      </Typography>
+                          <Stack direction="row" spacing={4} justifyContent="center">
+                                <Grid item width='148px' textAlign="center">
+                                  <Box className="icon-shape">
+                                    <Clock size={32} weight="light" />
+                                  </Box>
+                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                  {choiceArray.choiceTwo}
+                                  </Typography>
+                                </Grid>
+                          </Stack>
+                    </>}
+                    {rating.choiceThree.length > 0 &&
+                      <>
+                      <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      </Typography>
+                          <Stack direction="row" spacing={4} justifyContent="center">
+                                <Grid item width='148px' textAlign="center">
+                                  <Box className="icon-shape">
+                                    <Clock size={32} weight="light" />
+                                  </Box>
+                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                  {choiceArray.choiceThree}
+                                  </Typography>
+                                </Grid>
+                          </Stack>
+                    </>}
+                    {rating.choiceFour.length > 0 &&
+                      <>
+                      <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      </Typography>
+                          <Stack direction="row" spacing={4} justifyContent="center">
+                                <Grid item width='148px' textAlign="center">
+                                  <Box className="icon-shape">
+                                    <Clock size={32} weight="light" />
+                                  </Box>
+                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                  {choiceArray.choiceFour}
+                                  </Typography>
+                                </Grid>
+                          </Stack>
+                    </>}
+                    {rating.choiceFive.length > 0 &&
+                      <>
+                      <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      </Typography>
+                          <Stack direction="row" spacing={4} justifyContent="center">
+                                <Grid item width='148px' textAlign="center">
+                                  <Box className="icon-shape">
+                                    <Clock size={32} weight="light" />
+                                  </Box>
+                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                  {choiceArray.choiceFive}
+                                  </Typography>
+                                </Grid>
+                          </Stack>
+                    </>
 
-                        }
+                    }
                 
                 </Container>
               </div>
@@ -271,12 +300,12 @@ const QuizResult = () => {
 
               <Grid container>
 
-                <Grid item xs={4} sx={{ position: 'relative' }}>
+                <Grid item xs={12} md={4} sx={{ position: 'relative' }}>
                   <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
                     What's Next?
                   </Typography>
 
-                  <Typography variant="body1" lineHeight="24px" mb="3.5rem">
+                  <Typography variant="body1" lineHeight="24px" mb={!isMobile ? "3.5rem" : "1.3rem"}>
                     Use this summary to share what is important to you with your provider. Ask your care provider questions you have and tell them what you choose.
                   </Typography>
 
@@ -316,9 +345,9 @@ const QuizResult = () => {
 
                 </Grid>
 
-                <Grid item xs={4}></Grid>
+                <Grid item xs={12} md={4}></Grid>
 
-                <Grid item xs={4} sx={{ position: 'relative' }}>
+                <Grid item xs={12} md={4} mt={!isMobile ? "" : "1.3rem"} sx={{ position: 'relative' }}>
                   <Typography variant="h3" fontSize="2.25rem" mb="1.4rem" color="primary.main">
                     Don’t Know What to Ask?
                   </Typography>
@@ -335,7 +364,7 @@ const QuizResult = () => {
             </Container>
           </Grid>
         </div>
-      </Layout >
+      </LayoutNested>
     </StyledEngineProvider >
   );
 };
