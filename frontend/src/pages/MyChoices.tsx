@@ -36,6 +36,7 @@ const MyChoices = () => {
   const darkGreen = "#0c3a25";
   const lightGreen = "#dff0d8";
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [anchorCesarElBirth, setAnchorElCesarBirth] = useState<HTMLButtonElement | null>(null);
   const [anchorElPneu, setAnchorElPneu] = useState<HTMLButtonElement | null>(
     null
   );
@@ -45,6 +46,7 @@ const MyChoices = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -60,12 +62,22 @@ const MyChoices = () => {
  const handleCloseBirth = () => {
     setAnchorElBirth(null)
   }
+   const handleCloseCesarBirth = () => {
+    setAnchorElCesarBirth(null)
+  }
    const handleClickBirth = (event: React.MouseEvent<HTMLButtonElement>) => {
-       console.log('openBirthss',event.currentTarget)
     setAnchorElBirth(event.currentTarget)
   }
-    const openBirth = Boolean(anchorElBirth)
+
+  const handleClickCesarBirth = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorElCesarBirth(event.currentTarget)
+  }
+  
+  const openBirth = Boolean(anchorElBirth)
   const openPneu = Boolean(anchorElPneu);
+  const openCesarBirth = Boolean(anchorCesarElBirth);
+
+
   const [languageState, setLanguageState] = useState("en");
   const [pageTitlesData, setPageTitlesData] =
     useState<mychoices_page_title_subtitles>();
@@ -1015,7 +1027,7 @@ const MyChoices = () => {
                                   display="inline"
                                   className="FourTagsStyle test"
                                   bgcolor={lightGreen}
-                                  onClick={handleClickBirth}
+                                  onClick={handleClickCesarBirth}
                                 >
                                   {" "}
                                   {sectionsData?.data[5].attributes.title.title}
@@ -1030,11 +1042,11 @@ const MyChoices = () => {
                                       .titleNumber
                                   }
                                 </Typography>
-                                {sectionsData?.data[5].attributes.title.description?   
+                             {sectionsData?.data[5].attributes.title.description?   
                               <Popup
-                                open={openBirth}
-                                anchorEl={anchorElBirth}
-                                handleClose={handleCloseBirth}
+                                open={openCesarBirth}
+                                anchorEl={anchorCesarElBirth}
+                                handleClose={handleCloseCesarBirth}
                                 title={sectionsData?.data[5].attributes.title.title}
                                 text={sectionsData?.data[5].attributes.title.description}
                               />
