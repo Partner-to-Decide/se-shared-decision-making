@@ -197,6 +197,9 @@ const MyChoices = () => {
             "/api/my-choices-same?populate=deep&locale=" +
             localStorage.getItem("language")
         );
+         const sortedData = result.data.data.sort((a: any, b: any) => {
+          return a.id - b.id;
+        });
         setSameSection(result.data);
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
@@ -222,7 +225,9 @@ const MyChoices = () => {
             "/api/my-choices-risks-foralls?populate=content&locale=" +
             localStorage.getItem("language")
         );
-        console.log(result.data,'result.result')
+        const sortedData = result.data.data.sort((a: any, b: any) => {
+          return a.id - b.id;
+        });
         setForAll(result.data);
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
@@ -331,7 +336,6 @@ const MyChoices = () => {
     fetchSectionData();
     fetchNeedHelpData();
   }, [languageState]);
-  console.log('forAll',forAll)
   return (
     <StyledEngineProvider injectFirst>
       <Layout>

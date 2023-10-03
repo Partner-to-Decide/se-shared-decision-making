@@ -501,8 +501,8 @@ export default function Home() {
                                         <Typography variant="body2" sx={{ mb: 2 }} color="primary.dark" gutterBottom>
                                             {data.Para_Description}
                                         </Typography>
-                                        <Typography variant="body1" sx={{ fontSize: 16, fontWeight: 'bold' }} >
-                                            {data.Para_Link_Filler} <Link color="#00653E" href={data.Para_Link} >{data.Para_Link_Highlight}</Link>
+                                        <Typography variant="body1" color="primary.dark" sx={{ fontSize: 16 }} >
+                                            {data.Para_Link_Filler} <Link color="#00653E" fontWeight="bold" href={data.Para_Link} >{data.Para_Link_Highlight}</Link>
                                         </Typography>
                                     </div>
                                   )

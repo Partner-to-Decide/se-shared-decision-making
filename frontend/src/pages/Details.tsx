@@ -367,7 +367,7 @@ function Details() {
                                   { item.title }
                                   </Typography>
                                   {item.Description ?
-                                     <div className="bodyText" dangerouslySetInnerHTML={{ __html: item.Description }}></div>
+                                     <div className="bodyText details-content" dangerouslySetInnerHTML={{ __html: item.Description }}></div>
                                   : null }
                                   {item.link?
                                   <Typography variant="body1" className="linkText">

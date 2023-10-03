@@ -253,11 +253,16 @@ img#first-image-round {
     object-position: top;
 }
 
-.source-content p{
-  font-size: 1rem;
-  color: #000000;
-  line-height: 20px;
-  margin-bottom: 20px;
+.source-content p {
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.source-content p a {
+    color: #00653E;
+    font-weight: bold;
 }
 
 .source-content p br{
@@ -274,6 +279,23 @@ img#first-image-round {
     flex-grow: inherit;
 }
 
+
+.details-content p {
+    color: #000000;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.details-content ul li {
+    font-family: Public Sans;
+    color: #000000;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.details-content ul {
+    padding-left: 30px;
+}
 
 @media screen and (max-width: 769px) {
     .mainText{

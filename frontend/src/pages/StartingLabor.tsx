@@ -217,7 +217,7 @@ const { slug } = useParams()
                                     variant="h4"
                                     key={index}
                                     component="h2"
-                                    className="secondTitle"
+                                    className="secondTitle title-labor"
                                     style={{
                                       marginTop: '50px',
                                     }}
@@ -363,7 +363,7 @@ const { slug } = useParams()
                                         {topics?.attributes?.Heading}
                                       </Typography>
                                       {topics?.attributes?.LaborTopics.map((item, index) => ([ 
-                                        <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)}>
+                                        <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
                                          <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                                            <CaretRight size={16} /> {item.SectionHeading}
                                         </Typography>

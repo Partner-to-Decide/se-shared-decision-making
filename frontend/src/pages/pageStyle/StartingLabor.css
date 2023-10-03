@@ -1,6 +1,7 @@
 
-.labor-block-title{
-  margin-bottom: 1.5rem;
+.labor-block-title {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
 }
 
 .labor-acc-text {
@@ -19,4 +20,8 @@
 .sidebar-sticky{
     position: sticky;
     top: 0;
+}
+
+.secondTitle.title-labor {
+    font-size: 2.5rem;
 }
