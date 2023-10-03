@@ -9,9 +9,6 @@
     "title": {
       "type": "string"
     },
-    "Description": {
-      "type": "text"
-    },
     "link": {
       "type": "string"
     },
@@ -39,6 +36,14 @@
     },
     "linktitle2": {
       "type": "string"
+    },
+    "Description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

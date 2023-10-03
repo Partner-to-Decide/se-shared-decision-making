@@ -176,6 +176,7 @@ export interface home_choice_section {
 
 export interface home_about_section {
   Creator_Name: string
+  Creator_Position: string
   About_Paras: about_paras_card[]
   Creator_Image:image_data
 }
@@ -184,6 +185,8 @@ export interface about_paras_card {
   Para_Description: string
   Para_Link: string
   Para_Link_Filler: string
+  Para_Link_Highlight: string
+
 }
 
 export interface home_choice_attributes {

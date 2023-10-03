@@ -9,7 +9,7 @@ import { Box } from "@mui/system";
 import Card from '@mui/material/Card';
 import { Fragment } from "react";
 import Progress from "../components/Graphics/Progress";
-import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary,Link} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { REACT_APP_api_base_url } from "../utils/url_config";
 
@@ -487,7 +487,7 @@ export default function Home() {
                                     {aboutSection?.Creator_Name}
                                 </Typography>
                                 <Typography variant="body2" color="text.primary" gutterBottom sx={{ textAlign: 'center' }}>
-                                    Founder of Partner to Decide
+                                     {aboutSection?.Creator_Position}
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}></Grid>
@@ -501,8 +501,8 @@ export default function Home() {
                                         <Typography variant="body2" sx={{ mb: 2 }} color="primary.dark" gutterBottom>
                                             {data.Para_Description}
                                         </Typography>
-                                        <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={data.Para_Link}>
-                                            {data.Para_Link_Filler}
+                                        <Typography variant="body1" sx={{ fontSize: 16, fontWeight: 'bold' }} >
+                                            {data.Para_Link_Filler} <Link color="#00653E" href={data.Para_Link} >{data.Para_Link_Highlight}</Link>
                                         </Typography>
                                     </div>
                                   )
@@ -524,7 +524,7 @@ export default function Home() {
                                             {aboutSection?.About_Paras['0'].Para_Description}
                                         </Typography>
                                         <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={aboutSection?.About_Paras['0'].Para_Link}>
-                                            {aboutSection?.About_Paras['0'].Para_Link_Filler}
+                                            {aboutSection?.About_Paras['0'].Para_Link_Filler} {aboutSection?.About_Paras['0'].Para_Link_Highlight}
                                         </Typography>
                                     </div>
                                 </Grid>
@@ -537,7 +537,7 @@ export default function Home() {
                                         {aboutSection?.Creator_Name}
                                     </Typography>
                                     <Typography variant="body1" color="text.primary" gutterBottom sx={{ textAlign: 'center' }}>
-                                        Founder of Partner to Decide
+                                       {aboutSection?.Creator_Position}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
@@ -549,7 +549,7 @@ export default function Home() {
                                             {aboutSection?.About_Paras['1'].Para_Description}
                                         </Typography>
                                         <Typography variant="body2" color="#00653E" sx={{ fontSize: 16, fontWeight: 'bold' }} component="a" href={aboutSection?.About_Paras['1'].Para_Link}>
-                                            {aboutSection?.About_Paras['1'].Para_Link_Filler}
+                                            {aboutSection?.About_Paras['1'].Para_Link_Filler} {aboutSection?.About_Paras['1'].Para_Link_Highlight}
                                         </Typography>
                                     </div>
                                 </Grid>

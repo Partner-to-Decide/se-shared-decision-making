@@ -78,12 +78,6 @@
 }
 
 
-.language-selector {
-    border-top: 1px solid #B3B3B3;
-    padding-top: 20px;
-}
-
-
 .cross-icon {
     position: absolute;
     top: 20px;
@@ -126,5 +120,9 @@ header .menu-btn {
     }
     .nav-logo img.nav {
         width: 100%;
+    }
+    .language-selector {
+        border-top: 1px solid #B3B3B3;
+        padding-top: 20px;
     }
 }
