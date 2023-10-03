@@ -37,7 +37,7 @@ import {
   Labor_Topics,
 } from '../utils/types'
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 import FirstImg from '../siteImages/pexels-william-fortunato-6392989.png'
@@ -67,6 +67,24 @@ const { slug } = useParams()
       setLanguageState(localStorage.getItem('language') || 'en')
     })
   }, [])
+
+
+  const location = useLocation();
+  useEffect(() => {
+    setTimeout(() => {
+    if (location.hash) {
+      const targetId = location.hash.substring(1); 
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+  },2000);
+  }, [location.hash]);
+
 
   useEffect(() => {
 
@@ -197,6 +215,7 @@ const { slug } = useParams()
                             {LaborTopicsData?.data?.map((topics, index) => ([ <>
                                 <Typography
                                     variant="h4"
+                                    key={index}
                                     component="h2"
                                     className="secondTitle"
                                     style={{
@@ -206,6 +225,7 @@ const { slug } = useParams()
                                   {topics?.attributes?.Heading}
                                   </Typography>
                                   <Divider
+                                   key={index+1}
                                     style={{
                                       height: '3px',
                                       marginTop: '10px',
@@ -215,9 +235,9 @@ const { slug } = useParams()
 
                                
                               {topics?.attributes?.LaborTopics.map((item, index) => ([ 
-                                <Grid container spacing={2} mt="2.5rem" mb="3rem">
+                                <Grid key={index} container spacing={2} mt="2.5rem" mb="3rem">
 
-                                    <Grid item container flexDirection="row" flexWrap="nowrap" md={7}>
+                                    <Grid key={index} item container flexDirection="row" flexWrap="nowrap" md={7}>
                                         <span
                                           style={{
                                             display: 'inline-block',
@@ -310,7 +330,7 @@ const { slug } = useParams()
                               <AccordionDetails>
                                 {source?.map((item, index) => (
                                 [
-                                    <Grid>
+                                    <Grid key={index}>
                                       <Sources
                                         number={item.SourceNumber}
                                         text1={item.sourcecontent}

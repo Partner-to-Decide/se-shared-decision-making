@@ -164,6 +164,9 @@ export default function MyStuff() {
           "/api/my-stuff-questions?populate=deep&locale=" +
             localStorage.getItem("language")
         );
+         const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
         setSameSection(result.data);
       } catch (error) {
         console.error("Error fetching learn about data: ", error);

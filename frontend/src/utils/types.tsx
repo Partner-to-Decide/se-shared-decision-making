@@ -297,6 +297,7 @@ export interface mystuff_page_questions_list {
     attributes: {
       question: string
       Tooltip: string
+      Link: string
     }
   }
 }

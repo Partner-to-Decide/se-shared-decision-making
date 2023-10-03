@@ -20,6 +20,7 @@ const ChecklistQues = (props:any) => {
     text: string;
     id: number;
     tooltip: string;
+    Link: string;
     isEditing: boolean;
     isChecked: boolean;
   }
@@ -67,6 +68,7 @@ const ChecklistQues = (props:any) => {
         quizquestions.map((item:any) => ({
           text: item.attributes.question,
           tooltip: item.attributes.Tooltip,
+          Link:item.attributes.Link,
           id: item.id,
           isEditing: false,
           isChecked: false,
@@ -121,7 +123,7 @@ const ChecklistQues = (props:any) => {
     setQuestions(updatedQuestions);
   };
   const handleAddQuestion = () => {
-    const updatedQuestions = [...questions, { id: Date.now(), text: '',tooltip: '', isEditing: true,isChecked: true }];
+    const updatedQuestions = [...questions, { id: Date.now(), text: '',tooltip: '',Link:'', isEditing: true,isChecked: true }];
     setQuestions(updatedQuestions);
   };
 
@@ -185,7 +187,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
                        {question.text}
                         <div className="tooltop-pdf" style={{ marginTop: '7px', display: 'block', width: '100%' }}>
                           <h4>Learn more about</h4>
-                          <p>{question.tooltip}</p>
+                          <p><Link href={question.Link}>{question.tooltip}</Link></p>
                         </div>
                     </div>
                   }
@@ -198,7 +200,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
                       title={
                         <React.Fragment>
                           <Typography color="inherit">Learn more about</Typography>
-                          <Link href="#">{question.tooltip}</Link>
+                          <Link href={question.Link}>{question.tooltip}</Link>
                         </React.Fragment>
                       }
                       placement="top"

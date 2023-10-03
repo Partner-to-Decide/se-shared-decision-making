@@ -275,7 +275,7 @@ function Details() {
                              {isMobile &&
                                 <Grid item xs={12} mb="3rem">
 
-                                  { SideTopics ?
+                                  { details_content ?
                                     <Paper elevation={0} className="post">
                                       <Typography
                                         variant="h6"
@@ -285,14 +285,12 @@ function Details() {
                                       >
                                       {SideTopics?.Title}
                                       </Typography>
-                                      {SideTopics?.SidebarTopics.map((item, index) => (
+                                      {details_content?.map((item, index) => (
                                        <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                                          <CaretRight key={index} size={16} />
-                                         {item.Link ?
-                                         <Link href={item.Link} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
-                                           {item.Text}
+                                         <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
+                                           { item.title }
                                          </Link>
-                                         : item.Text }
                                        </Typography>
                                       ))}
                                     </Paper>
