@@ -354,13 +354,13 @@ export interface mychoices_risk_forall {
   data: {
     id: number
     attributes: {
-      title: string
+      Callout: string
       content: {
         id: number
-        content: string
-        number: string
-        popup1: string | null
-        popup2: string | null
+        Title: string
+        Number: string
+        Popup1: string | null
+        Popup2: string | null
       }[]
     }
   }[]

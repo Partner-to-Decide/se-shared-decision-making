@@ -4,7 +4,8 @@
   "info": {
     "singularName": "my-choices-risks-forall",
     "pluralName": "my-choices-risks-foralls",
-    "displayName": "MyChoices-risks-forall"
+    "displayName": "MyChoices-risks-forall",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,7 +16,7 @@
     }
   },
   "attributes": {
-    "title": {
+    "Callout": {
       "pluginOptions": {
         "i18n": {
           "localized": true

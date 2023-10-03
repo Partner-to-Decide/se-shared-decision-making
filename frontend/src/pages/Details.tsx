@@ -704,7 +704,7 @@ function Details() {
                                   src={(REACT_APP_api_base_url || "") + item.image.data.attributes.url}
                                   alt="DottedCircle6"
                                />
-                                
+                             {item?.popuptitle ?   
                               <Popup
                                 open={openBirth}
                                 anchorEl={anchorElBirth}
@@ -712,6 +712,7 @@ function Details() {
                                 title={item?.popuptitle}
                                 text={item?.popupcontent}
                               />
+                              : null }
                           </Grid>
                           ]
                         ))}
@@ -730,7 +731,7 @@ function Details() {
                           sx={{ ml: '0px', mr: '114px' }}
                         >
                           <Typography className="potential-risks-small-content">
-                            For all three options, there is{' '}
+                            For all three options there is the {' '}
                             <span
                               style={{
                                 fontWeight: 'bold',
@@ -738,7 +739,7 @@ function Details() {
                             >
                               same chance
                             </span>{' '}
-                            of the following:
+                            of breastfeeding.
                           </Typography>
                         </Grid>
                         <Grid

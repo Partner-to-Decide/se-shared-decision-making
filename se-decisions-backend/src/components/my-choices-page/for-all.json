@@ -1,20 +1,21 @@
 {
   "collectionName": "components_my_choices_page_for_alls",
   "info": {
-    "displayName": "For-all"
+    "displayName": "For-all",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "content": {
+    "Title": {
       "type": "text"
     },
-    "number": {
+    "Number": {
       "type": "string"
     },
-    "popup1": {
+    "Popup1": {
       "type": "text"
     },
-    "popup2": {
+    "Popup2": {
       "type": "text"
     }
   }

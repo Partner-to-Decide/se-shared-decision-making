@@ -39,6 +39,9 @@ const MyChoices = () => {
   const [anchorElPneu, setAnchorElPneu] = useState<HTMLButtonElement | null>(
     null
   );
+    const [anchorElBirth, setAnchorElBirth] = useState<HTMLButtonElement | null>(
+    null
+  )
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -54,6 +57,14 @@ const MyChoices = () => {
   const handleClosePneu = () => {
     setAnchorElPneu(null);
   };
+ const handleCloseBirth = () => {
+    setAnchorElBirth(null)
+  }
+   const handleClickBirth = (event: React.MouseEvent<HTMLButtonElement>) => {
+       console.log('openBirthss',event.currentTarget)
+    setAnchorElBirth(event.currentTarget)
+  }
+    const openBirth = Boolean(anchorElBirth)
   const openPneu = Boolean(anchorElPneu);
   const [languageState, setLanguageState] = useState("en");
   const [pageTitlesData, setPageTitlesData] =
@@ -85,13 +96,13 @@ const MyChoices = () => {
       setIsMobile(false);
     }
   }, [width]);
-  console.log(width);
-  console.log(isMobile);
+
   useEffect(() => {
     window.addEventListener("storage", () => {
       setLanguageState(localStorage.getItem("language") || "en");
     });
   }, []);
+
   useEffect(() => {
     const fetchPageTitlesData = async () => {
       try {
@@ -308,7 +319,7 @@ const MyChoices = () => {
     fetchSectionData();
     fetchNeedHelpData();
   }, [languageState]);
-
+  console.log('forAll',forAll)
   return (
     <StyledEngineProvider injectFirst>
       <Layout>
@@ -1002,8 +1013,9 @@ const MyChoices = () => {
                               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                 <Typography
                                   display="inline"
-                                  className="FourTagsStyle"
+                                  className="FourTagsStyle test"
                                   bgcolor={lightGreen}
+                                  onClick={handleClickBirth}
                                 >
                                   {" "}
                                   {sectionsData?.data[5].attributes.title.title}
@@ -1018,6 +1030,15 @@ const MyChoices = () => {
                                       .titleNumber
                                   }
                                 </Typography>
+                                {sectionsData?.data[5].attributes.title.description?   
+                              <Popup
+                                open={openBirth}
+                                anchorEl={anchorElBirth}
+                                handleClose={handleCloseBirth}
+                                title={sectionsData?.data[5].attributes.title.title}
+                                text={sectionsData?.data[5].attributes.title.description}
+                              />
+                              : null }
                               </Grid>
 
                               {/* line */}
@@ -1678,96 +1699,84 @@ const MyChoices = () => {
                       >
                         <Grid className="for-all-rectangle-col" item xl={7} lg={7} md={7} sm={7} xs={7}>
                           <Typography className="potential-risks-small-content">
-                            {forAll?.data[0].attributes.title}
+                            {forAll?.data[0].attributes.Callout}
                           </Typography>
                         </Grid>
                         <Grid className="for-all-rectangle-col" item xl={6} lg={6} md={6} sm={6} xs={6}>
                           <Grid container sx={{ mt: "1.5rem" }}>
                             <Typography className="potential-risks-small-content2">
+
                               <FiberManualRecordIcon
                                 sx={{ fontSize: 10, pr: "0.3125rem" }}
                               />
+                              Complications for baby {'  '}
                               <Typography
                                 display="inline"
                                 className="potential-risks-small-content2"
                                 bgcolor={lightGreen}
                                 onClick={handleClick}
                               >
-                                {forAll?.data[0].attributes.content[0].popup1}
+                             ( Seizure
                               </Typography>
+
                               <Popup
                                 open={open}
                                 anchorEl={anchorEl}
                                 handleClose={handleClose}
-                                title={forAll?.data[1].attributes.title}
-                                text={forAll?.data[1].attributes.content[0].content}
-                              />{" "}
+                                title={'Seizure'}
+                                text={forAll?.data[0].attributes.content[0].Popup1}
+                              />
+
                               <Typography
-                                display="inline"
-                                className="potential-risks-small-content2"
-                                bgcolor={lightGreen}
-                                onClick={handleClickPneu}
-                              >
-                                {forAll?.data[0].attributes.content[0].popup2}
+                                  display="inline"
+                                  className="potential-risks-small-content2"
+                                  bgcolor={lightGreen}
+                                  onClick={handleClickPneu}
+                                >
+                               {'  , '} pneumonia
                               </Typography>
                               <Popup
                                 open={openPneu}
                                 anchorEl={anchorElPneu}
                                 handleClose={handleClosePneu}
-                                title={forAll?.data[2].attributes.title}
-                                text={forAll?.data[2].attributes.content[0].content}
+                                title={'pneumonia'}
+                                text={forAll?.data[0].attributes.content[0].Popup2}
                               />
-                              {forAll?.data[0].attributes.content[0].content}
+                             {forAll?.data[0].attributes.content[0].Popup2 ?   
+                              <Popup
+                                open={openBirth}
+                                anchorEl={anchorElBirth}
+                                handleClose={handleCloseBirth}
+                                title={forAll?.data[0].attributes.content[0].Title}
+                                text={forAll?.data[0].attributes.content[0].Popup2}
+                              />
+                              : null }
+
+                              {'  '} {forAll?.data[0].attributes.content[0].Title} {' )'}
                               <Typography
                                 display="inline"
                                 className="for-all-small-number"
                               >
-                                {forAll?.data[0].attributes.content[0].number}
+                              {forAll?.data[0].attributes.content[0].Number}
                               </Typography>
                             </Typography>
                           </Grid>
-                          <Grid container sx={{ mt: "1rem" }}>
-                            <Typography className="potential-risks-small-content2">
-                              <FiberManualRecordIcon
-                                sx={{ fontSize: 10, pr: "0.3125rem" }}
-                              />
-                              {forAll?.data[0].attributes.content[1].content}
-                              <Typography
-                                display="inline"
-                                className="for-all-small-number"
-                              >
-                                {forAll?.data[0].attributes.content[1].number}
+                          {forAll?.data[0].attributes?.content?.slice(1).map((item, index) => (
+                            <Grid key={index} container sx={{ mt: "1rem" }}>
+                              <Typography className="potential-risks-small-content2">
+                                <FiberManualRecordIcon
+                                  sx={{ fontSize: 10, pr: "0.3125rem" }}
+                                />
+                                {item.Title}
+                                <Typography
+                                  display="inline"
+                                  className="for-all-small-number"
+                                >
+                                  {item.Number}
+                                </Typography>
                               </Typography>
-                            </Typography>
-                          </Grid>
-                          <Grid container sx={{ mt: "1rem" }}>
-                            <Typography className="potential-risks-small-content2">
-                              <FiberManualRecordIcon
-                                sx={{ fontSize: 10, pr: "0.3125rem" }}
-                              />
-                              {forAll?.data[0].attributes.content[2].content}
-                              <Typography
-                                display="inline"
-                                className="for-all-small-number"
-                              >
-                                {forAll?.data[0].attributes.content[2].number}
-                              </Typography>
-                            </Typography>
-                          </Grid>
-                          <Grid container sx={{ mt: "1rem" }}>
-                            <Typography className="potential-risks-small-content2">
-                              <FiberManualRecordIcon
-                                sx={{ fontSize: 10, pr: "0.3125rem" }}
-                              />
-                              {forAll?.data[0].attributes.content[3].content}
-                              <Typography
-                                display="inline"
-                                className="for-all-small-number"
-                              >
-                                {forAll?.data[0].attributes.content[3].number}
-                              </Typography>
-                            </Typography>
-                          </Grid>
+                            </Grid>
+                         ))}
                         </Grid>
                       </Grid>
                     ) : null}
