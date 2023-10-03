@@ -265,7 +265,7 @@ export default function Home() {
 
               :
               <Grid container sx={{display:'flex', justifyContent:'center', alignItems:'center', padding:'4rem 1rem 4rem 1rem', flexDirection:'row', width:'100%', backgroundColor:'#0C3A25'}}>
-                 <Typography data-testid="choice-title" variant="h2" color="primary.contrastText" sx={{ mb: 3 }}>
+                 <Typography data-testid="choice-title" variant="h2" color="primary.contrastText" sx={{ mb: 3, textAlign: 'center' }}>
                     {choiceSectionData?.Title}
                 </Typography>
                 <Grid container sx={{display:"flex", flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
@@ -282,7 +282,7 @@ export default function Home() {
                         <AccordionDetails sx={{ background:'#F4FCF0', borderBottomLeftRadius:'10px', borderBottomRightRadius:'10px' }}>
                             <CardContent sx={{padding:'0px' }}>
                               <Box sx={{padding:'10px', display:'flex', flexDirection:'column', minHeight:'89px', justifyContent:'flex-start', alignItems:'flex-start'}}>
-                                <Typography sx={{ fontSize: 20, lineHeight:1.5 }} color="text.primary" gutterBottom>
+                                <Typography sx={{ lineHeight:1.5 }} color="text.primary" gutterBottom>
                                   {card.card_subtext}
                                 </Typography>
                               </Box>
@@ -290,7 +290,7 @@ export default function Home() {
                                 <Typography sx={{ fontSize: 16, fontWeight: 700, textTransform: 'uppercase', mb: 2, letterSpacing: 2}} variant="h5" color="primary.main" gutterBottom>
                                   Quick Facts
                                 </Typography>
-                                <Box component={Container} sx={{maxWidth:'100%'}} disableGutters={true}>
+                                <Box component={Container} sx={{padding: '0', maxWidth:'100%'}} disableGutters={true}>
                                   {card.fact_point.map(fact => {
                                     return (
                                       <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-start', padding:'0px', marginBottom:'8px'}}>

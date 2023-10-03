@@ -25,3 +25,12 @@
 .secondTitle.title-labor {
     font-size: 2.5rem;
 }
+
+@media (max-width: 767px){
+    .secondTitle.title-labor {
+        font-size: 2rem;
+    }
+    .labor-block-title{
+        font-size: 1.5rem;
+    }
+}

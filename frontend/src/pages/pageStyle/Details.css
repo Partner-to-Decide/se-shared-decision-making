@@ -280,6 +280,13 @@ img#first-image-round {
 }
 
 
+.details-content{
+    color: #000000;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: Public Sans;
+}
+
 .details-content p {
     color: #000000;
     font-size: 16px;
