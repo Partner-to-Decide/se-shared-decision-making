@@ -1,6 +1,18 @@
 import { Grid, Typography, Link } from '@mui/material'
 
 export const Sources = ({ number, text1, text2 }: any) => {
+  
+  const addSourceLinkToText = (text) => {
+    const paragraphs = text.split('</p>');
+    if (paragraphs.length > 1) {
+      paragraphs[paragraphs.length - 2] += ` <a href="${text2}">Source</a></p>`;
+      return paragraphs.join('');
+    }
+    return text;
+  };
+
+  const modifiedText1 = addSourceLinkToText(text1);
+
   return (
     <Grid container item flexWrap="nowrap" mb="2rem">
       <Grid
@@ -24,8 +36,8 @@ export const Sources = ({ number, text1, text2 }: any) => {
         </Typography>
       </Grid>
       <Grid item ml="2rem">
-        <div dangerouslySetInnerHTML={{ __html: text1 }} className="source-content"></div>
-        <Link href={text2}
+        <div dangerouslySetInnerHTML={{ __html: modifiedText1 }} className="source-content"></div>
+        {/*<Link href={text2}
           display="block"
           fontFamily="Public Sans"
           fontWeight="700"
@@ -33,7 +45,7 @@ export const Sources = ({ number, text1, text2 }: any) => {
           lineHeight="24px"
           color="#00653E"
           sx={{ mt: '10px', textDecoration: 'underline' }}
-          >Source</Link>
+          >Source</Link>*/}
       </Grid>
     </Grid>
   )

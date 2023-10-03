@@ -54,6 +54,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from '../utils/url_config'
 import axios from 'axios'
 
+function scrollToSection(e, sectionId) {
+  e.preventDefault();
+  const target = document.querySelector(`#${sectionId}`);
+  if (target instanceof HTMLElement) {
+    window.scrollTo({
+      top: target.offsetTop,
+      behavior: 'smooth',
+    });
+  }
+}
 function Details() {
 
   const [isMobile, setIsMobile] = useState(false);
@@ -129,6 +139,9 @@ function Details() {
            `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
             localStorage.getItem('language')
         )
+         const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
         setDetailsSectionData(result.data)
       } catch (error) {
         console.error('Error fetching learn about data: ', error)
@@ -138,6 +151,9 @@ function Details() {
               `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
               DEFAULT_LANGUAGE
           )
+          const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
          setDetailsSectionData(result.data.data[0].attributes)
         } catch (error) {
           console.error(
@@ -155,6 +171,9 @@ function Details() {
             '/api/details-authors?populate=deep&locale=' +
             localStorage.getItem('language')
         )
+         const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
         setDetailsAuthorsData(result.data)
       } catch (error) {
         console.error('Error fetching learn about data: ', error)
@@ -331,7 +350,7 @@ function Details() {
                                     style={{ marginBottom: '30px' }}
                                     />
                                   :null }
-
+                              <div id={'section'+item.id}>
                                 <Typography
                                   variant="h4"
                                   component="h2"
@@ -350,13 +369,8 @@ function Details() {
                                   { item.title }
                                   </Typography>
                                   {item.Description ?
-                                  <Typography variant="body1" className="bodyText">
-                                  {
-                                    item.Description
-                                  }
-                                  </Typography>
+                                     <div className="bodyText" dangerouslySetInnerHTML={{ __html: item.Description }}></div>
                                   : null }
-
                                   {item.link?
                                   <Typography variant="body1" className="linkText">
                                    { item.linktitle1?item.linktitle1:null }{' '}
@@ -366,8 +380,9 @@ function Details() {
                                     >
                                    {item.linktitle2? item.linktitle2 :null}
                                     </Link>
-                              </Typography>
-                              : null }
+                                </Typography>
+                               : null }
+                              </div>
                           </>]))}
                      </Paper>
 
@@ -1117,7 +1132,7 @@ function Details() {
             {!isMobile &&
               <Grid item xs={12} md={4} className="sidebar-sticky">
 
-              { SideTopics ?
+             {details_content?
                 <Paper elevation={0} className="post">
                   <Typography
                     variant="h6"
@@ -1127,14 +1142,13 @@ function Details() {
                   >
                   {SideTopics?.Title}
                   </Typography>
-                  {SideTopics?.SidebarTopics.map((item, index) => (
+                                
+                  {details_content?.map((item, index) => (
                    <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
                      <CaretRight key={index} size={16} />
-                     {item.Link ?
-                     <Link href={item.Link} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
-                       {item.Text}
+                     <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
+                        { item.title }
                      </Link>
-                     : item.Text }
                    </Typography>
                   ))}
                 </Paper>

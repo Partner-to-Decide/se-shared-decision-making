@@ -131,6 +131,7 @@ majorTheme.typography.body2 = {
   fontFamily: 'Public Sans',
 }
 
+
 //Routing, i.e. directing to other pages on the website, using page components and useNavigate to achieve
 const Main = () => {
   return (

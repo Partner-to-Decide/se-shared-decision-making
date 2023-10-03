@@ -45,7 +45,7 @@ import FirstImg from '../siteImages/pexels-william-fortunato-6392989.png'
 function scrollToSection(e, sectionId) {
   e.preventDefault();
   const target = document.querySelector(`#${sectionId}`);
-  if (target instanceof HTMLElement) { // Assert the type
+  if (target instanceof HTMLElement) {
     window.scrollTo({
       top: target.offsetTop,
       behavior: 'smooth',
@@ -77,6 +77,9 @@ const { slug } = useParams()
             `/api/starting-labor-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
             localStorage.getItem('language')
             )
+          const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
           setLaborDetailsData(result.data)
         } catch (error) {
           console.error('Error fetching learn about data: ', error)
@@ -103,6 +106,9 @@ const { slug } = useParams()
             '/api/starting-labor-topics?populate=deep&locale=' +
             localStorage.getItem('language')
             )
+          const sortedData = result.data.data.sort((a: any, b: any) => {
+            return a.id - b.id;
+          });
           setLaborTopicsData(result.data)
         } catch (error) {
           console.error('Error fetching learn about data: ', error)
