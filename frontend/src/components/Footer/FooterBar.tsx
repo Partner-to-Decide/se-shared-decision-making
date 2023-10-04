@@ -55,7 +55,7 @@ const FooterBar = () => {
       <div className="allFooter">
         <Container maxWidth="xl">
             <Grid container spacing={2} className="allFooterInner">
-            {footerState && FooterData?.data[0].attributes.Footer_section_data1[0]?
+            {footerState && FooterData?.data[0]?.attributes?.Footer_section_data1[0]?
                 <Grid item xs={3} className="Footercol">
                     <Box
                       component="img"

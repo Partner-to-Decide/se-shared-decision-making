@@ -74,9 +74,12 @@
 }
 
 .toggle-drawer .menu-list button.active-btn {
-    background: #DFF0D8;
+    background-color: #DFF0D8;
+    background-image: url('../../siteImages/icons/check-icon.svg');
+    background-position: 94% center;
+    background-repeat: no-repeat;
+    background-size: 22px;
 }
-
 
 .cross-icon {
     position: absolute;
@@ -95,7 +98,13 @@
     border-radius: 20px;
     padding: 8px 13px;
     text-decoration: none;
-    margin: 0 10px 6px 0 !important;
+    margin: 0 10px 10px 0 !important;
+    display: inline-block;
+}
+
+.language-menu li a:hover{
+    background-color: #0C3A25;
+    color: #ffffff !important;
 }
 
 header .menu-btn {

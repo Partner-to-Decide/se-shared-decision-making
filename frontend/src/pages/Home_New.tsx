@@ -172,9 +172,9 @@ export default function Home() {
                     </Container>
                 </Grid>
               :
-              <Grid className="hero_container" container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'3rem 1.3rem'}}>
+              <Grid className="hero_container" container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', padding:'3rem 1.3rem 1.5rem 1.3rem'}}>
                 <Grid container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}> 
-                  <Box className="textBox" sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}} component={Container}>
+                  <Box className="textBox" sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', p: 0}} component={Container}>
                     <Typography sx={{ fontWeight:500, fontSize:'36px'}} variant="h2" className="title_text" color="primary" gutterBottom>
                         {mainSectionData?.data.attributes.Hero_Title}
                     </Typography>
@@ -380,7 +380,7 @@ export default function Home() {
                 <Container maxWidth={false} className="info_content">
                   <Container className="info_content_left" sx={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
                     <Typography sx={{ mb: 1, fontWeight: 700, color: '#0C3A25', lineHeight: 'inherit' }} textAlign="center" className="info_content_title" variant="h2">{selectedInfoSectionData?.Information_Full_Title}</Typography>
-                    <Typography component={'small'} variant="body1" textAlign="center">{selectedInfoSectionData?.Information_Caution_Text}</Typography>
+                    <Typography component={'small'} variant="body1" fontSize="14px" textAlign="center">{selectedInfoSectionData?.Information_Caution_Text}</Typography>
 
                     <Typography sx={{ mt: 4, mb: 1 }} className="info_content_answer" variant="h2" color="primary.main">{selectedInfoSectionData?.Information_Answer}</Typography>
                     <Typography sx={{width: '90%', lineHeight: 'inherit'}} className="info_content_description" color="primary.dark" variant="body1">{selectedInfoSectionData?.Information_Description}</Typography>
@@ -400,7 +400,7 @@ export default function Home() {
                         <Grid item xs={7} className="info_canvas" sx={{ pt: 3 }}>
                             <Progress offset={`${selectedInfoSectionData?.Information_Stat_Number}`}></Progress>
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={5} position="relative">
                             <Container className="stats_text" sx={{marginLeft: '-80px', width:'calc(100% + 110px)'}} maxWidth={false} disableGutters={true}>
                               <Typography className="info_stat_number" variant="h2" color="primary.main">{selectedInfoSectionData?.Information_Stat_Number + '%'}</Typography>
                               <Typography sx={{width:'100%', fontSize: '24px'}} className="info_content_additional" variant="h4" color="primary.main">{selectedInfoSectionData?.Information_Additional_Info}</Typography>
@@ -446,10 +446,10 @@ export default function Home() {
                     <Container maxWidth="lg">
                         <Grid container spacing={2}>
                             <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
-                                <Typography variant="h2" sx={{ mt: 2, width: '300px' }} color="primary.main" gutterBottom textAlign="center">
+                                <Typography variant="h2" sx={{ mt: 2, width: '300px' }} color="primary.main" gutterBottom textAlign="center" lineHeight="inherit">
                                     {decisonAidSection?.Section_Title}
                                 </Typography>
-                                <Typography variant="body2" color="primary.main" gutterBottom sx={{ width: '300px' }}>
+                                <Typography variant="body1" color="primary.dark" gutterBottom sx={{ lineHeight: '24px', width: '300px' }}>
                                     {decisonAidSection?.Section_Description}
                                 </Typography>
                                 <Button sx={{ px: 3, py: 1, mt: 4, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>{decisonAidSection?.Button_Text}</Button>

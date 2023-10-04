@@ -156,6 +156,12 @@
         border-radius:207px;
     }
 
+    .hero_container {
+        background-size: 40rem;
+        background-position: -40px 114%;
+        background-image: url('../../siteImages/mobile-hero-pattern-bg.svg');
+    }
+
     .hero_image {
         width: 100%;
         height: 264px;
@@ -195,7 +201,22 @@
         }
     }
     .about-section{
-        background-size: 280px;
+        background-image: none;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        &:after{
+            content: "";
+            background-size: 100%;
+            background-image: url('../../siteImages/about-pattern-bg.svg');
+            width: 396px;
+            height: 289px;
+            position: absolute;
+            bottom: -8%;
+            right: -25%;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
         .hero_image_about{
             max-width: 266px;
             margin: 0 auto 25px;

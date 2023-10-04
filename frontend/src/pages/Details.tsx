@@ -238,14 +238,14 @@ function Details() {
 
                                <Grid container spacing={2} mb={!isMobile ? "2rem" : "1rem"}>
                                   <Grid item>
-                                      <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
-                                          <span><Link href="/Home" color="#4D4D4D" sx={{ textDecoration: 'none' }}>Home</Link> <CaretRight size={16} /></span> 
-                                          {DetailsData?.Title}
+                                      <Typography textTransform="uppercase" variant="h5" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                          <span style={{ marginRight: '3px' }}><Link href="/Home" color="#4D4D4D" sx={{ textDecoration: 'none' }}>Home</Link> &gt; </span> 
+                                           {DetailsData?.Title}
                                       </Typography>
                                   </Grid>
                                   {!isMobile &&
                                     <Grid item ml='auto'>
-                                        <Typography textTransform="uppercase" variant="body1" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
+                                        <Typography textTransform="uppercase" variant="h5" color="#4D4D4D" gutterBottom alignItems="center" sx={{ display: 'flex' }}>
                                             <Clock size={20} style={{ marginRight: '5px' }} />
                                             { DetailsData?.DetailsWaiting?.ReadingTime }
                                         </Typography>
@@ -253,10 +253,10 @@ function Details() {
                                   }
                               </Grid>
 
-                               <Typography variant="h2" mb="0.7rem" color="primary.main">
+                               <Typography variant="h2" mb="0.7rem" color="primary.main" className="maintitle2">
                                 {DetailsData?.Title}
                               </Typography>
-                              <Typography variant="h4" color="primary.main">
+                              <Typography variant="h4" color="primary.main" className="m-font-size-24">
                                 { DetailsData?.DetailsWaiting?.title1 }
                               </Typography>
 
@@ -397,26 +397,27 @@ function Details() {
                           <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                             {item.Description}
                           </Typography>
-                           <img
-                              style={{ marginLeft: '58px', marginTop: '20px' }}
-                              width="160px"
-                              height="160px"
-                              src={(REACT_APP_api_base_url || "") + item.Image.data.attributes.url}
-                              alt="DottedCircle6"
-                           />
-                          {index === array.length - 1 && (
-                            <Typography
-                              variant="h4"
-                              color="#0C3A25"
-                              style={{
-                                fontSize: '16px',
-                                letterSpacing: '0.25px',
-                                textTransform: 'capitalize'
-                              }}
-                            >
-                             {item.unit}
-                          </Typography>
-                           )}
+                          <Grid xs={12} textAlign="center">
+                             <img
+                                style={{ marginTop: '20px' }}
+                                src={(REACT_APP_api_base_url || "") + item.Image.data.attributes.url}
+                                alt="DottedCircle6"
+                             />
+                            {index === array.length - 1 && (
+                              <Typography
+                                variant="h4"
+                                color="#000000"
+                                style={{
+                                  fontSize: '16px',
+                                  letterSpacing: '0.25px',
+                                  textTransform: 'capitalize',
+                                  marginTop: '1rem'
+                                }}
+                              >
+                               {item.unit}
+                            </Typography>
+                             )}
+                          </Grid>
                         </Paper>
                       </Grid>
                     ))}
@@ -428,7 +429,7 @@ function Details() {
                     </Typography>
 
                     <Typography display="block" className="same-breastfeed">
-                      {DetailsData?.DetailSubtitle.subtitle2}.
+                      {DetailsData?.DetailSubtitle.subtitle2}
                     </Typography>
                 </Grid>
 

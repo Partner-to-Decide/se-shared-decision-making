@@ -325,5 +325,8 @@ img#first-image-round {
     .maintitle2{
       font-size: 32px;
     }
+    .m-font-size-24{
+      font-size: 1.5rem;
+    }
 }
 

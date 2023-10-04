@@ -20,6 +20,7 @@ const Progress = (props) => {
                 label: '',
                 data: [100-Number(props.offset),Number(props.offset)],
                 backgroundColor: ['rgb(255, 255, 255)','rgb(12,58,37)'],
+                borderWidth: [0, 0, 0, 0]
             }
             
         ]
@@ -41,7 +42,7 @@ const Progress = (props) => {
                 responsive:true,
                 animation:{
                     animateScale: true,
-                               }
+                }
             }
         }
     }

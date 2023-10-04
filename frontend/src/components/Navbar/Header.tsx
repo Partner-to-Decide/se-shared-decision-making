@@ -165,11 +165,11 @@ const Header = () => {
                     </Grid>
 
                     <Grid item className="language-selector">
-                        <Typography textTransform="uppercase" color="#666666" mb='1rem'>Languages</Typography>
+                        <Typography textTransform="uppercase" color="#666666" mb='0.4rem'>Languages</Typography>
                         <MenuList className="language-menu">
-                            <MenuItem sx={{ mb: 1, p: 0 }}><Link href="#" onClick={() => handleLanguageChange('en')}>English</Link></MenuItem>
-                            <MenuItem sx={{ mb: 1, p: 0 }}><Link href="#" onClick={() => handleLanguageChange('es')}>Español</Link></MenuItem>
-                            <MenuItem sx={{ mb: 1, p: 0 }}><Link href="#" onClick={() => handleLanguageChange('bah')}>Kreyòl Ayisyen</Link></MenuItem>
+                            <MenuItem sx={{ mb: 0, p: 0, minHeight: 'auto' }}><Link href="#" onClick={() => handleLanguageChange('en')}>English</Link></MenuItem>
+                            <MenuItem sx={{ mb: 0, p: 0, minHeight: 'auto' }}><Link href="#" onClick={() => handleLanguageChange('es')}>Español</Link></MenuItem>
+                            <MenuItem sx={{ mb: 0, p: 0, minHeight: 'auto' }}><Link href="#" onClick={() => handleLanguageChange('bah')}>Kreyòl Ayisyen</Link></MenuItem>
                         </MenuList>
 
 

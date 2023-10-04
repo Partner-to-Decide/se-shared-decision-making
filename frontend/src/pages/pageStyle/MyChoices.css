@@ -336,9 +336,6 @@
       flex-basis: initial !important;
       margin-top: 3rem;
   }
-  .MuiTypography-h5{
-     font-size: 24px;
-  }
   .TimeBlock-content {
       margin-top: 2rem;
       display: flex;
