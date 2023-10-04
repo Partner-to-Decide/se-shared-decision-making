@@ -164,9 +164,14 @@ const Question = () => {
     };
 
     let questionsByLanguage = [];
-    questionsByLanguage['en'] = [1, 2, 3, 4, 5, 6, 19, 'quiz'];
-    questionsByLanguage['es'] = [7, 9, 10, 11, 12, 13, 19, 'quiz'];
-    questionsByLanguage['bah'] = [8, 14, 15, 16, 17, 18, 19, 'quiz'];
+    questionsByLanguage['en'] = [1,2,3,4,6,19, 'quiz'];
+    questionsByLanguage['es'] = [7,9,10,11,13,20, 'quiz'];
+    questionsByLanguage['bah'] = [8,14,15,16,18,21, 'quiz'];
+
+    let lastQuest = {'en': 19, 'es': 20,'bah': 21 }
+    //let label[19] = {''};
+    
+
 
     const handleNext = () => {
 
@@ -262,7 +267,7 @@ const Question = () => {
                                         {question.attributes.question_detail[0].question_content}
                                     </Typography>
                                 </Container>
-                                {question.id === 19 ?
+                                {question.id === 19 || question.id === 20 || question.id === 21 ?
                                     <CustomSlider
                                         className="step-slider step-slider-v2"
                                         value={sliderValue}

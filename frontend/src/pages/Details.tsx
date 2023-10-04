@@ -86,7 +86,6 @@ function Details() {
   const open = Boolean(anchorEl)
 
   const handleClickBirth = (event: React.MouseEvent<HTMLButtonElement>) => {
-       console.log('openBirthss',event.currentTarget)
     setAnchorElBirth(event.currentTarget)
   }
 
@@ -94,10 +93,8 @@ function Details() {
     setAnchorElBirth(null)
   }
   const openBirth = Boolean(anchorElBirth)
-  console.log('openBirth',openBirth)
-  const handleClickPneu = (event: React.MouseEvent<HTMLButtonElement>) => {
-   
-    setAnchorElPneu(event.currentTarget)
+     const handleClickPneu = (event: React.MouseEvent<HTMLButtonElement>) => {
+     setAnchorElPneu(event.currentTarget)
   }
 
   const handleClosePneu = () => {
@@ -136,7 +133,7 @@ function Details() {
       try {
         const result = await axios.get(
           REACT_APP_api_base_url +
-           `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
+           `/api/choices-detail-pages?filters[slug][$eq]=${slug}&populate=deep&locale=` +
             localStorage.getItem('language')
         )
          const sortedData = result.data.data.sort((a: any, b: any) => {
@@ -148,7 +145,7 @@ function Details() {
         try {
           const result = await axios.get(
             REACT_APP_api_base_url +
-              `/api/choices-detail-pages/?filters[slug][$eq]=${slug}&populate=deep&locale=` +
+              `/api/choices-detail-pages?filters[slug][$eq]=${slug}&populate=deep&locale=` +
               DEFAULT_LANGUAGE
           )
           const sortedData = result.data.data.sort((a: any, b: any) => {
@@ -226,7 +223,7 @@ function Details() {
 
   const DetailsData = detailsSectionData?.data[0]?.attributes;
   const SideTopics  = detailsSectionData?.data[0]?.attributes?.DetailTopics; 
-  const details_content = DetailsData?.details_content?.data?.attributes.content1;
+  const details_content = DetailsData?.DetailsContent;
   const details_source = DetailsData?.source?.data?.attributes.source1;
   const details_buttonset = DetailsData?.DetailsButtons;
 
@@ -338,7 +335,7 @@ function Details() {
                                 }
 
                               {details_content?.map((item, index) => (
-                                [<>
+                                <>
                                   {item.image?.data ?
                                     <img
                                     src={(REACT_APP_api_base_url || "") + item.image.data?.attributes?.url}
@@ -381,240 +378,50 @@ function Details() {
                                 </Typography>
                                : null }
                               </div>
-                          </>]))}
+                          </>))}
                      </Paper>
-
+                {DetailsData?.DetailsGrid?
                  <Grid container spacing={4}>
-
-                  <Grid item xs={12} md={6}>
-                    <Paper elevation={0} className="whitePost">
-                      <Typography
-                        variant="h4" 
-                        mb="0.7rem" 
-                        color="primary.dark"
-                        className="bottomTitle"
-                      >
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
-                            .Title
-                        }
-                        <span>{
-                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
-                            .TitleNumber
-                        }</span>
-                      </Typography>
-                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids1[0]
-                            .Description
-                        }
-                      </Typography>
-                      <Avatar
-                        className="avatar"
-                        style={{
-                          backgroundColor: '#DFF0D8',
-                        }}
-                      >
-                        <Typography
-                          variant="h4"
-                          style={{
-                            color: '#0C3A25',
-                            fontWeight: 'bold',
-                            fontSize: '2rem',
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids1[0].range
-                          }
-                        </Typography>
-                        <Typography
-                          variant="h4"
-                          color="#0C3A25"
-                          style={{
-                            fontSize: '16px',
-                            letterSpacing: '0.25px',
-                            textTransform: 'capitalize'
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids1[0].unit
-                          }
-                        </Typography>
-                      </Avatar>
-                    </Paper>
+                   {DetailsData?.DetailsGrid?.map((item, index, array) => (
+                      <Grid key={index} item xs={12} md={6}>
+                        <Paper elevation={0} className="whitePost">
+                          <Typography
+                            variant="h4" 
+                            mb="0.7rem" 
+                            color="primary.dark"
+                            className="bottomTitle"
+                          >
+                            {item.Title}
+                            <span>{item.TitleNumber}</span>
+                          </Typography>
+                          <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
+                            {item.Description}
+                          </Typography>
+                           <img
+                              style={{ marginLeft: '58px', marginTop: '20px' }}
+                              width="160px"
+                              height="160px"
+                              src={(REACT_APP_api_base_url || "") + item.Image.data.attributes.url}
+                              alt="DottedCircle6"
+                           />
+                          {index === array.length - 1 && (
+                            <Typography
+                              variant="h4"
+                              color="#0C3A25"
+                              style={{
+                                fontSize: '16px',
+                                letterSpacing: '0.25px',
+                                textTransform: 'capitalize'
+                              }}
+                            >
+                             {item.unit}
+                          </Typography>
+                           )}
+                        </Paper>
+                      </Grid>
+                    ))}
                   </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <Paper elevation={0} className="whitePost">
-                      <Typography
-                        variant="h4" 
-                        mb="0.7rem" 
-                        color="primary.dark"
-                        className="bottomTitle"
-                      >
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
-                            .Title
-                        }
-
-                        <span>{
-                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
-                            .TitleNumber
-                        }</span>
-                      </Typography>
-                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids2[0]
-                            .Description
-                        }
-                      </Typography>
-                      <Avatar
-                        className="avatar"
-                        style={{
-                          backgroundColor: '#0C3A25',
-                        }}
-                      >
-                        <Typography
-                          variant="h4"
-                          style={{
-                            color: '#DFF0D8',
-                            fontWeight: 'bold',
-                            fontSize: '2rem',
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids2[0].range
-                          }
-                        </Typography>
-                        <Typography
-                          variant="h4"
-                          color="#DFF0D8"
-                          style={{
-                            fontSize: '16px',
-                            letterSpacing: '0.25px',
-                            textTransform: 'capitalize'
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids2[0].unit
-                          }
-                        </Typography>
-                      </Avatar>
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Paper elevation={0} className="whitePost">
-                      <Typography
-                        variant="h4" 
-                        mb="0.7rem" 
-                        color="primary.dark"
-                        className="bottomTitle"
-                      >
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
-                            .Title
-                        }
-
-                          <span>{
-                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
-                            .TitleNumber
-                        }</span>
-                      </Typography>
-                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids3[0]
-                            .Description
-                        }
-                      </Typography>
-                      <Avatar
-                        className="avatar"
-                        style={{
-                          background:
-                            'linear-gradient(45deg, #0C3A25 30%, #DFF0D8 90%)',
-                          marginBottom: '2rem',
-                        }}
-                      >
-                        <Typography
-                          variant="h4"
-                          style={{
-                            color: '#DFF0D8',
-                            fontWeight: 'bold',
-                            fontSize: '24px',
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids3[0].range
-                          }
-                        </Typography>
-                        <Typography
-                          variant="h4"
-                          color="#DFF0D8"
-                          style={{
-                            fontSize: '16px',
-                            letterSpacing: '0.25px',
-                            textTransform: 'capitalize'
-                          }}
-                        >
-                          {
-                            DetailsData?.details_grid.data.attributes
-                              .Details_Grids3[0].unit
-                          }
-                        </Typography>
-                      </Avatar>
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Paper elevation={0} className="whitePost">
-                      <Typography 
-                        variant="h4" 
-                        mb="0.7rem" 
-                        color="primary.dark"
-                        className="bottomTitle"
-                        >
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
-                            .Title
-                        }
-                          <span>{
-                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
-                            .TitleNumber
-                        }</span>
-                      </Typography>
-                      <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
-                            .Description
-                        }
-                      </Typography>
-                      <Heart
-                        size={90}
-                        color="#0C3A25"
-                        weight="fill"
-                        style={{ margin: '0 auto 1rem', display: 'block' }}
-                      />
-                      <Typography
-                          variant="h4"
-                          color="primary.dark"
-                          textAlign="center"
-                          style={{
-                            fontSize: '16px',
-                            letterSpacing: '0.25px',
-                            textTransform: 'capitalize'
-                          }}
-                        >
-                        {
-                          DetailsData?.details_grid.data.attributes.Details_Grids4[0]
-                            .unit
-                        }
-                      </Typography>
-                    </Paper>
-                  </Grid>
-                </Grid>
+                : null }
                  <Grid className="same-rectangle" item>
                     <Typography display="block" className="same-for-all-opts">
                       {DetailsData?.DetailSubtitle.subtitle1}
@@ -624,6 +431,7 @@ function Details() {
                       {DetailsData?.DetailSubtitle.subtitle2}.
                     </Typography>
                 </Grid>
+
                  <Paper elevation={0}>
                   <Typography
                     variant="h4"
@@ -1076,7 +884,7 @@ function Details() {
                     </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      {details_source?.map((item, index) => (
+                    {details_source?.map((item, index) => (
                       [
                           <Grid>
                             <Sources
@@ -1112,13 +920,19 @@ function Details() {
 
                   <Grid container spacing={2} style={{ marginBottom: '20px' }}>
                     {details_buttonset?.BtnLinks.map((item, index) => (
-                      [
+                      
                     <Grid item>
                       <Button sx={{ fontSize: '18px' }}>
-                        <Link href={item.ButtonLink} sx={{ textDecoration: 'none' }}>{item.ButtonText}</Link>
-                      </Button>
+                      {item.ButtonLink ? (
+                        <Link href={item.ButtonLink} sx={{ textDecoration: 'none' }}>
+                          {item.ButtonText}
+                        </Link>
+                      ) : (
+                        <span>{item.ButtonText}</span>
+                      )}
+                    </Button>
                     </Grid>
-                     ] 
+                     
                     ))}
                   </Grid>
                 </>}

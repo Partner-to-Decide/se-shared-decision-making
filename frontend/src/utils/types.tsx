@@ -20,10 +20,12 @@ export interface Labor_data {
        WaitTime:string
        PageTitle:string
        FeaturedImage:image_data
-       source:source
+       // source:source
     }
   }
 }
+
+
 
 export interface Labor_Topics {
    data: {
@@ -51,39 +53,57 @@ export interface RisksandBenefits {
 }
 export interface Details_data {
   data: {
+    id: number
     attributes: {
       Title:string
       slug:string
       DetailsWaiting: detailsWaiting
       DetailsSection: Details_section_data
-      details_content:details_content1[]
-      details_grid:details_grids[]
-      DetailSubtitle:details_subtitle[]
+      DetailsContent:details_content1[]
+      DetailsGrid:details_grids_labor[]
+      DetailSubtitle:details_subtitle
       PotentialRisks:Details_PotentialRisks[]
       details_author:details_authors[]
       DetailTopics:Sidebar_topic
-      source:source
-      DetailsButtons:detailsbuttonset[]
+      source:source_labor
+      DetailsButtons:detailsbuttonset
+    }
+  }[]
+}
+
+export interface details_grids_labor {
+        id: number
+        Title: string | null
+        TitleNumber: string | null
+        Description: string | null
+        range: string | null
+        unit: string | null
+        Image:image_data
+}
+export interface source_labor {
+  data: {
+    id: number
+    attributes: {
+      source1: {
+        id: number
+        SourceNumber: string
+        sourcecontent: string | null
+        link: string | null
+      }[]
     }
   }
 }
-
 export interface detailsbuttonset {
-     TopHeading:string
+      id: number
+      TopHeading:string
       BtnLinks: {
         id: number
-        ButtonLink: string | null
+        ButtonLink: string|null
         ButtonText: string | null
       }[]
 }
 export interface Sidebar_topic {
-  DetailTopics: {
-    Title:string
-    SidebarTopics: {
-      Text: string
-      Link: string
-    }
-  }[]
+   Title:string
 }
 
 export interface detailsWaiting {
@@ -94,26 +114,21 @@ export interface detailsWaiting {
 export interface Details_PotentialRisks {
       titlenumber: string
       content: string
-      Title: string
+      title: string
+      popuptitle:string
+      popupcontent:string
       image:image_data
 }
 
 export interface details_content1 {
-  data: {
-    attributes: {
-      content1: {
-        id: number
-        title: string | null
-        Description: string | null
-        link: string | null
-         data: {
-          attributes: {
-              image:image_data
-            }
-          }
-      }[]
-    }
-  }
+    id: number
+    title: string | null
+    Description: string | null
+    link: string | null
+    linktitle1:string|null
+    linktitle2:string|null
+    image:image_data
+    Imagelayout:string
 }
 
 export interface Details_section_data {
@@ -613,13 +628,9 @@ export interface details_section {
   }[]
 }
 export interface details_subtitle {
-  data: {
-    id: number
-    attributes: {
-      subtitle1: string
-      subtitle2: string
-    }
-  }[]
+  id: number
+  subtitle1: string
+  subtitle2: string
 }
 export interface source {
   data: {
@@ -682,7 +693,7 @@ export interface details_grids {
         unit: string | null
       }[]
     }
-  }[]
+  }
 }
 
 export interface details_risk_content {

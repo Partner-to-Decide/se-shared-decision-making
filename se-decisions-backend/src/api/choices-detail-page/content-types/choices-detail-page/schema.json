@@ -16,11 +16,6 @@
     }
   },
   "attributes": {
-    "details_content": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::details-content.details-content"
-    },
     "DetailTopics": {
       "displayName": "Details-topics",
       "type": "component",
@@ -32,10 +27,6 @@
         }
       }
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "Title"
-    },
     "Title": {
       "type": "string",
       "pluginOptions": {
@@ -43,11 +34,6 @@
           "localized": true
         }
       }
-    },
-    "details_grid": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::details-grid.details-grid"
     },
     "DetailSubtitle": {
       "displayName": "Details-Subtitle",
@@ -116,6 +102,34 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::details-button-set.details-button-set"
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "DetailsGrid": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "details-grids.details-grids"
+    },
+    "DetailsContent": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "details-content.details-content"
     }
   }
 }

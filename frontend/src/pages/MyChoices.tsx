@@ -1725,14 +1725,14 @@ const MyChoices = () => {
                               <FiberManualRecordIcon
                                 sx={{ fontSize: 10, pr: "0.3125rem" }}
                               />
-                              Complications for baby {'  '}
+                              
                               <Typography
                                 display="inline"
                                 className="potential-risks-small-content2"
                                 bgcolor={lightGreen}
                                 onClick={handleClick}
                               >
-                             ( Seizure
+                             Seizure
                               </Typography>
 
                               <Popup
@@ -1742,14 +1742,14 @@ const MyChoices = () => {
                                 title={'Seizure'}
                                 text={forAll?.data[0].attributes.content[0].Popup1}
                               />
-
+                              {', '}
                               <Typography
                                   display="inline"
                                   className="potential-risks-small-content2"
                                   bgcolor={lightGreen}
                                   onClick={handleClickPneu}
                                 >
-                               {'  , '} pneumonia
+                                pneumonia
                               </Typography>
                               <Popup
                                 open={openPneu}
@@ -1768,9 +1768,10 @@ const MyChoices = () => {
                               />
                               : null }
 
-                              {'  '} {forAll?.data[0].attributes.content[0].Title} {' )'}
+                              {'  '} {forAll?.data[0].attributes.content[0].Title}
                               <Typography
                                 display="inline"
+                                ml="6px"
                                 className="for-all-small-number"
                               >
                               {forAll?.data[0].attributes.content[0].Number}
@@ -1786,6 +1787,7 @@ const MyChoices = () => {
                                 {item.Title}
                                 <Typography
                                   display="inline"
+                                  ml="6px"
                                   className="for-all-small-number"
                                 >
                                   {item.Number}
