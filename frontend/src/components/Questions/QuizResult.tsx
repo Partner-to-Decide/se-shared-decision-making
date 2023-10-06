@@ -132,7 +132,7 @@ const QuizResult = () => {
                   <Stack direction="row" flexWrap="wrap">
                     {rating.mostImportant.map((cur, index) => {
                       return (
-                        <Grid item width='148px' textAlign="center">
+                        <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
                            {cur['icon']?
                               <Box className="icon-shape">
                                  <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
@@ -155,7 +155,7 @@ const QuizResult = () => {
                   <Stack direction="row" flexWrap="wrap">
                     {rating.important.map((cur, index) => {
                       return (
-                        <Grid item width='148px' textAlign="center">
+                        <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
                           {cur['icon']?
                               <Box className="icon-shape">
                                  <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
@@ -178,7 +178,7 @@ const QuizResult = () => {
                   <Stack direction="row" flexWrap="wrap">
                     {rating.lessImportant.map((cur, index) => {
                       return (
-                        <Grid item width='148px' textAlign="center">
+                        <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
                            {cur['icon']?
                               <Box className="icon-shape">
                                  <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
@@ -201,7 +201,7 @@ const QuizResult = () => {
                   <Stack direction="row" flexWrap="wrap">
                     {rating.leastImportant.map((cur, index) => {
                       return (
-                        <Grid item width='148px' textAlign="center">
+                        <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
                         {cur['icon']?
                           <Box className="icon-shape">
                              <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
