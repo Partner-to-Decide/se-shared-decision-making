@@ -15,9 +15,6 @@
     "Description": {
       "type": "text"
     },
-    "unit": {
-      "type": "string"
-    },
     "Image": {
       "type": "media",
       "multiple": false,

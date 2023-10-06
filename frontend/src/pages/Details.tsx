@@ -397,27 +397,15 @@ function Details() {
                           <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                             {item.Description}
                           </Typography>
+                          {item.Image.data.attributes.url?
                           <Grid xs={12} textAlign="center">
                              <img
                                 style={{ marginTop: '20px' }}
                                 src={(REACT_APP_api_base_url || "") + item.Image.data.attributes.url}
                                 alt="DottedCircle6"
                              />
-                            {index === array.length - 1 && (
-                              <Typography
-                                variant="h4"
-                                color="#000000"
-                                style={{
-                                  fontSize: '16px',
-                                  letterSpacing: '0.25px',
-                                  textTransform: 'capitalize',
-                                  marginTop: '1rem'
-                                }}
-                              >
-                               {item.unit}
-                            </Typography>
-                             )}
-                          </Grid>
+                         </Grid>
+                         :null}
                         </Paper>
                       </Grid>
                     ))}
