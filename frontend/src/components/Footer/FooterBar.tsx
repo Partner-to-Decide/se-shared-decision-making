@@ -49,7 +49,6 @@ const FooterBar = () => {
       setFooterState(true)
     }
   }, [FooterData]);
-    console.log('lang',lang)
   return (
     <div>
       <div className="allFooter">

@@ -108,7 +108,6 @@ const Question = () => {
         setCurrentStep(parseInt(currentStepKey) + 1);
     }, [id]);
 
-      console.log('question',question)
     // update results array when user click the slider
     // todo: error
       const handleSliderChange = (
@@ -147,7 +146,7 @@ const Question = () => {
     questionsByLanguage['es'] = [7,9,10,11,13,20, 'quiz'];
     questionsByLanguage['bah'] = [8,14,15,16,18,21, 'quiz'];
     let lastQuest = {'en': 19, 'es': 20,'bah': 21 }
-    
+
     const handleNext = () => {
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;

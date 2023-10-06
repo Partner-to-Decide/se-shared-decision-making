@@ -9,31 +9,29 @@ import { useLocation } from 'react-router-dom';
 export default function BasicSelect() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const selectedLang = queryParams.get('lang') || 'en';
+  const selectedLang = queryParams.get('lang') || localStorage.getItem('language') || 'en';
 
   const [lang, setlang] = React.useState<string>(selectedLang);
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log('event.target.value',event.target.value as string)
-    setlang(event.target.value as string);
+    setlang(event.target.value as string);   
+    localStorage.setItem('language', event.target.value);
+    window.dispatchEvent(new Event('storage'));
   };
 
   //Used for the dropdown button in the navigation menu, to be a trigger for Strapi content, i.e. when Spanish selected, switches to Spanish version, etc.
-  
-  React.useEffect(() => {
-    localStorage.setItem("language", lang!);
-    window.dispatchEvent(new Event('storage'))
-  }, [lang]);
-
-  React.useEffect(() => {
+    React.useEffect(() => {
     if(localStorage.getItem("language") != null){
-      console.log("not null")
       setlang(localStorage.getItem("language")!)
     }else{
       console.log("is null")
     }
   },[])
-  console.log('localStorage.getItem("language")',localStorage.getItem("language"));
+
+  React.useEffect(() => {
+    localStorage.setItem("language", lang!);
+    window.dispatchEvent(new Event('storage'))
+  }, [lang]);
   return (
     <Box sx={{ minWidth: 120 }}>
       <Select
