@@ -6,13 +6,15 @@ import "../../pages/pageStyle/MyValues.css"
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { Box, Divider, Grid, Container, ThemeProvider, Typography, Stack, Button, Link } from "@mui/material";
+import { Box, Divider, Grid, Container, ThemeProvider, Typography, Stack, Link } from "@mui/material";
 import {
   EnvelopeSimple,
   DownloadSimple,
   PushPinSimple,
   Clock,
 } from '@phosphor-icons/react'
+import { styled } from '@mui/material/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
 import { REACT_APP_api_base_url } from "../../utils/url_config";
 import FirstImg from '../../siteImages/pexels-william-fortunato-6392989.png'
 
@@ -79,6 +81,18 @@ const QuizResult = () => {
     pdf.save("summary.pdf");
   };
 
+  const GreenStyleButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    color: '#ffffff',
+    backgroundColor: '#0C3A25',
+    borderRadius: '40px',
+    padding: '0.6rem 2rem',
+    textTransform: 'capitalize', 
+    fontSize: '1.125rem',
+    '&:hover': {
+      backgroundColor: '#DFF0D8',
+      color: '#0C3A25',
+    },
+  }));
 
   return (
     <StyledEngineProvider injectFirst>
@@ -359,9 +373,9 @@ const QuizResult = () => {
                     See suggested questions and add to them.
                   </Typography>
 
-                  <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem' }}>
-                     <Link href="/MyStuff" style={{ fontSize: '18px', color: '#fff' }}> View Questions </Link>
-                  </Button>
+                  <Link href="/MyStuff?tab=1" style={{ display: 'inline-block', marginTop: '3rem' }}>
+                    <GreenStyleButton variant="contained">View Questions</GreenStyleButton>
+                  </Link>
                   <Grid item mt="3rem">
                     <img className="view-question-bottom-img" src={FirstImg} alt="" />
                   </Grid>

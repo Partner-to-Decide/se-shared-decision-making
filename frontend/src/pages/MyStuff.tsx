@@ -28,6 +28,9 @@ import Tab from '@mui/material/Tab';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+
+import { useNavigate, useLocation } from 'react-router-dom';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -44,7 +47,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box className="box-wrapper" sx={{ py: 3, px: 3 }}>
+        <Box className="box-wrapper" sx={{ pt: 3, px: 0 }}>
           {children}
         </Box>
       )}
@@ -75,6 +78,10 @@ export default function MyStuff() {
   const [isMobile, setIsMobile] = useState(false);
   const [width, setWidth] = useState<number>(window.innerWidth);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
   useEffect(() => {
     if(width<=768){
       setIsMobile(true)
@@ -86,7 +93,17 @@ export default function MyStuff() {
   };
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    navigate(`/MyStuff?tab=${newValue}`);
   };
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tabValue = params.get('tab');
+    if (tabValue) {
+      setValue(Number(tabValue));
+    }
+  }, [location.search]);
+
   const addNote = function (value: string) {
     return setNote((notes) => [...notes, value]);
   };
@@ -205,6 +222,14 @@ export default function MyStuff() {
       </React.Fragment>
     ));
   };
+
+  const choiceArray = {
+    choiceOne: "Wait for spontaneous labor past 42 weeks",
+    choiceTwo: "Schedule induction at or around 42 weeks",
+    choiceThree: "Schedule induction sometime between 41 and 42 weeks",
+    choiceFour: "Schedule induction at or around 41 weeks",
+    choiceFive: "Request induction between 39-41 weeks"
+  };
  
   //returns index of where edit occurs
   return (
@@ -217,125 +242,223 @@ export default function MyStuff() {
           <Grid container columns={{ xl: 12, lg: 12, md: 12 }} item xl={12} lg={12} md={12}
             sx={{
               backgroundColor: "#FAF6ED", direction: "column",
-              mt: 0, pt: 8, pb: 8, display: "flex", alignItems: "center", justifyContent: "center"
+              mt: 0, pt: 8, pb: 0, display: "flex", alignItems: "center", justifyContent: "center"
             }} >
-                <Container maxWidth="md">
-                    <Box>
-                        <Tabs className="tabs-head" value={value} onChange={handleChange} aria-label="basic tabs example">
-                          <Tab label="Saved" {...a11yProps(0)} />
-                          <Tab label="Checklist" {...a11yProps(1)} />
-                        </Tabs>
-                    </Box>
-                    <CustomTabPanel value={value} index={0}>
-                        <Grid item xs={12} pl={!isMobile ? "1.5rem" : ""} pr={!isMobile ? "1.5rem"  : ""} sx={{ alignItems: "center" }}>
-                          
-                            <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
-                                Values Summary
-                            </Typography>
-                            {rating &&
-                                <Card className="value-summmary-card">
-                                    {rating.mostImportant.length > 0 &&
-                                        <Grid mb="3.4rem">
-                                            <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
-                                                Most Important
-                                            </Typography>
-                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
-                                               {rating.mostImportant.map((cur, index) => {
-                                                    return (
-                                                        <Grid item xs={6} md={4} textAlign="center">
-                                                             <Box className="icon-shape">
-                                                                <Clock size={32} weight="light" />
-                                                            </Box>
-                                                            <Typography variant="body1">
-                                                                {cur}
-                                                            </Typography>
-                                                        </Grid>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </Grid>
-                                    }
-                                    {rating.important.length > 0 &&
-                                        <Grid mb="3.4rem">
-                                            <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
-                                                Important
-                                            </Typography>
-                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
-                                                {rating.important.map((cur, index) => {
-                                                    return (
-                                                        <Grid item xs={6} md={4} textAlign="center">
-                                                             <Box className="icon-shape">
-                                                                <Clock size={32} weight="light" />
-                                                            </Box>
-                                                            <Typography variant="body1">
-                                                                {cur}
-                                                            </Typography>
-                                                        </Grid>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </Grid>
-                                    }
-                                    {rating.lessImportant.length > 0 &&
-                                        <Grid mb="3.4rem">
-                                            <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
-                                                Less Important
-                                            </Typography>
-                                            <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
-                                                {rating.lessImportant.map((cur, index) => {
-                                                    return (
-                                                        <Grid item xs={6} md={4} textAlign="center">
-                                                             <Box className="icon-shape">
-                                                                <Clock size={32} weight="light" />
-                                                            </Box>
-                                                            <Typography variant="body1">
-                                                                {cur}
-                                                            </Typography>
-                                                        </Grid>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </Grid>
-                                    }
-                                    
-                                    {rating.leastImportant.length > 0 &&<>
-                                        <Grid>
-                                            <Typography variant="body1" onClick={handleClick} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', cursor: 'pointer' }}>
-                                                View all {open ? <ExpandLess /> : <ExpandMore />}
-                                            </Typography>
-                                        </Grid>
-                                        <Collapse in={open} timeout="auto" unmountOnExit>
-                                            
-                                            <Grid mb="2rem">
-                                                <Typography variant="h3" color="primary.main" textAlign="center" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '2rem' }}>
-                                                   Least Important
-                                                </Typography>
-                                                <Grid container columnSpacing={{ xs: 1, sm: 3, md: 5 }}>
+                <Grid item xs={12}>
+                    <Container maxWidth="md">
+                      <Box>
+                          <Tabs className="tabs-head" value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tab label="Saved" {...a11yProps(0)} />
+                            <Tab label="Checklist" {...a11yProps(1)} />
+                          </Tabs>
+                      </Box>
+                    </Container>
 
-                                                    {rating.leastImportant.map((cur, index) => {
-                                                        return (
-                                                            <Grid item xs={6} md={4} textAlign="center">
-                                                                 <Box className="icon-shape">
-                                                                    <Clock size={32} weight="light" />
-                                                                </Box>
-                                                                <Typography variant="body1">
-                                                                    {cur}
-                                                                </Typography>
-                                                            </Grid>
-                                                        )
-                                                    })}
-                                                
+                    <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
+                    <CustomTabPanel value={value} index={0}>
+                        <Grid item xs={12} pl={!isMobile ? "0rem" : ""} pr={!isMobile ? "0rem"  : ""} sx={{ alignItems: "center" }}>
+                            
+                            <Container maxWidth="md">
+                              <Typography variant="h3" color="primary.main" fontSize="2.25rem" fontWeight="500" style={{ marginBottom: '1rem' }}>
+                                  Values Summary
+                              </Typography>
+                            </Container>
+                            {rating &&
+                                <Grid
+                                    container
+                                    columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+                                  >
+                                    <div className="summary-grid" >
+                                      {rating.mostImportant.length > 0 &&
+                                        <div className="summary-box most-important">
+                                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                            Most Important
+                                          </Typography>
+                                          <Stack direction="row" flexWrap="wrap">
+                                            {rating.mostImportant.map((cur, index) => {
+                                              return (
+                                                <Grid item width='148px' textAlign="center">
+                                                   {cur['icon']?
+                                                      <Box className="icon-shape">
+                                                         <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                      </Box>
+                                                  :null}
+                                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                    {cur['text']}
+                                                  </Typography>
                                                 </Grid>
-                                            </Grid>
-                                        </Collapse>
-                                    </>}
-                                </Card>
+                                              )
+                                            })}
+                                          </Stack>
+                                        </div>
+                                      }
+                                      {rating.important.length > 0 &&
+                                        <div className="summary-box important">
+                                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                            Important
+                                          </Typography>
+                                          <Stack direction="row" flexWrap="wrap">
+                                            {rating.important.map((cur, index) => {
+                                              return (
+                                                <Grid item width='148px' textAlign="center">
+                                                  {cur['icon']?
+                                                      <Box className="icon-shape">
+                                                         <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                      </Box>
+                                                  :null}
+                                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                     {cur['text']}
+                                                  </Typography>
+                                                </Grid>
+                                              )
+                                            })}
+                                          </Stack>
+                                        </div>
+                                      }
+                                      {rating.lessImportant.length > 0 &&
+                                        <div className="summary-box less-important">
+                                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                            Less Important
+                                          </Typography>
+                                          <Stack direction="row" flexWrap="wrap">
+                                            {rating.lessImportant.map((cur, index) => {
+                                              return (
+                                                <Grid item width='148px' textAlign="center">
+                                                   {cur['icon']?
+                                                      <Box className="icon-shape">
+                                                         <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                      </Box>
+                                                  :null}
+                                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                    {cur['text']}
+                                                  </Typography>
+                                                </Grid>
+                                              )
+                                            })}
+                                          </Stack>
+                                        </div>
+                                      }
+                                      {rating.leastImportant.length > 0 &&
+                                        <div className="summary-box least-important">
+                                          <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                            Least Important
+                                          </Typography>
+                                          <Stack direction="row" flexWrap="wrap">
+                                            {rating.leastImportant.map((cur, index) => {
+                                              return (
+                                                <Grid item width='148px' textAlign="center">
+                                                {cur['icon']?
+                                                  <Box className="icon-shape">
+                                                     <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                  </Box>
+                                                  :null}
+                                                  <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                    {cur['text']}
+                                                  </Typography>
+                                                </Grid>
+                                              )
+                                            })}
+                                          </Stack>
+                                        </div>
+                                      }
+                                    </div>
+
+                                    <div className="summary-box choice-ques stuff-value">
+                                        <Container maxWidth="md">
+                                            {rating.choiceOne.length > 0 &&
+                                              <>
+                                                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                Right now I’m leaning towards
+                                                </Typography>
+                                                    <Stack direction="row" spacing={4} justifyContent="center">
+                                                          <Grid item width='148px' textAlign="center">
+                                                            <Box className="icon-shape">
+                                                              <Clock size={32} weight="light" />
+                                                            </Box>
+                                                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                            {choiceArray.choiceOne}
+                                                            </Typography>
+                                                          </Grid>
+                                                    </Stack>
+                                              </>}
+                                            {rating.choiceTwo.length > 0 &&
+                                              <>
+                                              <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Right now I’m leaning towards
+                                              </Typography>
+                                                  <Stack direction="row" spacing={4} justifyContent="center">
+                                                        <Grid item width='148px' textAlign="center">
+                                                          <Box className="icon-shape">
+                                                            <Clock size={32} weight="light" />
+                                                          </Box>
+                                                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                          {choiceArray.choiceTwo}
+                                                          </Typography>
+                                                        </Grid>
+                                                  </Stack>
+                                            </>}
+                                            {rating.choiceThree.length > 0 &&
+                                              <>
+                                              <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Right now I’m leaning towards
+                                              </Typography>
+                                                  <Stack direction="row" spacing={4} justifyContent="center">
+                                                        <Grid item width='148px' textAlign="center">
+                                                          <Box className="icon-shape">
+                                                            <Clock size={32} weight="light" />
+                                                          </Box>
+                                                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                          {choiceArray.choiceThree}
+                                                          </Typography>
+                                                        </Grid>
+                                                  </Stack>
+                                            </>}
+                                            {rating.choiceFour.length > 0 &&
+                                              <>
+                                              <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Right now I’m leaning towards
+                                              </Typography>
+                                                  <Stack direction="row" spacing={4} justifyContent="center">
+                                                        <Grid item width='148px' textAlign="center">
+                                                          <Box className="icon-shape">
+                                                            <Clock size={32} weight="light" />
+                                                          </Box>
+                                                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                          {choiceArray.choiceFour}
+                                                          </Typography>
+                                                        </Grid>
+                                                  </Stack>
+                                            </>}
+                                            {rating.choiceFive.length > 0 &&
+                                              <>
+                                              <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Right now I’m leaning towards
+                                              </Typography>
+                                                  <Stack direction="row" spacing={4} justifyContent="center">
+                                                        <Grid item width='148px' textAlign="center">
+                                                          <Box className="icon-shape">
+                                                            <Clock size={32} weight="light" />
+                                                          </Box>
+                                                          <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                          {choiceArray.choiceFive}
+                                                          </Typography>
+                                                        </Grid>
+                                                  </Stack>
+                                            </>
+
+                                            }
+                                        
+                                        </Container>
+                                      </div>
+
+                                  </Grid>
                             }
                         </Grid>
                         
                     </CustomTabPanel>
 
                     <CustomTabPanel value={value} index={1}>
+                      <Container maxWidth="md">
                         <Grid xs={12} pl={!isMobile ? "1.5rem" : ""} pr={!isMobile ? "1.5rem"  : ""}>
                             <Grid item xs={12} sx={{ alignItems: "center" }}>
                               {pageTitlesData?.data.attributes.Title != null ? (
@@ -352,9 +475,7 @@ export default function MyStuff() {
                             <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 6, pb: 8 }}>
                               <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "space-between" }}>
                                {sameSection?.data != null ? (
-                                  <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
                                     <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} isloading={isloading} />  
-                                  </div>
                                 ) : null}
                               </Grid>
                             </Grid>
@@ -372,8 +493,10 @@ export default function MyStuff() {
                               </Grid>
                             </Grid>
                         </Grid>
+                      </Container>
                     </CustomTabPanel>
-                </Container>
+                    </div>
+                </Grid>
           </Grid>
         </div>
       </Layout>

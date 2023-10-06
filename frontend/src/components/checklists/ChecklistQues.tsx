@@ -185,10 +185,6 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
                   {question.isChecked === true &&
                     <div className="question pdf-ques">
                        {question.text}
-                        <div className="tooltop-pdf" style={{ marginTop: '7px', display: 'block', width: '100%' }}>
-                          <h4>Learn more about</h4>
-                          <p><Link href={question.Link}>{question.tooltip}</Link></p>
-                        </div>
                     </div>
                   }
                 </>) : (<>

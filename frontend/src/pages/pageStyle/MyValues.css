@@ -358,6 +358,10 @@
     margin-bottom: 5rem;
 }
 
+.summary-box.choice-ques.stuff-value {
+    margin: 0;
+}
+
 .most-important {
   background-color: #DFF0D8;
 }
