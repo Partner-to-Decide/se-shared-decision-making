@@ -99,7 +99,7 @@ const Question = () => {
                 "mostImportant",
                 ];
             const defaultCategory = categoryLabels[0]; // "leastImportant"
-            dispatch(addToCategory({ category: defaultCategory,questionNum:'test', questionText: data.data.attributes.question_detail[0].question_content, questionIcon: data.data.attributes.question_detail[0].Icon.data.attributes.url,isChoice: false }));
+            dispatch(addToCategory({ category: defaultCategory,questionNum:data.data.id, questionText: data.data.attributes.question_detail[0].question_content, questionIcon: data.data.attributes.question_detail[0].Icon.data.attributes.url,isChoice: false }));
             setSliderValue(1);
         }
         fetchQuestion();
@@ -114,7 +114,7 @@ const Question = () => {
         value: number | number[],
         ) => {      
         // const category = value as number - 1;
-        if (question.id === 19) {
+        if (question.id === 19 || question.id === 20 || question.id === 21) {
             const categoryLabels: (keyof typeof categories)[] = [
                 "choiceOne",
                 "choiceTwo",
@@ -124,7 +124,7 @@ const Question = () => {
                 ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionNum:'test', questionText: question.attributes.question_detail[0].question_content,
+            dispatch(addToCategory({ category, questionNum:question.id, questionText: question.attributes.question_detail[0].question_content,
                 questionIcon: question.attributes.question_detail[0].Icon.data.attributes.url, isChoice: true }));
         } else {
             const categoryLabels: (keyof typeof categories)[] = [
@@ -135,7 +135,7 @@ const Question = () => {
                 ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionNum:'test',questionText: question.attributes.question_detail[0].question_content,
+            dispatch(addToCategory({ category, questionNum:question.id,questionText: question.attributes.question_detail[0].question_content,
                 questionIcon: question.attributes.question_detail[0].Icon.data.attributes.url, isChoice: false }));
         }
         setSliderValue(value as number);
@@ -146,7 +146,7 @@ const Question = () => {
     questionsByLanguage['es'] = [7,9,10,11,13,20, 'quiz'];
     questionsByLanguage['bah'] = [8,14,15,16,18,21, 'quiz'];
     let lastQuest = {'en': 19, 'es': 20,'bah': 21 }
-
+    
     const handleNext = () => {
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;
@@ -185,28 +185,68 @@ const Question = () => {
         }
     };
 
-    // // next button
-    // const handleNext = () => {
-    //   const nextId = parseInt(id!) + 1;
-    //   if (nextId === 7) {
-    //     navigate(`/QuizResult`);
-    //   } else {
-    //     navigate(`/question/${nextId}`);
-    //     setCurrentStep(nextId); // Update the currentStep state
-    //   }
-    // };
+    const lang = languageState;
+    const labels = {
+        en: {
+            leastImportant: "Least Important",
+            mostImportant: "Most Important",
+        },
+        es: {
+            leastImportant: "Lo menos importante",
+            mostImportant: "Lo más importante",
+        },
+        bah: {
+            leastImportant: "Sa ki pi enpòtan",
+            mostImportant: "Sa ki mwens enpòtan",
+        },
+    };
+    const selectedLabels = labels[lang] || labels["en"]; 
 
-    // // previous button
-    // const handlePrevious = () => {
-    //   const prevId = parseInt(id!) - 1;
-    //   if (prevId === 0) {
-    //     navigate("/MyValues");
-    //   } else {
-    //     navigate(`/question/${prevId}`);
-    //     setCurrentStep(prevId); // Update the currentStep state
-    //   }
-    // };
+    const labelSets = {
+        en: {
+            label1: "Wait for spontaneous labor past 42 weeks",
+            label2: "Schedule induction at or around 42 weeks",
+            label3: "Schedule induction sometime between 41 and 42 weeks",
+            label4: "Schedule induction at or around 41 weeks",
+            label5: "Request induction between 39-41 weeks",
+        },
+        es: {
+            label1: "Esperar el trabajo de parto espontáneo después de las 42 semanas",
+            label2: "Programar la inducción a las 42 semanas o alrededor de ellas",
+            label3: "Programar la inducción en algún momento entre las 41 y las 42 semanas",
+            label4: "Programar la inducción a las 41 semanas o alrededor de ellas",
+            label5: "Solicitar la inducción entre las 39 y las 41 semanas",
+        },
+        bah: {
+            label1: "Esperar el trabajo de parto espontáneo después de las 42 semanas",
+            label2: "Programar la inducción a las 42 semanas o alrededor de ellas",
+            label3: "Programar la inducción en algún momento entre las 41 y las 42 semanas",
+            label4: "Programar la inducción a las 41 semanas o alrededor de ellas",
+            label5: "Solicitar la inducción entre las 39 y las 41 semanas",
+        },
+    };
+    const selectedLabelsMulti = labelSets[lang] || labelSets["en"];
 
+    const buttonTexts = {
+        en: {
+            backButton: "Back",
+            nextButton: "Next",
+            comeBackLater: "Come Back Later",
+        },
+        es: {
+            backButton: "Atrás",
+            nextButton: "Siguiente",
+            comeBackLater: "Volver más tarde",
+        },
+        bah: {
+            backButton: "Retounen",
+            nextButton: "Pwochen",
+            comeBackLater: "Retounen pita",
+        },
+    };
+
+    const selectedTexts = buttonTexts[lang] || buttonTexts["en"]; 
+    const { backButton, nextButton, comeBackLater } = selectedTexts;
 
     return (
         <StyledEngineProvider injectFirst>
@@ -245,11 +285,11 @@ const Question = () => {
                                         value={sliderValue}
                                         step={null}
                                         marks={[
-                                            { value: 1, label: "Wait for spontaneous labor past 42 weeks", },
-                                            { value: 2, label: "Schedule induction at or around 42 weeks" },
-                                            { value: 3, label: "Schedule induction sometime between 41 and 42 weeks" },
-                                            { value: 4, label: "Schedule induction at or around 41 weeks" },
-                                            { value: 5, label: "Request induction between 39-41 weeks" },
+                                            { value: 1, label: selectedLabelsMulti.label1, },
+                                            { value: 2, label: selectedLabelsMulti.label2 },
+                                            { value: 3, label: selectedLabelsMulti.label3 },
+                                            { value: 4, label: selectedLabelsMulti.label4 },
+                                            { value: 5, label: selectedLabelsMulti.label5 },
                                         ]}
                                         min={1}
                                         max={5}
@@ -259,10 +299,10 @@ const Question = () => {
                                         value={sliderValue}
                                         step={null}
                                         marks={[
-                                            { value: 1, label: "Least Important", },
+                                            { value: 1, label: selectedLabels.leastImportant, },
                                             { value: 2 },
                                             { value: 3 },
-                                            { value: 4, label: "Most Important" },
+                                            { value: 4, label: selectedLabels.mostImportant },
                                         ]}
                                         min={1}
                                         max={4}
@@ -276,15 +316,15 @@ const Question = () => {
                                     <button onClick={handlePrevious} className="Previous-circle"><span><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5.99991 12L7.40991 10.59L2.82991 6L7.40991 1.41L5.99991 -1.23266e-07L-8.72135e-05 6L5.99991 12Z" fill="#0C3A25" />
                                     </svg>
-                                    </span>Back</button>
+                                    </span> {backButton}</button>
                                     <button onClick={handleNext} className="Next-circle"><span><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2.00009 0L0.590088 1.41L5.17009 6L0.590088 10.59L2.00009 12L8.00009 6L2.00009 0Z" fill="#0C3A25" />
                                     </svg>
-                                    </span>Next</button>
+                                    </span>{nextButton}</button>
                                 </div>
 
                                 <div className="back_btn">
-                                    <Link href="#">Come Back Later</Link>
+                                    <Link href="#">{comeBackLater}</Link>
                                 </div>
 
                             </>

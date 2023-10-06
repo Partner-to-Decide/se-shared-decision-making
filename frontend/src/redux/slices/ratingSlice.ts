@@ -47,8 +47,8 @@ export const ratingSlice = createSlice({
     ) => {
       const { category, questionText, questionIcon, questionNum, isChoice } =
         action.payload;
-
-      if (questionText === "Right now I’m leaning towards") {
+        console.log(questionNum)
+     if (parseInt(questionNum) === 19 || parseInt(questionNum) === 20 || parseInt(questionNum) === 21) {
         state["choiceOne"] = [];
         state["choiceTwo"] = [];
         state["choiceThree"] = [];
