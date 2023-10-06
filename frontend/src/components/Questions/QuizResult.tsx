@@ -13,7 +13,7 @@ import {
   PushPinSimple,
   Clock,
 } from '@phosphor-icons/react'
-
+import { REACT_APP_api_base_url } from "../../utils/url_config";
 import FirstImg from '../../siteImages/pexels-william-fortunato-6392989.png'
 
 
@@ -38,10 +38,6 @@ const QuizResult = () => {
     }
   }, [width]);
 
-  //console.log('rating', rating);
-  //if (rating.lessImportant.length > 0) {
-  //localStorage.setItem('QuizQuestions', JSON.stringify(rating));
-  //}
   const summaryGridRef = useRef<HTMLDivElement>(null);
 
   const renderArray = (arr: string[]) => {
@@ -123,11 +119,13 @@ const QuizResult = () => {
                     {rating.mostImportant.map((cur, index) => {
                       return (
                         <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
+                           {cur['icon']?
+                              <Box className="icon-shape">
+                                 <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                              </Box>
+                          :null}
                           <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                            {cur}
+                            {cur['text']}
                           </Typography>
                         </Grid>
                       )
@@ -144,11 +142,13 @@ const QuizResult = () => {
                     {rating.important.map((cur, index) => {
                       return (
                         <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
+                          {cur['icon']?
+                              <Box className="icon-shape">
+                                 <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                              </Box>
+                          :null}
                           <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                            {cur}
+                             {cur['text']}
                           </Typography>
                         </Grid>
                       )
@@ -165,11 +165,13 @@ const QuizResult = () => {
                     {rating.lessImportant.map((cur, index) => {
                       return (
                         <Grid item width='148px' textAlign="center">
-                          <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
-                          </Box>
+                           {cur['icon']?
+                              <Box className="icon-shape">
+                                 <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                              </Box>
+                          :null}
                           <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                            {cur}
+                            {cur['text']}
                           </Typography>
                         </Grid>
                       )
@@ -186,11 +188,13 @@ const QuizResult = () => {
                     {rating.leastImportant.map((cur, index) => {
                       return (
                         <Grid item width='148px' textAlign="center">
+                        {cur['icon']?
                           <Box className="icon-shape">
-                            <Clock size={32} weight="light" />
+                             <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
                           </Box>
+                          :null}
                           <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
-                            {cur}
+                            {cur['text']}
                           </Typography>
                         </Grid>
                       )

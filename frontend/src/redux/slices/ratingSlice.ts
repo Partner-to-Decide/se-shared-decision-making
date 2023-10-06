@@ -1,15 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RatingState {
-  leastImportant: string[];
-  lessImportant: string[];
-  important: string[];
-  mostImportant: string[];
-  choiceOne: string[];
-  choiceTwo: string[];
-  choiceThree: string[];
-  choiceFour: string[];
-  choiceFive: string[];
+  leastImportant: (Question | string)[];
+  lessImportant: (Question | string)[];
+  important: (Question | string)[];
+  mostImportant: (Question | string)[];
+  choiceOne: (Question | string)[];
+  choiceTwo: (Question | string)[];
+  choiceThree: (Question | string)[];
+  choiceFour: (Question | string)[];
+  choiceFive: (Question | string)[];
+}
+
+interface Question {
+  text: string;
+  icon: string;
+  num: string;
+  isChoice: boolean;
 }
 
 const initialState: RatingState = {
@@ -30,36 +37,48 @@ export const ratingSlice = createSlice({
   reducers: {
     addToCategory: (
       state,
-      action: PayloadAction<{ category: keyof RatingState; questionText: string, questionIcon:string , isChoice: boolean }>
+      action: PayloadAction<{
+        category: keyof RatingState;
+        questionText: string;
+        questionIcon: string;
+        questionNum: string;
+        isChoice: boolean;
+      }>
     ) => {
-      const { category, questionText, isChoice } = action.payload;
-      if(questionText === 'WHAT SHOULD I KNOW ABOUT THESE CHOICES?'){
-        state['choiceOne'] = [];
-        state['choiceTwo'] = [];
-        state['choiceThree'] = [];
-        state['choiceFour'] = [];
-        state['choiceFive'] = [];
-        if(category === 'leastImportant'){
-          state['choiceOne'].push('WHAT SHOULD I KNOW ABOUT THESE CHOICES?');
-        } else {
-          state[category].push(questionText);
-        }
-          
-      } else {
-        // Remove the question from the previous category
-        Object.values(state).forEach((questionsArray) => {
-          const index = questionsArray.indexOf(questionText);
-          if (index !== -1) {
-            questionsArray.splice(index, 1);
-          }
-        });
+      const { category, questionText, questionIcon, questionNum, isChoice } =
+        action.payload;
 
-        // Add the question to the new category
-        state[category].push(questionText);
+      if (questionText === "Right now I’m leaning towards") {
+        state["choiceOne"] = [];
+        state["choiceTwo"] = [];
+        state["choiceThree"] = [];
+        state["choiceFour"] = [];
+        state["choiceFive"] = [];
+        if (category === "leastImportant") {
+          state["choiceOne"].push("Right now I’m leaning towards");
+        } else {
+          const question: Question = {
+            text: questionText || "",
+            icon: questionIcon || "",
+            num: questionNum || "", // Add questionNum
+            isChoice: isChoice || false, // Add isChoice
+          };
+          state[category].push(question);
+        }
+      } else {
+        const question: Question = {
+          text: questionText,
+          icon: questionIcon,
+          num: questionNum || "", // Add questionNum
+          isChoice: isChoice || false, // Add isChoice
+        };
+        Object.keys(state).forEach((key) => {
+          state[key] = state[key].filter((q) => q.text !== questionText);
+        });
+        state[category].push(question);
       }
 
-      localStorage.setItem('QuizQuestions', JSON.stringify(state));
-
+      localStorage.setItem("QuizQuestions", JSON.stringify(state));
     },
     resetCategories: (state) => {
       state.leastImportant = [];

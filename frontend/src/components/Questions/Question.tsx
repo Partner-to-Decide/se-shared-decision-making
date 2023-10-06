@@ -87,7 +87,7 @@ const Question = () => {
             const responseTotal = await fetch(
                 process.env.REACT_APP_api_base_url + `/api/my-values-questions/`
                 );
-            console.log(process.env.REACT_APP_api_base_url + `/api/my-values-questions/${id}?populate=deep&locale=` + languageState)
+           
             const data = await response.json();
             const dataTotal = await responseTotal.json();
             setQuestion(data.data);
@@ -99,7 +99,7 @@ const Question = () => {
                 "mostImportant",
                 ];
             const defaultCategory = categoryLabels[0]; // "leastImportant"
-            dispatch(addToCategory({ category: defaultCategory, questionText: data.data.attributes.question_detail[0].question_content, questionIcon: question.attributes.question_detail[0].Icon,isChoice: false }));
+            dispatch(addToCategory({ category: defaultCategory,questionNum:'test', questionText: data.data.attributes.question_detail[0].question_content, questionIcon: data.data.attributes.question_detail[0].Icon.data.attributes.url,isChoice: false }));
             setSliderValue(1);
         }
         fetchQuestion();
@@ -108,7 +108,7 @@ const Question = () => {
         setCurrentStep(parseInt(currentStepKey) + 1);
     }, [id]);
 
-
+      console.log('question',question)
     // update results array when user click the slider
     // todo: error
       const handleSliderChange = (
@@ -125,7 +125,8 @@ const Question = () => {
                 ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content,questionIcon: question.attributes.question_detail[0].Icon, isChoice: true }));
+            dispatch(addToCategory({ category, questionNum:'test', questionText: question.attributes.question_detail[0].question_content,
+                questionIcon: question.attributes.question_detail[0].Icon.data.attributes.url, isChoice: true }));
         } else {
             const categoryLabels: (keyof typeof categories)[] = [
                 "leastImportant",
@@ -135,7 +136,8 @@ const Question = () => {
                 ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content,questionIcon: question.attributes.question_detail[0].Icon, isChoice: false }));
+            dispatch(addToCategory({ category, questionNum:'test',questionText: question.attributes.question_detail[0].question_content,
+                questionIcon: question.attributes.question_detail[0].Icon.data.attributes.url, isChoice: false }));
         }
         setSliderValue(value as number);
     };
@@ -144,12 +146,8 @@ const Question = () => {
     questionsByLanguage['en'] = [1,2,3,4,6,19, 'quiz'];
     questionsByLanguage['es'] = [7,9,10,11,13,20, 'quiz'];
     questionsByLanguage['bah'] = [8,14,15,16,18,21, 'quiz'];
-
     let lastQuest = {'en': 19, 'es': 20,'bah': 21 }
-    //let label[19] = {''};
     
-
-
     const handleNext = () => {
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;
