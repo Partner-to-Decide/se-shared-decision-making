@@ -55,6 +55,14 @@
           "localized": true
         }
       }
+    },
+    "Button_Url": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

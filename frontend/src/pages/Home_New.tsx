@@ -259,7 +259,9 @@ export default function Home() {
                     </Container>
 
                     <Grid item xs={12} textAlign="center" mt="3rem">
-                      <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
+                     <Link href={'/MyChoices'}>
+                        <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
+                      </Link>
                     </Grid>
                 </Grid>
 
@@ -323,7 +325,9 @@ export default function Home() {
                 </Grid>
 
                 <Grid item xs={12} textAlign="center" mt="3rem">
-                  <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
+                    <Link href={'/MyChoices'}>
+                      <WhiteStyleButton variant="contained">Compare All</WhiteStyleButton>
+                   </Link>
                 </Grid>
 
               </Grid>
@@ -429,7 +433,11 @@ export default function Home() {
                                 <Typography variant="body2" color="primary.main" gutterBottom>
                                     {decisonAidSection?.Section_Description}
                                 </Typography>
-                                <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>{decisonAidSection?.Button_Text}</Button>
+                                <Link href={decisonAidSection?.Button_Url}>
+                                  <Button sx={{ px: 3, py: 1, mt: 4, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>
+                                      {decisonAidSection?.Button_Text}
+                                  </Button>
+                                </Link>
                             </Grid>
                             <Grid item xs={2}></Grid>
                             <Grid item xs={6}>
@@ -452,7 +460,11 @@ export default function Home() {
                                 <Typography variant="body1" color="primary.dark" gutterBottom sx={{ lineHeight: '24px', width: '300px' }}>
                                     {decisonAidSection?.Section_Description}
                                 </Typography>
-                                <Button sx={{ px: 3, py: 1, mt: 4, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>{decisonAidSection?.Button_Text}</Button>
+                                 <Link href={decisonAidSection?.Button_Url}>
+                                  <Button sx={{ px: 3, py: 1, mt: 4, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem'}}>
+                                      {decisonAidSection?.Button_Text}
+                                  </Button>
+                                </Link>
                             </Grid>
                             <Grid item xs={12}>
                                 {decisonAidSection?

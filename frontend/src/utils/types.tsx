@@ -293,6 +293,7 @@ export interface decision_aid_section {
   Section_Title: string
   Section_Description: string
   Button_Text: string
+  Button_Url: string
   Section_Image: image_data
 }
 
