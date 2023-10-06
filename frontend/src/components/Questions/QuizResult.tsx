@@ -57,11 +57,11 @@ const QuizResult = () => {
   };
 
   const choiceArray = {
-      choiceOne: "My labor starts on its own",
-      choiceTwo: "My baby comes sooner than later",
-      choiceThree: "Less time in the hospital and fewer interventions",
-      choiceFour: "Lower risks to me and my baby after 41-42 weeks",
-      choiceFive: "Personal and/or cultural reasons"
+      choiceOne: "Wait for spontaneous labor past 42 weeks",
+      choiceTwo: "Schedule induction at or around 42 weeks",
+      choiceThree: "Schedule induction sometime between 41 and 42 weeks",
+      choiceFour: "Schedule induction at or around 41 weeks",
+      choiceFive: "Request induction between 39-41 weeks"
     };
 
   // todo: can not download
@@ -205,7 +205,7 @@ const QuizResult = () => {
                     {rating.choiceOne.length > 0 &&
                       <>
                         <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                        WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                        Right now I’m leaning towards
                         </Typography>
                             <Stack direction="row" spacing={4} justifyContent="center">
                                   <Grid item width='148px' textAlign="center">
@@ -221,7 +221,7 @@ const QuizResult = () => {
                     {rating.choiceTwo.length > 0 &&
                       <>
                       <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      Right now I’m leaning towards
                       </Typography>
                           <Stack direction="row" spacing={4} justifyContent="center">
                                 <Grid item width='148px' textAlign="center">
@@ -237,7 +237,7 @@ const QuizResult = () => {
                     {rating.choiceThree.length > 0 &&
                       <>
                       <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      Right now I’m leaning towards
                       </Typography>
                           <Stack direction="row" spacing={4} justifyContent="center">
                                 <Grid item width='148px' textAlign="center">
@@ -253,7 +253,7 @@ const QuizResult = () => {
                     {rating.choiceFour.length > 0 &&
                       <>
                       <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      Right now I’m leaning towards
                       </Typography>
                           <Stack direction="row" spacing={4} justifyContent="center">
                                 <Grid item width='148px' textAlign="center">
@@ -269,7 +269,7 @@ const QuizResult = () => {
                     {rating.choiceFive.length > 0 &&
                       <>
                       <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
-                      WHAT SHOULD I KNOW ABOUT THESE CHOICES?
+                      Right now I’m leaning towards
                       </Typography>
                           <Stack direction="row" spacing={4} justifyContent="center">
                                 <Grid item width='148px' textAlign="center">
@@ -354,7 +354,10 @@ const QuizResult = () => {
                   <Typography variant="body1" lineHeight="24px">
                     See suggested questions and add to them.
                   </Typography>
-                  <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem' }}>View Questions</Button>
+
+                  <Button sx={{ px: 3, py: 1, mt: 6, backgroundColor: '#0C3A25', borderRadius: '25px', color: '#fff', textTransform: 'capitalize', fontSize: '1.125rem' }}>
+                     <Link href="/MyStuff" style={{ fontSize: '18px', color: '#fff' }}> View Questions </Link>
+                  </Button>
                   <Grid item mt="3rem">
                     <img className="view-question-bottom-img" src={FirstImg} alt="" />
                   </Grid>

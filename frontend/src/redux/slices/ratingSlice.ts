@@ -30,7 +30,7 @@ export const ratingSlice = createSlice({
   reducers: {
     addToCategory: (
       state,
-      action: PayloadAction<{ category: keyof RatingState; questionText: string, isChoice: boolean }>
+      action: PayloadAction<{ category: keyof RatingState; questionText: string, questionIcon:string , isChoice: boolean }>
     ) => {
       const { category, questionText, isChoice } = action.payload;
       if(questionText === 'WHAT SHOULD I KNOW ABOUT THESE CHOICES?'){

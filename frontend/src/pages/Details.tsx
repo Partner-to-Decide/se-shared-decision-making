@@ -959,10 +959,10 @@ function Details() {
                                 
                   {details_content?.map((item, index) => (
                    <Typography key={index} variant="body1" mb="1.5rem" fontSize="1.125rem" color="#4D4D4D" sx={{ display: 'flex' }}>
-                     <CaretRight key={index} size={16} />
-                     <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
-                        { item.title }
-                     </Link>
+                     <CaretRight key={index} size={16} style={{ minWidth: '20px' }}/>
+                       <Link href={'#section' + item.id} onClick={(e) => scrollToSection(e, 'section'+item.id)} sx={{ color: '#4D4D4D', textDecoration: 'none' }}>
+                          { item.title }
+                       </Link>
                    </Typography>
                   ))}
                 </Paper>

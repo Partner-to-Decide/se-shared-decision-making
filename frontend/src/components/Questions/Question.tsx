@@ -59,24 +59,15 @@ const Question = () => {
     const navigate = useNavigate();
     // update data in redux
     const categories = useSelector((state: RootState) => state.rating);
-    // current question from strapi
     const [question, setQuestion] = useState<any>(null);
-
     const [currentStep, setCurrentStep] = useState(1);
     const [questionTotal, setQuestionTotal] = useState(0);
-
-    // current question id
     const { id } = useParams();
-    // control slider value
     const [sliderValue, setSliderValue] = useState(1);
-    // global language
-    // const [languageState, setLanguageState] = useState('en');
     const [languageState, setLanguageState] = useState('en');
-
     const [questionSr, setQuestionSr] = useState(1);
 
     useEffect(() => {
-        // Sets the language at page load. If no language in local storage then uses english by default
         window.addEventListener('storage', () => {
             setLanguageState(localStorage.getItem('language') || 'en')
         });
@@ -87,43 +78,31 @@ const Question = () => {
         setSliderValue(1);
     }, [id]);
 
-    // update question content when id changes
-    useEffect(() => {
+      // update question content when id changes
+      useEffect(() => {
         const fetchQuestion = async () => {
             const response = await fetch(
                 process.env.REACT_APP_api_base_url + `/api/my-values-questions/${id}?populate=deep&locale=` + languageState
-            );
+                );
             const responseTotal = await fetch(
                 process.env.REACT_APP_api_base_url + `/api/my-values-questions/`
-            );
+                );
             console.log(process.env.REACT_APP_api_base_url + `/api/my-values-questions/${id}?populate=deep&locale=` + languageState)
             const data = await response.json();
             const dataTotal = await responseTotal.json();
-            console.log('Fetched data:', data.data);
-            console.log('Fetched data:', dataTotal.data);
             setQuestion(data.data);
             setQuestionTotal(dataTotal.data.length);
-
-            // add this line to dispatch the default value
-            //console.log('question.id ', question.id);
-                console.log(question?.id);
-                const categoryLabels: (keyof typeof categories)[] = [
-                    "leastImportant",
-                    "lessImportant",
-                    "important",
-                    "mostImportant",
+            const categoryLabels: (keyof typeof categories)[] = [
+                "leastImportant",
+                "lessImportant",
+                "important",
+                "mostImportant",
                 ];
-                const defaultCategory = categoryLabels[0]; // "leastImportant"
-                dispatch(addToCategory({ category: defaultCategory, questionText: data.data.attributes.question_detail[0].question_content, isChoice: false }));
-                
-    
-                setSliderValue(1); // reset slider value to 1
-            }
-            
-        
-
+            const defaultCategory = categoryLabels[0]; // "leastImportant"
+            dispatch(addToCategory({ category: defaultCategory, questionText: data.data.attributes.question_detail[0].question_content, questionIcon: question.attributes.question_detail[0].Icon,isChoice: false }));
+            setSliderValue(1);
+        }
         fetchQuestion();
-
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         setQuestionSr(parseInt(currentStepKey) + 1);
         setCurrentStep(parseInt(currentStepKey) + 1);
@@ -132,11 +111,9 @@ const Question = () => {
 
     // update results array when user click the slider
     // todo: error
-    const handleSliderChange = (
+      const handleSliderChange = (
         value: number | number[],
-    ) => {
-
-
+        ) => {      
         // const category = value as number - 1;
         if (question.id === 19) {
             const categoryLabels: (keyof typeof categories)[] = [
@@ -145,20 +122,20 @@ const Question = () => {
                 "choiceThree",
                 "choiceFour",
                 "choiceFive",
-            ];
+                ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content, isChoice: true }));
+            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content,questionIcon: question.attributes.question_detail[0].Icon, isChoice: true }));
         } else {
             const categoryLabels: (keyof typeof categories)[] = [
                 "leastImportant",
                 "lessImportant",
                 "important",
                 "mostImportant",
-            ];
+                ];
 
             const category = categoryLabels[value as number - 1];
-            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content, isChoice: false }));
+            dispatch(addToCategory({ category, questionText: question.attributes.question_detail[0].question_content,questionIcon: question.attributes.question_detail[0].Icon, isChoice: false }));
         }
         setSliderValue(value as number);
     };
@@ -174,8 +151,6 @@ const Question = () => {
 
 
     const handleNext = () => {
-
-
         let currentStepKey = questionsByLanguage[languageState].indexOf(parseInt(id!));
         const nextKey = parseInt(currentStepKey) + 1;
         setQuestionSr(parseInt(currentStepKey) + 1);
@@ -260,7 +235,7 @@ const Question = () => {
 
                                 <Container maxWidth="sm">
                                     <Typography variant="h5" letterSpacing="1.5px" mb="1.5rem" color="primary.main">
-                                        {question.attributes.question_detail[0].intro_sentance}
+                                       {question.attributes.question_detail[0].intro_sentence}
                                     </Typography>
 
                                     <Typography variant="h3" fontSize="2rem" color="primary.main">
@@ -273,11 +248,11 @@ const Question = () => {
                                         value={sliderValue}
                                         step={null}
                                         marks={[
-                                            { value: 1, label: "My labor starts on its own", },
-                                            { value: 2, label: "My baby comes sooner than later" },
-                                            { value: 3, label: "Less time in the hospital and fewer interventions" },
-                                            { value: 4, label: "Lower risks to me and my baby after 41-42 weeks" },
-                                            { value: 5, label: "Personal and/or cultural reasons" },
+                                            { value: 1, label: "Wait for spontaneous labor past 42 weeks", },
+                                            { value: 2, label: "Schedule induction at or around 42 weeks" },
+                                            { value: 3, label: "Schedule induction sometime between 41 and 42 weeks" },
+                                            { value: 4, label: "Schedule induction at or around 41 weeks" },
+                                            { value: 5, label: "Request induction between 39-41 weeks" },
                                         ]}
                                         min={1}
                                         max={5}
@@ -298,7 +273,7 @@ const Question = () => {
                                     />}
 
                                 <p className="drag-text">
-                                    Drag slider to indicate your preference
+                                   {question.attributes.question_detail[0].slider_description}
                                 </p>
                                 <div className="pre-next-container">
                                     <button onClick={handlePrevious} className="Previous-circle"><span><svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -20,6 +20,16 @@
     "slider_description": {
       "type": "string",
       "default": "Drag slider to indicate your preference"
+    },
+    "Icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
