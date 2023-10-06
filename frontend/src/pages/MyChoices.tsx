@@ -1969,6 +1969,7 @@ const MyChoices = () => {
               direction="column"
               sx={{ mt: "5.25rem" }}
             >
+            {needHelpData?.data.attributes.helpImage.data?
               <Grid item width="16.4375rem" height="25.6875rem" className="william-image">
                 <img
                   src={
@@ -1978,6 +1979,7 @@ const MyChoices = () => {
                   id="william-image"
                 />
               </Grid>
+              :null }
               <Grid
                 className="william-image-content"
                 item

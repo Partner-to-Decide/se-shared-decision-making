@@ -229,7 +229,9 @@ export default function Home() {
                                           {card.fact_point.map(fact => {
                                             return (
                                               <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-start', padding:'0px', marginBottom:'8px'}}>
-                                                <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
+                                                {fact.fact_icon.data?
+                                                  <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
+                                                :null}
                                                 <Typography sx={{ fontSize: 16, lineHeight:'24px'}} color="primary.main" gutterBottom>
                                                   {fact.fact_body}
                                                 </Typography>
@@ -296,7 +298,9 @@ export default function Home() {
                                   {card.fact_point.map(fact => {
                                     return (
                                       <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-start', padding:'0px', marginBottom:'8px'}}>
-                                        <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
+                                        {fact.fact_icon.data ? 
+                                           <img style={{marginRight:'10px'}} src={REACT_APP_api_base_url + fact.fact_icon.data.attributes.url} width="24" height="24"/>
+                                        : null }
                                         <Typography sx={{ fontSize: 16, lineHeight:'24px'}} color="primary.main" gutterBottom>
                                           {fact.fact_body}
                                         </Typography>
