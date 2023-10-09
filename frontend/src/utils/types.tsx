@@ -13,48 +13,43 @@ export interface section_data {
 }
 
 export interface Labor_data {
-   data: {
-    attributes: {
        Title:string
        slug:string
        WaitTime:string
        PageTitle:string
        FeaturedImage:image_data
-       // source:source
-    }
-  }
+       source:source_labor
 }
 
 
 
-export interface Labor_Topics {
-   data: {
+export interface LaborTopic {
+  data:{
+    id: number
     attributes: {
-       Heading:string
-       LaborTopics:LaborTopics[]
-    }
+      Heading:string | null
+      LaborTopics: LaborTopicItem[]
+    } 
   }[]
 }
-
-export interface LaborTopics {
+export interface LaborTopicItem {
     id: number
-    Category:string
-    Content:string
+    Content: string
     SectionHeading:string
-    RightImage:image_data
-    PotentialBenefits:RisksandBenefits[]
-    PotentialRisks:RisksandBenefits[]
+    Category:string
+    RightImage: image_data
+    PotentialBenefits: RisksAndBenefits[]
+    PotentialRisks: RisksAndBenefits[]
+}
+
+export interface RisksAndBenefits {
+  id: number;
+  Content: string;
 }
 
 
-export interface RisksandBenefits {
-  id: number
-  Content:string
-}
 export interface Details_data {
-  data: {
-    id: number
-    attributes: {
+
       Title:string
       slug:string
       DetailsWaiting: detailsWaiting
@@ -67,18 +62,14 @@ export interface Details_data {
       DetailTopics:Sidebar_topic
       source:source_labor
       DetailsButtons:detailsbuttonset
-    }
-  }[]
 }
 
 export interface details_grids_labor {
-        id: number
-        Title: string | null
-        TitleNumber: string | null
-        Description: string | null
-        range: string | null
-        unit: string | null
-        Image:image_data
+      id: number
+      Title: string
+      TitleNumber: string|null
+      Description: string 
+      Image:image_data
 }
 export interface source_labor {
   data: {
@@ -152,9 +143,6 @@ export interface header_menu_items{
     Menu_Link: string
 }
 export interface footer_section {
-   data: {
-    id: number
-    attributes: {
       Footer_section_data1: {
         id: number
         Footer_Logo:image_data
@@ -167,8 +155,6 @@ export interface footer_section {
         MenuHeading:string
         Footer_link:footer_menu_items[]
       }
-    }
-  }
 }
 
 export interface footer_menu_items{
@@ -465,9 +451,6 @@ export interface mychoices_needhelp {
 
 //--------------------------------- Details page
 export interface details_authors {
-  data: {
-    id: number
-    attributes: {
       Heading:string
       content:string
       ButtonText:string
@@ -492,28 +475,38 @@ export interface details_authors {
         name: string | null
         Description: string | null
       }[]
-    }
-  }[]
 }
 
 export interface details_buttonset {
-  data: {
-    id: number
-    attributes: {
-      buttonset1: {
+    buttonset1: {
         id: number
         button1: string | null
         button2: string | null
         button3: string | null
       }[]
-      buttonset2: {
-        id: number
-        button1: string | null
-        button2: string | null
-        button3: string | null
-      }[]
-    }
-  }[]
+  // data: {
+  //   id: number
+  //    buttonset1: {
+  //       id: number
+  //       button1: string | null
+  //       button2: string | null
+  //       button3: string | null
+  //     }[]
+  //   attributes: {
+  //     buttonset1: {
+  //       id: number
+  //       button1: string | null
+  //       button2: string | null
+  //       button3: string | null
+  //     }[]
+  //     buttonset2: {
+  //       id: number
+  //       button1: string | null
+  //       button2: string | null
+  //       button3: string | null
+  //     }[]
+  //   }
+  // }[]
 }
 
 export interface details_content {

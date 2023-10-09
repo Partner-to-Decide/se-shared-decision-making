@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 import { Fragment, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { footer_section} from "../../utils/types";
-import { REACT_APP_api_base_url } from "../../utils/url_config";
+import { REACT_APP_api_base_url,DEFAULT_LANGUAGE } from "../../utils/url_config";
 const FooterBar = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -38,10 +38,36 @@ const FooterBar = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(REACT_APP_api_base_url + '/api/footers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
-      setFooterData(result.data)
-      return result;
-    })
+
+    const fetchHeaderData = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/footers?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+        setFooterData(result.data.data[0].attributes);
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/footers?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+          setFooterData(result.data.data[0].attributes);
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
+    fetchHeaderData()
+
+    // axios.get(REACT_APP_api_base_url + '/api/footers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
+    //   setFooterData(result.data)
+    //   return result;
+    // })
   }, [lang]);
 
   useEffect(() => {
@@ -54,7 +80,7 @@ const FooterBar = () => {
       <div className="allFooter">
         <Container maxWidth="xl">
             <Grid container spacing={2} className="allFooterInner">
-            {footerState && FooterData?.data[0]?.attributes?.Footer_section_data1[0]?
+            {footerState && FooterData?.Footer_section_data1[0]?
                 <Grid item xs={3} className="Footercol">
                     <Box
                       component="img"
@@ -63,29 +89,29 @@ const FooterBar = () => {
                       className="logo" 
                       src={
                           REACT_APP_api_base_url +
-                          FooterData?.data[0].attributes.Footer_section_data1[0].Footer_Logo.data[0].attributes.url
+                          FooterData?.Footer_section_data1[0].Footer_Logo.data[0].attributes.url
                         }
                     />
-                   {footerState && FooterData?.data[0].attributes.Footer_section_data1[0].Footer_link?
+                   {footerState && FooterData?.Footer_section_data1[0].Footer_link?
                     <MenuList className="footer-menu">
-                     {FooterData?.data[0].attributes.Footer_section_data1[0].Footer_link.map((item) => (
+                     {FooterData?.Footer_section_data1[0].Footer_link.map((item) => (
                         <MenuItem sx={{ mb: 2.5, p: 0 }}><Link href={'/'+item.Link_url} style={{ color: '#fff' }}>{item.Link_Name}</Link></MenuItem>
                        ))}
                     </MenuList>
                     : null }
-                      <Link className="btn white-btn" href={FooterData?.data[0].attributes.Footer_section_data1[0].ButtonLink}>{FooterData?.data[0].attributes.Footer_section_data1[0].ButtonText}</Link>
+                      <Link className="btn white-btn" href={FooterData?.Footer_section_data1[0].ButtonLink}>{FooterData?.Footer_section_data1[0].ButtonText}</Link>
                 </Grid>
                  :
                  null
                }
                 <Grid item xs={1} className="Footercol-blank"></Grid>
-                {footerState && FooterData?.data[0].attributes.Footer_Decision_Aid[0]?
+                {footerState && FooterData?.Footer_Decision_Aid[0]?
                 <Grid item xs={3} className="Footercol">
                 <div className="Footercol-half">
                   <div className="Footercol-half-left">
-                    <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.data[0].attributes.Footer_Decision_Aid[0].MenuHeading}</Typography>
+                    <Typography className="footer-title" variant="h4" gutterBottom>{FooterData?.Footer_Decision_Aid[0].MenuHeading}</Typography>
                      <MenuList className="footer-menu">
-                        {FooterData?.data[0].attributes.Footer_Decision_Aid[0].Footer_link.map((item, index) => (
+                        {FooterData?.Footer_Decision_Aid[0].Footer_link.map((item, index) => (
                           [
                             <MenuItem key={index} sx={{ mb: 2.5, p: 0 }}>
                               <Link href={'/' + item.Link_url} style={{ color: '#fff' }}>

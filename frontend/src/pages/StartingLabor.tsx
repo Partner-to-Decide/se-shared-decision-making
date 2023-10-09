@@ -34,7 +34,7 @@ import './pageStyle/StartingLabor.css'
 import {
   Labor_data,
   details_buttonset,
-  Labor_Topics,
+  LaborTopic,
 } from '../utils/types'
 
 import { useNavigate, useParams,useLocation } from "react-router-dom";
@@ -56,7 +56,8 @@ function StartingLabor() {
 
 
 const [detailsLaborData, setLaborDetailsData] = useState<Labor_data>()
-const [LaborTopicsData, setLaborTopicsData] = useState<Labor_Topics>()
+const [LaborTopicsData, setLaborTopicsData] = useState<LaborTopic|null>()
+const [LaborTopicsData_zero, setLaborTopicsData_zero] = useState<LaborTopic|null>()
 const [detailsButtonSetData, setDetailsButtonSetData] = useState<details_buttonset>()
 const [languageState, setLanguageState] = useState('en')
 
@@ -98,7 +99,7 @@ const { slug } = useParams()
           const sortedData = result.data.data.sort((a: any, b: any) => {
             return a.id - b.id;
           });
-          setLaborDetailsData(result.data)
+          setLaborDetailsData(result.data.data[0].attributes)
         } catch (error) {
           console.error('Error fetching learn about data: ', error)
           try {
@@ -124,10 +125,29 @@ const { slug } = useParams()
             '/api/starting-labor-topics?populate=deep&locale=' +
             localStorage.getItem('language')
             )
-          const sortedData = result.data.data.sort((a: any, b: any) => {
-            return a.id - b.id;
-          });
-          setLaborTopicsData(result.data)
+            const sortedData = result.data.data.sort((a: any, b: any) => {
+              return a.id - b.id;
+            });
+          if (result.data.data.length > 0) {
+            setLaborTopicsData(result.data)
+          }else {
+            try {
+              const result = await axios.get(
+                REACT_APP_api_base_url +
+                '/api/starting-labor-topics?populate=deep&locale=' +
+                DEFAULT_LANGUAGE
+                )
+               const sortedData = result.data.data.sort((a: any, b: any) => {
+                return a.id - b.id;
+              });
+              setLaborTopicsData(result.data)
+            } catch (error) {
+              console.error(
+                'Error fetching learn about data with default locale: ',
+                error
+                )
+            }
+         }
         } catch (error) {
           console.error('Error fetching learn about data: ', error)
           try {
@@ -136,6 +156,9 @@ const { slug } = useParams()
               '/api/details-button-sets?populate=deep&locale=' +
               DEFAULT_LANGUAGE
               )
+             const sortedData = result.data.data.sort((a: any, b: any) => {
+              return a.id - b.id;
+             });
             setLaborTopicsData(result.data)
           } catch (error) {
             console.error(
@@ -153,7 +176,7 @@ const { slug } = useParams()
             '/api/details-button-sets?populate=deep&locale=' +
             localStorage.getItem('language')
             )
-          setDetailsButtonSetData(result.data)
+          setDetailsButtonSetData(result.data.data[0].attributes)
         } catch (error) {
           console.error('Error fetching learn about data: ', error)
           try {
@@ -162,7 +185,7 @@ const { slug } = useParams()
               '/api/details-button-sets?populate=deep&locale=' +
               DEFAULT_LANGUAGE
               )
-            setDetailsButtonSetData(result.data)
+            setDetailsButtonSetData(result.data.data[0].attributes)
           } catch (error) {
             console.error(
               'Error fetching learn about data with default locale: ',
@@ -176,7 +199,7 @@ const { slug } = useParams()
       fetchDetailsButtonSetData()
   }, [languageState])
 
-  const LaborsData = detailsLaborData?.data[0].attributes;
+  const LaborsData = detailsLaborData;
   const source     = LaborsData?.source?.data?.attributes.source1;
   return (  
       <StyledEngineProvider injectFirst>
@@ -232,8 +255,7 @@ const { slug } = useParams()
                                       marginBottom: '20px',
                                     }}
                                   />
-
-                               
+                              
                               {topics?.attributes?.LaborTopics.map((item, index) => ([ 
                                 <Grid key={index} container spacing={2} mt="2.5rem" mb="3rem">
 
@@ -270,7 +292,7 @@ const { slug } = useParams()
                                                     mb="0.7rem"
                                                     color="primary.main"
                                                 >
-                                                    Risks and Benefits
+                                                  Risks and Benefits
                                                 </Typography>
                                                 </AccordionSummary>
                                                 {item.PotentialBenefits?
@@ -295,7 +317,7 @@ const { slug } = useParams()
                                             </Accordion>
                                         </Box>
                                       </Grid>
-                                    {item?.RightImage?
+                                   {item?.RightImage?.data && (
                                      <Grid item md={5}>
                                         <img
                                             src={(REACT_APP_api_base_url || "") + item?.RightImage?.data?.attributes?.url}
@@ -304,7 +326,7 @@ const { slug } = useParams()
                                             style={{ marginBottom: '30px' }}
                                         />
                                     </Grid>
-                                    : null }
+                                   )}
                                 </Grid>
                               ]))}
                              </> 
@@ -381,7 +403,7 @@ const { slug } = useParams()
                                         style={{ marginRight: '5px' }}
                                       />
                                       {
-                                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                        detailsButtonSetData?.buttonset1[0]
                                           .button1
                                       }
                                     </Link>
@@ -393,7 +415,7 @@ const { slug } = useParams()
                                         style={{ marginRight: '5px' }}
                                       />
                                       {
-                                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                        detailsButtonSetData?.buttonset1[0]
                                           .button2
                                       }
                                     </Link>
@@ -405,7 +427,7 @@ const { slug } = useParams()
                                         style={{ marginRight: '5px' }}
                                       />
                                        {
-                                          detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                          detailsButtonSetData?.buttonset1[0]
                                             .button3
                                         }
                                     </Link>

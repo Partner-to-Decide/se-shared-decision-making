@@ -11,7 +11,7 @@ import { Fragment } from "react";
 import Progress from "../components/Graphics/Progress";
 import {Accordion, AccordionDetails, AccordionSummary,Link} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { REACT_APP_api_base_url } from "../utils/url_config";
+import { REACT_APP_api_base_url,DEFAULT_LANGUAGE } from "../utils/url_config";
 
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
@@ -63,23 +63,109 @@ export default function Home() {
 
   useEffect(() => {
 
-    axios.get(REACT_APP_api_base_url + '/api/homes?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
-      setMainSectionData(result.data.data[0].attributes.hero)
-      return result;
-    })
 
-    axios.get(REACT_APP_api_base_url + '/api/home-choice-sections?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
-      setChoiceSectionData(result.data.data[0].attributes)
-      return result;
-    })
+    const fetchMainSectionData = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/homes?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+        setMainSectionData(result.data.data[0].attributes.hero)
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/homes?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+          setMainSectionData(result.data.data[0].attributes.hero)
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
 
-    axios.get(REACT_APP_api_base_url + '/api/decisions-aid-sections?&populate=deep&locale='+localStorage.getItem("language")).then(result => {
-      setDecisonAidSection(result.data.data[0].attributes)
-    })
 
-    axios.get(REACT_APP_api_base_url + '/api/home-about-sections?&populate=deep&locale='+localStorage.getItem("language")).then(result => {
-      setAboutSection(result.data.data[0].attributes)
-    })
+
+    const fetchChoiceSectionData = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/home-choice-sections?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+          setChoiceSectionData(result.data.data[0].attributes)
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/home-choice-sections?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+             setChoiceSectionData(result.data.data[0].attributes)
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
+
+      const fetchDecisonAidSection = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/decisions-aid-sections?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+          setDecisonAidSection(result.data.data[0].attributes)
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/decisions-aid-sections?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+             setDecisonAidSection(result.data.data[0].attributes)
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
+
+     const fetchAboutSection = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/home-about-sections?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+          setAboutSection(result.data.data[0].attributes)
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/home-about-sections?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+              setAboutSection(result.data.data[0].attributes)
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
+
+    fetchMainSectionData()
+    fetchChoiceSectionData()
+    fetchDecisonAidSection()
+    fetchAboutSection()
 
   }, [languageState]);
 

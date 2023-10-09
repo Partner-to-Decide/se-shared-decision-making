@@ -139,7 +139,7 @@ function Details() {
          const sortedData = result.data.data.sort((a: any, b: any) => {
             return a.id - b.id;
           });
-        setDetailsSectionData(result.data)
+        setDetailsSectionData(result.data.data[0].attributes)
       } catch (error) {
         console.error('Error fetching learn about data: ', error)
         try {
@@ -171,7 +171,7 @@ function Details() {
          const sortedData = result.data.data.sort((a: any, b: any) => {
             return a.id - b.id;
           });
-        setDetailsAuthorsData(result.data)
+        setDetailsAuthorsData(result.data.data[0].attributes)
       } catch (error) {
         console.error('Error fetching learn about data: ', error)
         try {
@@ -180,7 +180,7 @@ function Details() {
               '/api/details-authors?populate=deep&locale=' +
               DEFAULT_LANGUAGE
           )
-          setDetailsAuthorsData(result.data)
+          setDetailsAuthorsData(result.data.data[0].attributes)
         } catch (error) {
           console.error(
             'Error fetching learn about data with default locale: ',
@@ -197,7 +197,7 @@ function Details() {
             '/api/details-button-sets?populate=deep&locale=' +
             localStorage.getItem('language')
         )
-        setDetailsButtonSetData(result.data)
+        setDetailsButtonSetData(result.data.data[0].attributes)
       } catch (error) {
         console.error('Error fetching learn about data: ', error)
         try {
@@ -206,7 +206,7 @@ function Details() {
               '/api/details-button-sets?populate=deep&locale=' +
               DEFAULT_LANGUAGE
           )
-          setDetailsButtonSetData(result.data)
+          setDetailsButtonSetData(result.data.data[0].attributes)
         } catch (error) {
           console.error(
             'Error fetching learn about data with default locale: ',
@@ -221,8 +221,8 @@ function Details() {
   }, [languageState])
 
 
-  const DetailsData = detailsSectionData?.data[0]?.attributes;
-  const SideTopics  = detailsSectionData?.data[0]?.attributes?.DetailTopics; 
+  const DetailsData = detailsSectionData;
+  const SideTopics  = detailsSectionData?.DetailTopics; 
   const details_content = DetailsData?.DetailsContent;
   const details_source = DetailsData?.source?.data?.attributes.source1;
   const details_buttonset = DetailsData?.DetailsButtons;
@@ -301,7 +301,7 @@ function Details() {
                                             style={{ marginRight: '5px' }}
                                           />
                                           {
-                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                            detailsButtonSetData?.buttonset1[0]
                                               .button1
                                           }
                                         </Link>
@@ -313,7 +313,7 @@ function Details() {
                                             style={{ marginRight: '5px' }}
                                           />
                                           {
-                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                            detailsButtonSetData?.buttonset1[0]
                                               .button2
                                           }
                                         </Link>
@@ -325,7 +325,7 @@ function Details() {
                                             style={{ marginRight: '5px' }}
                                           />
                                           {
-                                            detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                                            detailsButtonSetData?.buttonset1[0]
                                               .button3
                                           }
                                         </Link>
@@ -394,9 +394,11 @@ function Details() {
                             {item.Title}
                             <span>{item.TitleNumber}</span>
                           </Typography>
+                          {item?.Description?
                           <Typography variant="body1" lineHeight="24px" mb="2rem" color="primary.dark">
                             {item.Description}
                           </Typography>
+                          :null }
                           {item.Image.data.attributes.url?
                           <Grid xs={12} textAlign="center">
                              <img
@@ -655,7 +657,7 @@ function Details() {
                     mb="0.7rem"
                     className="secondTitle maintitle2"
                   >
-                   {detailsAuthorsData?.data[0].attributes?.Heading}
+                   {detailsAuthorsData?.Heading}
                   </Typography>
                   <Divider
                     style={{
@@ -667,18 +669,18 @@ function Details() {
                     variant="body1"
                     lineHeight='24px'
                   >
-                    {detailsAuthorsData?.data[0].attributes?.content}
+                    {detailsAuthorsData?.content}
                   </Typography>
                   <Link
                     variant="body1"
-                    href={detailsAuthorsData?.data[0].attributes?.btnlink}
+                    href={detailsAuthorsData?.btnlink}
                     style={{
                       color: '#00653E',
                       fontWeight: 'bold',
                       marginBottom: '30px',
                     }}
                   >
-                    {detailsAuthorsData?.data[0].attributes?.ButtonText}
+                    {detailsAuthorsData?.ButtonText}
                   </Link>
                   <Grid
                     container
@@ -706,7 +708,7 @@ function Details() {
                         }}
                       >
                      {
-                        detailsAuthorsData?.data[0].attributes.authors1[0]
+                        detailsAuthorsData?.authors1[0]
                             .name
                       }
                       </p>
@@ -719,7 +721,7 @@ function Details() {
                         }}
                       >
                        {
-                        detailsAuthorsData?.data[0].attributes.authors1[0]
+                        detailsAuthorsData?.authors1[0]
                             .Description
                       }
                       </p>
@@ -753,7 +755,7 @@ function Details() {
                           marginTop: '10px',
                         }}
                       >
-                      {detailsAuthorsData?.data[0].attributes.authors2[0].name }
+                      {detailsAuthorsData?.authors2[0].name }
                       </p>
                       <p
                         style={{
@@ -764,7 +766,7 @@ function Details() {
                         }}
                       >
                       {
-                        detailsAuthorsData?.data[0].attributes.authors2[0]
+                        detailsAuthorsData?.authors2[0]
                             .Description
                       }
                       </p>
@@ -789,7 +791,7 @@ function Details() {
                         }}
                       >
                      {
-                        detailsAuthorsData?.data[0].attributes.authors3[0]
+                        detailsAuthorsData?.authors3[0]
                             .name
                       }
                       </p>
@@ -802,7 +804,7 @@ function Details() {
                         }}
                       >
                       {
-                        detailsAuthorsData?.data[0].attributes.authors3[0]
+                        detailsAuthorsData?.authors3[0]
                             .Description
                       }
                       </p>
@@ -827,7 +829,7 @@ function Details() {
                         }}
                       >
                      {
-                        detailsAuthorsData?.data[0].attributes.authors4[0]
+                        detailsAuthorsData?.authors4[0]
                             .name
                       }
                       </p>
@@ -840,7 +842,7 @@ function Details() {
                         }}
                       >
                       {
-                        detailsAuthorsData?.data[0].attributes.authors4[0]
+                        detailsAuthorsData?.authors4[0]
                             .Description
                       }
                       </p>
@@ -964,7 +966,7 @@ function Details() {
                         style={{ marginRight: '5px' }}
                       />
                       {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                        detailsButtonSetData?.buttonset1[0]
                           .button1
                       }
                     </Link>
@@ -976,7 +978,7 @@ function Details() {
                         style={{ marginRight: '5px' }}
                       />
                       {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                        detailsButtonSetData?.buttonset1[0]
                           .button2
                       }
                     </Link>
@@ -988,7 +990,7 @@ function Details() {
                         style={{ marginRight: '5px' }}
                       />
                       {
-                        detailsButtonSetData?.data[0].attributes.buttonset1[0]
+                        detailsButtonSetData?.buttonset1[0]
                           .button3
                       }
                     </Link>

@@ -123,7 +123,23 @@ const MyChoices = () => {
             "/api/my-choices-page-title?populate=deep&locale=" +
             localStorage.getItem("language")
         );
-        setPageTitlesData(result.data);
+        if(result.data.data.length > 0){
+           setPageTitlesData(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-page-title?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+              );
+            setPageTitlesData(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -148,7 +164,23 @@ const MyChoices = () => {
             "/api/my-choices-learn-about?populate=deep&locale=" +
             localStorage.getItem("language")
         );
-        setLearnAboutData(result.data);
+        if(result.data.data.length > 0){
+          setLearnAboutData(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-learn-about?populate=deep&locale=en"
+              );
+            setLearnAboutData(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
+        
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -156,7 +188,6 @@ const MyChoices = () => {
             REACT_APP_api_base_url +
               "/api/my-choices-learn-about?populate=deep&locale=en"
           );
-          setLearnAboutData(result.data);
         } catch (error) {
           console.error(
             "Error fetching learn about data with default locale: ",
@@ -173,7 +204,23 @@ const MyChoices = () => {
             "/api/my-choices-risks-accordion-title?populate=deep&locale=" +
             localStorage.getItem("language")
         );
-        setRisksAccordionTitle(result.data);
+         if(result.data.data.length > 0){
+           setRisksAccordionTitle(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-risks-accordion-title?populate=deep&locale=en"
+              );
+            setRisksAccordionTitle(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
+        
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -197,7 +244,23 @@ const MyChoices = () => {
             "/api/my-choices-same?populate=deep&locale=" +
             localStorage.getItem("language")
         );
-        setSameSection(result.data);
+        if(result.data.data.length > 0){
+          setSameSection(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-same?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+              );
+            setSameSection(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          } 
+        }
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -225,7 +288,28 @@ const MyChoices = () => {
         const sortedData = result.data.data.sort((a: any, b: any) => {
           return a.id - b.id;
         });
-        setForAll(result.data);
+
+        if(result.data.data.length > 0){
+           setForAll(result.data);
+         }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-risks-foralls?populate=content&locale=" +
+              DEFAULT_LANGUAGE
+              );
+             const sortedData = result.data.data.sort((a: any, b: any) => {
+              return a.id - b.id;
+            });
+            setForAll(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
+       
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -253,7 +337,24 @@ const MyChoices = () => {
          const sortedData = result.data.data.sort((a: any, b: any) => {
           return a.id - b.id;
         });
-        setSourceData(result.data);
+         if(result.data.data.length > 0){
+          setSourceData(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-source-accordions?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+              );
+            setSourceData(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
+        
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -282,6 +383,26 @@ const MyChoices = () => {
           return a.id - b.id;
         });
         setSectionsData(result.data);
+        if(result.data.data.length > 0){
+          setSectionsData(result.data);
+        }else{
+           try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-sections?populate[title][populate]=*&populate[content1][populate]=*&populate[content2][populate]=*&populate[content3][populate]=*&locale=" +
+              DEFAULT_LANGUAGE
+              );
+             const sortedData = result.data.data.sort((a: any, b: any) => {
+                return a.id - b.id;
+              });
+            setSectionsData(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -306,7 +427,24 @@ const MyChoices = () => {
             "/api/my-choices-need-help?populate=*&locale=" +
             localStorage.getItem("language")
         );
-        setNeedHelpData(result.data);
+
+        if(result.data.data.length > 0){
+          setNeedHelpData(result.data);
+        }else{
+          try {
+            const result = await axios.get(
+              REACT_APP_api_base_url +
+              "/api/my-choices-need-help?populate=*&locale=" +
+              DEFAULT_LANGUAGE
+              );
+            setNeedHelpData(result.data);
+          } catch (error) {
+            console.error(
+              "Error fetching learn about data with default locale: ",
+              error
+              );
+          }
+        }
       } catch (error) {
         console.error("Error fetching learn about data: ", error);
         try {
@@ -333,6 +471,8 @@ const MyChoices = () => {
     fetchSectionData();
     fetchNeedHelpData();
   }, [languageState]);
+
+console.log('sameSection',sameSection)
   return (
     <StyledEngineProvider injectFirst>
       <Layout>
@@ -421,7 +561,7 @@ const MyChoices = () => {
             className="TimeBlock"
           > 
           <Container maxWidth="lg">
-                {sectionsData?.data[0].attributes.title != null ? (
+                {sectionsData?.data[0]?.attributes?.title != null ? (
                     <Grid container>
                         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                           <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
@@ -450,7 +590,7 @@ const MyChoices = () => {
                     justifyContent: "space-between",
                   }}
                 >
-                  {sectionsData?.data[0].attributes.content1[0].picture1.data
+                  {sectionsData?.data[0]?.attributes?.content1[0]?.picture1.data
                      != null ? (
                     <Grid item xs={6} sm={4} textAlign="center" >
                       <img
@@ -462,11 +602,11 @@ const MyChoices = () => {
                       />
                     </Grid>
                   ) : null}
-                  {sectionsData?.data[0].attributes.content2[0].picture1.data
+                  {sectionsData?.data[0]?.attributes?.content2[0]?.picture1.data
                       !=
                   null ? (
                     <Grid item xs={6} sm={4} textAlign="center">
-                    {sectionsData?.data[0].attributes.content2[0].picture1.data &&
+                    {sectionsData?.data[0]?.attributes?.content2[0]?.picture1.data &&
                       <img
                         src={
                           REACT_APP_api_base_url +
@@ -476,7 +616,7 @@ const MyChoices = () => {
                       />}
                     </Grid>
                   ) : null}
-                  { sectionsData?.data[0].attributes.content3[0].picture1.data
+                  { sectionsData?.data[0]?.attributes?.content3[0]?.picture1.data
                      !=
                     null && !isMobile ? (
                     <Grid item xs={6} sm={4} textAlign="center">
@@ -505,7 +645,7 @@ const MyChoices = () => {
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
             <Container maxWidth="lg">
-                {sectionsData?.data[1].attributes.title != null ? (
+                {sectionsData?.data[1]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
@@ -534,7 +674,7 @@ const MyChoices = () => {
                     justifyContent: "space-between",
                   }}
                 >
-                  {sectionsData?.data[1].attributes != null ? (
+                  {sectionsData?.data[1]?.attributes != null ? (
                     <Fragment>
                       <Grid item xs={4} textAlign="center">
                       {sectionsData?.data[1].attributes.content1[0].picture1
@@ -590,7 +730,7 @@ const MyChoices = () => {
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
             <Container maxWidth="lg">
-                {sectionsData?.data[2].attributes.title != null ? (
+                {sectionsData?.data[2]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
@@ -619,7 +759,7 @@ const MyChoices = () => {
                 >
                   <Grid item container xl={5} lg={5} md={5} sm={5} xs={5} justifyContent="center">
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
-                      {sectionsData?.data[2].attributes.content1[0].picture1.data
+                      {sectionsData?.data[2]?.attributes?.content1[0].picture1.data
                            !=
                       null ? (
                         <img
@@ -642,7 +782,7 @@ const MyChoices = () => {
                         alignItems: "center",
                       }}
                     >
-                      {sectionsData?.data[2].attributes.content1[0].content1 !=
+                      {sectionsData?.data[2]?.attributes?.content1[0]?.content1 !=
                       null ? (
                         <Typography className="experience-body-content">
                           {sectionsData?.data[2].attributes.content1[0].content1}
@@ -658,7 +798,7 @@ const MyChoices = () => {
                         .attributes.url !=
                     null ? ( */}
                       <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
-                      {sectionsData?.data[2].attributes.content2[0].picture1
+                      {sectionsData?.data[2]?.attributes?.content2[0]?.picture1
                               .data !=null &&
                         <img
                           src={
@@ -680,7 +820,7 @@ const MyChoices = () => {
                             alignItems: "center",
                         }}
                       >
-                        {sectionsData?.data[2].attributes.content2[0].content1 !=
+                        {sectionsData?.data[2]?.attributes?.content2[0]?.content1 !=
                         null ? (
                           <Typography className="experience-body-content">
                             {sectionsData?.data[2].attributes.content2[0].content1}
@@ -734,7 +874,7 @@ const MyChoices = () => {
                           alignItems: "center",
                         }}
                       >
-                        {sectionsData?.data[2].attributes.content2[0].content1 !=
+                        {sectionsData?.data[2]?.attributes?.content2[0]?.content1 !=
                         null ? (
                           <Typography
                             className="experience-body-content"
@@ -762,7 +902,7 @@ const MyChoices = () => {
             sx={{ alignItems: "center", justifyContent: "center", mt: "6rem" }}
           >
             <Container maxWidth="lg">
-                {sectionsData?.data[3].attributes.title != null ? (
+                {sectionsData?.data[3]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
@@ -792,7 +932,7 @@ const MyChoices = () => {
                   }}
                 >
                   <Grid container item xl={5} lg={5} md={5} sm={5} xs={5} flexDirection="column">
-                    {sectionsData?.data[3].attributes.content1[0].picture1.data
+                    {sectionsData?.data[3]?.attributes?.content1[0]?.picture1.data
                          !=
                     null ? (
                       <Grid
@@ -828,7 +968,7 @@ const MyChoices = () => {
 
                   <Grid container item xl={7} lg={7} md={7} sm={7} xs={7} flexDirection="row" justifyContent="center">
                     {
-                      sectionsData?.data[3].attributes.content2[0].picture1.data
+                      sectionsData?.data[3]?.attributes?.content2[0]?.picture1.data
                         !=
                     null ? (
                       <Grid
@@ -846,7 +986,7 @@ const MyChoices = () => {
                           <img
                             src={
                               REACT_APP_api_base_url +
-                              sectionsData?.data[3].attributes.content2[0].picture1
+                              sectionsData?.data[3]?.attributes?.content2[0]?.picture1
                                 .data.attributes.url
                             }
                           />
@@ -854,14 +994,14 @@ const MyChoices = () => {
                           <img
                             src={
                               REACT_APP_api_base_url +
-                              sectionsData?.data[3].attributes.content2[0].picture1
+                              sectionsData?.data[3]?.attributes?.content2[0]?.picture1
                                 .data.attributes.url
                             }
                           />
                         )}
                       </Grid>
                     ) : null}
-                    {sectionsData?.data[3].attributes.content2[0].content1 !=
+                    {sectionsData?.data[3]?.attributes?.content2[0]?.content1 !=
                     null ? (
                       <Grid
                         item
@@ -876,7 +1016,7 @@ const MyChoices = () => {
                       >
                         {!isMobile ? (
                           <Typography className="no-difference">
-                            {sectionsData?.data[3].attributes.content2[0].content1}
+                            {sectionsData?.data[3]?.attributes?.content2[0].content1}
                           </Typography>
                         ) : null}
                       </Grid>
@@ -886,7 +1026,7 @@ const MyChoices = () => {
             </Container>
           </Grid>
           {/* Same */}
-          {sameSection?.data.attributes != null ? (
+          {sameSection?.data?.attributes != null ? (
             <Grid container sx={{ justifyContent: "center" }}>
               <Grid
                 className="quote-box"
@@ -934,7 +1074,7 @@ const MyChoices = () => {
           >
             <Container maxWidth="lg">
                 {/* title */}
-                {sectionsData?.data[4].attributes.title != null ? (
+                {sectionsData?.data[4]?.attributes?.title != null ? (
                   <Grid
                    className="Risks-section"
                     container
@@ -987,7 +1127,7 @@ const MyChoices = () => {
                       id="panel1a-header"
                       className="view-risks-accordion"
                     >
-                      {risksAccordionTitle?.data.attributes.title != null ? (
+                      {risksAccordionTitle?.data?.attributes?.title != null ? (
                         <Grid
                           container
                           alignItems="center"
@@ -1021,7 +1161,7 @@ const MyChoices = () => {
                           xs={11}
                           sx={{ alignItems: "center", justifyContent: "center" }}
                         >
-                          {sectionsData?.data[5].attributes.title != null ? (
+                          {sectionsData?.data[5]?.attributes?.title != null ? (
                             <Grid container>
                               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                 <Typography
@@ -1043,7 +1183,7 @@ const MyChoices = () => {
                                       .titleNumber
                                   }
                                 </Typography>
-                             {sectionsData?.data[5].attributes.title.description?   
+                             {sectionsData?.data[5]?.attributes?.title?.description?   
                               <Popup
                                 open={openCesarBirth}
                                 anchorEl={anchorCesarElBirth}
@@ -1080,7 +1220,7 @@ const MyChoices = () => {
                             >
                               <Fragment>
                                 <Grid item>
-                                  {sectionsData?.data[5].attributes.content1[0]
+                                  {sectionsData?.data[5]?.attributes?.content1[0]
                                     .picture1.data != null ? (
                                     <img
                                       width="180.45px"
@@ -1094,7 +1234,7 @@ const MyChoices = () => {
                                   ) : null}
                                 </Grid>
                                 <Grid item>
-                                  {sectionsData?.data[5].attributes.content2[0]
+                                  {sectionsData?.data[5]?.attributes?.content2[0]
                                       .picture1.data !=
                                   null ? (
                                     <img
@@ -1109,7 +1249,7 @@ const MyChoices = () => {
                                   ) : null}
                                 </Grid>
                                 <Grid item>
-                                  {sectionsData?.data[5].attributes.content3[0]
+                                  {sectionsData?.data[5]?.attributes?.content3[0]
                                       .picture1.data !=
                                   null ? (
                                     <img
@@ -1141,7 +1281,7 @@ const MyChoices = () => {
                                     className="w-max-full"
                                     src={
                                       REACT_APP_api_base_url +
-                                        sectionsData?.data[5].attributes.content1[0]
+                                        sectionsData?.data[5]?.attributes?.content1[0]
                                           .picture1.data.attributes.url
                                     }
                                   />
@@ -1174,7 +1314,7 @@ const MyChoices = () => {
                             mt: "1.5rem",
                           }}
                         >
-                          {sectionsData?.data[6].attributes.title != null ? (
+                          {sectionsData?.data[6]?.attributes?.title != null ? (
                             <Grid container>
                               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                 <Typography
@@ -1230,7 +1370,7 @@ const MyChoices = () => {
                                     sm={12}
                                     xs={12}
                                   >
-                                    {sectionsData?.data[6].attributes.content1[0]
+                                    {sectionsData?.data[6]?.attributes?.content1[0]
                                         .picture1.data !=
                                     null ? (
                                       <img
@@ -1258,7 +1398,7 @@ const MyChoices = () => {
                                     sm={12}
                                     xs={12}
                                   >
-                                    {sectionsData?.data[6].attributes.content2[0]
+                                    {sectionsData?.data[6]?.attributes?.content2[0]
                                         .picture1.data !=
                                     null ? (
                                       <img
@@ -1293,7 +1433,7 @@ const MyChoices = () => {
                                         ml: "6.3rem",
                                       }}
                                     >
-                                      {sectionsData?.data[6].attributes.content2[0]
+                                      {sectionsData?.data[6]?.attributes?.content2[0]
                                         .content1 != null ? (
                                         <Typography className="potential-risks-small-content">
                                           {
@@ -1358,7 +1498,7 @@ const MyChoices = () => {
                             mt: "1.5rem",
                           }}
                         >
-                          {sectionsData?.data[7].attributes.title != null ? (
+                          {sectionsData?.data[7]?.attributes?.title != null ? (
                             <Grid container>
                               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                 <Typography
@@ -1366,7 +1506,7 @@ const MyChoices = () => {
                                   className="FourTagsStyle"
                                 >
                                   {" "}
-                                  {sectionsData?.data[7].attributes.title.title}
+                                  {sectionsData?.data[7]?.attributes.title.title}
                                 </Typography>
                                 <Typography
                                   sx={{ ml: "0.25rem" }}
@@ -1413,7 +1553,7 @@ const MyChoices = () => {
                                     sm={12}
                                     xs={12}
                                   >
-                                    {sectionsData?.data[7].attributes.content1[0]
+                                    {sectionsData?.data[7]?.attributes?.content1[0]
                                         .picture1.data !=
                                     null ? (
                                       <img
@@ -1441,7 +1581,7 @@ const MyChoices = () => {
                                     sm={12}
                                     xs={12}
                                   >
-                                    { sectionsData?.data[7].attributes.content2[0]
+                                    { sectionsData?.data[7]?.attributes?.content2[0]
                                         .picture1.data !=
                                     null ? (
                                       <img
@@ -1476,7 +1616,7 @@ const MyChoices = () => {
                                         ml: "6.3rem",
                                       }}
                                     >
-                                      {sectionsData?.data[7].attributes.content2[0]
+                                      {sectionsData?.data[7]?.attributes?.content2[0]
                                         .content1 != null ? (
                                         <Typography className="potential-risks-small-content">
                                           {
@@ -1542,7 +1682,7 @@ const MyChoices = () => {
                             mb: "1.5rem",
                           }}
                         >
-                          {sectionsData?.data[8].attributes.title != null ? (
+                          {sectionsData?.data[8]?.attributes?.title != null ? (
                             <Grid container>
                               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                 <Typography
@@ -1614,7 +1754,7 @@ const MyChoices = () => {
                                   xs={3}
                                   sx={{ mt: "4.5rem" }}
                                 >
-                                  {sectionsData?.data[8].attributes.content1[0]
+                                  {sectionsData?.data[8]?.attributes?.content1[0]
                                     .content1 != null ? (
                                     <Typography className="potential-risks-small-content">
                                       {
@@ -1626,7 +1766,7 @@ const MyChoices = () => {
                                 </Grid>
                                 <Grid item>
                                 
-                                  {sectionsData?.data[8].attributes.content2[0].picture1.data != null && sectionsData?.data[8].attributes.content2[0].picture1.data.attributes.url != undefined ? (
+                                  {sectionsData?.data[8]?.attributes?.content2[0]?.picture1.data != null && sectionsData?.data[8].attributes.content2[0].picture1.data.attributes.url != undefined ? (
                                     <img
                                       width="180.45px"
                                       height="243px"
@@ -1640,7 +1780,7 @@ const MyChoices = () => {
                                 </Grid>
 
                                 <Grid item>
-                                {sectionsData?.data[8]?.attributes.content3[0].picture1.data != null ? (
+                                {sectionsData?.data[8]?.attributes?.content3[0]?.picture1.data != null ? (
                                     <img
                                       width="180.45px"
                                       height="235.66px"
@@ -1688,7 +1828,7 @@ const MyChoices = () => {
                                 >
                                   <Typography className="potential-risks-small-content">
                                     {
-                                      sectionsData?.data[8].attributes.content1[0]
+                                      sectionsData?.data[8]?.attributes?.content1[0]
                                         .content1
                                     }
                                   </Typography>
@@ -1712,7 +1852,7 @@ const MyChoices = () => {
                       >
                         <Grid className="for-all-rectangle-col" item xl={7} lg={7} md={7} sm={7} xs={7}>
                           <Typography className="potential-risks-small-content">
-                            {forAll?.data[0].attributes.Callout}
+                            {forAll?.data[0]?.attributes?.Callout}
                           </Typography>
                         </Grid>
                         <Grid className="for-all-rectangle-col" item xl={6} lg={6} md={6} sm={6} xs={6}>
@@ -1737,7 +1877,7 @@ const MyChoices = () => {
                                 anchorEl={anchorEl}
                                 handleClose={handleClose}
                                 title={'Seizure'}
-                                text={forAll?.data[0].attributes.content[0].Popup1}
+                                text={forAll?.data[0]?.attributes?.content[0]?.Popup1}
                               />
                               {', '}
                               <Typography
@@ -1753,29 +1893,29 @@ const MyChoices = () => {
                                 anchorEl={anchorElPneu}
                                 handleClose={handleClosePneu}
                                 title={'pneumonia'}
-                                text={forAll?.data[0].attributes.content[0].Popup2}
+                                text={forAll?.data[0]?.attributes?.content[0]?.Popup2}
                               />
-                             {forAll?.data[0].attributes.content[0].Popup2 ?   
+                             {forAll?.data[0]?.attributes?.content[0]?.Popup2 ?   
                               <Popup
                                 open={openBirth}
                                 anchorEl={anchorElBirth}
                                 handleClose={handleCloseBirth}
-                                title={forAll?.data[0].attributes.content[0].Title}
-                                text={forAll?.data[0].attributes.content[0].Popup2}
+                                title={forAll?.data[0]?.attributes?.content[0]?.Title}
+                                text={forAll?.data[0]?.attributes?.content[0]?.Popup2}
                               />
                               : null }
 
-                              {'  '} {forAll?.data[0].attributes.content[0].Title}
+                              {'  '} {forAll?.data[0]?.attributes?.content[0]?.Title}
                               <Typography
                                 display="inline"
                                 ml="6px"
                                 className="for-all-small-number"
                               >
-                              {forAll?.data[0].attributes.content[0].Number}
+                              {forAll?.data[0]?.attributes?.content[0]?.Number}
                               </Typography>
                             </Typography>
                           </Grid>
-                          {forAll?.data[0].attributes?.content?.slice(1).map((item, index) => (
+                          {forAll?.data[0]?.attributes?.content?.slice(1).map((item, index) => (
                             <Grid key={index} container sx={{ mt: "1rem" }}>
                               <Typography className="potential-risks-small-content2">
                                 <FiberManualRecordIcon

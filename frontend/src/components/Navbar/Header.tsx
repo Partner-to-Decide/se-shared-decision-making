@@ -8,7 +8,7 @@ import './Header.css'
 import { Fragment, useState, useEffect } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { header_section} from "../../utils/types";
-import { REACT_APP_api_base_url } from "../../utils/url_config";
+import { REACT_APP_api_base_url,DEFAULT_LANGUAGE } from "../../utils/url_config";
 import Link from '@mui/material/Link';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -62,11 +62,31 @@ const Header = () => {
     });
   }, []);
   
-  useEffect(() => {
-    axios.get(REACT_APP_api_base_url + '/api/headers?populate=deep&locale=' + localStorage.getItem("language")).then(result => {
-      setHeaderMenusData(result.data.data[0].attributes)
-      return result;
-    })
+ useEffect(() => {
+   const fetchHeaderData = async () => {
+      try {
+        const result = await axios.get( REACT_APP_api_base_url +
+          "/api/headers?populate=deep&locale=" +
+            localStorage.getItem("language")
+        );
+        setHeaderMenusData(result.data.data[0].attributes);
+      } catch (error) {
+        console.error("Error fetching learn about data: ", error);
+        try {
+          const result = await axios.get( REACT_APP_api_base_url +
+            "/api/headers?populate=deep&locale=" +
+              DEFAULT_LANGUAGE
+          );
+          setHeaderMenusData(result.data.data[0].attributes);
+        } catch (error) {
+          console.error(
+            "Error fetching learn about data with default locale: ",
+            error
+          );
+        }
+      }
+    };
+    fetchHeaderData()
   }, [languageState]);
 
   useEffect(() => {
