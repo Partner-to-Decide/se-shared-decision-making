@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emails",
+  "info": {
+    "singularName": "email",
+    "pluralName": "emails",
+    "displayName": "Email"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Email": {
+      "type": "email"
+    }
+  },
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/email",
+      "handler": "email.send",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

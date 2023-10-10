@@ -30,6 +30,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import { useNavigate, useLocation } from 'react-router-dom';
+import PageBreak from '../components/PageBreak/PageBreak';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -254,7 +255,219 @@ export default function MyStuff() {
                       </Box>
                     </Container>
 
-                    <div id="pdf-page" ref={summaryGridRef} style={isPdfGeneration == true ? { backgroundColor: '#FAF6ED', width: '100%', height: '296mm', paddingLeft: '1rem', paddingRight: '1rem' } : { backgroundColor: '#FAF6ED', width: '100%' }}>
+                    <div id="pdf-page" ref={summaryGridRef} style={{ backgroundColor: '#FAF6ED', width: '100%', paddingLeft: '1rem', paddingRight: '1rem' }}>
+                      {isPdfGeneration == true &&
+                      <>
+                          <Grid item xs={12} pl={!isMobile ? "0rem" : ""} pr={!isMobile ? "0rem"  : ""} sx={{ alignItems: "center" }}>
+
+                              {rating &&
+                                  <Grid
+                                      container
+                                      columns={{ xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+                                    >
+                                      <div className="summary-grid" >
+                                        {rating.mostImportant.length > 0 &&
+                                          <div className="summary-box most-important">
+                                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Most Important
+                                            </Typography>
+                                            <Stack direction="row" flexWrap="wrap">
+                                              {rating.mostImportant.map((cur, index) => {
+                                                return (
+                                                  <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
+                                                     {cur['icon']?
+                                                        <Box className="icon-shape">
+                                                           <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                        </Box>
+                                                    :null}
+                                                    <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                      {cur['text']}
+                                                    </Typography>
+                                                  </Grid>
+                                                )
+                                              })}
+                                            </Stack>
+                                          </div>
+                                        }
+                                        {rating.important.length > 0 &&
+                                          <div className="summary-box important">
+                                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Important
+                                            </Typography>
+                                            <Stack direction="row" flexWrap="wrap">
+                                              {rating.important.map((cur, index) => {
+                                                return (
+                                                  <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
+                                                    {cur['icon']?
+                                                        <Box className="icon-shape">
+                                                           <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                        </Box>
+                                                    :null}
+                                                    <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                       {cur['text']}
+                                                    </Typography>
+                                                  </Grid>
+                                                )
+                                              })}
+                                            </Stack>
+                                          </div>
+                                        }
+                                        {rating.lessImportant.length > 0 &&
+                                          <div className="summary-box less-important">
+                                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Less Important
+                                            </Typography>
+                                            <Stack direction="row" flexWrap="wrap">
+                                              {rating.lessImportant.map((cur, index) => {
+                                                return (
+                                                  <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
+                                                     {cur['icon']?
+                                                        <Box className="icon-shape">
+                                                           <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                        </Box>
+                                                    :null}
+                                                    <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                      {cur['text']}
+                                                    </Typography>
+                                                  </Grid>
+                                                )
+                                              })}
+                                            </Stack>
+                                          </div>
+                                        }
+                                        {rating.leastImportant.length > 0 &&
+                                          <div className="summary-box least-important">
+                                            <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                              Least Important
+                                            </Typography>
+                                            <Stack direction="row" flexWrap="wrap">
+                                              {rating.leastImportant.map((cur, index) => {
+                                                return (
+                                                  <Grid item width='158px' sx={{ p: 2 }} textAlign="center">
+                                                  {cur['icon']?
+                                                    <Box className="icon-shape">
+                                                       <img className="values-icon" style={{width:50}} src={(REACT_APP_api_base_url || "") + cur['icon']} alt="" />
+                                                    </Box>
+                                                    :null}
+                                                    <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                      {cur['text']}
+                                                    </Typography>
+                                                  </Grid>
+                                                )
+                                              })}
+                                            </Stack>
+                                          </div>
+                                        }
+                                      </div>
+
+                                      <div className="summary-box choice-ques stuff-value">
+                                          <Container maxWidth="md">
+                                              {rating.choiceOne.length > 0 &&
+                                                <>
+                                                  <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                  Right now I’m leaning towards
+                                                  </Typography>
+                                                      <Stack direction="row" spacing={4} justifyContent="center">
+                                                            <Grid item width='148px' textAlign="center">
+                                                              <Box className="icon-shape">
+                                                                <Clock size={32} weight="light" />
+                                                              </Box>
+                                                              <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                              {choiceArray.choiceOne}
+                                                              </Typography>
+                                                            </Grid>
+                                                      </Stack>
+                                                </>}
+                                              {rating.choiceTwo.length > 0 &&
+                                                <>
+                                                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                Right now I’m leaning towards
+                                                </Typography>
+                                                    <Stack direction="row" spacing={4} justifyContent="center">
+                                                          <Grid item width='148px' textAlign="center">
+                                                            <Box className="icon-shape">
+                                                              <Clock size={32} weight="light" />
+                                                            </Box>
+                                                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                            {choiceArray.choiceTwo}
+                                                            </Typography>
+                                                          </Grid>
+                                                    </Stack>
+                                              </>}
+                                              {rating.choiceThree.length > 0 &&
+                                                <>
+                                                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                Right now I’m leaning towards
+                                                </Typography>
+                                                    <Stack direction="row" spacing={4} justifyContent="center">
+                                                          <Grid item width='148px' textAlign="center">
+                                                            <Box className="icon-shape">
+                                                              <Clock size={32} weight="light" />
+                                                            </Box>
+                                                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                            {choiceArray.choiceThree}
+                                                            </Typography>
+                                                          </Grid>
+                                                    </Stack>
+                                              </>}
+                                              {rating.choiceFour.length > 0 &&
+                                                <>
+                                                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                Right now I’m leaning towards
+                                                </Typography>
+                                                    <Stack direction="row" spacing={4} justifyContent="center">
+                                                          <Grid item width='148px' textAlign="center">
+                                                            <Box className="icon-shape">
+                                                              <Clock size={32} weight="light" />
+                                                            </Box>
+                                                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                            {choiceArray.choiceFour}
+                                                            </Typography>
+                                                          </Grid>
+                                                    </Stack>
+                                              </>}
+                                              {rating.choiceFive.length > 0 &&
+                                                <>
+                                                <Typography variant="h3" fontSize="2.25rem" mb="2.4rem" color="primary.main">
+                                                Right now I’m leaning towards
+                                                </Typography>
+                                                    <Stack direction="row" spacing={4} justifyContent="center">
+                                                          <Grid item width='148px' textAlign="center">
+                                                            <Box className="icon-shape">
+                                                              <Clock size={32} weight="light" />
+                                                            </Box>
+                                                            <Typography variant="body1" fontSize="0.875rem" lineHeight="20px">
+                                                            {choiceArray.choiceFive}
+                                                            </Typography>
+                                                          </Grid>
+                                                    </Stack>
+                                              </>
+
+                                              }
+                                          
+                                          </Container>
+                                        </div>
+
+                                    </Grid>
+                              }
+                          </Grid>
+
+                          <PageBreak key="break" />
+
+                          <div style={{ backgroundColor: '#FAF6ED', height: '286mm' }}>
+                            <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
+                              <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "space-between" }}>
+                               {sameSection?.data != null ? (
+                                    <ChecklistQues quiz={sameSection} isPdfGeneration={isPdfGeneration} isloading={isloading} />  
+                                ) : null}
+                              </Grid>
+                            </Grid>
+                          </div>
+
+                      </>}
+                      </div>
+
+
                     <CustomTabPanel value={value} index={0}>
                         <Grid item xs={12} pl={!isMobile ? "0rem" : ""} pr={!isMobile ? "0rem"  : ""} sx={{ alignItems: "center" }}>
                             
@@ -495,7 +708,6 @@ export default function MyStuff() {
                         </Grid>
                       </Container>
                     </CustomTabPanel>
-                    </div>
                 </Grid>
           </Grid>
         </div>

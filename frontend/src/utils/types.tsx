@@ -21,8 +21,6 @@ export interface Labor_data {
        source:source_labor
 }
 
-
-
 export interface LaborTopic {
   data:{
     id: number
