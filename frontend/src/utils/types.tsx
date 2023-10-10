@@ -49,7 +49,6 @@ export interface RisksAndBenefits {
 
 
 export interface Details_data {
-
       Title:string
       slug:string
       DetailsWaiting: detailsWaiting
