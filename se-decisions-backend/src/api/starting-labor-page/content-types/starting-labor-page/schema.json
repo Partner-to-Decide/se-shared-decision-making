@@ -24,10 +24,6 @@
         }
       }
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "Title"
-    },
     "WaitTime": {
       "type": "string",
       "pluginOptions": {
@@ -60,21 +56,18 @@
         }
       }
     },
-    "NaturalMethods": {
-      "displayName": "NaturalMethods",
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "natural-methods.natural-methods"
-    },
     "source": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::source.source"
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
     }
   }
 }
