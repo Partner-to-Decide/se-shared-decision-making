@@ -1,16 +1,18 @@
-module.exports = ({ env }) => ({  
-	email: {    
-		provider: 'sendgrid',    
-		providerOptions: {      
-			apiKey: env('SENDGRID_API_KEY'),    
-		},    
-		settings: {      
-			defaultFrom: env('SENDGRID_DEFAULT_FROM'),      
-			defaultReplyTo: env('SENDGRID_DEFAULT_REPLY_TO'),  
-			testAddress: 'testing@yopmail.com',
-		},
-	},
-  upload: {
+
+module.exports = ({ env }) => ({
+  email: {
+    config: {
+      provider: 'sendgrid',
+      providerOptions: {
+        apiKey: env('SENDGRID_API_KEY'),
+      },
+      settings: {
+         defaultFrom: env('SENDGRID_DEFAULT_FROM'),      
+	     defaultReplyTo: env('SENDGRID_DEFAULT_REPLY_TO'),
+      },
+    },
+  },
+   upload: {
     config: {
       provider: 'aws-s3',
       providerOptions: {
@@ -34,4 +36,4 @@ module.exports = ({ env }) => ({
       },
     },
   },
-})
+});
