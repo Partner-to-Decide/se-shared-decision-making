@@ -4,7 +4,8 @@
   "info": {
     "singularName": "email",
     "pluralName": "emails",
-    "displayName": "Email"
+    "displayName": "Email",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,12 @@
   "attributes": {
     "Email": {
       "type": "email"
+    },
+    "Subject": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "richtext"
     }
   },
   "routes": [
