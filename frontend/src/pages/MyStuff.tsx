@@ -85,7 +85,7 @@ export default function MyStuff() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     if(width<=768){
