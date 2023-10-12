@@ -245,7 +245,7 @@ export default function MyStuff() {
           {
             email: 'recipienttesting@yopmail.com',
             subject: 'What should I ask my provider?',
-            text: 'Here are questions about labor induction that might be specific to the place you will give birth. You can edit the list and bring it with you to learn more during your prenatal care visit!',
+            text: 'Here are questions about labor induction that might be specific to the place you will give birth.',
             fileURL: "public/Quiz-result.pdf",
           }
         );
