@@ -29,6 +29,10 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import PageBreak from '../components/PageBreak/PageBreak';
 
@@ -73,7 +77,6 @@ export default function MyStuff() {
   const [isPdfGeneration, setIsPdfGeneration] = useState(false);
   const [isloading, setLoading] = useState(false);
   const [languageState, setLanguageState] = useState("en");
-  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -82,6 +85,7 @@ export default function MyStuff() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [open, setOpen] = React.useState(true);
 
   useEffect(() => {
     if(width<=768){
@@ -233,21 +237,46 @@ export default function MyStuff() {
   };
  
   const handleEmailSend = async () => {
+    setLoading(true);
+    setOpen(false);
     try {
       const response = await axios.post(
         `${REACT_APP_api_base_url}/api/email/send`,
-        {
-          email: 'recipienttesting@yopmail.com',
-          subject: 'Test Hello Email',
-          text: 'This is a test email',
-          file:"https://se-shared-decision-making-production.up.railway.app/uploads/mobile_logo_9c5fb223f4.svg",
-        }
+          {
+            email: 'recipienttesting@yopmail.com',
+            subject: 'What should I ask my provider?',
+            text: 'Here are questions about labor induction that might be specific to the place you will give birth. You can edit the list and bring it with you to learn more during your prenatal care visit!',
+            fileURL: "public/Quiz-result.pdf",
+          }
         );
       console.log('Email sent:', response.data);
+      setLoading(false);
+      setOpen(true);
     } catch (error) {
       console.error('Error sending email:', error);
     }
   };
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   //returns index of where edit occurs
   return (
@@ -724,6 +753,16 @@ export default function MyStuff() {
                             </Grid>
                         </Grid>
                       </Container>
+
+                      <Snackbar
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message="Email Sent"
+                        action={action}
+                      />
+
                     </CustomTabPanel>
                 </Grid>
           </Grid>

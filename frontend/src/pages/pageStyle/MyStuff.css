@@ -232,6 +232,11 @@
     line-height: 20px;
 }
 
+.MuiSnackbarContent-root {
+    background: #0c3a25;
+    font-family: ClashGrotesk-Medium;
+}
+
 @media(max-width:767px){
     .value-summmary-card {
         padding: 25px 25px;
