@@ -232,6 +232,23 @@ export default function MyStuff() {
     choiceFive: "Request induction between 39-41 weeks"
   };
  
+  const handleEmailSend = async () => {
+    try {
+      const response = await axios.post(
+        `${REACT_APP_api_base_url}/api/email/send`,
+        {
+          email: 'recipienttesting@yopmail.com',
+          subject: 'Test Hello Email',
+          text: 'This is a test email',
+          file:"https://se-shared-decision-making-production.up.railway.app/uploads/mobile_logo_9c5fb223f4.svg",
+        }
+        );
+      console.log('Email sent:', response.data);
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+
   //returns index of where edit occurs
   return (
     <StyledEngineProvider injectFirst>
@@ -700,7 +717,7 @@ export default function MyStuff() {
                             <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
                               <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "center" }}>
                                  <Stack spacing={2} direction="row">
-                                  <Button className="save-ques-btn" variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
+                                  <Button className="save-ques-btn" onClick={handleEmailSend} variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
                                   <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
                                 </Stack>
                               </Grid>

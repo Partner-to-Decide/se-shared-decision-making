@@ -1,0 +1,8 @@
+{
+  "method": "POST",
+  "path": "/email/send",
+  "handler": "Email.send",
+  "config": {
+    "policies": []
+  }
+}
