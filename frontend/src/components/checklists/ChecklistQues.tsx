@@ -169,6 +169,9 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
           <div className="question-outer">
             {question.isEditing ? (
               <>
+              {props.isPdfGeneration == true ? (
+                  ""
+              ): (<>
                 <Checkbox {...label} />
                 <div className="question no-flex">
                   <input type="text" value={question.text} autoFocus onChange={(e) => handleQuestionTextChange(index, e.target.value)} />
@@ -178,6 +181,8 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
                     <button className="save-btn" onClick={() => handleSaveQuestion(index)}>Save</button>
                   </div>
                 </div>
+              </>
+              )}
               </>
             ) : (
               <>

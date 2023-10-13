@@ -186,7 +186,7 @@
     background: rgb(255 255 255 / 86%);
     left: 0;
     width: 100%;
-    z-index: 99;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,6 +235,11 @@
 .MuiSnackbarContent-root {
     background: #0c3a25;
     font-family: ClashGrotesk-Medium;
+}
+
+.stuff-email-form .MuiDialog-container .MuiDialog-paperWidthSm {
+    max-width: 500px;
+    width: 100%;
 }
 
 @media(max-width:767px){

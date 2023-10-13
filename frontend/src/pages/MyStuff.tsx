@@ -36,6 +36,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PageBreak from '../components/PageBreak/PageBreak';
 
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -79,6 +86,9 @@ export default function MyStuff() {
   const [languageState, setLanguageState] = useState("en");
   const [value, setValue] = React.useState(0);
 
+  const [email, setEmail] = useState('');
+  const [isEmailValid, setEmailValid] = useState(true);
+
   const [isMobile, setIsMobile] = useState(false);
   const [width, setWidth] = useState<number>(window.innerWidth);
 
@@ -93,9 +103,14 @@ export default function MyStuff() {
     }
   }, [width]);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     navigate(`/MyStuff?tab=${newValue}`);
@@ -235,15 +250,25 @@ export default function MyStuff() {
     choiceFour: "Schedule induction at or around 41 weeks",
     choiceFive: "Request induction between 39-41 weeks"
   };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    setEmailValid(validateEmail(newEmail));
+  };
  
   const handleEmailSend = async () => {
     setLoading(true);
-    setOpen(false);
     try {
       const response = await axios.post(
         `${REACT_APP_api_base_url}/api/email/send`,
           {
-            email: 'recipienttesting@yopmail.com',
+            email: email,
             subject: 'What should I ask my provider?',
             text: 'Here are questions about labor induction that might be specific to the place you will give birth.',
             fileURL: "public/Quiz-result.pdf",
@@ -251,32 +276,11 @@ export default function MyStuff() {
         );
       console.log('Email sent:', response.data);
       setLoading(false);
-      setOpen(true);
+      setOpen(false);
     } catch (error) {
       console.error('Error sending email:', error);
     }
   };
-
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
 
   //returns index of where edit occurs
   return (
@@ -746,7 +750,7 @@ export default function MyStuff() {
                             <Grid container item xl={12} lg={12} md={12} sx={{ alignItems: "center", justifyContent: "center", pt: 0, pb: 8 }}>
                               <Grid container item xs={12} sx={{ alignItems: "center", justifyContent: "center" }}>
                                  <Stack spacing={2} direction="row">
-                                  <Button className="save-ques-btn" onClick={handleEmailSend} variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
+                                  <Button className="save-ques-btn" onClick={handleClickOpen} variant="outlined"><img src={EnvelopeIcon} alt="Envelope Icon" />Email</Button>
                                   <Button className="save-ques-btn" variant="outlined" onClick={downloadSummary} ><img src={DownloadIcon} alt="Download Icon"  />Download</Button>
                                 </Stack>
                               </Grid>
@@ -754,14 +758,30 @@ export default function MyStuff() {
                         </Grid>
                       </Container>
 
-                      <Snackbar
-                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                        open={open}
-                        autoHideDuration={6000}
-                        onClose={handleClose}
-                        message="Email Sent"
-                        action={action}
-                      />
+                      <Dialog open={open} className="stuff-email-form" onClose={handleClose}>
+                        <DialogTitle>Save Your Questions</DialogTitle>
+                        <DialogContent>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Email Address"
+                            type="email"
+                            fullWidth
+                            variant="standard"
+                            value={email}
+                            onChange={handleEmailChange}
+                            InputProps={{
+                              error: !isEmailValid,
+                            }}
+                            helperText={isEmailValid ? '' : 'Invalid email format'}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Cancel</Button>
+                          <Button onClick={handleEmailSend}>Send</Button>
+                        </DialogActions>
+                      </Dialog>
 
                     </CustomTabPanel>
                 </Grid>

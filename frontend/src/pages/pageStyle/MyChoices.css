@@ -103,7 +103,7 @@
 }
 
 .experience-7 {
-  font-family: "Clash Grotesk";
+  font-family: ClashGrotesk-Medium;
   font-style: normal;
   font-feature-settings: "ss01" on;
   color: #000000;
@@ -328,6 +328,15 @@
     max-width: 100%;
 }
 
+.choice-sticky-bar {
+    background: #fff;
+    box-shadow: 0 0;
+    padding: 20px 0;
+}
+.choice-sticky-bar.sticky-appbar {
+    background: #E7F4E2;
+    box-shadow: 0px 2px 7px -4px rgba(0,0,0,0.2);
+}
 
 @media(max-width:767px){
   .TimeBlock {

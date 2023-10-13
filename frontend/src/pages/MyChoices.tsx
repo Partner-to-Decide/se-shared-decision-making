@@ -32,7 +32,11 @@ import useFetch from "../hooks/useFetch";
 import { REACT_APP_api_base_url, DEFAULT_LANGUAGE } from "../utils/url_config";
 import axios from "axios";
 
+import AppBar from '@mui/material/AppBar';
+
+
 const MyChoices = () => {
+  const [isSticky, setIsSticky] = useState(false);
   const darkGreen = "#0c3a25";
   const lightGreen = "#dff0d8";
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -47,6 +51,24 @@ const MyChoices = () => {
     setAnchorEl(event.currentTarget);
   };
 
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Adjust the scroll position threshold as needed (e.g., 0 for the top of the page)
+      if (window.scrollY >= 300) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -518,29 +540,29 @@ const MyChoices = () => {
           {!isMobile ? (
            <>
             {pageTitlesData?.data.attributes != null ? (
-              <Container maxWidth="lg">
-                  <Grid container spacing={2} justifyContent="center">
+              <AppBar position="sticky" className={isSticky ? 'sticky-appbar choice-sticky-bar' : 'choice-sticky-bar'}>
+                <div className="bg-light-green">
+                  <Container maxWidth="lg">
+                    <Grid container spacing={2} justifyContent="center">
                       <Grid item xs={4}>
-                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                              {pageTitlesData?.data.attributes.subTitle1}
-                          </Typography>
+                        <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main" textAlign="center">
+                          {pageTitlesData?.data.attributes.subTitle1}
+                        </Typography>
                       </Grid>
-                  
-                  
                       <Grid item xs={4}>
-                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                              {pageTitlesData?.data.attributes.subTitle2}
-                          </Typography>
+                        <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main" textAlign="center">
+                          {pageTitlesData?.data.attributes.subTitle2}
+                        </Typography>
                       </Grid>
-                  
-                  
                       <Grid item xs={4}>
-                          <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main">
-                              {pageTitlesData?.data.attributes.subTitle3}
-                          </Typography>
+                        <Typography sx={{ fontSize: 24, mb: 0}} variant="h5" color="primary.main" textAlign="center">
+                          {pageTitlesData?.data.attributes.subTitle3}
+                        </Typography>
                       </Grid>
-                  </Grid>
-              </Container>
+                    </Grid>
+                  </Container>
+                </div>
+              </AppBar>
             ) : null}
           </>) : (
             ""
@@ -1277,7 +1299,7 @@ const MyChoices = () => {
                               >
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                         sectionsData?.data[5]?.attributes?.content1[0]
@@ -1287,7 +1309,7 @@ const MyChoices = () => {
                                 </Grid>
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                         sectionsData?.data[5].attributes.content2[0]
@@ -1459,7 +1481,7 @@ const MyChoices = () => {
                               >
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                           sectionsData?.data[6].attributes
@@ -1470,7 +1492,7 @@ const MyChoices = () => {
                                 </Grid>
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                           sectionsData?.data[6].attributes
@@ -1642,7 +1664,7 @@ const MyChoices = () => {
                               >
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                           sectionsData?.data[7].attributes
@@ -1653,7 +1675,7 @@ const MyChoices = () => {
                                 </Grid>
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                           sectionsData?.data[7].attributes
@@ -1806,7 +1828,7 @@ const MyChoices = () => {
                               >
                                 <Grid item xs={6} sx={{ mb: "2rem" }}>
                                   <img
-                                    className="w-max-full"
+                                    className="w-max-full w-full"
                                     src={
                                       REACT_APP_api_base_url +
                                         sectionsData?.data[8].attributes.content2[0]
