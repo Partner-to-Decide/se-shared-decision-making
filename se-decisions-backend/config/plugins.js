@@ -4,7 +4,7 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'sendgrid',
       providerOptions: {
-        apiKey: "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",
+        apiKey: env('SENDGRID_API_KEY'),
       },
       settings: {
        defaultFrom: env('SENDGRID_DEFAULT_FROM'),      
