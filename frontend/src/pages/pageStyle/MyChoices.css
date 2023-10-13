@@ -454,8 +454,15 @@
       flex-basis: initial;
   }
   .panel1a-header{
-    padding-left:0px;
-    padding-right:0px;
+      padding-left:0px;
+      padding-right:0px;
+  }
+  .mobile-font-24{
+      font-size: 24px;
+  }
+  .learn-choices-subTitle{
+      font-size:16px;
+      margin-bottom: 20px;
   }
 }
 

@@ -472,7 +472,6 @@ const MyChoices = () => {
     fetchNeedHelpData();
   }, [languageState]);
 
-console.log('sameSection',sameSection)
   return (
     <StyledEngineProvider injectFirst>
       <Layout>
@@ -564,7 +563,7 @@ console.log('sameSection',sameSection)
                 {sectionsData?.data[0]?.attributes?.title != null ? (
                     <Grid container>
                         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                          <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
+                          <Typography className="mobile-font-24" sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
                             {" "}
                             {sectionsData?.data[0].attributes.title.title}
                           </Typography>
@@ -648,7 +647,7 @@ console.log('sameSection',sameSection)
                 {sectionsData?.data[1]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
+                      <Typography className="mobile-font-24" sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" }>
                         {" "}
                         {sectionsData?.data[1].attributes.title.title}
                       </Typography>
@@ -733,7 +732,7 @@ console.log('sameSection',sameSection)
                 {sectionsData?.data[2]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
+                      <Typography className="mobile-font-24" sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
                         {" "}
                         {sectionsData?.data[2].attributes.title.title}
                       </Typography>
@@ -905,7 +904,7 @@ console.log('sameSection',sameSection)
                 {sectionsData?.data[3]?.attributes?.title != null ? (
                   <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                      <Typography sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
+                      <Typography className="mobile-font-24" sx={{ fontSize: 36, mb: 0}} variant="h5" color={!isMobile ? "primary.main" : "primary.dark" } display="inline">
                         {" "}
                         {sectionsData?.data[3].attributes.title.title}
                       </Typography>
@@ -1953,7 +1952,7 @@ console.log('sameSection',sameSection)
               }}
             >
               <Container maxWidth="lg">
-                <Typography sx={{ fontSize: 36, mb: 0}} textAlign="center" variant="h5" color="primary.main">
+                <Typography className="mobile-font-24" sx={{ fontSize: 36, mb: 0}} textAlign="center" variant="h5" color="primary.main">
                   {learnAboutData?.data.attributes.title}
                 </Typography>
               </Container>

@@ -40,13 +40,21 @@ $terracotta:#A86133;
   color: #000000;
 }
 
-.potential-risks-foot-content{
-font-family: 'Public Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 24px;
-color: #000000;
+.potential-risks-foot-content {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.potential-risks-foot-content svg {
+    width: 6px;
+    float: left;
+    height: 21px;
+    margin-bottom: 17px;
 }
 
 .foot-small-number{
@@ -71,14 +79,14 @@ color: #000000;
 }
 
 .ThreeTagsStyle {
-  font-family: 'ClashGrotesk-Medium';
-  font-style: normal;
-  margin-left: 15px;
-  font-feature-settings: "ss01" on;
-  font-size: 24px;
-  line-height: 60px;
-  color: #000000;
-  font-weight: 500;
+    font-family: 'ClashGrotesk-Medium';
+    font-style: normal;
+    font-feature-settings: "ss01" on;
+    font-size: 1.5rem;
+    line-height: normal;
+    color: #000000;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .bodyText {
@@ -303,14 +311,41 @@ img#first-image-round {
 .details-content ul {
     padding-left: 30px;
 }
+.main-image {
+    height: 351px;
+}
+
+.author-profile-avatar{
+    width: 70px;
+    height: 70px;
+}
+
+.author-profile-paragraph{
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.author-profile-name {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    color: rgb(77, 77, 77);
+}
+
+.explore-btn {
+    margin-right: 10px;
+}
 
 @media screen and (max-width: 769px) {
     .mainText{
       padding: 0px;
     }
     img#first-image-round {
-      width: 100%;
-      margin-top: 30px;
+        width: 100%;
+        margin-top: 30px;
+        border-radius: 141.88px;
+        height: 257px;
     }
     .secondTitle{
       font-size: 24px;
@@ -327,6 +362,59 @@ img#first-image-round {
     }
     .m-font-size-24{
       font-size: 1.5rem;
+    }
+    .link-btn {
+        font-size: 18px;
+    }
+    .rightTitle {
+        font-size: 24px;
+    }
+
+    .potential-risks-foot-content {
+        position: relative;
+        padding-left: 13px;
+    }
+    .potential-risks-foot-content:before {
+        content: "";
+        background: #000;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        left: 0;
+        border-radius: 100%;
+        top: 7px;
+    }
+    .potential-risks-foot-content svg {
+        display: none;
+    }
+
+    .author-profile-avatar {
+        width: 53px;
+        height: 53px;
+    }
+    .author-profile-paragraph {
+        font-size: 14px;
+        margin-top: 1px;
+    }
+    .explore-btn {
+        margin-right: 0px;
+        margin-bottom: 15px;
+    }
+    .details-content ul {
+        padding-left: 26px;
+    }
+    .mobile-font-14{
+        font-size: 14px;
+    }
+    .explore-btn button {
+        font-size: 16px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-width: 1px;
+        font-family: 'ClashGrotesk-Medium';
+    }
+    .explore-btns-grid {
+        justify-content: space-between;
     }
 }
 

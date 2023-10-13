@@ -269,6 +269,20 @@ function Details() {
                                 </Grid>
                               }
 
+                            {isMobile &&
+                              <div className="mobile-image">
+                                {details_content &&
+                                  <img
+                                    src={(REACT_APP_api_base_url || "") + details_content['0'].image.data?.attributes?.url}
+                                    id={'first-image-'+details_content['0'].Imagelayout}
+                                    className={details_content['0'].Imagelayout == "round" ? "main-image" : ""}
+                                    alt="firstimg"
+                                    style={{ marginBottom: '30px' }}
+                                  />
+                                }
+                              </div>
+                            }
+
                              {isMobile &&
                                 <Grid item xs={12} mb="3rem">
 
@@ -336,15 +350,17 @@ function Details() {
 
                               {details_content?.map((item, index) => (
                                 <>
+                                {index >= 1 &&<>
                                   {item.image?.data ?
                                     <img
                                     src={(REACT_APP_api_base_url || "") + item.image.data?.attributes?.url}
                                     id={'first-image-'+item.Imagelayout}
-                                    className={'imagelayout-'+item.Imagelayout}
+                                    className={item.Imagelayout == "round" ? "main-image" : ""}
                                     alt="firstimg"
                                     style={{ marginBottom: '30px' }}
                                     />
                                   :null }
+                                </>}
                               <div id={'section'+item.id}>
                                 <Typography
                                   variant="h4"
@@ -468,12 +484,12 @@ function Details() {
                        View Risks
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails style={{ backgroundColor: '#FAF6ED', padding: '3rem' }}>
+                    <AccordionDetails sx={{ p: { xs: 3, md: 6 } }} style={{ backgroundColor: '#FAF6ED' }}>
                       <Grid container spacing={4}>
 
                         {DetailsData?.PotentialRisks.map((item, index) => (
                           [
-                          <Grid item xs={6}>
+                          <Grid item xs={12} sm={6}>
                              
                             {item?.popuptitle ?
                               <Typography
@@ -497,7 +513,7 @@ function Details() {
                                  {item.content}
                               </Typography>
                               <img
-                                  style={{ marginLeft: '58px', marginTop: '20px' }}
+                                  style={{ display: 'block', margin: '20px auto 0px', }}
                                   width="180.45px"
                                   height="239px"
                                   src={(REACT_APP_api_base_url || "") + item.image.data.attributes.url}
@@ -520,15 +536,11 @@ function Details() {
                     <Grid
                       container
                       className="potential-risks"
-                      sx={{ pt: '48px' }}
+                      sx={{ p: { xs: 3, md: 6 } }}
+                      justifyContent="center"
                     >
-                      <Grid height="269px">
-                        <Grid
-                          item
-                          width="649px"
-                          height="27px"
-                          sx={{ ml: '0px', mr: '114px' }}
-                        >
+                      <Grid item justifyContent="center">
+                        <Grid item sx={{ mb: 2 }}>
                           <Typography className="potential-risks-small-content">
                             For all three options there is the {' '}
                             <span
@@ -541,10 +553,7 @@ function Details() {
                             of breastfeeding.
                           </Typography>
                         </Grid>
-                        <Grid
-                          width="483px"
-                          sx={{ ml: '100px', mr: '196px', mt: '24px' }}
-                        >
+                        <Grid item sx={{ maxWidth: '460px', margin: '0 auto' }}>
                           <Typography className="potential-risks-foot-content">
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
@@ -552,7 +561,6 @@ function Details() {
                             Complications for baby{' '}
                             <Typography
                               display="inline"
-                              className="potential-risks-foot-content"
                               bgcolor="#dff0d8"
                               onClick={handleClick}
                             >
@@ -572,7 +580,6 @@ function Details() {
                             ,{' '}
                             <Typography
                               display="inline"
-                              className="potential-risks-foot-content"
                               bgcolor="#dff0d8"
                               onClick={handleClickPneu}
                             >
@@ -595,11 +602,7 @@ function Details() {
                               6
                             </Typography>
                           </Typography>
-                        </Grid>
-                        <Grid
-                          width="483px"
-                          sx={{ ml: '100px', mr: '196px', mt: '16px' }}
-                        >
+
                           <Typography className="potential-risks-foot-content">
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
@@ -612,11 +615,7 @@ function Details() {
                               6
                             </Typography>
                           </Typography>
-                        </Grid>
-                        <Grid
-                          width="483px"
-                          sx={{ ml: '100px', mr: '196px', mt: '16px' }}
-                        >
+
                           <Typography className="potential-risks-foot-content">
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
@@ -629,11 +628,7 @@ function Details() {
                               6
                             </Typography>
                           </Typography>
-                        </Grid>
-                        <Grid
-                          width="483px"
-                          sx={{ ml: '100px', mr: '196px', mt: '16px' }}
-                        >
+
                           <Typography className="potential-risks-foot-content">
                             <FiberManualRecordIcon
                               sx={{ fontSize: 10, pr: '5px' }}
@@ -646,7 +641,9 @@ function Details() {
                               6
                             </Typography>
                           </Typography>
+
                         </Grid>
+                
                       </Grid>
                     </Grid>
                   </Accordion>
@@ -668,12 +665,14 @@ function Details() {
                   <Typography
                     variant="body1"
                     lineHeight='24px'
+                    className="mobile-font-14"
                   >
                     {detailsAuthorsData?.content}
                   </Typography>
                   <Link
                     variant="body1"
                     href={detailsAuthorsData?.btnlink}
+                    className="mobile-font-14"
                     style={{
                       color: '#00653E',
                       fontWeight: 'bold',
@@ -686,13 +685,14 @@ function Details() {
                     container
                     spacing={0}
                     style={{ marginTop: 10, marginBottom: 10 }}
+                    className="author-profile-section"
                   >
                     <Grid
                       item
                       xs={2}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <Avatar alt="Remy Sharp" sx={{ width: 70, height: 70 }} />
+                      <Avatar alt="Remy Sharp" className="author-profile-avatar" />
                     </Grid>
 
                     <Grid
@@ -700,26 +700,13 @@ function Details() {
                       xs={4}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          marginTop: '10px',
-                        }}
-                      >
+                      <p className="author-profile-paragraph">
                      {
                         detailsAuthorsData?.authors1[0]
                             .name
                       }
                       </p>
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          fontWeight: 'bold',
-                          color: '#4D4D4D',
-                        }}
-                      >
+                      <p className="author-profile-name">
                        {
                         detailsAuthorsData?.authors1[0]
                             .Description
@@ -741,30 +728,17 @@ function Details() {
                       xs={2}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <Avatar alt="Remy Sharp" sx={{ width: 70, height: 70 }} />
+                      <Avatar alt="Remy Sharp" className="author-profile-avatar" />
                     </Grid>
                     <Grid
                       item
                       xs={4}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          marginTop: '10px',
-                        }}
-                      >
+                      <p className="author-profile-paragraph">
                       {detailsAuthorsData?.authors2[0].name }
                       </p>
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          fontWeight: 'bold',
-                          color: '#4D4D4D',
-                        }}
-                      >
+                      <p className="author-profile-name">
                       {
                         detailsAuthorsData?.authors2[0]
                             .Description
@@ -776,33 +750,20 @@ function Details() {
                       xs={2}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <Avatar alt="Remy Sharp" sx={{ width: 70, height: 70 }} />
+                      <Avatar alt="Remy Sharp" className="author-profile-avatar" />
                     </Grid>
                     <Grid
                       item
                       xs={4}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          marginTop: '7px',
-                        }}
-                      >
+                      <p className="author-profile-paragraph">
                      {
                         detailsAuthorsData?.authors3[0]
                             .name
                       }
                       </p>
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          fontWeight: 'bold',
-                          color: '#4D4D4D',
-                        }}
-                      >
+                      <p className="author-profile-name">
                       {
                         detailsAuthorsData?.authors3[0]
                             .Description
@@ -814,33 +775,20 @@ function Details() {
                       xs={2}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <Avatar alt="Remy Sharp" sx={{ width: 70, height: 70 }} />
+                      <Avatar alt="Remy Sharp" className="author-profile-avatar" />
                     </Grid>
                     <Grid
                       item
                       xs={4}
                       style={{ marginTop: 10, marginBottom: 10 }}
                     >
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          marginTop: '10px',
-                        }}
-                      >
+                      <p className="author-profile-paragraph">
                      {
                         detailsAuthorsData?.authors4[0]
                             .name
                       }
                       </p>
-                      <p
-                        style={{
-                          fontSize: '16px',
-                          lineHeight: '20px',
-                          fontWeight: 'bold',
-                          color: '#4D4D4D',
-                        }}
-                      >
+                      <p className="author-profile-name">
                       {
                         detailsAuthorsData?.authors4[0]
                             .Description
@@ -909,11 +857,11 @@ function Details() {
                     }}
                   />
 
-                  <Grid container spacing={2} style={{ marginBottom: '20px' }}>
+                  <Grid container className="explore-btns-grid" style={{ marginBottom: '20px' }}>
                     {details_buttonset?.BtnLinks.map((item, index) => (
                       
-                    <Grid item>
-                      <Button sx={{ fontSize: '18px' }}>
+                    <Grid item className="explore-btn">
+                      <Button>
                       {item.ButtonLink ? (
                         <Link href={item.ButtonLink} sx={{ textDecoration: 'none' }}>
                           {item.ButtonText}
