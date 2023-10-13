@@ -13,14 +13,14 @@ module.exports = [
             'data:',
             'blob:',
             'dl.airtable.com',
-            'partnertodecide.s3.us-east-1.amazonaws.com', // change here
+            'partner-to-decide.s3.us-east-1.amazonaws.com', // change here
             ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
             'dl.airtable.com',
-            'partnertodecide.s3.us-east-1.amazonaws.com', // change here
+            'partner-to-decide.s3.us-east-1.amazonaws.com', // change here
             ],
           upgradeInsecureRequests: null,
         },

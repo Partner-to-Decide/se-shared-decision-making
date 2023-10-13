@@ -4,28 +4,26 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'sendgrid',
       providerOptions: {
-        apiKey: env('SENDGRID_API_KEY'),
+        apiKey: "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",
       },
       settings: {
-         defaultFrom: env('SENDGRID_DEFAULT_FROM'),      
+       defaultFrom: env('SENDGRID_DEFAULT_FROM'),      
 	     defaultReplyTo: env('SENDGRID_DEFAULT_REPLY_TO'),
       },
     },
   },
-   upload: {
+  upload: {
     config: {
       provider: 'aws-s3',
       providerOptions: {
-        baseUrl: env('CDN_URL'),
-        rootPath: env('CDN_ROOT_PATH'),
         s3Options: {
-          accessKeyId: env('AWS_ACCESS_KEY_ID'),
-          secretAccessKey: env('AWS_ACCESS_SECRET'),
-          region: env('AWS_REGION'),
+          accessKeyId: "AKIATYWLZTVDFYZLB3UH",
+          secretAccessKey: "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",
+          region: "us-east-1",
           params: {
             ACL: env('AWS_ACL', 'public-read'),
             signedUrlExpires: env('AWS_SIGNED_URL_EXPIRES', 15 * 60),
-            Bucket: env('AWS_BUCKET'),
+            Bucket: "partner-to-decide",
           },
         },
       },
@@ -36,4 +34,26 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  //  upload: {
+  //   config: {
+  //     provider: 'aws-s3',
+  //     providerOptions: {
+  //       s3Options: {
+  //         accessKeyId: env('AWS_ACCESS_KEY_ID'),
+  //         secretAccessKey: env('AWS_ACCESS_SECRET'),
+  //         region: env('AWS_REGION'),
+  //         params: {
+  //           // ACL: env('AWS_ACL', 'public-read'),
+  //           signedUrlExpires: env('AWS_SIGNED_URL_EXPIRES', 15 * 60),
+  //           Bucket: env('AWS_BUCKET'),
+  //         },
+  //       },
+  //     },
+  //     actionOptions: {
+  //       upload: {},
+  //       uploadStream: {},
+  //       delete: {},
+  //     },
+  //   },
+  // },
 });
